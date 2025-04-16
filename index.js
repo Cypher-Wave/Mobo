@@ -1,5 +1,6 @@
 // Importando os frameworks e conexões
 import express from "express";
+import mongoose from "mongoose";
 // import mongoose from "./config/db-connection.js";
 const app = express();
 
@@ -9,13 +10,14 @@ const app = express();
 // Configurações do Express
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
-app.use("/", )
+// Descomentar quando as rotas tiverem prontas 
+// app.use("/")
 
 // Estabelecendo a Conexão com o MongoDB
 mongoose.connect("mongodb://127.0.0.1:27017/mobo");
 
 // ROTA PRINCIPAL
-app.get("/", );
+app.get("/");
 
 // Iniciando o servidor
 const port = 4000;
