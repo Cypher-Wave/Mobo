@@ -1,27 +1,53 @@
-// Importando o Mongoose
 import mongoose from "mongoose";
 
-// Criando a Tabela e seus Atributos
-const UserSchema = new mongoose.Schema({
-    userName: { type: String, required: true },
-    userEmail: { type: String, required: true, unique: true, lowercase: true, trim: true },
-    userPassword: { type: String, required: true },
-    company: { type: mongoose.Schema.Types.ObjectId, ref: "Company" }
+// Schema para detalhes específicos de agricultores familiares
+const FarmerDetailsSchema = new mongoose.Schema({
+  cpf: String,
+  dap: String, // Declaração de Aptidão ao Pronaf (documento obrigatório)
 });
 
-// Garantindo que a senha não seja mostrada ao buscar o usuário
-UserSchema.methods.toJSON = function() {
-    const user = this;
-    const userObject = user.toObject();
+// Schema principal de usuários
+const UserSchema = new mongoose.Schema(
+  {
+    // Dados básicos de autenticação
+    userName: { type: String, required: true },
+    userEmail: { type: String, required: true, unique: true, trim: true },
+    userPassword: { type: String, required: true },
+    // Informações opcionais
+    userPhone: String,
+    // Controle de acesso (roles)
+    userRole: {
+      type: String,
+      enum: ["family_farmer", "company_admin", "company_worker"],
+      required: true,
+    },
+    // Relacionamentos condicionais
+    company: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Company",
+      required: function () {
+        return this.userRole !== "family_farmer";
+      },
+    },
+    // Detalhes específicos para agricultores familiares
+    farmerDetails: {
+      type: FarmerDetailsSchema,
+      required: function () {
+        return this.userRole === "family_farmer";
+      },
+    },
+  },
+  { timestamps: true }
+);
 
-    // Removendo a senha do objeto antes de retornar
-    delete userObject.userPassword;
-
-    return userObject;
+// Método para ocultar a senha nas respostas da API
+UserSchema.methods.toJSON = function () {
+  const userObject = this.toObject();
+  delete userObject.userPassword; // Remove o campo sensível
+  return userObject;
 };
 
-// Criando a Coleção "Users"
+// Compilando o modelo e criando a collection users
 const User = mongoose.model("User", UserSchema);
 
-// Exportando User
 export default User;

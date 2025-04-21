@@ -1,15 +1,16 @@
-// Importando o Mongoose
 import mongoose from "mongoose";
 
-// Criando a Tabela e seus Atributos
-const LocationSchema = new mongoose.Schema({
+// Schema principal de localizações
+const LocationSchema = new mongoose.Schema(
+  {
     locationName: String,
     longitude: Number,
-    latitude: Number
-});
+    latitude: Number,
+  },
+  { timestamps: true }
+);
 
-// Criando a Coleção "Locations"
+// Compilando o modelo e criando a collection locations
 const Location = mongoose.model("Location", LocationSchema);
 
-// Exportando Location
 export default Location;
