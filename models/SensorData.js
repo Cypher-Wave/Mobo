@@ -1,17 +1,19 @@
-// Importando o Mongoose
 import mongoose from "mongoose";
 
-// Criando a Tabela e seus Atributos
-const SensorDataSchema = new mongoose.Schema({
-    timeStamp: Date,
+// Schema principal de dados de sensores
+const SensorDataSchema = new mongoose.Schema(
+  {
     temperature: Number,
     soilHumidity: Number,
     airHumidity: Number,
-    locationId: ObjectId 
-});
+    alertActive: { type: Boolean, default: false },
+    location: { type: mongoose.Schema.Types.ObjectId, ref: "Location", required: true },
+    sensor: { type: mongoose.Schema.Types.ObjectId, ref: "Sensor", required: true },
+  },
+  { timestamps: true }
+);
 
-// Criando a Coleção "SensorData"
+// Compilando o modelo e criando a collection sensordatas
 const SensorData = mongoose.model("SensorData", SensorDataSchema);
 
-// Exportando SensorData
 export default SensorData;

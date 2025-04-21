@@ -1,8 +1,8 @@
-// Importando o Mongoose
 import mongoose from "mongoose";
 
-// Criando a Tabela e seus Atributos
-const HarvestSchema = new mongoose.Schema({
+// Schema principal de colheitas
+const HarvestSchema = new mongoose.Schema(
+  {
     harvestedQuantity: Number,
     quality: Number,
     harvestDate: Date,
@@ -10,11 +10,12 @@ const HarvestSchema = new mongoose.Schema({
     harvestEnd: String,
     harvestDuration: String,
     planting: { type: mongoose.Schema.Types.ObjectId, ref: "Planting" },
-    location: { type: mongoose.Schema.Types.ObjectId, ref: "Location" }
-});
+    location: { type: mongoose.Schema.Types.ObjectId, ref: "Location" },
+  },
+  { timestamps: true }
+);
 
-// Criando a Coleção "Harvests"
+// Compilando o modelo e criando a collection harvests
 const Harvest = mongoose.model("Harvest", HarvestSchema);
 
-// Exportando Harvest
 export default Harvest;
