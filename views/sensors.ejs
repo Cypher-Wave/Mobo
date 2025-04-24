@@ -1,0 +1,153 @@
+<%- include("partials/head.ejs") %>
+<body id="home">
+    <div class="container">
+        <aside>
+            <div class="toggle">
+                <div class="logo">
+                    <img src="img/mbBege.png">
+                </div>
+                <div class="close" id="close-btn">
+                    <span class="material-icons-sharp">
+                        close
+                    </span>
+                </div>
+            </div>
+
+            <div class="sidebar">
+                <a href="home.html">
+                    <span >
+                        Home
+                    </span>
+                </a>
+                <a href="bracoMecanico.html">
+                    <span>
+                        Braço Mecânico
+                    </span>
+                </a>
+                <a href="dashboard.html">
+                    <span>
+                        Dashboard
+                    </span>
+                </a>
+                <a href="sensores.html">
+                    <span>
+                        Sensores
+                    </span>
+                </a>
+                <a href="relatorios.html">
+                    <span>
+                        Relatórios
+                    </span>
+                </a>
+                <a href="alertas.html">
+                    <span>
+                        Alertas
+                    </span>
+                </a>
+                <a href="previsaoColheita.html">
+                    <span>
+                        Previsão Colheita
+                    </span>
+                </a>
+                <a href="perfil.html">
+                    <span>
+                        Perfil
+                    </span>
+                </a>
+                <a class="Terreno" href="cadastroTerreno.html">
+                    <img class="IconTerren" src="img/icon/adicionar.png" alt="logout">Terreno
+                </a>
+                <a class="Logout" href="login.html">
+                    <img width="20px" src="img/icon/botao-de-logout.png" alt="logout">Logout
+                </a>
+            </div>
+        </aside> 
+        
+        <main>
+            <h1 class="txt">Sensores</h1>
+
+            <div class="new-users">
+                <div class="user-list">
+                    
+                    <iframe class="areaMapa" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d58104.267122994366!2d-47.850728627694984!3d-24.
+                    467547991622677!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x94c53436f4f0c1cb%3A0xbab60b5cc9451e73!2sRegistro%2C%20SP%2C%2011900-000!5e0!3m2!1spt-
+                    BR!2sbr!4v1729989897108!5m2!1spt-BR!2sbr" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                </div>
+            </div>
+            <!-- grafico -->
+            <div class="graficos">
+                        <div class="chart-container">
+                            <a href="alertas.html"><img class="alertIcons" src="img/icon/alerta.png" alt=""></a>
+                            <h3 class="txtGrafic">Umidade do Solo</h3>
+                            <canvas id="myChart"></canvas>
+                        </div>   
+                        <div>
+                           <a href="alertas.html"><img class="alertIcons" src="img/icon/alerta.png" alt=""></a>
+                            <h3 class="txtGrafic">Umidade do Ar</h3>
+                            <canvas id="myChart2"></canvas>
+                        </div>
+                        <div>
+                            <h3 class="txtGrafic2">Temperatura</h3>
+                            <canvas id="myChart3"></canvas>
+                        </div>
+            </div>
+        </main>
+
+        
+              <!--  Botao darkMode -->
+              <div class="right-section">
+                <div class="nav">
+                    <button id="menu-btn">
+                        <span class="material-icons-sharp">
+                            menu
+                        </span>
+                    </button>
+                    <div class="dark-mode">
+                        <span class="material-icons-sharp active">
+                            
+                        </span>
+                        <span class="material-icons-sharp">
+                            
+                        </span>
+                    </div>
+    
+                        <div class="perfilFT">
+                            <a href="perfil.html"><img width="40px" src="img/icon/perfil.png"></a>
+                        </div>
+                </div>
+                              <!-- Ícone de notificação -->
+    <div class="notificacao-container">
+        <img src="./img/icon/notificacao.png" alt="Ícone de Notificação" class="notificacao-icone" id="notificacao-icone">
+        <span class="badge" id="notificacao-badge">3</span>
+    </div>
+
+    <!-- Caixa de notificação -->
+    <div class="caixa-notificacao" id="caixa-notificacao">
+        <h3>Notificações</h3>
+        <ul id="lista-notificacoes">
+            <li class="notificacao-item alerta">
+                <p>Atenção chuvas fortes se aproximam, proteja sua Plantação!</p>
+                <button onclick="excluirNotificacao(this)">Excluir</button>
+                <button onclick="gerarAlerta('Nova atualização de sistema disponível!')">Gerar Alerta</button>
+            </li>
+            <li class="notificacao-item">
+                <p>Alta Temperatura.</p>
+                <button onclick="excluirNotificacao(this)">Excluir</button>
+                <button onclick="gerarAlerta('Seu pedido foi enviado.')">Gerar Alerta</button>
+            </li>
+            <li class="notificacao-item">
+                <p>Baixa Umidade.</p>
+                <button onclick="excluirNotificacao(this)">Excluir</button>
+                <button onclick="gerarAlerta('Você tem 3 novas mensagens.')">Gerar Alerta</button>
+            </li>
+        </ul>
+        <button id="fechar-caixa" onclick="fecharCaixa()">Fechar</button>
+        </div>
+
+
+    <script src="js/darkmode.js"></script>
+    <script src="js/graficos.js"></script>   
+    <script src="js/notificacao.js"></script>     
+    <script src="js/mapa.js"></script>   
+</body>
+</html>

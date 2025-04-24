@@ -1,0 +1,129 @@
+<%- include("partials/head.ejs") %>
+<body>
+    <div class="container">
+        <aside>
+            <div class="toggle">
+                <div class="logo">
+                    <img src="img/mbBege.png">
+                </div>
+                <div class="close" id="close-btn">
+                    <span class="material-icons-sharp">
+                        close
+                    </span>
+                </div>
+            </div>
+
+            <div class="sidebar">
+                <a href="home.html">
+                    <span >
+                        Home
+                    </span>
+                </a>
+                <a href="bracoMecanico.html">
+                    <span>
+                        Braço Mecânico
+                    </span>
+                </a>
+                <a href="dashboard.html">
+                    <span>
+                        Dashboard
+                    </span>
+                </a>
+                <a href="sensores.html">
+                    <span>
+                        Sensores
+                    </span>
+                </a>
+                <a href="relatorios.html">
+                    <span>
+                        Relatórios
+                    </span>
+                </a>
+                <a href="alertas.html">
+                    <span>
+                        Alertas
+                    </span>
+                </a>
+                <a href="previsaoColheita.html">
+                    <span>
+                        Previsão Colheita
+                    </span>
+                </a>
+                <a href="perfil.html">
+                    <span>
+                        Perfil
+                    </span>
+                </a>
+                <a class="Terreno" href="cadastroTerreno.html">
+                    <img class="IconTerren" src="img/icon/adicionar.png" alt="logout">Terreno
+                </a>
+                <a class="Logout" href="login.html">
+                    <img width="20px" src="img/icon/botao-de-logout.png" alt="logout">Logout
+                </a>
+            </div>
+        </aside> 
+
+        <div class="informacoes card">
+            <img class="ftPerfilCard" src="./img/Agronomia.jpeg" alt="">
+                    <h2 class="tituloCardPerfil">Giovanna Silva</h2>
+                    <p class="txtCardPerfil">email@email.com</p>
+                    <button class="btncard">Editar Perfil</button>
+
+                    <a href="relatorios.html"><p class="btn1">Relatórios</p></a>
+                    <a href="alertas.html"><p class="btn2">Alertas</p></a>
+        </div> 
+   
+    <div class="galeria" id="gallery">
+        <div class="item"><img src="img/fotoLichia11.jpg" alt="Foto 1">
+            <div class="descricao">Dia 12/12/2024</div>
+        </div>
+        <div class="item"><img src="img/fotoLichia5.jpg" alt="Foto 2">
+            <div class="descricao">Dia 25/12/2024</div>
+        </div>
+        <div class="item"><img src="img/fotoLichia8.jpg" alt="Foto 3">
+            <div class="descricao">Dia 02/12/2024</div>
+        </div>
+        <div class="item"><img src="img/fotoLichia9.jpg" alt="Foto 4">
+            <div class="descricao">Dia 12/12/2024</div>
+        </div>
+        <div class="item"><img src="img/fotoLichia1.jpg" alt="Foto 5">
+            <div class="descricao">Dia 10/12/2024</div>
+        </div>
+        <div class="item"><img src="img/fotoLichia2.jpg" alt="Foto 6">
+            <div class="descricao">Dia 08/12/2024</div>
+        </div>
+        <div class="item"><img src="img/fotoLichia1.jpg" alt="Foto 7">
+            <div class="descricao">Dia 01/12/2024</div>
+        </div>
+        <div class="item"><img src="img/fotoLichia2.jpg" alt="Foto 8">
+            <div class="descricao">Dia 28/12/2024</div>
+        </div>
+       
+    </div>
+
+    <div class="btnsFT">
+        <a class="btnFT" href="bracoMecanico.html">Voltar para a Câmera</a>
+        <a class="btnFT">Carregar Foto</a>
+    </div>
+
+         <!--  Botao darkMode -->
+         <div class="right-section">
+            <div class="nav">
+                <button id="menu-btn">
+                    <span class="material-icons-sharp"></span>
+                </button>
+                <div class="dark-mode">
+                    <span class="material-icons-sharp active">
+                        
+                    </span>
+                    <span class="material-icons-sharp">
+                        
+                    </span>
+                </div>
+            </div>
+
+    <script src="js/notificacao.js"></script>     
+    <script src="js/darkmode.js"></script>
+
+</body>
+</html>    

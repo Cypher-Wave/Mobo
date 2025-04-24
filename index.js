@@ -17,6 +17,8 @@ import UserRoutes from "./routes/UserRoutes.js";
 // Configurações do Express
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
+app.set("view engine", "ejs");
+app.use(express.static("public"));
 
 // Definindo o Uso das Rotas
 app.use("/", CompanyRoutes);
@@ -28,7 +30,12 @@ app.use("/", SensorRoutes);
 app.use("/", UserRoutes);
 
 // Rota Principal
-app.get("/");
+app.get("/home", (req, res) => {
+  res.render("index", {
+    pageTitle: "Home",
+    cssPage: "home",
+  });
+});
 
 // Iniciando o servidor
 const port = process.env.PORT;

@@ -1,0 +1,194 @@
+<%- include("partials/head.ejs") %>
+<body>
+    <div class="container">
+     <!--Menu Lateral-->
+<div class="container">
+  <aside>
+      <div class="toggle">
+          <div class="logo">
+              <img src="img/mbBege.png">
+          </div>
+          <div class="close" id="close-btn">
+              <span class="material-icons-sharp">
+                  close
+              </span>
+          </div>
+      </div>
+
+      <div class="sidebar">
+          <a href="home.html">
+              <span >
+                  Home
+              </span>
+          </a>
+          <a href="bracoMecanico.html">
+              <span>
+                  Braço Mecânico
+              </span>
+          </a>
+          <a href="dashboard.html">
+              <span>
+                  Dashboard
+              </span>
+          </a>
+          <a href="sensores.html">
+              <span>
+                  Sensores
+              </span>
+          </a>
+          <a href="relatorios.html">
+              <span>
+                  Relatórios
+              </span>
+          </a>
+          <a href="alertas.html">
+              <span>
+                  Alertas
+              </span>
+          </a>
+          <a href="previsaoColheita.html">
+              <span>
+                  Previsão Colheita
+              </span>
+          </a>
+          <a href="perfil.html">
+              <span>
+                  Perfil
+              </span>
+          </a>
+          <a class="Terreno" href="cadastroTerreno.html">
+              <img class="IconTerren" src="img/icon/adicionar.png" alt="logout">Terreno
+          </a>
+          <a class="Logout" href="login.html">
+              <img width="20px" src="img/icon/botao-de-logout.png" alt="logout">Logout
+          </a>
+      </div>
+  </aside> 
+         
+        <main>
+            <h1 class="txt">Previsão Colheita</h1>
+                    <div class="containerCalendario">
+                        <div class="left">
+                          <div class="calendar">
+                            <div class="month">
+                              <i class="fas fa-angle-left prev"></i>
+                              <div class="date">Outubro 2024</div>
+                              <i class="fas fa-angle-right next"></i>
+                            </div>
+                            <div class="weekdays">
+                              <div>Seg</div>
+                              <div>Ter</div>
+                              <div>Qua</div>
+                              <div>Qui</div>
+                              <div>Sex</div>
+                              <div>Sáb</div>
+                              <div>Dom</div>
+                            </div>
+                            <div class="days"></div>
+                            <div class="goto-today">
+                              <div class="goto">
+                                <input type="text" placeholder="mes/ano" class="date-input" />
+                                <button class="goto-btn">Procurar</button>
+                              </div>
+                              <button class="today-btn">Hoje</button>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="right">
+                          <div class="today-date">
+                            <div class="event-day"></div>
+                            <div class="event-date">30 de Outubro de 2024</div>
+                          </div>
+                          <div class="events"></div>
+                          <div class="add-event-wrapper">
+                            <div class="add-event-header">
+                              <div class="title">Adicionar Evento</div>
+                              <i class="fas fa-times close"></i>
+                            </div>
+                            <div class="add-event-body">
+                              <div class="add-event-input">
+                                <input type="text" placeholder="Título" class="event-name" />
+                              </div>
+                              <div class="add-event-input">
+                                <input
+                                  type="text"
+                                  placeholder="Hora Inicio"
+                                  class="event-time-from"
+                                />
+                              </div>
+                              <div class="add-event-input">
+                                <input
+                                  type="text"
+                                  placeholder="Hora Termino"
+                                  class="event-time-to"
+                                />
+                              </div>
+                            </div>
+                            <div class="add-event-footer">
+                              <button class="add-event-btn">Adicionar Marcação</button>
+                            </div>
+                          </div>
+                        </div>
+                        <button class="add-event">
+                          <i class="fas fa-plus"></i>
+                        </button>
+
+                      </div>
+                
+        </main>
+
+      
+              <!--  Botao darkMode -->
+              <div class="right-section">
+                <div class="nav">
+                    <button id="menu-btn">
+                        <span class="material-icons-sharp">
+                            menu
+                        </span>
+                    </button>
+                    <div class="dark-mode">
+                        <span class="material-icons-sharp active"></span>
+                        <span class="material-icons-sharp"></span>
+                    </div>
+                        <div class="perfilFT">
+                          <a href="perfil.html"><img width="40px" src="img/icon/perfil.png"></a>
+                        </div>
+                </div>
+    
+                             <!-- Ícone de notificação -->
+                             <div class="notificacao-container">
+                                <img src="./img/icon/notificacao.png" alt="Ícone de Notificação" class="notificacao-icone" id="notificacao-icone">
+                                <span class="badge" id="notificacao-badge">3</span>
+                            </div>
+                        
+                            <!-- Caixa de notificação -->
+                            <div class="caixa-notificacao" id="caixa-notificacao">
+                                <h3>Notificações</h3>
+                                <ul id="lista-notificacoes">
+                                    <li class="notificacao-item alerta">
+                                        <p>Atenção chuvas fortes se aproximam, proteja sua Plantação!</p>
+                                        <button onclick="excluirNotificacao(this)">Excluir</button>
+                                        <button onclick="gerarAlerta('Nova atualização de sistema disponível!')">Gerar Alerta</button>
+                                    </li>
+                                    <li class="notificacao-item">
+                                        <p>Alta Temperatura.</p>
+                                        <button onclick="excluirNotificacao(this)">Excluir</button>
+                                        <button onclick="gerarAlerta('Seu pedido foi enviado.')">Gerar Alerta</button>
+                                    </li>
+                                    <li class="notificacao-item">
+                                        <p>Baixa Umidade.</p>
+                                        <button onclick="excluirNotificacao(this)">Excluir</button>
+                                        <button onclick="gerarAlerta('Você tem 3 novas mensagens.')">Gerar Alerta</button>
+                                    </li>
+                                </ul>
+                                <button id="fechar-caixa" onclick="fecharCaixa()">Fechar</button>
+                                </div>
+
+
+    <script src="js/darkmode.js"></script>
+    <script src="js/popUp.js"></script>
+    <script src="js/splash.js"></script>   
+    <script src="js/calendario.js"></script>   
+    <script src="js/notificacao.js"></script>      
+</body>
+</html>

@@ -1,0 +1,61 @@
+<%- include("partials/head.ejs") %>
+<body>
+    <div class="container">
+        <div class="card">  
+          <div id="msgError"></div>
+          <div id="msgSuccess"></div>
+  
+
+          <form class="form">
+            <h2>Dados do Proprietário:</h2>
+
+          <div class="label-float">
+            <input type="text" id="nome" placeholder="Nome completo ou razão social" required />
+            <label id="labelNome" for="nome"></label>
+          </div>
+  
+          <div class="label-float">
+            <input type="text" id="cpf" placeholder="CPF ou CNPJ " required />
+            <label id="cpf" for="cpf"></label>
+          </div>
+          <div class="label-float">
+            <input type="text" id="Endereco" placeholder=" Endereço completo (incluindo CEP" required />
+            <label id="Endereco" for="Endereco"></label>
+          </div>
+          <div class="label-float">
+            <input type="text" id="telefone" placeholder="Telefone " required />
+            <label id="telefone " for="telefone"> </label>
+          </div>
+          <div class="label-float">
+            <input type="text" id="email" placeholder="E-mail" required />
+            <label id="email " for="email"></label>
+          </div>
+          <h2>Dados do Terreno:</h2>
+
+          <div class="label-float">
+            <input type="text" id="localizacao" placeholder="Localização geográfica " required />
+            <label id="localizacao " for="localizacao"> </label>
+          </div>
+          <div class="label-float">
+            <input type="text" id="localizacao" placeholder="Tipo de terreno " required />
+            <label id="localizacao " for="localizacao"> </label>
+          </div>
+          <div class="label-float">
+            <input type="text" id="localizacao" placeholder="Área total do terreno " required />
+            <label id="localizacao " for="localizacao"></label>
+          </div>
+        </form>
+        </div>
+      </div>
+      <div>
+        <a class="btnTerreno" href="">Cadastrar</a>
+      </div>
+
+  <section class="images">
+    <img src="img/moboTerreno.png">
+  </section>
+
+  <h1 class="titulo"> Cadastre seu Terreno!</h1>
+
+</body>
+</html>

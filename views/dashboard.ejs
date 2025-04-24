@@ -1,0 +1,218 @@
+<%- include("partials/head.ejs") %>
+<body id="home">
+    <div class="container">
+        
+        <aside>
+            <div class="toggle">
+                <div class="logo">
+                    <img src="img/mbBege.png">
+                </div>
+                <div class="close" id="close-btn">
+                    <span class="material-icons-sharp">
+                        close
+                    </span>
+                </div>
+            </div>
+
+            <div class="sidebar">
+                <a href="home.html">
+                    <span >
+                        Home
+                    </span>
+                </a>
+                <a href="bracoMecanico.html">
+                    <span>
+                        Braço Mecânico
+                    </span>
+                </a>
+                <a href="dashboard.html">
+                    <span>
+                        Dashboard
+                    </span>
+                </a>
+                <a href="sensores.html">
+                    <span>
+                        Sensores
+                    </span>
+                </a>
+                <a href="relatorios.html">
+                    <span>
+                        Relatórios
+                    </span>
+                </a>
+                <a href="alertas.html">
+                    <span>
+                        Alertas
+                    </span>
+                </a>
+                <a href="previsaoColheita.html">
+                    <span>
+                        Previsão Colheita
+                    </span>
+                </a>
+                <a href="perfil.html">
+                    <span>
+                        Perfil
+                    </span>
+                </a>
+                <a class="Terreno" href="cadastroTerreno.html">
+                    <img class="IconTerren" src="img/icon/adicionar.png" alt="logout">Terreno
+                </a>
+                <a class="Logout" href="login.html">
+                    <img width="20px" src="img/icon/botao-de-logout.png" alt="logout">Logout
+                </a>
+              
+            </div>
+        </aside>
+        
+        <main>
+            <h1 class="txt">Dashboard</h1>
+            <!-- grafico -->
+            <div class="graficos">
+                        <div>
+                            <h3 class="txtGrafic">Qualidade de Colheita</h3>
+                            <canvas id="myChart"></canvas>
+                        </div>   
+                        <div>
+                            <h3 class="txtGrafic">Colheita da Semana</h3>
+                            <canvas id="myChart2"></canvas>
+                        </div>
+                        <div>
+                            <h3 class="txtGrafic">Tendencia Crescimento da Plantação </h3>
+                            <canvas id="myChart3"></canvas>
+                        </div>
+                <div>
+                    <div>
+                        <h3 class="txtGrafic">Total Colhido </h3>
+                        <canvas id="myChart4"></canvas>
+                    </div>
+                </div>
+            </div>
+
+    <!-- Area relatorios  -->          
+    <main class="new-users">
+        <h2 class="txt2">Relatórios</h2>
+
+        <!-- Botão Ver Mais -->
+        <div class="button-container">
+           <a href="relatorios.html"><button class="view-more-btn">Ver Mais</button></a>
+        </div>
+
+    <div class="user-list">
+            <div class="table-header">
+                <div class="table-cell">Selecionar</div>
+                <div class="table-cell">ID Relatórios</div>
+                <div class="table-cell">Data Relatórios</div>
+                <div class="table-cell">Data Colheita</div>
+                <div class="table-cell">Hora Início</div>
+                <div class="table-cell">Hora Término</div>
+                <div class="table-cell">Quantidade Colhida</div>
+                <div class="table-cell">Localização</div>
+                <div class="table-cell">Qualidade</div>
+            </div>
+
+            <div class="table-row">
+                <div class="table-cell"><input type="checkbox" class="select-record"></div>
+                <div class="table-cell">1</div>
+                <div class="table-cell">10/12/2024</div>
+                <div class="table-cell">10/12/2024</div>
+                <div class="table-cell">08:00</div>
+                <div class="table-cell">18:20</div>
+                <div class="table-cell">50 kg</div>
+                <div class="table-cell">Campo 1</div>
+                <div class="table-cell">Excelente</div>
+            </div>
+       
+            <div class="table-row">
+                <div class="table-cell"><input type="checkbox" class="select-record"></div>
+                <div class="table-cell">2</div>
+                <div class="table-cell">15/12/2024</div>
+                <div class="table-cell">15/12/2024</div>
+                <div class="table-cell">08:00</div>
+                <div class="table-cell">12:00</div>
+                <div class="table-cell">50 kg</div>
+                <div class="table-cell">Campo 2</div>
+                <div class="table-cell">Excelente</div>
+            </div>
+       
+            <div class="table-row">
+                <div class="table-cell"><input type="checkbox" class="select-record"></div>
+                <div class="table-cell">3</div>
+                <div class="table-cell">16/12/2024</div>
+                <div class="table-cell">16/12/2024</div>
+                <div class="table-cell">08:30</div>
+                <div class="table-cell">12:10</div>
+                <div class="table-cell">50 kg</div>
+                <div class="table-cell">Campo 3</div>
+                <div class="table-cell">Boa</div>
+            </div>
+       
+            <div class="table-row">
+                <div class="table-cell"><input type="checkbox" class="select-record"></div>
+                <div class="table-cell">4</div>
+                <div class="table-cell">17/12/2024</div>
+                <div class="table-cell">17/12/2024</div>
+                <div class="table-cell">13:00</div>
+                <div class="table-cell">17:40</div>
+                <div class="table-cell">50 kg</div>
+                <div class="table-cell">Campo 4</div>
+                <div class="table-cell">Ruim</div>
+            </div>                      
+        </div>
+    </main>
+ </main>
+              <!--  Botao darkMode -->
+              <div class="right-section">
+                <div class="nav">
+                    <button id="menu-btn">
+                            <span class="material-icons-sharp">
+                                menu
+                            </span>
+                    </button>
+                    <div class="dark-mode">
+                                <span class="material-icons-sharp active">  
+                        </span>
+                                <span class="material-icons-sharp">  
+                        </span>
+                    </div>
+    
+                        <div class="perfilFT">
+                            <a href="perfil.html"><img width="40px" src="img/icon/perfil.png"></a>
+                        </div>
+                </div>
+    
+                 <!-- Ícone de notificação -->
+    <div class="notificacao-container">
+        <img src="./img/icon/notificacao.png" alt="Ícone de Notificação" class="notificacao-icone" id="notificacao-icone">
+        <span class="badge" id="notificacao-badge">3</span>
+    </div>
+
+    <!-- Caixa de notificação -->
+    <div class="caixa-notificacao" id="caixa-notificacao">
+        <h3>Notificações</h3>
+        <ul id="lista-notificacoes">
+            <li class="notificacao-item alerta">
+                <p>Atenção chuvas fortes se aproximam, proteja sua Plantação!</p>
+                <button onclick="excluirNotificacao(this)">Excluir</button>
+                <button onclick="gerarAlerta('Nova atualização de sistema disponível!')">Gerar Alerta</button>
+            </li>
+            <li class="notificacao-item">
+                <p>Alta Temperatura.</p>
+                <button onclick="excluirNotificacao(this)">Excluir</button>
+                <button onclick="gerarAlerta('Seu pedido foi enviado.')">Gerar Alerta</button>
+            </li>
+            <li class="notificacao-item">
+                <p>Baixa Umidade.</p>
+                <button onclick="excluirNotificacao(this)">Excluir</button>
+                <button onclick="gerarAlerta('Você tem 3 novas mensagens.')">Gerar Alerta</button>
+            </li>
+        </ul>
+        <button id="fechar-caixa" onclick="fecharCaixa()">Fechar</button>
+    </div>
+
+            
+    <script src="js/graficosDash.js"></script>   
+    <script src="js/dashboard.js"></script>
+    <script src="js/notificacao.js"></script>     
+</body>
+</html>
