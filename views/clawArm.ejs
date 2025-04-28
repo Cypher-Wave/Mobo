@@ -3,67 +3,7 @@
   <div class="container">
    <!--Menu Lateral-->
 <div class="container">
-    <aside>
-        <div class="toggle">
-            <div class="logo">
-                <img src="img/mbBege.png">
-            </div>
-            <div class="close" id="close-btn">
-                <span class="material-icons-sharp">
-                    close
-                </span>
-            </div>
-        </div>
-
-        <div class="sidebar">
-            <a href="home.html">
-                <span >
-                    Home
-                </span>
-            </a>
-            <a href="bracoMecanico.html">
-                <span>
-                    Braço Mecânico
-                </span>
-            </a>
-            <a href="dashboard.html">
-                <span>
-                    Dashboard
-                </span>
-            </a>
-            <a href="sensores.html">
-                <span>
-                    Sensores
-                </span>
-            </a>
-            <a href="relatorios.html">
-                <span>
-                    Relatórios
-                </span>
-            </a>
-            <a href="alertas.html">
-                <span>
-                    Alertas
-                </span>
-            </a>
-            <a href="previsaoColheita.html">
-                <span>
-                    Previsão Colheita
-                </span>
-            </a>
-            <a href="perfil.html">
-                <span>
-                    Perfil
-                </span>
-            </a>
-            <a class="Terreno" href="cadastroTerreno.html">
-                <img class="IconTerren" src="img/icon/adicionar.png" alt="logout">Terreno
-            </a>
-            <a class="Logout" href="login.html">
-                <img width="20px" src="img/icon/botao-de-logout.png" alt="logout">Logout
-            </a>
-        </div>
-    </aside> 
+    <%- include("partials/sideMenu.ejs") %> 
     
     <main>
         <h1 class="txt">Configurações do Braço Mecânico</h1>
@@ -80,20 +20,20 @@
          <!-- Controles da Câmera -->
          <div id="controls">
             <p class="btnTxt">Botões</p>
-            <button id="take-photo"><img class="botoes" src="img/icon/camera (1).png" alt=""><p class="txticons">Foto</p></button>
-            <button id="start-recording"><img class="botoes" src="img/icon/camera-de-video.png" alt=""><p class="txticons">Video</p></button>
-            <button id="stop-recording" disabled><img class="botoes" src="img/icon/pare.png" alt=""><p class="txticons">Parar</p></button>
-            <button id="toggle-fullscreen"><img class="botoes2" src="img/icon/expandir.png" alt=""><p class="txticons">Expandir</p></button>
+            <button id="take-photo"><img class="botoes" src="/assets/img/icon/camera (1).png" alt=""><p class="txticons">Foto</p></button>
+            <button id="start-recording"><img class="botoes" src="/assets/img/icon/camera-de-video.png" alt=""><p class="txticons">Video</p></button>
+            <button id="stop-recording" disabled><img class="botoes" src="/assets/img/icon/pare.png" alt=""><p class="txticons">Parar</p></button>
+            <button id="toggle-fullscreen"><img class="botoes2" src="/assets/img/icon/expandir.png" alt=""><p class="txticons">Expandir</p></button>
             <br>
           </div>
 
           <div class="areaBraco2">
-            <button style="background-color: transparent;"><img class="botoes" src="img/icon/relampago.png" alt=""><p class="txticons">Flash</p></button>
-            <button style="background-color: transparent;"><img class="botoes" src="img/icon/sem-flash.png" alt=""><p class="txticons">Sem Flash</p></button>
-            <button style="background-color: transparent;"><img class="botoes" src="img/mais-zoom (1).png" alt=""><p class="txticons">+Zoom</p></button>
-            <button style="background-color: transparent;"><img class="botoes" src="img/reduzir-o-zoom (1).png" alt=""><p class="txticons">-Zoom</p></button>
+            <button style="background-color: transparent;"><img class="botoes" src="/assets/img/icon/relampago.png" alt=""><p class="txticons">Flash</p></button>
+            <button style="background-color: transparent;"><img class="botoes" src="/assets/img/icon/sem-flash.png" alt=""><p class="txticons">Sem Flash</p></button>
+            <button style="background-color: transparent;"><img class="botoes" src="/assets/img/mais-zoom (1).png" alt=""><p class="txticons">+Zoom</p></button>
+            <button style="background-color: transparent;"><img class="botoes" src="/assets/img/reduzir-o-zoom (1).png" alt=""><p class="txticons">-Zoom</p></button>
           </div>
-          <a class="txtgaleria" href="perfil.html">Visualizar Registros de Fotos</a>
+          <a class="txtgaleria" href="/profile">Visualizar Registros de Fotos</a>
 
       </div>
     </main>
@@ -111,8 +51,8 @@
             </div>
     </div>
 
-    <button class="btnVelocidade"><img width="90px" src="img/icon/btnMaior.png" alt=""></button>
-    <button class="btnVelocidadeM"><img width="90px" src="img/icon/btnMenor.png" alt=""></button>
+    <button class="btnVelocidade"><img width="90px" src="/assets/img/icon/btnMaior.png" alt=""></button>
+    <button class="btnVelocidadeM"><img width="90px" src="/assets/img/icon/btnMenor.png" alt=""></button>
 
     <div class="remote">
         <!-- Botão Central de Stop -->
@@ -120,16 +60,16 @@
     
         <!-- Botões de Direção -->
         <div class="direction-buttons">
-          <button class="direction-button up"> <img width="43px" src="img/icon/btnCima.png" alt=""></button>
-          <button class="direction-button down"><img width="42px" src="img/icon/btnBaixo.png" alt=""></button>
-          <button class="direction-button left"><img width="33px" src="img/icon/btnEsquerda.png" alt=""></button>
-          <button class="direction-button right"><img width="33px" src="img/icon/btnDireita.png" alt=""></button>
+          <button class="direction-button up"> <img width="43px" src="/assets/img/icon/btnCima.png" alt=""></button>
+          <button class="direction-button down"><img width="42px" src="/assets/img/icon/btnBaixo.png" alt=""></button>
+          <button class="direction-button left"><img width="33px" src="/assets/img/icon/btnEsquerda.png" alt=""></button>
+          <button class="direction-button right"><img width="33px" src="/assets/img/icon/btnDireita.png" alt=""></button>
         </div>
     </div>
 
       <div class="areaGarra">
-        <img class="direcaoGarra" src="img/icon/direcao.png" alt="">
-        <img class="garra" src="img/icon/garra.png" alt="">
+        <img class="direcaoGarra" src="/assets/img/icon/direcao.png" alt="">
+        <img class="garra" src="/assets/img/icon/garra.png" alt="">
     </div>
 </main>
 
@@ -147,13 +87,13 @@
                         <span class="material-icons-sharp"></span>
                     </div>
                         <div class="perfilFT">
-                            <a href="perfil.html"><img width="40px" src="img/icon/perfil.png"></a>
+                            <a href="/profile"><img width="40px" src="/assets/img/icon/perfil.png"></a>
                         </div>
                 </div>
     
                              <!-- Ícone de notificação -->
                              <div class="notificacao-container">
-                                <img src="./img/icon/notificacao.png" alt="Ícone de Notificação" class="notificacao-icone" id="notificacao-icone">
+                                <img src="/assets/img/icon/notificacao.png" alt="Ícone de Notificação" class="notificacao-icone" id="notificacao-icone">
                                 <span class="badge" id="notificacao-badge">3</span>
                             </div>
                         
@@ -182,9 +122,9 @@
 
 
 
-  <script src="js/bracoMecan.js"></script>
-  <script src="js/popUp.js"></script>   
-  <script src="js/darkmode.js"></script>  
-  <script src="js/notificacao.js"></script>  
+  <script src="/assets/js/bracoMecan.js"></script>
+  <script src="/assets/js/popUp.js"></script>   
+  <script src="/assets/js/darkmode.js"></script>  
+  <script src="/assets/js/notificacao.js"></script>  
 </body>
 </html>

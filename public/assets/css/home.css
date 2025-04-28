@@ -39,7 +39,7 @@
     --box-shadow: 0 2rem 3rem var(--color-light);
 }
 
-/* Vartiaveis para modo dark (passa o nome da variavel com outra cor )*/
+/* Variaveis para modo dark (passa o nome da variavel com outra cor )*/
 .dark-mode-variables{
     --verdeClaro:rgb(166, 255, 0)d;
     --color-background: #1c2412;

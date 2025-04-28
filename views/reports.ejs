@@ -1,67 +1,7 @@
 <%- include("partials/head.ejs") %>
 <body id="home">
     <div class="container">
-        <aside>
-            <div class="toggle">
-                <div class="logo">
-                    <img src="img/mbBege.png">
-                </div>
-                <div class="close" id="close-btn">
-                    <span class="material-icons-sharp">
-                        close
-                    </span>
-                </div>
-            </div>
-
-            <div class="sidebar">
-                <a href="home.html">
-                    <span >
-                        Home
-                    </span>
-                </a>
-                <a href="bracoMecanico.html">
-                    <span>
-                        Braço Mecânico
-                    </span>
-                </a>
-                <a href="dashboard.html">
-                    <span>
-                        Dashboard
-                    </span>
-                </a>
-                <a href="sensores.html">
-                    <span>
-                        Sensores
-                    </span>
-                </a>
-                <a href="relatorios.html">
-                    <span>
-                        Relatórios
-                    </span>
-                </a>
-                <a href="alertas.html">
-                    <span>
-                        Alertas
-                    </span>
-                </a>
-                <a href="previsaoColheita.html">
-                    <span>
-                        Previsão Colheita
-                    </span>
-                </a>
-                <a href="perfil.html">
-                    <span>
-                        Perfil
-                    </span>
-                </a>
-                <a class="Terreno" href="cadastroTerreno.html">
-                    <img class="IconTerren" src="img/icon/adicionar.png" alt="logout">Terreno
-                </a>
-                <a class="Logout" href="login.html">
-                    <img width="20px" src="img/icon/botao-de-logout.png" alt="logout">Logout
-                </a>
-            </div>
-        </aside>
+        <%- include("partials/sideMenu.ejs") %>
         <main>
           
             <main class="new-users">
@@ -230,13 +170,13 @@
                         <span class="material-icons-sharp"></span>
                     </div>
                         <div class="perfilFT">
-                            <a href="perfil.html"><img width="40px" src="img/icon/perfil.png"></a>
+                            <a href="/profile"><img width="40px" src="/assets/img/icon/perfil.png"></a>
                         </div>
                 </div>
     
                              <!-- Ícone de notificação -->
                              <div class="notificacao-container">
-                                <img src="./img/icon/notificacao.png" alt="Ícone de Notificação" class="notificacao-icone" id="notificacao-icone">
+                                <img src="/assets/img/icon/notificacao.png" alt="Ícone de Notificação" class="notificacao-icone" id="notificacao-icone">
                                 <span class="badge" id="notificacao-badge">3</span>
                             </div>
                         
@@ -263,8 +203,8 @@
                                 <button id="fechar-caixa" onclick="fecharCaixa()">Fechar</button>
                                 </div>
 
-    <script src="js/graficosDash.js"></script>   
-    <script src="js/dashboard.js"></script>
-    <script src="js/notificacao.js"></script>     
+    <script src="/assets/js/graficosDash.js"></script>   
+    <script src="/assets/js/dashboard.js"></script>
+    <script src="/assets/js/notificacao.js"></script>     
 </body>
 </html>

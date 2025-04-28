@@ -43,6 +43,6 @@ app.listen(port, (error) => {
   if (error) {
     console.log(error);
   } else {
-    console.log(`Projeto rodando em http://localhost:${port}.`);
+    console.log(`Projeto rodando em http://localhost:${port}/home.`);
   }
 });
