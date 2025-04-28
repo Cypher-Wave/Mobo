@@ -16,7 +16,7 @@ class SensorDataService {
     temperature,
     soilHumidity,
     airHumidity,
-    alertActive,
+    alerts,
     location,
     sensor,
   ) {
@@ -25,7 +25,7 @@ class SensorDataService {
         temperature,
         soilHumidity,
         airHumidity,
-        alertActive,
+        alerts,
         location,
         sensor,
       });
@@ -51,7 +51,7 @@ class SensorDataService {
     temperature,
     soilHumidity,
     airHumidity,
-    alertActive,
+    alerts,
     location,
     sensor
   ) {
@@ -60,7 +60,7 @@ class SensorDataService {
         temperature,
         soilHumidity,
         airHumidity,
-        alertActive,
+        alerts,
         location,
         sensor,
       });

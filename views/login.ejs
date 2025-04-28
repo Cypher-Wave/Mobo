@@ -1,70 +1,68 @@
 <%- include("partials/head.ejs") %>
 <body>
-    </nav>
-    <div class="container">
-        <div class="content first-content">
-            <div class="first-column">
-                    <h2 class="title title-primary"> Bem vindo ao Mobo!</h2>
-                    <p class="description description-primary">Se você já possui uma conta</p>
-                    <p class="description description-primary">clique no botão abaixo e faça seu login</p>
-                    <button id="signin" class="btn btn-primary">Entrar</button>
-            </div>    
-            <div class="second-column">
-                <img class="logo-container" width="150px" src="/assets/img/Logo.png" alt="">
-                <h2 class="title title-second">Deseja criar uma conta?</h2>
-                <form class="form">
-                    <label class=" label-input" for="">
-                        <i class="far fa-user icon-modify"></i>
-                        <input type="text" placeholder="Name">
-                    </label>
+<div class="container">
+    <div class="content first-content">
+        <div class="first-column">
+            <h2 class="title title-primary"> Bem vindo ao Mobo!</h2>
+            <p class="description description-primary">Se você já possui uma conta</p>
+            <p class="description description-primary">clique no botão abaixo e faça seu login</p>
+            <button id="signin" class="btn btn-primary">Entrar</button>
+        </div>    
+        <div class="second-column">
+            <img class="logo-container" width="150px" src="/assets/img/Logo.png" alt="">
+            <h2 class="title title-second">Deseja criar uma conta?</h2>
+            <form class="form">
+                <label class=" label-input" for="">
+                    <i class="far fa-user icon-modify"></i>
+                    <input type="text" placeholder="Name">
+                </label>
                     
-                    <label class="label-input" for="">
-                        <i class="far fa-envelope icon-modify"></i>
-                        <input type="email" placeholder="Email">
-                    </label>
+                <label class="label-input" for="">
+                    <i class="far fa-envelope icon-modify"></i>
+                    <input type="email" placeholder="Email">
+                </label>
                     
-                    <label class="label-input" for="">
-                        <i class="fas fa-lock icon-modify"></i>
-                        <input type="password" placeholder="Senha">
-                    </label>
+                <label class="label-input" for="">
+                    <i class="fas fa-lock icon-modify"></i>
+                    <input type="password" placeholder="Senha">
+                </label>
                     
                     
-                    <button class="btn btn-second">Cadastrar-se</button>        
-                </form>
-            </div>
-        </div>
-        <div class="content second-content">
-            <div class="first-column">
-                 <h2 class="title title-primary">olá!</h2>
-                <p class="description description-primary">Se ainda não possui conta, cadastre-se</p>
-                <p class="description description-primary">e comece a jornada conosco</p>
-                <button id="signup" class="btn btn-primary">Cadastrar-se</button>
-            </div>
-            <div class="second-column">
-                <img class="logo-container" src="/assets/img/Logo.png" alt="">
-
-                <h2 class="title title-second">Faça seu login!</h2>
-                <form class="form">
-                
-                    <label class="label-input" for="">
-                        <i class="far fa-envelope icon-modify"></i>
-                        <input type="email" placeholder="Email">
-                    </label>
-                
-                    <label class="label-input" for="">
-                        <i class="fas fa-lock icon-modify"></i>
-                        <input type="password" placeholder="Senha">
-                    </label>
-            
-                    <a href="/index" class="btn btn-second">Entrar</a>
-                    <a class="password" href="#">Esqueceu sua senha?</a>
-
-                </form>
-            </div>
+                <button class="btn btn-second">Cadastrar-se</button>        
+            </form>
         </div>
     </div>
-    <script src="/assets/js/script.js"></script>
+    <div class="content second-content">
+        <div class="first-column">
+            <h2 class="title title-primary">olá!</h2>
+            <p class="description description-primary">Se ainda não possui conta, cadastre-se</p>
+            <p class="description description-primary">e comece a jornada conosco</p>
+            <button id="signup" class="btn btn-primary">Cadastrar-se</button>
+        </div>
+        <div class="second-column">
+            <img class="logo-container" src="/assets/img/Logo.png" alt="">
 
+            <h2 class="title title-second">Faça seu login!</h2>
+            <form class="form">
+                
+                <label class="label-input" for="">
+                    <i class="far fa-envelope icon-modify"></i>
+                    <input type="email" placeholder="Email">
+                </label>
+                
+                <label class="label-input" for="">
+                    <i class="fas fa-lock icon-modify"></i>
+                    <input type="password" placeholder="Senha">
+                </label>
+            
+                <a href="/index" class="btn btn-second">Entrar</a>
+                <a class="password" href="#">Esqueceu sua senha?</a>
 
+            </form>
+        </div>
+    </div>
+</div>
+
+<script src="/assets/js/script.js"></script>
 </body>
 </html>

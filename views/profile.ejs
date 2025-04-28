@@ -1,17 +1,17 @@
 <%- include("partials/head.ejs") %>
 <body>
-    <div class="container">
-        <%- include("partials/sideMenu.ejs") %> 
+<div class="container">
+    <%- include("partials/sideMenu.ejs") %> 
 
-        <div class="informacoes card">
-            <img class="ftPerfilCard" src="/assets/img/Agronomia.jpeg" alt="">
-                    <h2 class="tituloCardPerfil">Giovanna Silva</h2>
-                    <p class="txtCardPerfil">email@email.com</p>
-                    <button class="btncard">Editar Perfil</button>
+    <div class="informacoes card">
+        <img class="ftPerfilCard" src="/assets/img/Agronomia.jpeg" alt="">
+        <h2 class="tituloCardPerfil">Giovanna Silva</h2>
+        <p class="txtCardPerfil">email@email.com</p>
+        <button class="btncard">Editar Perfil</button>
 
-                    <a href="/reports"><p class="btn1">Relatórios</p></a>
-                    <a href="/alerts"><p class="btn2">Alertas</p></a>
-        </div> 
+        <a href="/reports"><p class="btn1">Relatórios</p></a>
+        <a href="/alerts"><p class="btn2">Alertas</p></a>
+    </div> 
    
     <div class="galeria" id="gallery">
         <div class="item"><img src="/assets/img/fotoLichia11.jpg" alt="Foto 1">
@@ -38,7 +38,6 @@
         <div class="item"><img src="/assets/img/fotoLichia2.jpg" alt="Foto 8">
             <div class="descricao">Dia 28/12/2024</div>
         </div>
-       
     </div>
 
     <div class="btnsFT">
@@ -46,24 +45,23 @@
         <a class="btnFT">Carregar Foto</a>
     </div>
 
-         <!--  Botao darkMode -->
-         <div class="right-section">
-            <div class="nav">
-                <button id="menu-btn">
-                    <span class="material-icons-sharp"></span>
-                </button>
-                <div class="dark-mode">
-                    <span class="material-icons-sharp active">
-                        
-                    </span>
-                    <span class="material-icons-sharp">
-                        
-                    </span>
-                </div>
+    <!--  Botao darkMode -->
+    <div class="right-section">
+        <div class="nav">
+            <button id="menu-btn">
+                <span class="material-icons-sharp"></span>
+            </button>
+            <div class="dark-mode">
+                <span class="material-icons-sharp active">      
+                </span>
+                <span class="material-icons-sharp">    
+                </span>
             </div>
+        </div>
+    </div>
+</div>
 
-    <script src="/assets/js/notificacao.js"></script>     
-    <script src="/assets/js/darkmode.js"></script>
-
+<script src="/assets/js/notificacao.js"></script>     
+<script src="/assets/js/darkmode.js"></script>
 </body>
 </html>    
