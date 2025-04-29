@@ -31,7 +31,7 @@ import DashboardRoutes from "./routes/views/DashboardRoutes.js";
 import HarvestForecastRoutes from "./routes/views/HarvestForecastRoutes.js";
 import LandRoutes from "./routes/views/LandRoutes.js";
 import LoginRoutes from "./routes/views/LoginRoutes.js";
-// import ProfileRoutes from "./routes/views/ProfileRoutes.js";
+import ProfileRoutes from "./routes/views/ProfileRoutes.js";
 import ReportRoutes from "./routes/views/ReportRoutes.js";
 import SensorsRoutes from "./routes/views/SensorsRoutes.js";
 
@@ -51,7 +51,7 @@ app.use("/", DashboardRoutes);
 app.use("/", HarvestForecastRoutes);
 app.use("/", LandRoutes);
 app.use("/", LoginRoutes);
-// app.use("/", ProfileRoutes);
+app.use("/", ProfileRoutes);
 app.use("/", ReportRoutes);
 app.use("/", SensorsRoutes);
 
