@@ -1,6 +1,6 @@
 import UserService from "../../services/UserService.js";
 
-const renderUser = async(req, res) => {
+const renderLogin = async(req, res) => {
     try {
         res.render("login", {
             pageTitle: "Login / Cadastro",
@@ -15,6 +15,7 @@ const renderUser = async(req, res) => {
 const registerUser = async(req, res) => {
   try {
     const { userName, userEmail, userPassword, userPhone, userRole, company, farmerDetails } = req.body;
+    const userImage = req.file ? req.file.filename : null;
     const userData = {
       userName,
       userEmail,
@@ -23,6 +24,7 @@ const registerUser = async(req, res) => {
       userRole,
       company,
       farmerDetails,
+      userImage
     };
     const newUser = await UserService.register(userData);
     res.status(201).json({ message: "Usuário registrado com sucesso!", user: newUser });
@@ -41,4 +43,4 @@ const loginUser = async(req, res) => {
     }
 }
 
-export default { renderUser, registerUser, loginUser };
+export default { renderLogin, registerUser, loginUser };

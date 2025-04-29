@@ -10,7 +10,6 @@ class UserService {
       return users;
     } catch (error) {
       console.error("Erro em getAll User:", error);
-      throw new Error("Erro ao listar usuários.");
     }
   }
 
@@ -22,7 +21,8 @@ class UserService {
     userPhone,
     userRole,
     company,
-    farmerDetails
+    farmerDetails,
+    userImage
   ) {
     try {
       const hashedPassword = await bcrypt.hash(userPassword, 10);
@@ -34,11 +34,11 @@ class UserService {
         userRole,
         company,
         farmerDetails,
+        userImage
       });
       await newUser.save();
     } catch (error) {
       console.error("Erro em create User:", error);
-      throw new Error("Erro ao criar usuário.");
     }
   }
 
@@ -49,7 +49,6 @@ class UserService {
       console.log(`Usuário com a id: ${id} foi excluído.`);
     } catch (error) {
       console.error("Erro em delete User:", error);
-      throw new Error("Erro ao exluir usuário.");
     }
   }
 
@@ -62,7 +61,8 @@ class UserService {
     userPhone,
     userRole,
     company,
-    farmerDetails
+    farmerDetails,
+    userImage
   ) {
     try {
       if (userPassword) {
@@ -76,11 +76,11 @@ class UserService {
         userRole,
         company,
         farmerDetails,
+        userImage
       });
       console.log(`Usuário com a id: ${id} atualizado com sucesso.`);
     } catch (error) {
       console.error("Erro em update User:", error);
-      throw new Error("Erro ao atualizar usuário.");
     }
   }
 
@@ -91,7 +91,6 @@ class UserService {
       return user;
     } catch (error) {
       console.error("Erro em getOne User:", error);
-      throw new Error("Erro ao listar usuário.");
     }
   }
 
@@ -100,16 +99,15 @@ class UserService {
     try {
       const user = await User.findOne({ userEmail });
       if (!user) {
-        throw new Error("Usuário não encontrado.");
+        console.log("Usuário não encontrado.");
       }
       const isPasswordValid = await bcrypt.compare(userPassword, user.userPassword);
       if (!isPasswordValid) {
-        throw new Error("Senha incorreta.");
+        console.log("Senha incorreta.");
       }
       return user;
     } catch (error) {
-      console.error("Erro ao fazer login:", error);
-      throw new Error(error.message);
+      console.log("Erro ao fazer login:", error);
     }
   }
 }

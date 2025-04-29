@@ -1,9 +1,13 @@
 // Importando os frameworks e conexões
 import express from "express";
-import mongoose from "./config/db-connection.js";
+import mongoose from "mongoose";
+// import mongoose from "./config/db-connection.js";
 import dotenv from "dotenv";
 dotenv.config();
 const app = express();
+
+// Mongo local para teste
+mongoose.connect("mongodb://127.0.0.1:27017/"+process.env.DB_NAME);
 
 // Configurações do Express
 app.use(express.urlencoded({ extended: false }));
@@ -27,6 +31,8 @@ import DashboardRoutes from "./routes/views/DashboardRoutes.js";
 import HarvestForecastRoutes from "./routes/views/HarvestForecastRoutes.js";
 import LandRoutes from "./routes/views/LandRoutes.js";
 import LoginRoutes from "./routes/views/LoginRoutes.js";
+// import ProfileRoutes from "./routes/views/ProfileRoutes.js";
+import ReportRoutes from "./routes/views/ReportRoutes.js";
 
 // Definindo o Uso das Rotas da API
 app.use("/api/", CompanyRoutes);
@@ -45,7 +51,7 @@ app.use("/", HarvestForecastRoutes);
 app.use("/", LandRoutes);
 app.use("/", LoginRoutes);
 // app.use("/", ProfileRoutes);
-// app.use("/", ReportsRoutes);
+app.use("/", ReportRoutes);
 // app.use("/", SensorsRoutes);
 
 // Rota Principal

@@ -27,6 +27,7 @@ const createUser = async (req, res) => {
       company,
       farmerDetails,
     } = req.body;
+    const userImage = req.file ? req.file.filename : null;
     await UserService.create(
       userName,
       userEmail,
@@ -34,7 +35,8 @@ const createUser = async (req, res) => {
       userPhone,
       userRole,
       company,
-      farmerDetails
+      farmerDetails,
+      userImage
     );
     res.sendStatus(201); // HTTP 201 para criação de recurso
   } catch (error) {
@@ -74,6 +76,7 @@ const updateUser = async (req, res) => {
         company,
         farmerDetails,
       } = req.body;
+      const userImage = req.file ? req.file.filename : null;
       UserService.update(
         id,
         userName,
@@ -82,7 +85,8 @@ const updateUser = async (req, res) => {
         userPhone,
         userRole,
         company,
-        farmerDetails
+        farmerDetails,
+        userImage
       );
       res.sendStatus(200); // Ok
     } else {

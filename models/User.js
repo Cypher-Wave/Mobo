@@ -10,6 +10,7 @@ const FarmerDetailsSchema = new mongoose.Schema({
 const UserSchema = new mongoose.Schema(
   {
     // Dados básicos de autenticação
+    userImage: String,
     userName: { type: String, required: true },
     userEmail: { type: String, required: true, unique: true, trim: true },
     userPassword: { type: String, required: true },
