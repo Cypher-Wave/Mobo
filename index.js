@@ -57,7 +57,7 @@ app.use("/", SensorsRoutes);
 
 // Rota Principal
 app.get("/home", (req, res) => {
-  res.render("index", {
+  res.render("home", {
     pageTitle: "Home",
     cssPage: "home",
   });
