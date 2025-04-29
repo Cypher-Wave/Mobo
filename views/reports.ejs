@@ -1,0 +1,209 @@
+<%- include("partials/head.ejs") %>
+<body id="home">
+<div class="container">
+    <%- include("partials/sideMenu.ejs") %>
+    <main>
+        <main class="new-users">
+            <h1 class="txt">Relatórios</h1>
+
+            <div class="button-container">
+                <button class="view-more-btn">Criar Registro</button>
+            </div> 
+            <div class="button-container2">
+                <button class="view-more-btn">Excluir Registro</button>
+            </div> 
+
+            <div class="user-list">
+                <!-- Cabeçalho da Tabela -->
+                <div class="table-header">
+                    <div class="table-cell">Selecionar</div>
+                    <div class="table-cell">ID Relatórios</div>
+                    <div class="table-cell">Data Relatórios</div>
+                    <div class="table-cell">Data Colheita</div>
+                    <div class="table-cell">Hora Início</div>
+                    <div class="table-cell">Hora Término</div>
+                    <div class="table-cell">Quantidade Colhida</div>
+                    <div class="table-cell">Localização</div>
+                    <div class="table-cell">Qualidade</div>
+                </div>
+                
+                <!-- Linha da Tabela (Exemplo de Relatório) -->
+                <div class="table-row">
+                    <div class="table-cell"><input type="checkbox" class="select-record"></div>
+                    <div class="table-cell">1</div>
+                    <div class="table-cell">10/12/2024</div>
+                    <div class="table-cell">10/12/2024</div>
+                    <div class="table-cell">08:00</div>
+                    <div class="table-cell">18:20</div>
+                    <div class="table-cell">50 kg</div>
+                    <div class="table-cell">Campo 1</div>
+                    <div class="table-cell">Excelente</div>
+                </div>
+                   
+                <div class="table-row">
+                    <div class="table-cell"><input type="checkbox" class="select-record"></div>
+                    <div class="table-cell">2</div>
+                    <div class="table-cell">15/12/2024</div>
+                    <div class="table-cell">15/12/2024</div>
+                    <div class="table-cell">08:00</div>
+                    <div class="table-cell">12:00</div>
+                    <div class="table-cell">50 kg</div>
+                    <div class="table-cell">Campo 2</div>
+                    <div class="table-cell">Excelente</div>
+                </div>
+                   
+                <div class="table-row">
+                    <div class="table-cell"><input type="checkbox" class="select-record"></div>
+                    <div class="table-cell">3</div>
+                    <div class="table-cell">16/12/2024</div>
+                    <div class="table-cell">16/12/2024</div>
+                    <div class="table-cell">08:30</div>
+                    <div class="table-cell">12:10</div>
+                    <div class="table-cell">50 kg</div>
+                    <div class="table-cell">Campo 3</div>
+                    <div class="table-cell">Boa</div>
+                </div>
+                   
+                <div class="table-row">
+                    <div class="table-cell"><input type="checkbox" class="select-record"></div>
+                    <div class="table-cell">4</div>
+                    <div class="table-cell">17/12/2024</div>
+                    <div class="table-cell">17/12/2024</div>
+                    <div class="table-cell">13:00</div>
+                    <div class="table-cell">17:40</div>
+                    <div class="table-cell">50 kg</div>
+                    <div class="table-cell">Campo 4</div>
+                    <div class="table-cell">Ruim</div>
+                </div>
+                <div class="table-row">
+                    <div class="table-cell"><input type="checkbox" class="select-record"></div>
+                    <div class="table-cell">5</div>
+                    <div class="table-cell">18/12/2024</div>
+                    <div class="table-cell">18/12/2024</div>
+                    <div class="table-cell">07:10</div>
+                    <div class="table-cell">13:00</div>
+                    <div class="table-cell">50 kg</div>
+                    <div class="table-cell">Campo 5</div>
+                    <div class="table-cell">Excelente</div>
+                </div>
+                <div class="table-row">
+                    <div class="table-cell"><input type="checkbox" class="select-record"></div>
+                    <div class="table-cell">6</div>
+                    <div class="table-cell">19/12/2024</div>
+                    <div class="table-cell">19/12/2024</div>
+                    <div class="table-cell">18:25</div>
+                    <div class="table-cell">22:30</div>
+                    <div class="table-cell">50 kg</div>
+                    <div class="table-cell">Campo 6</div>
+                    <div class="table-cell">Ruim</div>
+                </div>
+                <div class="table-row">
+                    <div class="table-cell"><input type="checkbox" class="select-record"></div>
+                    <div class="table-cell">7</div>
+                    <div class="table-cell">20/12/2024</div>
+                    <div class="table-cell">20/12/2024</div>
+                    <div class="table-cell">08:00</div>
+                    <div class="table-cell">10:00</div>
+                    <div class="table-cell">50 kg</div>
+                    <div class="table-cell">Campo 7</div>
+                    <div class="table-cell">Excelente</div>
+                </div>
+                <div class="table-row">
+                    <div class="table-cell"><input type="checkbox" class="select-record"></div>
+                    <div class="table-cell">8</div>
+                    <div class="table-cell">21/12/2024</div>
+                    <div class="table-cell">21/12/2024</div>
+                    <div class="table-cell">16:50</div>
+                    <div class="table-cell">19:00</div>
+                    <div class="table-cell">50 kg</div>
+                    <div class="table-cell">Campo 8</div>
+                    <div class="table-cell">Excelente</div>
+                </div>
+                <div class="table-row">
+                    <div class="table-cell"><input type="checkbox" class="select-record"></div>
+                    <div class="table-cell">9</div>
+                    <div class="table-cell">22/12/2024</div>
+                    <div class="table-cell">22/12/2024</div>
+                    <div class="table-cell">12:30</div>
+                    <div class="table-cell">14:00</div>
+                    <div class="table-cell">50 kg</div>
+                    <div class="table-cell">Campo 9</div>
+                    <div class="table-cell">Boa</div>
+                </div>
+                <div class="table-row">
+                    <div class="table-cell"><input type="checkbox" class="select-record"></div>
+                    <div class="table-cell">10</div>
+                    <div class="table-cell">23/12/2024</div>
+                    <div class="table-cell">23/12/2024</div>
+                    <div class="table-cell">06:30</div>
+                    <div class="table-cell">09:00</div>
+                    <div class="table-cell">50 kg</div>
+                    <div class="table-cell">Campo 10</div>
+                    <div class="table-cell">Excelente</div>
+                </div>
+                <div class="table-row">
+                    <div class="table-cell"><input type="checkbox" class="select-record"></div>
+                    <div class="table-cell">11</div>
+                    <div class="table-cell">24/12/2024</div>
+                    <div class="table-cell">24/12/2024</div>
+                    <div class="table-cell">06:50</div>
+                    <div class="table-cell">11:00</div>
+                    <div class="table-cell">50 kg</div>
+                    <div class="table-cell">Campo 11</div>
+                    <div class="table-cell">Boa</div>
+                </div>                
+            </div>
+        </main>
+    </main>
+
+    <!--  Botao darkMode -->
+    <div class="right-section">
+        <div class="nav">
+            <button id="menu-btn">
+                <span class="material-icons-sharp">menu</span>
+            </button>
+            <div class="dark-mode">
+                <span class="material-icons-sharp active"></span>
+                <span class="material-icons-sharp"></span>
+            </div>
+            <div class="perfilFT">
+                <a href="/profile"><img width="40px" src="/assets/img/icon/perfil.png"></a>
+            </div>
+        </div>
+    
+        <!-- Ícone de notificação -->
+        <div class="notificacao-container">
+            <img src="/assets/img/icon/notificacao.png" alt="Ícone de Notificação" class="notificacao-icone" id="notificacao-icone">
+            <span class="badge" id="notificacao-badge">3</span>
+        </div>
+                        
+        <!-- Caixa de notificação -->
+        <div class="caixa-notificacao" id="caixa-notificacao">
+            <h3>Notificações</h3>
+            <ul id="lista-notificacoes">
+                <li class="notificacao-item alerta">
+                    <p>Atenção chuvas fortes se aproximam, proteja sua Plantação!</p>
+                    <button onclick="excluirNotificacao(this)">Excluir</button>
+                    <button onclick="gerarAlerta('Nova atualização de sistema disponível!')">Gerar Alerta</button>
+                </li>
+                <li class="notificacao-item">
+                    <p>Alta Temperatura.</p>
+                    <button onclick="excluirNotificacao(this)">Excluir</button>
+                    <button onclick="gerarAlerta('Seu pedido foi enviado.')">Gerar Alerta</button>
+                </li>
+                <li class="notificacao-item">
+                    <p>Baixa Umidade.</p>
+                    <button onclick="excluirNotificacao(this)">Excluir</button>
+                    <button onclick="gerarAlerta('Você tem 3 novas mensagens.')">Gerar Alerta</button>
+                </li>
+            </ul>
+            <button id="fechar-caixa" onclick="fecharCaixa()">Fechar</button>
+        </div>
+    </div>
+</div>
+
+<script src="/assets/js/graficosDash.js"></script>   
+<script src="/assets/js/dashboard.js"></script>
+<script src="/assets/js/notificacao.js"></script>     
+</body>
+</html>

@@ -1,0 +1,67 @@
+<%- include("partials/head.ejs") %>
+<body>
+<div class="container">
+    <%- include("partials/sideMenu.ejs") %> 
+
+    <div class="informacoes card">
+        <img class="ftPerfilCard" src="/assets/img/Agronomia.jpeg" alt="">
+        <h2 class="tituloCardPerfil">Giovanna Silva</h2>
+        <p class="txtCardPerfil">email@email.com</p>
+        <button class="btncard">Editar Perfil</button>
+
+        <a href="/reports"><p class="btn1">Relatórios</p></a>
+        <a href="/alerts"><p class="btn2">Alertas</p></a>
+    </div> 
+   
+    <div class="galeria" id="gallery">
+        <div class="item"><img src="/assets/img/fotoLichia11.jpg" alt="Foto 1">
+            <div class="descricao">Dia 12/12/2024</div>
+        </div>
+        <div class="item"><img src="/assets/img/fotoLichia5.jpg" alt="Foto 2">
+            <div class="descricao">Dia 25/12/2024</div>
+        </div>
+        <div class="item"><img src="/assets/img/fotoLichia8.jpg" alt="Foto 3">
+            <div class="descricao">Dia 02/12/2024</div>
+        </div>
+        <div class="item"><img src="/assets/img/fotoLichia9.jpg" alt="Foto 4">
+            <div class="descricao">Dia 12/12/2024</div>
+        </div>
+        <div class="item"><img src="/assets/img/fotoLichia1.jpg" alt="Foto 5">
+            <div class="descricao">Dia 10/12/2024</div>
+        </div>
+        <div class="item"><img src="/assets/img/fotoLichia2.jpg" alt="Foto 6">
+            <div class="descricao">Dia 08/12/2024</div>
+        </div>
+        <div class="item"><img src="/assets/img/fotoLichia1.jpg" alt="Foto 7">
+            <div class="descricao">Dia 01/12/2024</div>
+        </div>
+        <div class="item"><img src="/assets/img/fotoLichia2.jpg" alt="Foto 8">
+            <div class="descricao">Dia 28/12/2024</div>
+        </div>
+    </div>
+
+    <div class="btnsFT">
+        <a class="btnFT" href="/clawArm">Voltar para a Câmera</a>
+        <a class="btnFT">Carregar Foto</a>
+    </div>
+
+    <!--  Botao darkMode -->
+    <div class="right-section">
+        <div class="nav">
+            <button id="menu-btn">
+                <span class="material-icons-sharp"></span>
+            </button>
+            <div class="dark-mode">
+                <span class="material-icons-sharp active">      
+                </span>
+                <span class="material-icons-sharp">    
+                </span>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="/assets/js/notificacao.js"></script>     
+<script src="/assets/js/darkmode.js"></script>
+</body>
+</html>    
