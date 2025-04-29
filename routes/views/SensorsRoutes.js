@@ -1,9 +1,9 @@
 import express from "express";
-import renderReports from "../../controllers/views/ReportController.js";
+import renderSensors from "../../controllers/views/SensorsController.js";
 
 const router = express.Router();
 
 // Rota para obter alertas
-router.get("/reports", renderReports);
+router.get("/sensors", renderSensors);
 
 export default router;

@@ -1,6 +1,6 @@
 import HarvestService from "../../services/HarvestService.js";
 
-const getReports = async (req, res) => {
+const renderReports = async (req, res) => {
     try {
       // Delega a lógica de negócio para a camada de serviço
       const harvest = await HarvestService.getAll();
@@ -15,4 +15,4 @@ const getReports = async (req, res) => {
     }
 };
 
-export default getReports;
+export default renderReports;

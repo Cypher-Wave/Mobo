@@ -33,6 +33,7 @@ import LandRoutes from "./routes/views/LandRoutes.js";
 import LoginRoutes from "./routes/views/LoginRoutes.js";
 // import ProfileRoutes from "./routes/views/ProfileRoutes.js";
 import ReportRoutes from "./routes/views/ReportRoutes.js";
+import SensorsRoutes from "./routes/views/SensorsRoutes.js";
 
 // Definindo o Uso das Rotas da API
 app.use("/api/", CompanyRoutes);
@@ -52,7 +53,7 @@ app.use("/", LandRoutes);
 app.use("/", LoginRoutes);
 // app.use("/", ProfileRoutes);
 app.use("/", ReportRoutes);
-// app.use("/", SensorsRoutes);
+app.use("/", SensorsRoutes);
 
 // Rota Principal
 app.get("/home", (req, res) => {
