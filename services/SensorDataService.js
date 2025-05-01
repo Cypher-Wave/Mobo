@@ -18,7 +18,7 @@ class SensorDataService {
     airHumidity,
     alerts,
     location,
-    sensor,
+    sensor
   ) {
     try {
       const newSensorData = new SensorData({

@@ -6,6 +6,10 @@ const FarmerDetailsSchema = new mongoose.Schema({
   dap: String, // Declaração de Aptidão ao Pronaf (documento obrigatório)
 });
 
+const HarvestImagesSchema = new mongoose.Schema({
+  imageName: String,
+});
+
 // Schema principal de usuários
 const UserSchema = new mongoose.Schema(
   {
@@ -33,7 +37,7 @@ const UserSchema = new mongoose.Schema(
     // Detalhes específicos para agricultores familiares
     farmerDetails: {
       type: FarmerDetailsSchema,
-      required: function () {
+      function () {
         return this.userRole === "family_farmer";
       },
     },

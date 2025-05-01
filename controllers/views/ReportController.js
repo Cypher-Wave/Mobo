@@ -1,7 +1,8 @@
 import HarvestService from "../../services/HarvestService.js";
+import asyncHandler from "../../utils/asyncHandler.js";
 
-const renderReports = async (req, res) => {
-  try {
+class ReportController {
+  renderReports = asyncHandler(async (req, res) => {
     // Delega a lógica de negócio para a camada de serviço
     const harvests = await HarvestService.getAll();
     res.render("reports", {
@@ -9,12 +10,7 @@ const renderReports = async (req, res) => {
       pageTitle: "Relatórios",
       cssPage: "reports",
     });
-  } catch (error) {
-    console.error("Erro:", error);
-    res
-      .status(500)
-      .render("error", { message: "Erro ao processar relatórios" });
-  }
-};
+  });
+}
 
-export default renderReports;
+export default new ReportController();

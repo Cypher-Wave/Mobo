@@ -17,14 +17,8 @@ const getAllSensorDatas = async (req, res) => {
 const createSensorData = async (req, res) => {
   try {
     // Validação implícita via destructuring
-    const {
-      temperature,
-      soilHumidity,
-      airHumidity,
-      alerts,
-      location,
-      sensor,
-    } = req.body;
+    const { temperature, soilHumidity, airHumidity, alerts, location, sensor } =
+      req.body;
     await SensorDataService.create(
       temperature,
       soilHumidity,

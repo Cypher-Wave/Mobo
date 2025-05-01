@@ -1,15 +1,14 @@
 // Importando os frameworks e conexões
 import express from "express";
-import mongoose from "mongoose";
-// import mongoose from "./config/db-connection.js";
+import mongoose from "./config/db-connection.js";
 import dotenv from "dotenv";
 import flash from "express-flash";
 import session from "express-session";
 dotenv.config();
 const app = express();
-
 // Mongo local para teste na Fatec
-mongoose.connect("mongodb://127.0.0.1:27017/"+process.env.DB_NAME);
+// import mongoose from "mongoose";
+// mongoose.connect("mongodb://127.0.0.1:27017/"+process.env.DB_NAME);
 
 // Configurações do Express
 app.use(express.urlencoded({ extended: false }));
@@ -19,12 +18,23 @@ app.use(express.static("public"));
 app.use(flash());
 
 // Configurando o express-session
-app.use(session({
-  secret: process.env.JWT_SECRET,
-  cookie: { maxAge: 3600000 },
-  saveUninitialized: false,
-  resave: false
-}));
+app.use(
+  session({
+    secret: process.env.JWT_SECRET,
+    cookie: { maxAge: 24 * 60 * 60 * 1000 },
+    // cookie: { maxAge: 60 * 60 * 1000 },
+    saveUninitialized: false,
+    resave: false,
+  })
+);
+
+app.use((error, req, res, next) => {
+  console.error("Erro não tratado:", error);
+  res.status(500).json({
+    success: false,
+    message: "Erro interno do servidor.",
+  });
+});
 
 // Importando as Rotas da API
 import CompanyRoutes from "./routes/api/CompanyRoutes.js";
@@ -69,6 +79,7 @@ app.use("/", SensorsRoutes);
 // Rota Principal
 app.get("/home", (req, res) => {
   res.render("home", {
+    user: req.session.user,
     messages: req.flash(),
     pageTitle: "Home",
     cssPage: "home",

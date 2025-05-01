@@ -5,21 +5,27 @@
         <img class="fade-in imgLogo" width="100px" src="/assets/img/mobo.ico" alt="">
     </h1>
 </div> 
-
 <div class="navbarHome">
     <div class="iconNav">
         <img width="50px" src="/assets/img/mbRosa.png">
+        <% if (user) { %>
+        <!-- Se estiver logado, mostra o perfil -->
         <div class="perfilFT">
-            <a href="/profile" class="profile-link"><img width="40px" src="/assets/img/icon/perfil.png">
-                <div class="profile-info" >
-                    <img class="perfilCard" src="/assets/img/Agronomia.jpeg" alt="">
-                    <p class="txts"><strong>Nome:</strong> Giovanna Silva</p>
-                    <p class="txts"><strong>Email:</strong> email@email.com</p>
+            <a href="/profile" class="profile-link">
+                <img width="40px" src="<%= user.userImage ? ('/uploads/img/users/' + user.userImage) : '/assets/img/icon/perfil.png' %>">
+                <div class="profile-info">
+                    <p class="txts"><strong>Nome:</strong> <%= user.userName %></p>
+                    <p class="txts"><strong>Email:</strong> <%= user.userEmail %></p>
                     <p class="txt1Card">Logout</p>
-                </div>                
+                </div>
             </a>
         </div>
-    </div>   
+        <% } else { %>
+        <!-- Se NÃO estiver logado, mostra apenas link para login -->
+        <a class="perfilFT" href="/login">Login</a>
+        <% } %>
+  
+    </div>
 </div>
 
 <div style="display: flex; gap: 10px;">            

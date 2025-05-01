@@ -1,8 +1,9 @@
 import AlertService from "../../services/AlertService.js";
+import asyncHandler from "../../utils/asyncHandler.js";
 
 // Controlador para obter alertas
-const getAlerts = async (req, res) => {
-  try {
+class AlertController {
+  render = asyncHandler(async (req, res) => {
     // Verifica os alertas
     await AlertService.checkAlerts();
     // Obtém os sensores com alertas ativos
@@ -13,10 +14,7 @@ const getAlerts = async (req, res) => {
       pageTitle: "Alertas",
       cssPage: "alerts",
     });
-  } catch (error) {
-    console.error("Erro:", error);
-    res.status(500).render("error", { message: "Erro ao processar alertas" });
-  }
-};
+  });
+}
 
-export default getAlerts;
+export default new AlertController();

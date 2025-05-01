@@ -1,13 +1,12 @@
-const renderClawArm = async (req, res) => {
-  try {
+import asyncHandler from "../../utils/asyncHandler.js";
+
+class ClawArmController {
+  render = asyncHandler(async (req, res) => {
     res.render("clawArm", {
       pageTitle: "Braço Mecânico",
       cssPage: "clawArm",
     });
-  } catch (error) {
-    console.error("Erro:", error);
-    res.status(500).render("error", { message: "Erro ao carregar braço" });
-  }
-};
+  });
+}
 
-export default renderClawArm;
+export default new ClawArmController();

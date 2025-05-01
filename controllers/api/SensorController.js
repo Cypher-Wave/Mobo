@@ -7,7 +7,7 @@ const getAllSensors = async (req, res) => {
   try {
     // Delega a lógica de negócio para a camada de serviço
     const sensors = await SensorService.getAll();
-    res.status(200).json({ sensors: sensors }); // Padrão de resposta consistente 
+    res.status(200).json({ sensors: sensors }); // Padrão de resposta consistente
   } catch (error) {
     console.log("Error in getAllSensors:", error);
     res.status(500).json({ error: "Erro interno do servidor." }); // Mensagem genérica por segurança
@@ -29,7 +29,7 @@ const createSensor = async (req, res) => {
       sensorNumeration,
       sensorAccuracy,
       measuringRange,
-      setting,
+      setting
     );
     res.sendStatus(201); // HTTP 201 para criação de recurso
   } catch (error) {
@@ -73,7 +73,7 @@ const updateSensor = async (req, res) => {
         sensorNumeration,
         sensorAccuracy,
         measuringRange,
-        setting,
+        setting
       );
       res.sendStatus(200); // Ok
     } else {

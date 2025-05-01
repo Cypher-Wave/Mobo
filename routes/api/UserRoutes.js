@@ -1,7 +1,7 @@
 import express from "express";
 const UserRoutes = express.Router();
 import UserController from "../../controllers/api/UserController.js";
-import upload from "../../config/multer.js";
+import upload from "../../config/multerUser.js";
 
 // Endpoint para listar todos os usuários
 UserRoutes.get("/users", UserController.getAllUsers);
