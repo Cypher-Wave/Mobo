@@ -11,24 +11,33 @@
         <div class="second-column">
             <img class="logo-container" width="150px" src="/assets/img/Logo.png" alt="">
             <h2 class="title title-second">Deseja criar uma conta?</h2>
-            <form class="form">
+            <form class="form" action="/createUser" method="POST">
                 <label class=" label-input" for="">
                     <i class="far fa-user icon-modify"></i>
-                    <input type="text" placeholder="Name">
+                    <input type="text" name="userName" placeholder="Name">
                 </label>
                     
                 <label class="label-input" for="">
                     <i class="far fa-envelope icon-modify"></i>
-                    <input type="email" placeholder="Email">
+                    <input type="email" name="userEmail" placeholder="Email">
                 </label>
                     
                 <label class="label-input" for="">
                     <i class="fas fa-lock icon-modify"></i>
-                    <input type="password" placeholder="Senha">
+                    <input type="password" name="userPassword" placeholder="Senha">
                 </label>
                     
+                <label class="label-input" for="">
+                    <i class="far fa-user icon-modify"></i>
+                    <select type="text" name="userRole">
+                        <option value="">Tipo de Usuário:</option>
+                        <option value="company_admin">CEO de Empresa</option>
+                        <option value="company_worker">Funcionário de Empresa</option>
+                        <option value="family_farmer">Agricultor Familiar</option>
+                    </select>
+                </label>
                     
-                <button class="btn btn-second">Cadastrar-se</button>        
+                <button class="btn btn-second" type="submit">Cadastrar-se</button>        
             </form>
         </div>
     </div>
@@ -43,19 +52,19 @@
             <img class="logo-container" src="/assets/img/Logo.png" alt="">
 
             <h2 class="title title-second">Faça seu login!</h2>
-            <form class="form">
+            <form class="form" action="/authenticate" method="POST">
                 
                 <label class="label-input" for="">
                     <i class="far fa-envelope icon-modify"></i>
-                    <input type="email" placeholder="Email">
+                    <input type="email" name="email" id="email" placeholder="Email" required>
                 </label>
                 
                 <label class="label-input" for="">
                     <i class="fas fa-lock icon-modify"></i>
-                    <input type="password" placeholder="Senha">
+                    <input type="password" name="password" id="password" placeholder="Senha" required>
                 </label>
             
-                <a href="/index" class="btn btn-second">Entrar</a>
+                <button class="btn btn-second" type="submit">Entrar</button>
                 <a class="password" href="#">Esqueceu sua senha?</a>
 
             </form>

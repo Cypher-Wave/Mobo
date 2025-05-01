@@ -1,10 +1,10 @@
-import harvestService from "./HarvestService.js";
+import HarvestService from "./HarvestService.js";
 
 class DashboardService {
   // Qualidade da colheita por mês/ano
   async getHarvestQualityByMonth() {
     try {
-      const harvests = await harvestService.getAll();
+      const harvests = await HarvestService.getAll();
       const grouped = {};
       harvests.forEach((harvest) => {
         const date = dayjs(harvest.harvestDate);
@@ -29,7 +29,7 @@ class DashboardService {
   // Colheita da semana por dia
   async getHarvestThisWeek() {
     try {
-      const harvests = await harvestService.getAll();
+      const harvests = await HarvestService.getAll();
       const startOfWeek = dayjs().startOf("week");
       const endOfWeek = dayjs().endOf("week");
       const thisWeekHarvests = harvests.filter((harvest) => {
@@ -49,7 +49,7 @@ class DashboardService {
   // Total colhido por mês/ano
   async getTotalHarvestByMonth() {
     try {
-      const harvests = await harvestService.getAll();
+      const harvests = await HarvestService.getAll();
       const grouped = {};
       harvests.forEach((harvest) => {
         const date = dayjs(harvest.harvestDate);

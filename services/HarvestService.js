@@ -4,7 +4,7 @@ class HarvestService {
   // Função para listar todas as colheitas
   async getAll() {
     try {
-      const harvests = await Harvest.find();
+      const harvests = await Harvest.find().populate("location");
       return harvests;
     } catch (error) {
       console.log(error);

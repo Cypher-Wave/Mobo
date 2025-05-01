@@ -25,7 +25,10 @@ class UserService {
     userImage
   ) {
     try {
-      const hashedPassword = await bcrypt.hash(userPassword, 10);
+      const existing = await User.findOne({ userEmail });
+      if (existing) return { success: false, message: "Usuário já cadastrado." };
+      const salt = await bcrypt.genSalt(10);
+      const hashedPassword = await bcrypt.hash(userPassword, salt);
       const newUser = new User({
         userName,
         userEmail,
@@ -37,6 +40,7 @@ class UserService {
         userImage
       });
       await newUser.save();
+      return { success: true };
     } catch (error) {
       console.error("Erro em create User:", error);
     }
@@ -95,20 +99,21 @@ class UserService {
   }
 
   // Login do usuário
-  async login(userEmail, userPassword) {
-    try {
-      const user = await User.findOne({ userEmail });
-      if (!user) {
-        console.log("Usuário não encontrado.");
-      }
-      const isPasswordValid = await bcrypt.compare(userPassword, user.userPassword);
-      if (!isPasswordValid) {
-        console.log("Senha incorreta.");
-      }
-      return user;
-    } catch (error) {
-      console.log("Erro ao fazer login:", error);
-    }
+  async authenticate(email, password) {
+    const user = await User.findOne({ userEmail: email, userPassword: password });
+    if (!user) return { success: false, message: "Usuário não encontrado." };
+
+    // const correct = await bcrypt.compare(password, user.userPassword);
+    // if (!correct) return { success: false, message: "Senha incorreta." };
+
+    return {
+      success: true,
+      user: {
+        id: user._id,
+        email: user.userEmail,
+        role: user.userRole,
+      },
+    };
   }
 }
 
