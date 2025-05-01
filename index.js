@@ -3,6 +3,8 @@ import express from "express";
 import mongoose from "mongoose";
 // import mongoose from "./config/db-connection.js";
 import dotenv from "dotenv";
+import flash from "express-flash";
+import session from "express-session";
 dotenv.config();
 const app = express();
 
@@ -14,6 +16,15 @@ app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 app.set("view engine", "ejs");
 app.use(express.static("public"));
+app.use(flash());
+
+// Configurando o express-session
+app.use(session({
+  secret: process.env.JWT_SECRET,
+  cookie: { maxAge: 3600000 },
+  saveUninitialized: false,
+  resave: false
+}));
 
 // Importando as Rotas da API
 import CompanyRoutes from "./routes/api/CompanyRoutes.js";
@@ -58,6 +69,7 @@ app.use("/", SensorsRoutes);
 // Rota Principal
 app.get("/home", (req, res) => {
   res.render("home", {
+    messages: req.flash(),
     pageTitle: "Home",
     cssPage: "home",
   });
