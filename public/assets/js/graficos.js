@@ -43,7 +43,7 @@ new Chart(grafico1, {
 });
 
 const grafico2 = document.getElementById("myChart2");
-let nomex = ["Brasil", "China"];
+let nomex = ["Boa", "Alta"];
 let color = ["#b80043", "#dd0d59"];
 
 let valor = [20, 10, 30, 40, 70];
@@ -74,7 +74,7 @@ new Chart(grafico2, {
 });
 
 const grafico3 = document.getElementById("myChart3");
-let nome = ["Brasil", "China"];
+let nome = ["Baixa", "Estável"];
 let valorX = [20, 10, 30, 40, 70];
 
 new Chart(grafico3, {
