@@ -3,9 +3,9 @@ import dayjs from "dayjs";
 
 class DashboardService {
   // Qualidade da colheita por mês/ano
-  async getHarvestQualityByMonth() {
+  async getHarvestQualityByMonth(userSession) {
     try {
-      const harvests = await HarvestService.getAll();
+      const harvests = await HarvestService.getAll(userSession);
       const grouped = {};
       harvests.forEach((harvest) => {
         const date = dayjs(harvest.harvestDate);
@@ -28,9 +28,9 @@ class DashboardService {
     }
   }
   // Colheita da semana por dia
-  async getHarvestThisWeek() {
+  async getHarvestThisWeek(userSession) {
     try {
-      const harvests = await HarvestService.getAll();
+      const harvests = await HarvestService.getAll(userSession);
       const startOfWeek = dayjs().startOf("week");
       const endOfWeek = dayjs().endOf("week");
       const thisWeekHarvests = harvests.filter((harvest) => {
@@ -48,9 +48,9 @@ class DashboardService {
     }
   }
   // Total colhido por mês/ano
-  async getTotalHarvestByMonth() {
+  async getTotalHarvestByMonth(userSession) {
     try {
-      const harvests = await HarvestService.getAll();
+      const harvests = await HarvestService.getAll(userSession);
       const grouped = {};
       harvests.forEach((harvest) => {
         const date = dayjs(harvest.harvestDate);
@@ -66,9 +66,9 @@ class DashboardService {
     }
   }
   // Tendência de crescimento
-  async getPlantingGrowthTrend() {
+  async getPlantingGrowthTrend(userSession) {
     try {
-      const totalByMonth = await this.getTotalHarvestByMonth();
+      const totalByMonth = await this.getTotalHarvestByMonth(userSession);
       const months = Object.keys(totalByMonth).sort(); // Organiza cronologicamente
       const trend = months.map((month, index) => {
         if (index === 0) return { month, growth: 0 };

@@ -6,6 +6,8 @@ const LocationSchema = new mongoose.Schema(
     locationName: String,
     longitude: Number,
     latitude: Number,
+    user: { type: mongoose.Schema.Types.ObjectId, ref: "User" },
+    company: { type: mongoose.Schema.Types.ObjectId, ref: "Company" },
   },
   { timestamps: true }
 );

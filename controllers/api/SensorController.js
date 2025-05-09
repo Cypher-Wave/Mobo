@@ -6,7 +6,8 @@ import { ObjectId } from "mongodb";
 const getAllSensors = async (req, res) => {
   try {
     // Delega a lógica de negócio para a camada de serviço
-    const sensors = await SensorService.getAll();
+    const userSession = req.session.user;
+    const sensors = await SensorService.getAll(userSession);
     res.status(200).json({ sensors: sensors }); // Padrão de resposta consistente
   } catch (error) {
     console.log("Error in getAllSensors:", error);
@@ -24,12 +25,14 @@ const createSensor = async (req, res) => {
       measuringRange,
       setting,
     } = req.body;
+    const userSession = req.session.user;
     await SensorService.create(
       sensorType,
       sensorNumeration,
       sensorAccuracy,
       measuringRange,
-      setting
+      setting,
+      userSession
     );
     res.sendStatus(201); // HTTP 201 para criação de recurso
   } catch (error) {

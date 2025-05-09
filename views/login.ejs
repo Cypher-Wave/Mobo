@@ -14,11 +14,22 @@
             <h2 class="title title-second">Deseja criar uma conta?</h2>
             <form class="form" action="/createUser" method="POST">
 
+                <label class="label-input" for="userProfileImage">
+                    <i class="far fa-image icon-modifys"></i>
+                    <span class="txtimp">Escolher imagem</span> <!-- o texto customizado -->
+                    <input  class="fundoInput" id="userProfileImage" type="file" name="userProfileImage" accept="image/*" required style="display: none;">
+                </label>
+
                 <label class="label-input" for="userName">
                     <i class="far fa-user icon-modify"></i>
                     <input type="text" name="userName" placeholder="Nome" required>
                 </label>
                     
+                <label class="label-input" for="userPhone">
+                    <i class="fas fa-phone icon-modify"></i>
+                    <input type="text" name="userPhone" placeholder="Telefone" required>
+                </label>
+
                 <label class="label-input" for="userEmail">
                     <i class="far fa-envelope icon-modify"></i>
                     <input type="email" name="userEmail" placeholder="Email" required>
@@ -30,14 +41,38 @@
                 </label>
                     
                 <label class="label-input" for="userRole">
-                    <i class="far fa-user icon-modify"></i>
-                    <select name="userRole" required>
-                        <option value="" disabled selected>Tipo de Usuário:</option>
-                        <option value="company_admin">CEO de Empresa</option>
-                        <option value="company_worker">Funcionário de Empresa</option>
-                        <option value="family_farmer">Agricultor Familiar</option>
+                    <i class="fas fa-seedling icon-modify"></i>
+                    <select class="fundoInput" name="userRole" id="userRole" required>
+                        <option class="startInput" value="" disabled selected>Tipo de Usuário:</option>
+                        <option class="txtInput" value="company_admin">CEO de Empresa</option>
+                        <option class="txtInput" value="company_worker">Funcionário de Empresa</option>
+                        <option class="txtInput" value="family_farmer">Agricultor Familiar</option>
                     </select>
                 </label>
+                  
+                <!-- Bloco para Agricultor Familiar -->
+                <div id="farmerFields" style="display: none;">
+                    <label class="label-input" for="userCPF">
+                        <i class="fas fa-id-card icon-modify"></i>
+                        <input type="text" name="userCPF" placeholder="CPF">
+                    </label>
+                  
+                    <label class="label-input" for="userDAP">
+                        <i class="fas fa-file-alt icon-modify"></i>
+                        <input type="text" name="userDAP" placeholder="DAP">
+                    </label>
+                </div>
+                  
+                <!-- Bloco para Empresa -->
+                <div id="companyFields" style="display: none;">
+                    <label class="label-input" for="company">
+                        <i class="fas fa-building icon-modify"></i>
+                        <select class="fundoInput" name="company">
+                            <option class="startInput" value="" disabled selected>Selecione a Empresa</option>
+                            <!-- opções dinâmicas aqui -->
+                        </select>
+                    </label>
+                </div>
 
                 <button class="btn btn-second" type="submit">Cadastrar-se</button> 
 
@@ -76,5 +111,6 @@
 </div>
 
 <script src="/assets/js/script.js"></script>
+<script src="/assets/js/formToggle.js"></script>
 </body>
 </html>

@@ -2,9 +2,13 @@ import Location from "../models/Location.js";
 
 class LocationService {
   // Função para listar todas as localizações
-  async getAll() {
+  async getAll(userSession) {
     try {
-      const locations = await Location.find();
+      const filter = {
+        [userSession.userRole === "family_farmer" ? "user" : "company"]: 
+        userSession.userRole === "family_farmer" ? userSession.id : userSession.company
+      };
+      const locations = await Location.find(filter);
       return locations;
     } catch (error) {
       console.log(error);
@@ -12,13 +16,18 @@ class LocationService {
   }
 
   // Função para cadastrar uma localização
-  async create(locationName, longitude, latitude) {
+  async create(userSession, locationName, longitude, latitude) {
     try {
       const newLocation = new Location({
         locationName,
         longitude,
         latitude,
       });
+      if (userSession.userRole === "family_farmer") {
+        newLocation.user = userSession.id;
+      } else {
+        newLocation.company = userSession.company;
+      }
       await newLocation.save();
     } catch (error) {
       console.log(error);

@@ -19,10 +19,8 @@
                 <canvas id="myChart3"></canvas>
             </div>
             <div>
-                <div>
-                    <h3 class="txtGrafic">Total Colhido </h3>
-                    <canvas id="myChart4"></canvas>
-                </div>
+                <h3 class="txtGrafic">Total Colhido</h3>
+                <canvas id="myChart4"></canvas>
             </div>
         </div>
         <!-- Area relatorios  -->          
@@ -134,7 +132,19 @@
         </div> 
     </div>
 </div>
+<script>
+    const qualityData = <%- JSON.stringify(qualityByMonth.map(item => item.averageQuality)) %>;
+    const qualityLabels = <%- JSON.stringify(qualityByMonth.map(item => item.period)) %>;
 
+    const harvestWeekData = <%- JSON.stringify(Object.values(harvestThisWeek.daily || {})) %>;
+    const harvestWeekLabels = <%- JSON.stringify(Object.keys(harvestThisWeek.daily || {})) %>;
+
+    const trendData = <%- JSON.stringify(growthTrend.map(item => item.growth)) %>;
+    const trendLabels = <%- JSON.stringify(growthTrend.map(item => item.month)) %>;
+
+    const totalData = <%- JSON.stringify(Object.values(totalHarvestByMonth || {})) %>;
+    const totalLabels = <%- JSON.stringify(Object.keys(totalHarvestByMonth || {})) %>;
+</script>
 <script src="/assets/js/graficosDash.js"></script>   
 <script src="/assets/js/dashboard.js"></script>
 <script src="/assets/js/notificacao.js"></script>     

@@ -3,10 +3,11 @@ import asyncHandler from "../../utils/asyncHandler.js";
 
 class DashboardController {
   render = asyncHandler(async (req, res) => {
-    const qualityByMonth = await DashboardService.getHarvestQualityByMonth();
-    const harvestThisWeek = await DashboardService.getHarvestThisWeek();
-    const totalHarvestByMonth = await DashboardService.getTotalHarvestByMonth();
-    const growthTrend = await DashboardService.getPlantingGrowthTrend();
+    const userSession = req.session.user;
+    const qualityByMonth = await DashboardService.getHarvestQualityByMonth(userSession);
+    const harvestThisWeek = await DashboardService.getHarvestThisWeek(userSession);
+    const totalHarvestByMonth = await DashboardService.getTotalHarvestByMonth(userSession);
+    const growthTrend = await DashboardService.getPlantingGrowthTrend(userSession);
     res.render("dashboard", {
       qualityByMonth,
       harvestThisWeek,

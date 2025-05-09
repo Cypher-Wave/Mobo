@@ -4,7 +4,8 @@ import asyncHandler from "../../utils/asyncHandler.js";
 
 class SensorsController {
   renderSensors = asyncHandler(async (req, res) => {
-    const sensors = await SensorService.getAll();
+    const userSession = req.session.user;
+    const sensors = await SensorService.getAll(userSession);
     const sensorsData = await SensorDataService.getAll();
     res.render("sensors", {
       sensors,

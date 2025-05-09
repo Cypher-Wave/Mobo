@@ -53,6 +53,8 @@ const SensorSchema = new mongoose.Schema(
     sensorAccuracy: Number,
     measuringRange: String,
     setting: SettingSchema,
+    user: { type: mongoose.Schema.Types.ObjectId, ref: "User" },
+    company: { type: mongoose.Schema.Types.ObjectId, ref: "Company" },
   },
   { timestamps: true }
 );

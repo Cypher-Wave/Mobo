@@ -18,6 +18,8 @@ const UserSchema = new mongoose.Schema(
     userName: { type: String, required: true },
     userEmail: { type: String, required: true, unique: true, trim: true },
     userPassword: { type: String, required: true },
+    userPhone: { type: String, required: true, unique: true, trim: true },
+
     // Informações opcionais
     userPhone: String,
     // Controle de acesso (roles)

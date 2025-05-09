@@ -4,7 +4,11 @@ class PlantingService {
   // Função para listar todas as plantações
   async getAll() {
     try {
-      const plantings = await Planting.find();
+      const filter = {
+        [userSession.userRole === "family_farmer" ? "user" : "company"]: 
+        userSession.userRole === "family_farmer" ? userSession.id : userSession.company
+      };
+      const plantings = await Planting.find(filter);
       return plantings;
     } catch (error) {
       console.log(error);
@@ -12,15 +16,19 @@ class PlantingService {
   }
 
   // Função para cadastrar uma plantação
-  async create(plantingName, plantingDate, plantedArea, location, company) {
+  async create(userSession, plantingName, plantingDate, plantedArea, location) {
     try {
       const newPlanting = new Planting({
         plantingName,
         plantingDate,
         plantedArea,
         location,
-        company,
       });
+      if (userSession.userRole === "family_farmer") {
+        newPlanting.user = userSession.id;
+      } else {
+        newPlanting.company = userSession.company;
+      }
       await newPlanting.save();
     } catch (error) {
       console.log(error);
