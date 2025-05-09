@@ -16,7 +16,7 @@
 
                 <label class="label-input" for="userProfileImage">
                     <i class="far fa-image icon-modifys"></i>
-                    <span class="txtimp">Escolher imagem</span> <!-- o texto customizado -->
+                    <span class="txtimp">Escolher imagem</span>
                     <input  class="fundoInput" id="userProfileImage" type="file" name="userProfileImage" accept="image/*" required style="display: none;">
                 </label>
 
@@ -69,7 +69,9 @@
                         <i class="fas fa-building icon-modify"></i>
                         <select class="fundoInput" name="company">
                             <option class="startInput" value="" disabled selected>Selecione a Empresa</option>
-                            <!-- opções dinâmicas aqui -->
+                                <% companies.forEach((company) => { %>
+                                <option class="txtInput" value="<%= company._id %>"><%= company.companyName %></option>
+                                <% }) %>
                         </select>
                     </label>
                 </div>

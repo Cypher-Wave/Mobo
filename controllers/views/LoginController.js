@@ -1,4 +1,5 @@
 import UserService from "../../services/UserService.js";
+import CompanyService from "../../services/CompanyService.js"; 
 import flash from "express-flash";
 import session from "express-session";
 import asyncHandler from "../../utils/asyncHandler.js";
@@ -6,7 +7,9 @@ import asyncHandler from "../../utils/asyncHandler.js";
 class LoginController {
   // Renderizar a página de Login
   render = asyncHandler(async (req, res) => {
+    const companies = await CompanyService.getAll();
     res.render("login", {
+      companies,
       loggedOut: true,
       messages: req.flash(),
       pageTitle: "Login / Cadastro",

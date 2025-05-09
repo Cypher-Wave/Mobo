@@ -19,12 +19,12 @@
                     <div class="table-header">
                         <div class="table-cell">Selecionar</div>
                         <div class="table-cell">Índice</div>
-                        <div class="table-cell">Localização</div>
                         <div class="table-cell">Data Colheita</div>
                         <div class="table-cell">Hora Início</div>
                         <div class="table-cell">Hora Término</div>
                         <div class="table-cell">Duração</div>
                         <div class="table-cell">Quantidade Colhida</div>
+                        <div class="table-cell">Localização</div>
                         <div class="table-cell">Qualidade</div>
                     </div>
                 
@@ -33,12 +33,12 @@
                     <div class="table-row">
                         <div class="table-cell"><input type="checkbox" class="select-record" name="selected_id" value="<%= harvest._id %>"></div>
                         <div class="table-cell"><%= i+1 %></div>
-                        <div class="table-cell"><%= harvest.location.locationName %></div>
                         <div class="table-cell"><%= new Date(harvest.harvestDate).toLocaleDateString("pt-BR") %></div>
                         <div class="table-cell"><%= harvest.harvestStart %></div>
                         <div class="table-cell"><%= harvest.harvestEnd %></div>
                         <div class="table-cell"><%= harvest.harvestDuration %></div>
                         <div class="table-cell"><%= harvest.harvestedQuantity %></div>
+                        <div class="table-cell"><%= harvest.location.locationName %></div>
                         <div class="table-cell"><%= harvest.quality %>/10</div>
                     </div>
                     <% }) %> 

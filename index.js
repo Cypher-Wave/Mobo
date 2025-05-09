@@ -1,14 +1,14 @@
 // Importando os frameworks e conexões
 import express from "express";
-// import mongoose from "./config/db-connection.js";
+import mongoose from "./config/db-connection.js";
 import dotenv from "dotenv";
 import flash from "express-flash";
 import session from "express-session";
 dotenv.config();
 const app = express();
 // Mongo local para teste na Fatec
-import mongoose from "mongoose";
- mongoose.connect("mongodb://127.0.0.1:27017/"+process.env.DB_NAME);
+// import mongoose from "mongoose";
+//  mongoose.connect("mongodb://127.0.0.1:27017/"+process.env.DB_NAME);
 
 // Configurações do Express
 app.use(express.urlencoded({ extended: false }));
