@@ -40,7 +40,7 @@ class LoginController {
       userPhone,
       userRole,
       company,
-      farmerDetails,
+      farmerDetails
     } = req.body;
     const userImage = req.file ? req.file.filename : null;
     const result = await UserService.create(

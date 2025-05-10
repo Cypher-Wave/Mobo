@@ -14,10 +14,10 @@
             <h2 class="title title-second">Deseja criar uma conta?</h2>
             <form class="form" action="/createUser" method="POST">
 
-                <label class="label-input" for="userProfileImage">
+                <label class="label-input" for="userImage">
                     <i class="far fa-image icon-modifys"></i>
                     <span class="txtimp">Escolher imagem</span>
-                    <input  class="fundoInput" id="userProfileImage" type="file" name="userProfileImage" accept="image/*" required style="display: none;">
+                    <input  class="fundoInput" id="userProfileImage" type="file" name="userImage" accept="image/*" style="display: none;">
                 </label>
 
                 <label class="label-input" for="userName">
@@ -27,7 +27,7 @@
                     
                 <label class="label-input" for="userPhone">
                     <i class="fas fa-phone icon-modify"></i>
-                    <input type="text" name="userPhone" placeholder="Telefone" required>
+                    <input type="text" name="userPhone" placeholder="Telefone">
                 </label>
 
                 <label class="label-input" for="userEmail">
@@ -52,14 +52,14 @@
                   
                 <!-- Bloco para Agricultor Familiar -->
                 <div id="farmerFields" style="display: none;">
-                    <label class="label-input" for="userCPF">
+                    <label class="label-input" for="farmerDetails[cpf]">
                         <i class="fas fa-id-card icon-modify"></i>
-                        <input type="text" name="userCPF" placeholder="CPF">
+                        <input type="text" name="farmerDetails[cpf]" placeholder="CPF">
                     </label>
                   
-                    <label class="label-input" for="userDAP">
+                    <label class="label-input" for="farmerDetails[dap]">
                         <i class="fas fa-file-alt icon-modify"></i>
-                        <input type="text" name="userDAP" placeholder="DAP">
+                        <input type="text" name="farmerDetails[dap]" placeholder="DAP">
                     </label>
                 </div>
                   

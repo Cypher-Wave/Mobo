@@ -30,7 +30,16 @@ class UserService {
           success: false,
           message: "Campos obrigatórios não preenchidos.",
         };
-
+      let parsedFarmerDetails = undefined;
+      if (userRole === "family_farmer") {
+        if (!farmerDetails || !farmerDetails.cpf || !farmerDetails.dap) {
+          return { success: false, message: "Campos CPF e DAP são obrigatórios para agricultores familiares." };
+        }
+        parsedFarmerDetails = {
+          cpf: farmerDetails.cpf,
+          dap: farmerDetails.dap,
+        };
+      };
       const existing = await User.findOne({ userEmail });
       if (existing)
         return { success: false, message: "Usuário já cadastrado." };
@@ -43,7 +52,7 @@ class UserService {
         userPhone,
         userRole,
         company,
-        farmerDetails,
+        farmerDetails: parsedFarmerDetails,
         userImage,
       });
       await newUser.save();
