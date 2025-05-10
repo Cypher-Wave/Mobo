@@ -212,7 +212,7 @@ dateInput.addEventListener("input", (e) => {
     }
   }
 });
-// Pesquisa data 
+// Pesquisa data
 gotoBtn.addEventListener("click", gotoDate);
 
 function gotoDate() {
@@ -287,8 +287,6 @@ document.addEventListener("click", (e) => {
 addEventTitle.addEventListener("input", (e) => {
   addEventTitle.value = addEventTitle.value.slice(0, 60);
 });
-
-
 
 //allow only time in eventtime from and to
 addEventFrom.addEventListener("input", (e) => {

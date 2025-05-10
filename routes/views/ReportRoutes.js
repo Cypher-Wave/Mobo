@@ -1,9 +1,13 @@
 import express from "express";
-import renderReports from "../../controllers/views/ReportController.js";
+import ReportController from "../../controllers/views/ReportController.js";
+import Auth from "../../middleware/Auth.js";
 
 const router = express.Router();
 
-// Rota para obter alertas
-router.get("/reports", renderReports);
+// Rota para obter relatórios
+router.get("/reports", Auth, ReportController.renderReports);
+
+// Rota para excluir relatórios
+router.post("/reports/delete", Auth, ReportController.deleteReports);
 
 export default router;

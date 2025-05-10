@@ -1,12 +1,17 @@
 import DashboardService from "../../services/DashboardService.js";
+import HarvestService from "../../services/HarvestService.js";
+import asyncHandler from "../../utils/asyncHandler.js";
 
-async function renderDashboard(req, res) {
-  try {
-    const qualityByMonth = await DashboardService.getHarvestQualityByMonth();
-    const harvestThisWeek = await DashboardService.getHarvestThisWeek();
-    const totalHarvestByMonth = await DashboardService.getTotalHarvestByMonth();
-    const growthTrend = await DashboardService.getPlantingGrowthTrend();
+class DashboardController {
+  render = asyncHandler(async (req, res) => {
+    const userSession = req.session.user;
+    const harvests = await HarvestService.getAll(userSession);
+    const qualityByMonth = await DashboardService.getHarvestQualityByMonth(userSession);
+    const harvestThisWeek = await DashboardService.getHarvestThisWeek(userSession);
+    const totalHarvestByMonth = await DashboardService.getTotalHarvestByMonth(userSession);
+    const growthTrend = await DashboardService.getPlantingGrowthTrend(userSession);
     res.render("dashboard", {
+      harvests,
       qualityByMonth,
       harvestThisWeek,
       totalHarvestByMonth,
@@ -14,10 +19,7 @@ async function renderDashboard(req, res) {
       pageTitle: "Dashboard",
       cssPage: "dashboard",
     });
-  } catch (error) {
-    console.log(error);
-    res.status(500).send("Erro ao carregar a dashboard.");
-  }
+  });
 }
 
-export default renderDashboard;
+export default new DashboardController();

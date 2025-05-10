@@ -4,7 +4,7 @@
     <%- include("partials/sideMenu.ejs") %>
     <main>
         <h1 class="txt">Dashboard</h1>
-        <!-- grafico -->
+        <!-- Grafico -->
         <div class="graficos">
             <div>
                 <h3 class="txtGrafic">Qualidade de Colheita</h3>
@@ -19,10 +19,8 @@
                 <canvas id="myChart3"></canvas>
             </div>
             <div>
-                <div>
-                    <h3 class="txtGrafic">Total Colhido </h3>
-                    <canvas id="myChart4"></canvas>
-                </div>
+                <h3 class="txtGrafic">Total Colhido</h3>
+                <canvas id="myChart4"></canvas>
             </div>
         </div>
         <!-- Area relatorios  -->          
@@ -33,61 +31,30 @@
                 <a href="/reports"><button class="view-more-btn">Ver Mais</button></a>
             </div>
             <div class="user-list">
+                <!-- Cabeçalho da Tabela -->
                 <div class="table-header">
-                    <div class="table-cell">Selecionar</div>
-                    <div class="table-cell">ID Relatórios</div>
-                    <div class="table-cell">Data Relatórios</div>
+                    <div class="table-cell">Índice</div>
                     <div class="table-cell">Data Colheita</div>
                     <div class="table-cell">Hora Início</div>
                     <div class="table-cell">Hora Término</div>
+                    <div class="table-cell">Duração</div>
                     <div class="table-cell">Quantidade Colhida</div>
                     <div class="table-cell">Localização</div>
                     <div class="table-cell">Qualidade</div>
                 </div>
+                <!-- Linha da Tabela -->
+                <% harvests.forEach((harvest, i) => { %>
                 <div class="table-row">
-                    <div class="table-cell"><input type="checkbox" class="select-record"></div>
-                    <div class="table-cell">1</div>
-                    <div class="table-cell">10/12/2024</div>
-                    <div class="table-cell">10/12/2024</div>
-                    <div class="table-cell">08:00</div>
-                    <div class="table-cell">18:20</div>
-                    <div class="table-cell">50 kg</div>
-                    <div class="table-cell">Campo 1</div>
-                    <div class="table-cell">Excelente</div>
+                    <div class="table-cell"><%= i+1 %></div>
+                    <div class="table-cell"><%= new Date(harvest.harvestDate).toLocaleDateString("pt-BR") %></div>
+                    <div class="table-cell"><%= harvest.harvestStart %></div>
+                    <div class="table-cell"><%= harvest.harvestEnd %></div>
+                    <div class="table-cell"><%= harvest.harvestDuration %></div>
+                    <div class="table-cell"><%= harvest.harvestedQuantity %></div>
+                    <div class="table-cell"><%= harvest.location.locationName %></div>
+                    <div class="table-cell"><%= harvest.quality %>/10</div>
                 </div>
-                <div class="table-row">
-                    <div class="table-cell"><input type="checkbox" class="select-record"></div>
-                    <div class="table-cell">2</div>
-                    <div class="table-cell">15/12/2024</div>
-                    <div class="table-cell">15/12/2024</div>
-                    <div class="table-cell">08:00</div>
-                    <div class="table-cell">12:00</div>
-                    <div class="table-cell">50 kg</div>
-                    <div class="table-cell">Campo 2</div>
-                    <div class="table-cell">Excelente</div>
-                </div>
-                <div class="table-row">
-                    <div class="table-cell"><input type="checkbox" class="select-record"></div>
-                    <div class="table-cell">3</div>
-                    <div class="table-cell">16/12/2024</div>
-                    <div class="table-cell">16/12/2024</div>
-                    <div class="table-cell">08:30</div>
-                    <div class="table-cell">12:10</div>
-                    <div class="table-cell">50 kg</div>
-                    <div class="table-cell">Campo 3</div>
-                    <div class="table-cell">Boa</div>
-                </div>
-                <div class="table-row">
-                    <div class="table-cell"><input type="checkbox" class="select-record"></div>
-                    <div class="table-cell">4</div>
-                    <div class="table-cell">17/12/2024</div>
-                    <div class="table-cell">17/12/2024</div>
-                    <div class="table-cell">13:00</div>
-                    <div class="table-cell">17:40</div>
-                    <div class="table-cell">50 kg</div>
-                    <div class="table-cell">Campo 4</div>
-                    <div class="table-cell">Ruim</div>
-                </div>                      
+                <% }) %>                   
             </div>
         </main>
     </main>
@@ -135,6 +102,19 @@
     </div>
 </div>
 
+<script>
+    const qualityData = <%- JSON.stringify(qualityByMonth.map(item => item.averageQuality)) %>;
+    const qualityLabels = <%- JSON.stringify(qualityByMonth.map(item => item.period)) %>;
+
+    const harvestWeekData = <%- JSON.stringify(Object.values(harvestThisWeek.daily || {})) %>;
+    const harvestWeekLabels = <%- JSON.stringify(Object.keys(harvestThisWeek.daily || {})) %>;
+
+    const trendData = <%- JSON.stringify(growthTrend.map(item => item.growth)) %>;
+    const trendLabels = <%- JSON.stringify(growthTrend.map(item => item.month)) %>;
+
+    const totalData = <%- JSON.stringify(Object.values(totalHarvestByMonth || {})) %>;
+    const totalLabels = <%- JSON.stringify(Object.keys(totalHarvestByMonth || {})) %>;
+</script>
 <script src="/assets/js/graficosDash.js"></script>   
 <script src="/assets/js/dashboard.js"></script>
 <script src="/assets/js/notificacao.js"></script>     

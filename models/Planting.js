@@ -7,6 +7,7 @@ const PlantingSchema = new mongoose.Schema(
     plantingDate: Date,
     plantedArea: Number,
     location: { type: mongoose.Schema.Types.ObjectId, ref: "Location" },
+    user: { type: mongoose.Schema.Types.ObjectId, ref: "User" },
     company: { type: mongoose.Schema.Types.ObjectId, ref: "Company" },
   },
   { timestamps: true }

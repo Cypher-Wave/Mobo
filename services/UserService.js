@@ -9,7 +9,7 @@ class UserService {
       const users = await User.find(query);
       return users;
     } catch (error) {
-      console.error("Erro em getAll User:", error);
+      console.log("Erro em getAll User:", error);
     }
   }
 
@@ -25,6 +25,25 @@ class UserService {
     userImage
   ) {
     try {
+      if (!userName || !userEmail || !userPassword || !userRole)
+        return {
+          success: false,
+          message: "Campos obrigatórios não preenchidos.",
+        };
+      let parsedFarmerDetails = undefined;
+      if (userRole === "family_farmer") {
+        if (!farmerDetails || !farmerDetails.cpf || !farmerDetails.dap) {
+          return { success: false, message: "Campos CPF e DAP são obrigatórios para agricultores familiares." };
+        }
+        parsedFarmerDetails = {
+          cpf: farmerDetails.cpf,
+          dap: farmerDetails.dap,
+        };
+      };
+      const existing = await User.findOne({ userEmail });
+      if (existing)
+        return { success: false, message: "Usuário já cadastrado." };
+
       const hashedPassword = await bcrypt.hash(userPassword, 10);
       const newUser = new User({
         userName,
@@ -33,12 +52,24 @@ class UserService {
         userPhone,
         userRole,
         company,
-        farmerDetails,
-        userImage
+        farmerDetails: parsedFarmerDetails,
+        userImage,
       });
       await newUser.save();
+      return {
+        success: true,
+        message: "Usuário criado com sucesso.",
+        user: {
+          id: newUser._id,
+          userImage: newUser.userImage,
+          userName: newUser.userName,
+          userEmail: newUser.userEmail,
+          userRole: newUser.userRole,
+        },
+      };
     } catch (error) {
-      console.error("Erro em create User:", error);
+      console.log("Erro em create User:", error);
+      return { success: false, message: "Erro ao criar usuário." };
     }
   }
 
@@ -48,7 +79,7 @@ class UserService {
       await User.findByIdAndDelete(id);
       console.log(`Usuário com a id: ${id} foi excluído.`);
     } catch (error) {
-      console.error("Erro em delete User:", error);
+      console.log("Erro em delete User:", error);
     }
   }
 
@@ -76,11 +107,11 @@ class UserService {
         userRole,
         company,
         farmerDetails,
-        userImage
+        userImage,
       });
       console.log(`Usuário com a id: ${id} atualizado com sucesso.`);
     } catch (error) {
-      console.error("Erro em update User:", error);
+      console.log("Erro em update User:", error);
     }
   }
 
@@ -90,25 +121,29 @@ class UserService {
       const user = await User.findOne({ _id: id });
       return user;
     } catch (error) {
-      console.error("Erro em getOne User:", error);
+      console.log("Erro em getOne User:", error);
     }
   }
 
   // Login do usuário
-  async login(userEmail, userPassword) {
-    try {
-      const user = await User.findOne({ userEmail });
-      if (!user) {
-        console.log("Usuário não encontrado.");
-      }
-      const isPasswordValid = await bcrypt.compare(userPassword, user.userPassword);
-      if (!isPasswordValid) {
-        console.log("Senha incorreta.");
-      }
-      return user;
-    } catch (error) {
-      console.log("Erro ao fazer login:", error);
-    }
+  async authenticate(userEmail, userPassword) {
+    const user = await User.findOne({ userEmail });
+    if (!user) return { success: false, message: "Usuário não encontrado." };
+
+    const correct = await bcrypt.compare(userPassword, user.userPassword);
+    if (!correct) return { success: false, message: "Senha incorreta." };
+
+    return {
+      success: true,
+      message: "Login efetuado com sucesso!",
+      user: {
+        id: user._id,
+        userImage: user.userImage,
+        userName: user.userName,
+        userEmail: user.userEmail,
+        userRole: user.userRole,
+      },
+    };
   }
 }
 

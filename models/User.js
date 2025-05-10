@@ -2,8 +2,20 @@ import mongoose from "mongoose";
 
 // Schema para detalhes específicos de agricultores familiares
 const FarmerDetailsSchema = new mongoose.Schema({
-  cpf: String,
-  dap: String, // Declaração de Aptidão ao Pronaf (documento obrigatório)
+  cpf: {
+    type: String,
+    required: true,
+    validate: {
+      validator: (v) => /^\d{3}\.\d{3}\.\d{3}-\d{2}$/.test(v), // Formato 000.000.000-00
+      message: "CPF inválido!",
+    },
+  },
+  dap: {
+    type: String,
+    required: true,
+    minlength: 10,
+    uppercase: true,
+  }, // Declaração de Aptidão ao Pronaf (documento obrigatório)
 });
 
 // Schema principal de usuários
@@ -14,6 +26,7 @@ const UserSchema = new mongoose.Schema(
     userName: { type: String, required: true },
     userEmail: { type: String, required: true, unique: true, trim: true },
     userPassword: { type: String, required: true },
+    userPhone: { type: String, required: true, unique: true, trim: true },
     // Informações opcionais
     userPhone: String,
     // Controle de acesso (roles)

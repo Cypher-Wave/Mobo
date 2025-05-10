@@ -2,9 +2,13 @@ import Sensor from "../models/Sensor.js";
 
 class SensorService {
   // Função para listar todas os sensores
-  async getAll() {
+  async getAll(userSession) {
     try {
-      const sensors = await Sensor.find();
+      const filter = {
+        [userSession.userRole === "family_farmer" ? "user" : "company"]: 
+        userSession.userRole === "family_farmer" ? userSession.id : userSession.company
+      };
+      const sensors = await Sensor.find(filter);
       return sensors;
     } catch (error) {
       console.log(error);
@@ -13,6 +17,7 @@ class SensorService {
 
   // Função para cadastrar um sensor
   async create(
+    userSession,
     sensorType,
     sensorNumeration,
     sensorAccuracy,
@@ -27,6 +32,11 @@ class SensorService {
         measuringRange,
         setting,
       });
+      if (userSession.userRole === "family_farmer") {
+        newSensor.user = userSession.id;
+      } else {
+        newSensor.company = userSession.company;
+      }
       await newSensor.save();
     } catch (error) {
       console.log(error);

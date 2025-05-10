@@ -2,9 +2,13 @@ import Harvest from "../models/Harvest.js";
 
 class HarvestService {
   // Função para listar todas as colheitas
-  async getAll() {
+  async getAll(userSession) {
     try {
-      const harvests = await Harvest.find();
+      const filter = {
+        [userSession.userRole === "family_farmer" ? "user" : "company"]: 
+        userSession.userRole === "family_farmer" ? userSession.id : userSession.company
+      };
+      const harvests = await Harvest.find(filter).populate("location");
       return harvests;
     } catch (error) {
       console.log(error);
@@ -13,6 +17,7 @@ class HarvestService {
 
   // Função para cadastrar uma colheita
   async create(
+    userSession,
     harvestedQuantity,
     quality,
     harvestDate,
@@ -33,6 +38,11 @@ class HarvestService {
         planting,
         location,
       });
+      if (userSession.userRole === "family_farmer") {
+        newHarvest.user = userSession.id;
+      } else {
+        newHarvest.company = userSession.company;
+      }
       await newHarvest.save();
     } catch (error) {
       console.log(error);
@@ -44,6 +54,15 @@ class HarvestService {
     try {
       await Harvest.findByIdAndDelete(id);
       console.log(`Colheita com a id: ${id} foi excluída.`);
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+  async deleteMany(ids){
+    try {
+      const idsArray = Array.isArray(ids) ? ids : [ids];
+      await Harvest.deleteMany({ _id: { $in: idsArray } });
     } catch (error) {
       console.log(error);
     }

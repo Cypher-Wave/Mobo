@@ -1,22 +1,49 @@
 import UserService from "../../services/UserService.js";
+import CompanyService from "../../services/CompanyService.js"; 
+import flash from "express-flash";
+import session from "express-session";
+import asyncHandler from "../../utils/asyncHandler.js";
 
-const renderLogin = async(req, res) => {
-    try {
-        res.render("login", {
-            pageTitle: "Login / Cadastro",
-            cssPage: "login",
-        });
-    } catch (error) {
-        console.error("Erro:", error);
-        res.status(500).render("error", { message: "Erro ao carregar página de login / cadastro" });
+class LoginController {
+  // Renderizar a página de Login
+  render = asyncHandler(async (req, res) => {
+    const companies = await CompanyService.getAll();
+    res.render("login", {
+      companies,
+      loggedOut: true,
+      messages: req.flash(),
+      pageTitle: "Login / Cadastro",
+      cssPage: "login",
+    });
+  });
+
+  // Efetuar a Autenticação e Logar
+  authenticate = asyncHandler(async (req, res) => {
+    const { userEmail, userPassword } = req.body;
+    const result = await UserService.authenticate(userEmail, userPassword);
+    if (result.success) {
+      req.session.user = result.user;
+      req.flash("success", "Login efetuado com sucesso!");
+      return res.redirect("/home");
+    } else {
+      req.flash("danger", result.message);
+      return res.redirect("/login");
     }
-}
+  });
 
-const registerUser = async(req, res) => {
-  try {
-    const { userName, userEmail, userPassword, userPhone, userRole, company, farmerDetails } = req.body;
+  // Registrar o Usuário
+  register = asyncHandler(async (req, res) => {
+    const {
+      userName,
+      userEmail,
+      userPassword,
+      userPhone,
+      userRole,
+      company,
+      farmerDetails
+    } = req.body;
     const userImage = req.file ? req.file.filename : null;
-    const userData = {
+    const result = await UserService.create(
       userName,
       userEmail,
       userPassword,
@@ -25,22 +52,22 @@ const registerUser = async(req, res) => {
       company,
       farmerDetails,
       userImage
-    };
-    const newUser = await UserService.register(userData);
-    res.status(201).json({ message: "Usuário registrado com sucesso!", user: newUser });
-  } catch (error) {
-    res.status(400).json({ error: error.message });
-  }
-}
-
-const loginUser = async(req, res) => {
-    try {
-        const { userEmail, userPassword } = req.body;
-        const user = await UserService.login(userEmail, userPassword);
-        res.status(200).json({ message: "Login realizado com sucesso!", user });
-    } catch (error) {
-        res.status(401).json({ error: error.message });
+    );
+    if (result.success) {
+      req.session.user = result.user;
+      req.flash("success", "Cadastro realizado!.");
+      return res.redirect("/home");
+    } else {
+      req.flash("danger", result.message);
+      return res.redirect("/login");
     }
+  });
+
+  // Fazer Logout
+  logout = asyncHandler(async (req, res) => {
+    req.session.user = undefined;
+    res.redirect("/login");
+  });
 }
 
-export default { renderLogin, registerUser, loginUser };
+export default new LoginController();

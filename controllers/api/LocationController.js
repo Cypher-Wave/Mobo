@@ -6,7 +6,8 @@ import { ObjectId } from "mongodb";
 const getAllLocations = async (req, res) => {
   try {
     // Delega a lógica de negócio para a camada de serviço
-    const locations = await LocationService.getAll();
+    const userSession = req.session.user;
+    const locations = await LocationService.getAll(userSession);
     res.status(200).json({ locations: locations }); // Padrão de resposta consistente
   } catch (error) {
     console.log("Error in getAllLocations:", error);
@@ -18,7 +19,8 @@ const createLocation = async (req, res) => {
   try {
     // Validação implícita via destructuring
     const { locationName, longitude, latitude } = req.body;
-    await LocationService.create(locationName, longitude, latitude);
+    const userSession = req.session.user;
+    await LocationService.create(locationName, longitude, latitude, userSession);
     res.sendStatus(201); // HTTP 201 para criação de recurso
   } catch (error) {
     console.log("Error in createLocation:", error);

@@ -1,9 +1,10 @@
 import express from "express";
-import renderSensors from "../../controllers/views/SensorsController.js";
+import SensorsController from "../../controllers/views/SensorsController.js";
+import Auth from "../../middleware/Auth.js";
 
 const router = express.Router();
 
 // Rota para obter alertas
-router.get("/sensors", renderSensors);
+router.get("/sensors", Auth, SensorsController.renderSensors);
 
 export default router;
