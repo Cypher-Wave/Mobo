@@ -11,7 +11,6 @@ const HarvestSchema = new mongoose.Schema(
     harvestEnd: String,
     harvestDuration: String,
     planting: { type: mongoose.Schema.Types.ObjectId, ref: "Planting" },
-    location: { type: mongoose.Schema.Types.ObjectId, ref: "Location" },
     user: { type: mongoose.Schema.Types.ObjectId, ref: "User" },
     company: { type: mongoose.Schema.Types.ObjectId, ref: "Company" },
   },

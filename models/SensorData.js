@@ -19,9 +19,9 @@ const SensorDataSchema = new mongoose.Schema(
     soilHumidity: Number,
     airHumidity: Number,
     alerts: [SensorAlertsSchema],
-    location: {
+    planting: {
       type: mongoose.Schema.Types.ObjectId,
-      ref: "Location",
+      ref: "Planting",
       required: true,
     },
     sensor: {

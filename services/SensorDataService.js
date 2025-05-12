@@ -17,7 +17,6 @@ class SensorDataService {
     soilHumidity,
     airHumidity,
     alerts,
-    location,
     sensor
   ) {
     try {
@@ -26,7 +25,6 @@ class SensorDataService {
         soilHumidity,
         airHumidity,
         alerts,
-        location,
         sensor,
       });
       await newSensorData.save();
@@ -52,7 +50,6 @@ class SensorDataService {
     soilHumidity,
     airHumidity,
     alerts,
-    location,
     sensor
   ) {
     try {
@@ -61,7 +58,6 @@ class SensorDataService {
         soilHumidity,
         airHumidity,
         alerts,
-        location,
         sensor,
       });
       console.log(`Dados de Sensor com a id: ${id} atualizados com sucesso.`);

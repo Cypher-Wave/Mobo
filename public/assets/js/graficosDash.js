@@ -10,7 +10,7 @@ let colors = ["#597427", "#1b410c"];
 
 if (graphicQualityByMonth && typeof qualityLabels !== "undefined" && typeof qualityData !== "undefined") {
   new Chart(graphicQualityByMonth, {
-    type: "polarArea",
+    type: "pie",
     data: {
       labels: qualityLabels,
       datasets: [
@@ -25,16 +25,6 @@ if (graphicQualityByMonth && typeof qualityLabels !== "undefined" && typeof qual
         },
       ],
     },
-    options: {
-      scales: {
-        y: {
-          beginAtZero: true,
-          responsive: true,
-          maintainAspectRatio: true, // Mantém a proporção ao redimensionar
-          aspectRatio: 2, // Ajusta a proporção (largura/altura)
-        },
-      },
-    },
   });
 }
 
@@ -44,27 +34,18 @@ let color = ["#b80043", "#dd0d59"];
 
 if (graphicHarvestThisWeek && typeof harvestWeekLabels !== "undefined" && typeof harvestWeekData !== "undefined") {
   new Chart(graphicHarvestThisWeek, {
-    type: "polarArea",
+    type: "pie",
     data: {
       labels: harvestWeekLabels,
-      datasets: [
-        {
-          label: "Colheita(kg):",
-          data: harvestWeekData,
-          borderWidth: 1,
-          backgroundColor: color,
-          hoverBackgroundColor: "#ece2d6",
-          hoverBorderColor: "#b80043",
-          borderColor: "#ece2d6",
-        },
-      ],
-    },
-    options: {
-      scales: {
-        y: {
-          beginAtZero: true,
-        },
-      },
+      datasets: [{
+        label: "Quantidade Colhida",
+        data: harvestWeekData,
+        backgroundColor: color,
+        hoverBackgroundColor: "#ece2d6",
+        hoverBorderColor: "#b80043",
+        borderColor: "#ece2d6",
+        borderWidth: 1
+      }]
     },
   });
 }
@@ -89,13 +70,6 @@ if (graphicGrowthTrend && typeof trendLabels !== "undefined" && typeof trendData
         },
       ],
     },
-    options: {
-      scales: {
-        y: {
-          beginAtZero: true,
-        },
-      },
-    },
   });
 }
 
@@ -119,9 +93,6 @@ if (graphicTotalHarvestByMonth && typeof totalLabels !== "undefined" && typeof t
           font: "Livvic",
         },
       ],
-    },
-    options: {
-      scales: { y: { beginAtZero: true } },
     },
   });
 }

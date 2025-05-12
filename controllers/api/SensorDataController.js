@@ -17,14 +17,13 @@ const getAllSensorDatas = async (req, res) => {
 const createSensorData = async (req, res) => {
   try {
     // Validação implícita via destructuring
-    const { temperature, soilHumidity, airHumidity, alerts, location, sensor } =
+    const { temperature, soilHumidity, airHumidity, alerts, sensor } =
       req.body;
     await SensorDataService.create(
       temperature,
       soilHumidity,
       airHumidity,
       alerts,
-      location,
       sensor
     );
     res.sendStatus(201); // HTTP 201 para criação de recurso
@@ -61,7 +60,6 @@ const updateSensorData = async (req, res) => {
         soilHumidity,
         airHumidity,
         alerts,
-        location,
         sensor,
       } = req.body;
       SensorDataService.update(
@@ -70,7 +68,6 @@ const updateSensorData = async (req, res) => {
         soilHumidity,
         airHumidity,
         alerts,
-        location,
         sensor
       );
       res.sendStatus(200); // Ok

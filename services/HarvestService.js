@@ -8,7 +8,7 @@ class HarvestService {
         [userSession.userRole === "family_farmer" ? "user" : "company"]: 
         userSession.userRole === "family_farmer" ? userSession.id : userSession.company
       };
-      const harvests = await Harvest.find(filter).populate("location");
+      const harvests = await Harvest.find(filter).populate("planting");
       return harvests;
     } catch (error) {
       console.log(error);
@@ -25,7 +25,6 @@ class HarvestService {
     harvestEnd,
     harvestDuration,
     planting,
-    location
   ) {
     try {
       const newHarvest = new Harvest({
@@ -36,7 +35,6 @@ class HarvestService {
         harvestEnd,
         harvestDuration,
         planting,
-        location,
       });
       if (userSession.userRole === "family_farmer") {
         newHarvest.user = userSession.id;
@@ -78,7 +76,6 @@ class HarvestService {
     harvestEnd,
     harvestDuration,
     planting,
-    location
   ) {
     try {
       await Harvest.findByIdAndUpdate(id, {
@@ -89,7 +86,6 @@ class HarvestService {
         harvestEnd,
         harvestDuration,
         planting,
-        location,
       });
       console.log(`Colheita com a id: ${id} atualizada com sucesso.`);
     } catch (error) {

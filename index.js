@@ -1,14 +1,14 @@
 // Importando os frameworks e conexões
 import express from "express";
-import mongoose from "./config/db-connection.js";
+// import mongoose from "./config/db-connection.js";
 import dotenv from "dotenv";
 import flash from "express-flash";
 import session from "express-session";
 dotenv.config();
 const app = express();
 // Mongo local para teste na Fatec
-// import mongoose from "mongoose";
-//  mongoose.connect("mongodb://127.0.0.1:27017/"+process.env.DB_NAME);
+import mongoose from "mongoose";
+ mongoose.connect("mongodb://127.0.0.1:27017/"+process.env.DB_NAME);
 
 // Configurações do Express
 app.use(express.urlencoded({ extended: true }));
@@ -39,7 +39,6 @@ app.use((error, req, res, next) => {
 // Importando as Rotas da API
 import CompanyRoutes from "./routes/api/CompanyRoutes.js";
 import HarvestRoutes from "./routes/api/HarvestRoutes.js";
-import LocationRoutes from "./routes/api/LocationRoutes.js";
 import PlantingRoutes from "./routes/api/PlantingRoutes.js";
 import SensorDataRoutes from "./routes/api/SensorDataRoutes.js";
 import SensorRoutes from "./routes/api/SensorRoutes.js";
@@ -59,7 +58,6 @@ import SensorsRoutes from "./routes/views/SensorsRoutes.js";
 // Definindo o Uso das Rotas da API
 app.use("/api/", CompanyRoutes);
 app.use("/api/", HarvestRoutes);
-app.use("/api/", LocationRoutes);
 app.use("/api/", PlantingRoutes);
 app.use("/api/", SensorDataRoutes);
 app.use("/api/", SensorRoutes);

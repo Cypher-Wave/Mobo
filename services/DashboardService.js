@@ -31,18 +31,29 @@ class DashboardService {
   async getHarvestThisWeek(userSession) {
     try {
       const harvests = await HarvestService.getAll(userSession);
-      const startOfWeek = dayjs().startOf("week");
-      const endOfWeek = dayjs().endOf("week");
-      const thisWeekHarvests = harvests.filter((harvest) => {
-        const date = dayjs(harvest.harvestDate);
-        return date.isAfter(startOfWeek) && date.isBefore(endOfWeek);
-      });
+      const today = dayjs();
+      const sevenDaysAgo = today.subtract(6, "day");
+      // Inicializa objeto com os últimos 7 dias com valor 0
       const daily = {};
-      thisWeekHarvests.forEach((harvest) => {
-        const day = dayjs(harvest.harvestDate).format("dddd"); // Segunda, Terça, etc
-        daily[day] = (daily[day] || 0) + harvest.harvestedQuantity;
+      for (let i = 0; i < 7; i++) {
+        const date = sevenDaysAgo.add(i, "day");
+        const key = date.format("DD/MM");
+        daily[key] = 0;
+      }
+      // Soma colheitas nos respectivos dias
+      harvests.forEach((harvest) => {
+        const date = dayjs(harvest.harvestDate);
+        const key = date.format("DD/MM");
+        if (key in daily) {
+          daily[key] += harvest.harvestedQuantity;
+        }
       });
-      return daily;
+      // Converte para array de objetos com day e total
+      const result = Object.entries(daily).map(([day, total]) => ({
+        day,
+        total
+      }));
+      return result;
     } catch (error) {
       console.log(error);
     }

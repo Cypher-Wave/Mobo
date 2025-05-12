@@ -26,7 +26,6 @@ const createHarvest = async (req, res) => {
       harvestEnd,
       harvestDuration,
       planting,
-      location,
     } = req.body;
     const userSession = req.session.user;
     await HarvestService.create(
@@ -37,7 +36,6 @@ const createHarvest = async (req, res) => {
       harvestEnd,
       harvestDuration,
       planting,
-      location,
       userSession
     );
     res.sendStatus(201); // HTTP 201 para criação de recurso
@@ -77,7 +75,6 @@ const updateHarvest = async (req, res) => {
         harvestEnd,
         harvestDuration,
         planting,
-        location,
       } = req.body;
       HarvestService.update(
         id,
@@ -88,7 +85,6 @@ const updateHarvest = async (req, res) => {
         harvestEnd,
         harvestDuration,
         planting,
-        location
       );
       res.sendStatus(200); // Ok
     } else {
