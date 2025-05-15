@@ -39,7 +39,7 @@
                     <div class="table-cell">Hora Término</div>
                     <div class="table-cell">Duração</div>
                     <div class="table-cell">Quantidade Colhida</div>
-                    <div class="table-cell">Localização</div>
+                    <div class="table-cell">Plantação</div>
                     <div class="table-cell">Qualidade</div>
                 </div>
                 <!-- Linha da Tabela -->
@@ -103,17 +103,17 @@
 </div>
 
 <script>
-    const qualityData = <%- JSON.stringify(qualityByMonth.map(item => item.averageQuality)) %>;
     const qualityLabels = <%- JSON.stringify(qualityByMonth.map(item => item.period)) %>;
+    const qualityData = <%- JSON.stringify(qualityByMonth.map(item => item.averageQuality)) %>;
 
     const harvestWeekLabels = <%- JSON.stringify(harvestThisWeek.map(item => item.day)) %>; 
     const harvestWeekData = <%- JSON.stringify(harvestThisWeek.map(item => item.total)) %>;
 
-    const trendData = <%- JSON.stringify(growthTrend.map(item => item.growth)) %>;
     const trendLabels = <%- JSON.stringify(growthTrend.map(item => item.month)) %>;
+    const trendData = <%- JSON.stringify(growthTrend.map(item => item.growth)) %>;
 
-    const totalData = <%- JSON.stringify(Object.values(totalHarvestByMonth || {})) %>;
     const totalLabels = <%- JSON.stringify(Object.keys(totalHarvestByMonth || {})) %>;
+    const totalData = <%- JSON.stringify(Object.values(totalHarvestByMonth || {})) %>;
 </script>
 <script src="/assets/js/graficosDash.js"></script>   
 <script src="/assets/js/dashboard.js"></script>

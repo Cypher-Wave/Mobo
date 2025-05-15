@@ -4,11 +4,12 @@ import express from "express";
 import dotenv from "dotenv";
 import flash from "express-flash";
 import session from "express-session";
+import Auth from "./middleware/Auth.js";
 dotenv.config();
 const app = express();
 // Mongo local para teste na Fatec
 import mongoose from "mongoose";
- mongoose.connect("mongodb://127.0.0.1:27017/"+process.env.DB_NAME);
+mongoose.connect("mongodb://127.0.0.1:27017/"+process.env.DB_NAME);
 
 // Configurações do Express
 app.use(express.urlencoded({ extended: true }));
@@ -75,7 +76,7 @@ app.use("/", ReportRoutes);
 app.use("/", SensorsRoutes);
 
 // Rota Principal
-app.get("/home", (req, res) => {
+app.get("/home", Auth, (req, res) => {
   res.render("home", {
     user: req.session.user,
     messages: req.flash(),
