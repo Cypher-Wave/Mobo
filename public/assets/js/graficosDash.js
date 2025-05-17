@@ -6,7 +6,8 @@ const notas = JSON.parse(localStorage.getItem("notas"));
 const graphicQualityByMonth = document.getElementById("myChart");
 
 let colorsDark = ["#ffffff"];
-let colors = ["#597427", "#1b410c"];
+// Cores Verdes
+let colors = ["#252f18", "#3c4c27", "#61743d", "#879c5f", "#b4c279", "#deebc1", "#f9ffeb"];
 
 if (graphicQualityByMonth && typeof qualityLabels !== "undefined" && typeof qualityData !== "undefined") {
   new Chart(graphicQualityByMonth, {
@@ -30,7 +31,8 @@ if (graphicQualityByMonth && typeof qualityLabels !== "undefined" && typeof qual
 
 // Colheita da Semana 
 const graphicHarvestThisWeek = document.getElementById("myChart2");
-let color = ["#b80043", "#dd0d59"];
+// Cores Vermelhas
+let color = ["#430018", "#710029", "#b70a49", "#c23166", "#db6892", "#ff9cc0", "#ffc9dd"];
 
 if (graphicHarvestThisWeek && typeof harvestWeekLabels !== "undefined" && typeof harvestWeekData !== "undefined") {
   new Chart(graphicHarvestThisWeek, {
