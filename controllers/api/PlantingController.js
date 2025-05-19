@@ -6,8 +6,8 @@ import { ObjectId } from "mongodb";
 const getAllPlantings = async (req, res) => {
   try {
     // Delega a lógica de negócio para a camada de serviço
-    const userSession = req.session.user;
-    const plantings = await PlantingService.getAll(userSession);
+    const user = req.session.user;
+    const plantings = await PlantingService.getAll(user);
     res.status(200).json({ plantings: plantings }); // Padrão de resposta consistente
   } catch (error) {
     console.log("Error in getAllPlantings:", error);
@@ -20,13 +20,13 @@ const createPlanting = async (req, res) => {
     // Validação implícita via destructuring
     const { plantingName, plantingDate, plantedArea, location, company } =
       req.body;
-    const userSession = req.session.user;
+    const user = req.session.user;
     await PlantingService.create(
       plantingName,
       plantingDate,
       plantedArea,
       location,
-      userSession
+      user
     );
     res.sendStatus(201); // HTTP 201 para criação de recurso
   } catch (error) {

@@ -9,18 +9,18 @@ const grafico1 = document.getElementById("myChart");
 // Graficos -
 
 let colorsDark = ["#ffffff"];
-let nomesx = [10, 599, 800, 100, 1000];
-let colors = ["#597427", "#1b410c"];
+let nomesx = ["Talhão A", "Talhão B"];
+let colors = ["#252f18", "#3c4c27", "#61743d", "#879c5f", "#b4c279", "#deebc1", "#f9ffeb"];
 
-let valores = [20, 10, 300, 40, 70, 400, 800, 300.1];
+let valores = [45.6, 23.1];
 
 new Chart(grafico1, {
-  type: "pie",
+  type: "polarArea",
   data: {
     labels: nomesx,
     datasets: [
       {
-        label: "# of Votes",
+        label: "% da umidade do solo",
         data: valores,
         borderWidth: 1,
         backgroundColor: colors,
@@ -43,10 +43,10 @@ new Chart(grafico1, {
 });
 
 const grafico2 = document.getElementById("myChart2");
-let nomex = ["Boa", "Alta"];
-let color = ["#b80043", "#dd0d59"];
+let nomex = ["AIRH-001", "AIRH-010"];
+let color = ["#430018", "#710029", "#b70a49", "#c23166", "#db6892", "#ff9cc0", "#ffc9dd"];
 
-let valor = [20, 10, 30, 40, 70];
+let valor = [68, 70];
 
 new Chart(grafico2, {
   type: "polarArea",
@@ -54,10 +54,10 @@ new Chart(grafico2, {
     labels: nomex,
     datasets: [
       {
-        label: "# of Votes",
+        label: "% da umidade do ar",
         data: valor,
         borderWidth: 1,
-        backgroundColor: color,
+        backgroundColor: colors,
         hoverBackgroundColor: "#ece2d6",
         hoverBorderColor: "#b80043",
         borderColor: "#ece2d6",
@@ -74,19 +74,19 @@ new Chart(grafico2, {
 });
 
 const grafico3 = document.getElementById("myChart3");
-let nome = ["Baixa", "Estável"];
-let valorX = [20, 10, 30, 40, 70];
+let nome = ["TEMP-001", "TEMP-064"];
+let valorX = [26.4, 28.8];
 
 new Chart(grafico3, {
-  type: "doughnut",
+  type: "polarArea",
   data: {
     labels: nome,
     datasets: [
       {
-        label: "# of Votes",
+        label: "Temperatura em °C",
         data: valorX,
         borderWidth: 1,
-        backgroundColor: colors,
+        backgroundColor: color,
         hoverBackgroundColor: "#ece2d6",
         hoverBorderColor: "#597427",
         borderColor: "#ece2d6",

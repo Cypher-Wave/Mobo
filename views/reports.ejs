@@ -32,7 +32,7 @@
                     <% harvests.forEach((harvest, i) => { %>
                     <div class="table-row">
                         <div class="table-cell"><input type="checkbox" class="select-record" name="selected_id" value="<%= harvest._id %>"></div>
-                        <div class="table-cell"><%= i+1 %></div>
+                        <div class="table-cell"><%= (currentPage - 1) * itemsPerPage + i + 1 %></div>
                         <div class="table-cell"><%= new Date(harvest.harvestDate).toLocaleDateString("pt-BR") %></div>
                         <div class="table-cell"><%= harvest.harvestStart %></div>
                         <div class="table-cell"><%= harvest.harvestEnd %></div>
@@ -42,6 +42,11 @@
                         <div class="table-cell"><%= harvest.quality %>/10</div>
                     </div>
                     <% }) %> 
+                    <div class="pagination">
+                        <% for(let i = 1; i <= totalPages; i++) { %>
+                        <a href="?page=<%= i %>" class="<%= i === currentPage ? 'active' : '' %>"><%= i %></a>
+                        <% } %>
+                    </div>
                 </form>               
             </div>
         </main>
@@ -58,7 +63,14 @@
                 <span class="material-icons-sharp"></span>
             </div>
             <div class="perfilFT">
-                <a href="/profile"><img width="40px" src="/assets/img/icon/perfil.png"></a>
+                <a href="/profile" class="profile-link">
+                    <img class="profile-img" src="<%= user.userImage ? ('/uploads/img/users/' + user.userImage) : '/assets/img/icon/perfil.png' %>">
+                    <div class="profile-info">
+                        <p class="txts"><strong>Nome:</strong> <%= user.userName %></p>
+                        <p class="txts"><strong>Email:</strong> <%= user.userEmail %></p>
+                        <p class="txt1Card">Logout</p>
+                    </div>
+                </a>
             </div>
         </div>
     

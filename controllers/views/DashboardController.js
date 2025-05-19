@@ -4,14 +4,16 @@ import asyncHandler from "../../utils/asyncHandler.js";
 
 class DashboardController {
   render = asyncHandler(async (req, res) => {
-    const userSession = req.session.user;
-    const harvests = await HarvestService.getAll(userSession);
-    const qualityByMonth = await DashboardService.getHarvestQualityByMonth(userSession);
-    const harvestThisWeek = await DashboardService.getHarvestThisWeek(userSession);
-    const totalHarvestByMonth = await DashboardService.getTotalHarvestByMonth(userSession);
-    const growthTrend = await DashboardService.getPlantingGrowthTrend(userSession);
+    const user = req.session.user;
+    const qualityByMonth = await DashboardService.getHarvestQualityByMonth(user);
+    const harvestThisWeek = await DashboardService.getHarvestThisWeek(user);
+    const totalHarvestByMonth = await DashboardService.getTotalHarvestByMonth(user);
+    const growthTrend = await DashboardService.getPlantingGrowthTrend(user);
+    const harvests = await HarvestService.getAll(user);
+    const top5Harvests = harvests.slice(0, 5);
     res.render("dashboard", {
-      harvests,
+      user,
+      harvests: top5Harvests,
       qualityByMonth,
       harvestThisWeek,
       totalHarvestByMonth,

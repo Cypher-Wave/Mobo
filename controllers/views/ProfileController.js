@@ -16,6 +16,7 @@ class ProfileController {
   });
 
   render = asyncHandler(async (req, res) => {
+    const user = req.session.user;
     const userId = req.params.userId || req.user.id;
     const images = await ProfileService.getUserImages(userId);
 
@@ -23,7 +24,7 @@ class ProfileController {
     // const images = allImages.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt)).slice(0, 8);
 
     res.render("profile", {
-      user: req.session.user,
+      user,
       images,
       dayjs,
       pageTitle: "Perfil",

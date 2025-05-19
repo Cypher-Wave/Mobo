@@ -7,8 +7,10 @@ import asyncHandler from "../../utils/asyncHandler.js";
 class LoginController {
   // Renderizar a página de Login
   render = asyncHandler(async (req, res) => {
+    const user = req.session.user;
     const companies = await CompanyService.getAll();
     res.render("login", {
+      user,
       companies,
       loggedOut: true,
       messages: req.flash(),

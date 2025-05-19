@@ -6,8 +6,8 @@ import { ObjectId } from "mongodb";
 const getAllHarvests = async (req, res) => {
   try {
     // Delega a lógica de negócio para a camada de serviço
-    const userSession = req.session.user;
-    const harvests = await HarvestService.getAll(userSession);
+    const user = req.session.user;
+    const harvests = await HarvestService.getAll(user);
     res.status(200).json({ harvests: harvests }); // Padrão de resposta consistente
   } catch (error) {
     console.log("Error in getAllHarvests:", error);
@@ -27,7 +27,7 @@ const createHarvest = async (req, res) => {
       harvestDuration,
       planting,
     } = req.body;
-    const userSession = req.session.user;
+    const user = req.session.user;
     await HarvestService.create(
       harvestedQuantity,
       quality,
@@ -36,7 +36,7 @@ const createHarvest = async (req, res) => {
       harvestEnd,
       harvestDuration,
       planting,
-      userSession
+      user
     );
     res.sendStatus(201); // HTTP 201 para criação de recurso
   } catch (error) {

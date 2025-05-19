@@ -634,35 +634,6 @@ main{
   position: fixed;
   margin-top: 4px;
 }
-.profile-link {
-  position: relative;
-  display: inline-block;
-  text-decoration: none;
-}
-
-.profile-info {
-  position: absolute;
-  top: 50px; /* ajusta a posição conforme necessário */
-  left: 0;
-  background: #61743d7e; /* efeito glass */
-  border: 1px solid rgba(255, 255, 255, 0.616);
-  backdrop-filter: blur(10px); /* efeito de desfoque */
-  padding: 10px;
-  width: 200px;
-  height: 300px;
-  border-radius: 8px;
-  opacity: 0;
-  visibility: hidden;
-  transition: opacity 0.3s ease;
-  color: #fff;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-  margin-left: -100px;
-  font-family: 'Livvic';
-}
-.txts{
-  text-align: center;
-  margin-top: 20px;
-}
 .perfilCard{
   width: 70px;
   height: 70px;
@@ -670,19 +641,6 @@ main{
   margin-top: 10px;
   border-radius: 100%;
 }
-.txt1Card{
-  font-weight: bold;
-  text-align: center;
-  margin-top: 80px;
-}
-
-/* Mostrar a caixinha no hover */
-.profile-link:hover .profile-info {
-  opacity: 1;
-  visibility: visible;
-}
-
-
 
 /**/
 .footerimg{

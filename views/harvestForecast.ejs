@@ -76,7 +76,14 @@
           <span class="material-icons-sharp"></span>
         </div>
         <div class="perfilFT">
-          <a href="/profile"><img width="40px" src="/assets/img/icon/perfil.png"></a>
+          <a href="/profile" class="profile-link">
+            <img style="border-radius: 50%; width: 50px; height: 50px;" src="<%= user.userImage ? ('/uploads/img/users/' + user.userImage) : '/assets/img/icon/perfil.png' %>">
+            <div class="profile-info">
+              <p class="txts"><strong>Nome:</strong> <%= user.userName %></p>
+              <p class="txts"><strong>Email:</strong> <%= user.userEmail %></p>
+              <p class="txt1Card">Logout</p>
+            </div>
+          </a>
         </div>
       </div>
       <!-- Ícone de notificação -->

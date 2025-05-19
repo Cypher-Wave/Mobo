@@ -1,18 +1,17 @@
 <%- include("partials/head.ejs") %>
-<body>
+<body class="no-theme">
 <div class="intro">
     <h1 class="logo-header" >
         <img class="fade-in imgLogo" width="100px" src="/assets/img/mobo.ico" alt="">
     </h1>
 </div> 
+<!-- Perfil -->
 <div class="navbarHome">
     <div class="iconNav">
         <img width="50px" src="/assets/img/mbRosa.png">
-        <% if (user) { %>
-        <!-- Se estiver logado, mostra o perfil -->
         <div class="perfilFT">
             <a href="/profile" class="profile-link">
-                <img style="border-radius: 50%; width: 50px; height: 50px;" src="<%= user.userImage ? ('/uploads/img/users/' + user.userImage) : '/assets/img/icon/perfil.png' %>">
+                <img class="profile-img" src="<%= user.userImage ? ('/uploads/img/users/' + user.userImage) : '/assets/img/icon/perfil.png' %>">
                 <div class="profile-info">
                     <p class="txts"><strong>Nome:</strong> <%= user.userName %></p>
                     <p class="txts"><strong>Email:</strong> <%= user.userEmail %></p>
@@ -20,11 +19,6 @@
                 </div>
             </a>
         </div>
-        <% } else { %>
-        <!-- Se NÃO estiver logado, mostra apenas link para login -->
-        <a class="perfilFT" href="/login">Login</a>
-        <% } %>
-  
     </div>
 </div>
 
@@ -130,6 +124,7 @@
         <div class="wave" id="wave4"></div>
     </div>
 </footer>
+<script src="/assets/js/theme.js"></script>
 <script src="/assets/js/popUp.js"></script>
 <script src="/assets/js/splash.js"></script>
 </body>

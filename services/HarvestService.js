@@ -5,13 +5,14 @@ class HarvestService {
   async getAll(userSession) {
     try {
       const filter = {
-        [userSession.userRole === "family_farmer" ? "user" : "company"]: 
-        userSession.userRole === "family_farmer" ? userSession.id : userSession.company
+        ...(userSession.userRole === "family_farmer"
+          ? { user: userSession.id }
+          : { company: userSession.company }),
       };
       const harvests = await Harvest.find(filter).populate("planting");
       return harvests;
     } catch (error) {
-      console.log(error);
+      console.error(error);
     }
   }
 
@@ -24,7 +25,7 @@ class HarvestService {
     harvestStart,
     harvestEnd,
     harvestDuration,
-    planting,
+    planting
   ) {
     try {
       const newHarvest = new Harvest({
@@ -43,7 +44,7 @@ class HarvestService {
       }
       await newHarvest.save();
     } catch (error) {
-      console.log(error);
+      console.error(error);
     }
   }
 
@@ -53,16 +54,16 @@ class HarvestService {
       await Harvest.findByIdAndDelete(id);
       console.log(`Colheita com a id: ${id} foi excluída.`);
     } catch (error) {
-      console.log(error);
+      console.error(error);
     }
   }
 
-  async deleteMany(ids){
+  async deleteMany(ids) {
     try {
       const idsArray = Array.isArray(ids) ? ids : [ids];
       await Harvest.deleteMany({ _id: { $in: idsArray } });
     } catch (error) {
-      console.log(error);
+      console.error(error);
     }
   }
 
@@ -75,7 +76,7 @@ class HarvestService {
     harvestStart,
     harvestEnd,
     harvestDuration,
-    planting,
+    planting
   ) {
     try {
       await Harvest.findByIdAndUpdate(id, {
@@ -89,7 +90,7 @@ class HarvestService {
       });
       console.log(`Colheita com a id: ${id} atualizada com sucesso.`);
     } catch (error) {
-      console.log(error);
+      console.error(error);
     }
   }
 
@@ -99,7 +100,31 @@ class HarvestService {
       const harvest = await Harvest.findOne({ _id: id });
       return harvest;
     } catch (error) {
-      console.log(error);
+      console.error(error);
+    }
+  }
+
+  async getPaginated(page, limit, userSession) {
+    try {
+      const filter = {
+        ...(userSession.userRole === "family_farmer"
+          ? { user: userSession.id }
+          : { company: userSession.company }),
+      };
+      const total = await Harvest.countDocuments(filter);
+      const harvests = await Harvest.find(filter)
+        .populate("planting")
+        .sort({ harvestDate: -1 })
+        .skip((page - 1) * limit)
+        .limit(limit);
+      return {
+        harvests,
+        total,
+        currentPage: page,
+        totalPages: Math.ceil(total / limit),
+      };
+    } catch (error) {
+      console.error(error);
     }
   }
 }
