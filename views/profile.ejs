@@ -4,7 +4,7 @@
     <%- include("partials/sideMenu.ejs") %> 
 
     <div class="informacoes card">
-        <img class="ftPerfilCard" src="/uploads/img/users/<%= user.userImage %>" alt="">
+        <img class="ftPerfilCard" src="<%= user.userImage ? ('/uploads/img/users/' + user.userImage) : '/assets/img/icon/user_profile.png' %>" alt="">
         <h2 class="tituloCardPerfil"><%= user.userName %></h2>
         <p class="txtCardPerfil"><%= user.userEmail %></p>
         <button class="btncard">Editar Perfil</button>
