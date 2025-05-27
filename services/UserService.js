@@ -65,6 +65,7 @@ class UserService {
           userName: newUser.userName,
           userEmail: newUser.userEmail,
           userRole: newUser.userRole,
+          company: newUser.company,
         },
       };
     } catch (error) {
@@ -142,6 +143,7 @@ class UserService {
         userName: user.userName,
         userEmail: user.userEmail,
         userRole: user.userRole,
+        company: user.company,
       },
     };
   }
