@@ -4,149 +4,80 @@ import {
   View,
   Text,
   TouchableOpacity,
-  Alert,
-  TextInput,
+  FlatList,
 } from 'react-native';
-import { CalendarList } from 'react-native-calendars';
-import type { DateObject, MarkedDates } from 'react-native-calendars/src/types';
-
-interface Period {
-  start: string;
-  end: string;
-  note?: string;
-}
+import { Calendar } from 'react-native-calendars';
 
 export default function PrevisaoColheita() {
-  const [periods, setPeriods] = useState<Period[]>([]);
-  const [selecting, setSelecting] = useState<'start' | 'end'>('start');
-  const [currentStart, setCurrentStart] = useState<string | null>(null);
-  const [note, setNote] = useState('');
+  const [selectedDate, setSelectedDate] = useState<string>('');
+  const [viewMode, setViewMode] = useState<'Dia' | 'Semana' | 'Mês' | 'Ano'>('Mês');
 
-  const onDayPress = (day: DateObject) => {
-    const dateStr = day.dateString;
-
-    if (selecting === 'start') {
-      setCurrentStart(dateStr);
-      setSelecting('end');
-    } else {
-      if (!currentStart) {
-        setSelecting('start');
-        return;
-      }
-
-      const start = new Date(currentStart);
-      const end = new Date(dateStr);
-
-      if (end < start) {
-        Alert.alert('Erro', 'A data de término não pode ser antes da data de início.');
-        return;
-      }
-
-      const newPeriod: Period = {
-        start: currentStart,
-        end: dateStr,
-        note: note.trim(),
-      };
-
-      setPeriods([...periods, newPeriod]);
-      setNote('');
-      setCurrentStart(null);
-      setSelecting('start');
-    }
-  };
-
-  const getMarkedDates = (): MarkedDates => {
-    const marks: MarkedDates = {};
-
-    periods.forEach((p) => {
-      const start = new Date(p.start);
-      const end = new Date(p.end);
-
-      for (let d = new Date(start); d <= end; d.setDate(d.getDate() + 1)) {
-        const ds = d.toISOString().split('T')[0];
-        const isStart = ds === p.start;
-        const isEnd = ds === p.end;
-
-        marks[ds] = {
-          color: '#b70a49',
-          textColor: '#fff',
-          startingDay: isStart,
-          endingDay: isEnd,
-        };
-      }
-    });
-
-    return marks;
-  };
+  const events = [
+    { id: '1', title: 'Primeira colheita', time: '08:30 AM - 09:40 AM' },
+    { id: '2', title: 'Primeira colheita', time: '08:30 AM - 09:40 AM' },
+  ];
 
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Previsão de Colheita</Text>
+      {/* Botões de Filtro */}
+      <View style={styles.filterRow}>
+        {['Dia', 'Semana', 'Mês', 'Ano'].map((mode) => (
+          <TouchableOpacity
+            key={mode}
+            style={[
+              styles.filterButton,
+              viewMode === mode && styles.filterButtonActive,
+            ]}
+            onPress={() => setViewMode(mode as any)}
+          >
+            <Text
+              style={[
+                styles.filterText,
+                viewMode === mode && styles.filterTextActive,
+              ]}
+            >
+              {mode}
+            </Text>
+          </TouchableOpacity>
+        ))}
+      </View>
 
-      <CalendarList
-        horizontal
-        pagingEnabled
-        calendarWidth={350}
-        onDayPress={onDayPress}
-        pastScrollRange={12}
-        futureScrollRange={12}
-        markingType="period"
-        markedDates={getMarkedDates()}
+      {/* Calendário */}
+      <Calendar
+        onDayPress={(day) => setSelectedDate(day.dateString)}
+        markedDates={{
+          [selectedDate]: {
+            selected: true,
+            selectedColor: '#b70a49',
+            selectedTextColor: '#fff',
+          },
+        }}
         theme={{
           todayTextColor: '#b70a49',
-          selectedDayBackgroundColor: '#b70a49',
-          selectedDayTextColor: '#fff',
           arrowColor: '#b70a49',
         }}
         style={styles.calendar}
       />
 
-      <View style={styles.info}>
-        {selecting === 'end' && currentStart ? (
-          <Text style={styles.infoText}>
-            Escolha a data final para iniciar em <Text style={{ fontWeight: 'bold' }}>{currentStart}</Text>
-          </Text>
-        ) : (
-          <Text style={styles.infoText}>Toque uma data para iniciar um novo período</Text>
-        )}
+      {/* Eventos */}
+      <View style={styles.eventSection}>
+        <Text style={styles.eventTitle}>Principais Eventos</Text>
+        <FlatList
+          data={events}
+          keyExtractor={(item) => item.id}
+          renderItem={({ item }) => (
+            <View style={styles.eventCard}>
+              <Text style={styles.eventText}>• {item.title}</Text>
+              <Text style={styles.eventTime}>{item.time}</Text>
+            </View>
+          )}
+        />
       </View>
 
-      {/* Campo para notas */}
-      <TextInput
-        style={styles.noteInput}
-        placeholder="Adicionar observações (ex: tipo da colheita, clima...)"
-        placeholderTextColor="#888"
-        value={note}
-        onChangeText={setNote}
-        multiline
-      />
-
-      <TouchableOpacity
-        style={styles.clearButton}
-        onPress={() => {
-          setPeriods([]);
-          setCurrentStart(null);
-          setNote('');
-          setSelecting('start');
-        }}
-      >
-        <Text style={styles.clearText}>Limpar Períodos</Text>
+      {/* Botão adicionar */}
+      <TouchableOpacity style={styles.addButton}>
+        <Text style={styles.addButtonText}>＋</Text>
       </TouchableOpacity>
-
-      {/* Lista de notas salvas */}
-      {periods.length > 0 && (
-        <View style={styles.notesList}>
-          <Text style={styles.notesTitle}>Períodos Salvos:</Text>
-          {periods.map((p, i) => (
-            <View key={i} style={styles.noteItem}>
-              <Text style={styles.noteText}>
-                📅 {p.start} → {p.end}
-              </Text>
-              {p.note ? <Text style={styles.noteContent}>📝 {p.note}</Text> : null}
-            </View>
-          ))}
-        </View>
-      )}
     </View>
   );
 }
@@ -155,71 +86,73 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#ece2d6',
-    padding: 16,
   },
-  title: {
-    fontSize: 22,
+  filterRow: {
+    flexDirection: 'row',
+    justifyContent: 'space-around',
+    marginVertical: 12,
+  },
+  filterButton: {
+    paddingHorizontal: 18,
+    paddingVertical: 8,
+    borderRadius: 20,
+    backgroundColor: '#d890a5',
+  },
+  filterButtonActive: {
+    backgroundColor: '#b70a49',
+  },
+  filterText: {
+    color: '#fff',
+    fontSize: 15,
+  },
+  filterTextActive: {
     fontWeight: 'bold',
-    color: '#b70a49',
-    marginBottom: 12,
-    textAlign: 'center',
   },
   calendar: {
+    marginHorizontal: 16,
     borderRadius: 12,
-    marginBottom: 10,
-  },
-  info: {
-    marginTop: 8,
-    alignItems: 'center',
-  },
-  infoText: {
-    fontSize: 16,
-    color: '#444',
-  },
-  noteInput: {
-    marginTop: 16,
     backgroundColor: '#fff',
-    borderColor: '#b70a49',
-    borderWidth: 1,
-    borderRadius: 8,
-    padding: 12,
-    fontSize: 14,
-    color: '#333',
-    minHeight: 60,
+    elevation: 3,
   },
-  clearButton: {
+  eventSection: {
+    flex: 1,
     marginTop: 16,
-    backgroundColor: '#b70a49',
-    paddingVertical: 12,
-    borderRadius: 8,
-    alignItems: 'center',
+    paddingHorizontal: 16,
   },
-  clearText: {
-    color: '#fff',
-    fontSize: 16,
-    fontWeight: 'bold',
-  },
-  notesList: {
-    marginTop: 20,
-  },
-  notesTitle: {
+  eventTitle: {
     fontSize: 18,
     fontWeight: 'bold',
-    color: '#b70a49',
+    color: '#222',
     marginBottom: 8,
   },
-  noteItem: {
-    backgroundColor: '#f3e8dd',
-    padding: 10,
+  eventCard: {
+    backgroundColor: '#b70a49',
     borderRadius: 8,
-    marginBottom: 8,
+    padding: 12,
+    marginBottom: 10,
   },
-  noteText: {
-    fontSize: 14,
-    fontWeight: 'bold',
+  eventText: {
+    color: '#fff',
+    fontSize: 16,
   },
-  noteContent: {
+  eventTime: {
+    color: '#fce4ec',
     fontSize: 14,
     marginTop: 4,
+  },
+  addButton: {
+    backgroundColor: '#b70a49',
+    width: 55,
+    height: 55,
+    borderRadius: 30,
+    justifyContent: 'center',
+    alignItems: 'center',
+    alignSelf: 'center',
+    marginVertical: 16,
+  },
+  addButtonText: {
+    color: '#fff',
+    fontSize: 28,
+    fontWeight: 'bold',
   },
 });
