@@ -1,0 +1,172 @@
+<%- include("partials/head.ejs")%>
+<body>
+<!--Menu Lateral-->
+<div class="container">
+    <%- include("partials/sideMenu.ejs") %> 
+    <h1 class="txt">Alertas</h1>
+    <div class="container">
+        <!-- Previsão de clima -->
+        <div class="previsao-clima">
+            <img class="moboAlert" src="/assets/img/alertMobo.png" alt="">
+            <!-- Pesquisa clima  -->
+            <div class="psqClima" id="container">
+                <form id="search">
+                    <i class="fa-solid fa-location-dot"></i>
+                    <input type="search" name="city_name" id="city_name" placeholder="Buscar cidade">
+                    <button type="submit">
+                        <i class="fa-solid fa-magnifying-glass"></i>
+                    </button>
+                </form>
+
+                <div id="weather">
+                    <h1 style="color: var(--txt);" id="title">Rolante, BR</h1>
+                    <div id="infos">
+                        <div id="temp">
+                            <img id="temp_img" src="http://openweathermap.org/img/wn/04d@2x.png" alt="">
+                            <div>
+                                <p id="temp_value">
+                                    32 
+                                </p>
+                                <p id="temp_description">
+                                    Ensolarado
+                                </p>
+                            </div>
+                        </div>
+
+                        <div id="other_infos">
+                            <div class="info">
+                                <i id="temp_max_icon" class="fa-solid fa-temperature-high"></i>
+                                <div>
+                                    <h2 class="tituloClima">Temp. max</h2>
+    
+                                    <p class="txtClima" id="temp_max">
+                                        32 <sup>C°</sup>
+                                    </p>
+                                </div>
+                            </div>
+    
+                            <div class="info">
+                                <i id="temp_min_icon" class="fa-solid fa-temperature-low"></i>
+    
+                                <div>
+                                    <h2 class="tituloClima">Temp. min</h2>
+    
+                                    <p class="txtClima" id="temp_min">
+                                        12 <sup>C°</sup>
+                                    </p>
+                                </div>
+                            </div>
+    
+                            <div class="info">
+                                <i id="humidity_icon" class="fa-solid fa-droplet"></i>
+    
+                                <div>
+                                    <h2 class="tituloClima">Humidade</h2>
+    
+                                    <p class="txtClima" id="humidity">
+                                        50%
+                                    </p>
+                                </div>
+                            </div>
+    
+                            <div class="info">
+                                <i id="wind_icon" class="fa-solid fa-wind"></i>
+    
+                                <div>
+                                    <h2 class="tituloClima">Vento</h2>
+    
+                                    <p class="txtClima" id="wind">
+                                        50 km/h
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div id="alert"></div>
+            </div>
+
+            <div class="alertas">
+                <div class="card alerta-temperatura">
+                    <img class="alertIcons1" src="/assets/img/icon/sucesso.png" alt="">
+                    <h3>Alerta de Temperatura</h3>
+                    <p>Temperatura estavel!</p>
+                </div>
+                <div class="card alerta-umidade-ar">
+                    <img class="alertIcons" src="/assets/img/icon/alerta.png" alt="">
+                    <h3>Alerta de Umidade do Ar</h3>
+                    <p>Umidade do ar baixa, risco de secura.</p>
+                </div>
+                <div class="card alerta-umidade-solo">
+                    <img class="alertIcons" src="/assets/img/icon/alerta.png" alt="">
+                    <h3>Alerta de Umidade do Solo</h3>
+                    <p>Solo seco, irrigação necessária.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="container2">
+            <div class="calendar">
+                <div class="month">
+                <button class="prev">&lt;</button>
+                <h3>Novembro 2024</h3>
+                <button class="next">&gt;</button>
+            </div>
+            <div class="weekdays">
+                <span>Dom</span>
+                <span>Seg</span>
+                <span>Ter</span>
+                <span>Qua</span>
+                <span>Qui</span>
+                <span>Sex</span>
+                <span>Sáb</span>
+            </div>
+            <div class="days">
+                <!-- Exemplo de dias (adicione dinamicamente conforme necessário) -->
+                <span class="prev-month">29</span>
+                <span class="prev-month">30</span>
+                <span>1</span>
+                <span>2</span>
+                <span>3</span>
+                <span>4</span>
+                <span>5</span>
+                <span>6</span>
+                <span>7</span>
+                <span>8</span>
+                <span>9</span>
+                <span>10</span>
+                <span>11</span>
+                <span>12</span>
+                <span>13</span>
+                <span>14</span>
+                <span>15</span>
+                <span>16</span>
+                <span>17</span>
+                <span>18</span>
+                <span>19</span>
+                <span>20</span>
+                <span>21</span>
+                <span>22</span>
+                <span>23</span>
+                <span>24</span>
+                <span>25</span>
+                <span>26</span>
+                <span>27</span>
+                <span>28</span>
+                <span>29</span>
+                <span>30</span>
+            </div>
+        </div>
+
+        <p class="txtAlerta">As informações foram coletadas a partir dos dados fornecidos pelo braço mecânico, que realizou a análise e a transmissão de dados de forma precisa.</p> 
+        <p class="txtAlerta2">Para uma visão mais detalhada, explore o menu e consulte as seções específicas de cada ferramenta,
+         onde você encontrará as informações detalhadas sobre os alertas correspondentes.</p>
+        <img class="imgAlert" src="/assets/img/mboAlert.png" alt="">
+    </div>
+</div>
+
+<script src="/assets/js/alerts.js"></script>   
+<script src="/assets/js/menu.js"></script>   
+<script src="/assets/js/darkmode.js"></script>   
+</body>
+</html>

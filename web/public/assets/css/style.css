@@ -1,0 +1,63 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap');
+
+:root{
+    --beige: #ece2d6;
+    --light-green: #61743d;
+    --dark-green: #3c4c27;
+    --pink: #b70a49;
+
+    --bordaGrafico: var(--pink);
+    --color-danger: #FF0060;
+    --color-light: #848bc82e;
+    --color-primary: var(--beige);
+    --color-white: #fff;
+    --menu: var(--pink);
+    --txtMenu: var(--dark-green);
+
+    --border-radius-1: 0.4rem;
+}
+
+/*Perfil Usuário*/
+.profile-link {
+    position: relative;
+    display: inline-block;
+    text-decoration: none;
+}
+.profile-info {
+    position: absolute;
+    top: 50px; /* ajusta a posição conforme necessário */
+    left: 0;
+    background: #61743d7e; /* efeito glass */
+    border: 1px solid #ffffff9d;
+    backdrop-filter: blur(10px); /* efeito de desfoque */
+    padding: 10px;
+    width: 200px;
+    height: 300px;
+    border-radius: 8px;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease;
+    color: #fff;
+    box-shadow: 0 4px 8px #00000033;
+    margin-left: -100px;
+    font-family: 'Livvic';
+}
+.profile-img{
+    border-radius: 50%; 
+    width: 50px; 
+    height: 50px;
+}
+.txts{
+    text-align: center;
+    margin-top: 20px;
+}
+.txt1Card{
+    font-weight: bold;
+    text-align: center;
+    margin-top: 80px;
+}
+/* Mostrar a caixinha no hover */
+.profile-link:hover .profile-info {
+    opacity: 1;
+    visibility: visible;
+  }
