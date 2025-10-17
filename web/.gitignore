@@ -1,0 +1,52 @@
+# Diretórios e arquivos gerados pelo Node.js
+node_modules/
+npm-debug.log
+yarn-error.log
+.pnpm-debug.log
+
+# Ambiente de desenvolvimento (VSCode, JetBrains, etc.)
+.vscode/
+.idea/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+
+# Arquivos de ambiente (não commitar credenciais!)
+.env
+.env.local
+.env.development
+.env.production
+.env.test
+
+# Logs e temporários
+logs/
+*.log
+*.pid
+*.pid.lock
+.DS_Store
+*.tmp
+
+# Banco de dados local (como MongoDB local ou SQLite)
+/data/
+/mongodata/
+*.db
+*.sqlite
+
+# Build e pastas de output
+dist/
+build/
+.out/
+.next/
+.serverless/
+
+# Cobertura de testes
+coverage/
+.nyc_output/
+
+# Configurações do sistema / IDE
+*.bak
+*.cache
+*.orig
+*.rej

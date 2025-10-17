@@ -1,0 +1,126 @@
+<%- include("partials/head.ejs") %>
+<body>
+<div class="container">
+  <!--Menu Lateral-->
+  <div class="container">
+    <%- include("partials/sideMenu.ejs") %>  
+    <main>
+      <h1 class="txt">Previsão Colheita</h1>
+      <div class="containerCalendario">
+        <div class="left">
+          <div class="calendar">
+            <div class="month">
+              <i class="fas fa-angle-left prev"></i>
+              <div class="date">Outubro 2024</div>
+              <i class="fas fa-angle-right next"></i>
+            </div>
+            <div class="weekdays">
+              <div>Seg</div>
+              <div>Ter</div>
+              <div>Qua</div>
+              <div>Qui</div>
+              <div>Sex</div>
+              <div>Sáb</div>
+              <div>Dom</div>
+            </div>
+            <div class="days"></div>
+            <div class="goto-today">
+              <div class="goto">
+                <input type="text" placeholder="mes/ano" class="date-input" />
+                <button class="goto-btn">Procurar</button>
+              </div>
+              <button class="today-btn">Hoje</button>
+            </div>
+          </div>
+        </div>
+        <div class="right">
+          <div class="today-date">
+            <div class="event-day"></div>
+            <div class="event-date">30 de Outubro de 2024</div>
+          </div>
+          <div class="events"></div>
+          <div class="add-event-wrapper">
+            <div class="add-event-header">
+              <div class="title">Adicionar Evento</div>
+              <i class="fas fa-times close"></i>
+            </div>
+            <div class="add-event-body">
+              <div class="add-event-input">
+                <input type="text" placeholder="Título" class="event-name" />
+              </div>
+              <div class="add-event-input">
+                <input type="text" placeholder="Hora Inicio" class="event-time-from" />
+              </div>
+              <div class="add-event-input">
+                <input type="text" placeholder="Hora Termino" class="event-time-to" />
+              </div>
+            </div>
+            <div class="add-event-footer">
+              <button class="add-event-btn">Adicionar Marcação</button>
+            </div>
+          </div>
+        </div>
+        <button class="add-event">
+          <i class="fas fa-plus"></i>
+        </button>
+      </div>        
+    </main>
+    <!--  Botao darkMode -->
+    <div class="right-section">
+      <div class="nav">
+        <button id="menu-btn">
+          <span class="material-icons-sharp">menu</span>
+        </button>
+        <div class="dark-mode">
+          <span class="material-icons-sharp active"></span>
+          <span class="material-icons-sharp"></span>
+        </div>
+        <div class="perfilFT">
+          <a href="/profile" class="profile-link">
+            <img style="border-radius: 50%; width: 50px; height: 50px;" src="<%= user.userImage ? ('/uploads/img/users/' + user.userImage) : '/assets/img/icon/perfil.png' %>">
+            <div class="profile-info">
+              <p class="txts"><strong>Nome:</strong> <%= user.userName %></p>
+              <p class="txts"><strong>Email:</strong> <%= user.userEmail %></p>
+              <p class="txt1Card">Logout</p>
+            </div>
+          </a>
+        </div>
+      </div>
+      <!-- Ícone de notificação -->
+      <div class="notificacao-container">
+        <img src="/assets/img/icon/notificacao.png" alt="Ícone de Notificação" class="notificacao-icone" id="notificacao-icone">
+        <span class="badge" id="notificacao-badge">3</span>
+      </div>
+      <!-- Caixa de notificação -->
+      <div class="caixa-notificacao" id="caixa-notificacao">
+        <h3>Notificações</h3>
+        <ul id="lista-notificacoes">
+          <li class="notificacao-item alerta">
+            <p>Atenção chuvas fortes se aproximam, proteja sua Plantação!</p>
+            <button onclick="excluirNotificacao(this)">Excluir</button>
+            <button onclick="gerarAlerta('Nova atualização de sistema disponível!')">Gerar Alerta</button>
+          </li>
+          <li class="notificacao-item">
+            <p>Alta Temperatura.</p>
+            <button onclick="excluirNotificacao(this)">Excluir</button>
+            <button onclick="gerarAlerta('Seu pedido foi enviado.')">Gerar Alerta</button>
+          </li>
+          <li class="notificacao-item">
+            <p>Baixa Umidade.</p>
+            <button onclick="excluirNotificacao(this)">Excluir</button>
+            <button onclick="gerarAlerta('Você tem 3 novas mensagens.')">Gerar Alerta</button>
+          </li>
+        </ul>
+        <button id="fechar-caixa" onclick="fecharCaixa()">Fechar</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script src="/assets/js/darkmode.js"></script>
+<script src="/assets/js/popUp.js"></script>
+<script src="/assets/js/splash.js"></script>   
+<script src="/assets/js/calendario.js"></script>   
+<script src="/assets/js/notificacao.js"></script>      
+</body>
+</html>
