@@ -1,4 +1,5 @@
 import React from "react";
+import Image from "next/image";
 import { NavLink } from "react-router-dom";
 
 const Sidebar: React.FC = () => {
@@ -6,7 +7,12 @@ const Sidebar: React.FC = () => {
     <aside className="sidebar-container">
       <div className="toggle">
         <div className="logo">
-          <img src="/assets/img/mbBege.png" alt="Mobo logo" />
+          <Image
+            src="/images/mbBege.png"
+            alt="Mobo logo"
+            width={1200}
+            height={300}
+          />
         </div>
         <div className="close" id="close-btn">
           <span className="material-icons-sharp">close</span>
@@ -40,18 +46,18 @@ const Sidebar: React.FC = () => {
         </NavLink>
 
         <NavLink className="Terreno" to="/land">
-          <img
+          <Image
             className="IconTerren"
-            src="/assets/img/icon/adicionar.png"
+            src="/images/icons/adicionar.png"
             alt="Adicionar Terreno"
           />
           Terreno
         </NavLink>
 
         <NavLink className="Logout" to="/logout">
-          <img
-            width="20px"
-            src="/assets/img/icon/botao-de-logout.png"
+          <Image
+            width="20"
+            src="/images/icons/botao-de-logout.png"
             alt="Logout"
           />
           Logout
