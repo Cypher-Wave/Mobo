@@ -1,18 +1,29 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
-import Image from "next/image";
-import NavbarHome from "../components/NavbarHome";
-import CardSection from "../components/CardSection";
-import Footer from "../components/Footer";
-import api from "../services/api";
-import { IUser } from "../types/User";
 import { useRouter } from "next/navigation";
+import Image from "next/image";
+import "@/styles/globals.css";
+import NavbarHome from "@/components/NavbarHome";
+import CardSection from "@/components/CardSection";
+import Footer from "@/components/Footer";
+import api from "@/services/api";
+import { IUser } from "@/types/User";
+import SplashScreen from "@/components/SplashScreen";
 
 const Home: React.FC = () => {
   const router = useRouter();
   const [user, setUser] = useState<IUser | null>(null);
   const [loading, setLoading] = useState(true);
+  const [showSplash, setShowSplash] = useState(false);
+
+  useEffect(() => {
+    const hasSeenSplash = localStorage.getItem("hasSeenSplash");
+    if (!hasSeenSplash) {
+      setShowSplash(true);
+      localStorage.setItem("hasSeenSplash", "true");
+    }
+  }, []);
 
   useEffect(() => {
     const fetchUser = async () => {
@@ -31,13 +42,21 @@ const Home: React.FC = () => {
         }
       } catch (error) {
         console.error("Erro ao buscar usuário:", error);
-        router.push("/login")
+        router.push("/login");
       } finally {
         setLoading(false);
       }
     };
+
     fetchUser();
-  }, []);
+  }, [router]);
+
+  if (showSplash) {
+    return <SplashScreen onFinish={() => setShowSplash(false)} />;
+  }
+
+  if (loading) return <div>Carregando...</div>;
+  if (!user) return null;
 
   const tools = [
     {
@@ -84,47 +103,66 @@ const Home: React.FC = () => {
     },
   ];
 
-  if (!user) return <div>Carregando...</div>;
-
   return (
-    <div className="min-h-screen flex flex-col items-center bg-gradient-to-b from-green-100 to-pink-50">
-      <NavbarHome user={user} />
+    <>
+      <div className="min-h-screen flex flex-col items-center bg-gradient-to-b from-green-100 to-pink-50">
+        <NavbarHome user={user} />
 
-      <main className="text-center mt-8">
-        <div className="banner mb-6">
-          <Image
-            src="/images/BannerOfc2.png"
-            alt="Banner"
-            className="mx-auto rounded-lg shadow-md"
-          />
-        </div>
-
-        <Image src="/images/Logo.png" alt="Logo" className="mx-auto w-28 mb-6" />
-
-        <form action="/search" method="GET" className="flex justify-center mb-12">
-          <div className="flex items-center border-2 border-pink-600 rounded-full px-6 py-3 bg-white shadow-md w-3/4 max-w-2xl">
-            <input
-              type="text"
-              placeholder="Digite sua pesquisa..."
-              className="flex-grow outline-none text-gray-700 placeholder-gray-400"
+        <main className="text-center mt-8">
+          <div className="banner mb-6">
+            <Image
+              src="/images/BannerOfc2.png"
+              alt="Banner"
+              width={800}
+              height={300}
+              className="mx-auto rounded-lg shadow-md"
             />
-            <button type="submit" className="ml-3">
-              <Image
-                src="/images/icons/lupa-de-pesquisa.png"
-                width={20}
-                alt="Pesquisar"
-              />
-            </button>
           </div>
-        </form>
 
-        <CardSection title="Ferramentas" cards={tools} />
+          <Image
+            src="/images/Logo.png"
+            alt="Logo"
+            width={100}
+            height={100}
+            className="mx-auto w-28 mb-6"
+          />
 
-        <Image src="/images/mobotst3.png" alt="Mascote" className="mx-auto mt-16 w-60" />
-      </main>
+          <form
+            action="/search"
+            method="GET"
+            className="flex justify-center mb-12"
+          >
+            <div className="flex items-center border-2 border-pink-600 rounded-full px-6 py-3 bg-white shadow-md w-3/4 max-w-2xl">
+              <input
+                type="text"
+                placeholder="Digite sua pesquisa..."
+                className="flex-grow outline-none text-gray-700 placeholder-gray-400"
+              />
+              <button type="submit" className="ml-3">
+                <Image
+                  src="/images/icons/lupa-de-pesquisa.png"
+                  width={20}
+                  height={20}
+                  alt="Pesquisar"
+                />
+              </button>
+            </div>
+          </form>
 
-      <Footer />
-    </div>
+          <CardSection title="Ferramentas" cards={tools} />
+
+          <Image
+            src="/images/mobotst3.png"
+            alt="Mascote"
+            width={240}
+            height={240}
+            className="mx-auto mt-16 w-60"
+          />
+        </main>
+
+        <Footer />
+      </div>
+    </>
   );
 };
 
