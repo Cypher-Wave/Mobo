@@ -1,3 +1,5 @@
+"use client";
+
 import React, { useEffect, useState } from "react";
 import Image from "next/image";
 import NavbarHome from "../components/NavbarHome";
@@ -5,19 +7,33 @@ import CardSection from "../components/CardSection";
 import Footer from "../components/Footer";
 import api from "../services/api";
 import { IUser } from "../types/User";
+import { useRouter } from "next/navigation";
 
 const Home: React.FC = () => {
+  const router = useRouter();
   const [user, setUser] = useState<IUser | null>(null);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const fetchUser = async () => {
+      const token = localStorage.getItem("token");
+      if (!token) {
+        router.push("/login");
+        return;
+      }
+
       try {
-        const res = await api.get("/users/");
+        const res = await api.get("/user/me");
         if (res.data.success) {
           setUser(res.data.user);
+        } else {
+          router.push("/login");
         }
-      } catch (err) {
-        console.error("Erro ao buscar usuário:", err);
+      } catch (error) {
+        console.error("Erro ao buscar usuário:", error);
+        router.push("/login")
+      } finally {
+        setLoading(false);
       }
     };
     fetchUser();

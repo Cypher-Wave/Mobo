@@ -2,6 +2,7 @@ import React from "react";
 import { IUser } from "../types/User";
 import Image from "next/image";
 
+
 interface NavbarProps {
   user: IUser;
 }

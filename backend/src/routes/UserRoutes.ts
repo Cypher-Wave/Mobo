@@ -12,6 +12,6 @@ router.get("/", UserController.getAllUsers);
 // Não possui o create pois está no AuthRouters
 router.put("/:id", UserController.updateUser);
 router.delete("/:id", UserController.deleteUser);
-router.get("/:id", UserController.getOneUser);
+router.get("/me", UserController.getUser);
 
 export default router;

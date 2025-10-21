@@ -42,7 +42,7 @@ class PlantingController {
         message: "Não foi possível cadastrar a plantação.",
       });
     }
-    return res.sendStatus(201).json({
+    return res.status(201).json({
       success: true,
       message: "Plantação cadastrada com sucesso.",
       newPlanting,
@@ -72,7 +72,7 @@ class PlantingController {
         message: "Plantação não encontrada ou não pôde ser atualizada.",
       });
     }
-    return res.sendStatus(200).json({
+    return res.status(200).json({
       success: true,
       message: "Plantação atualizada com sucesso.",
       updatedPlanting,
@@ -90,7 +90,7 @@ class PlantingController {
     const { id } = req.params;
 
     await PlantingService.delete(id, user);
-    return res.sendStatus(204).json({
+    return res.status(204).json({
       success: true,
       message: "Plantação deletada com sucesso.",
     });

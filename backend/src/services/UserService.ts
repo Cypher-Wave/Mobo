@@ -135,7 +135,7 @@ class UserService {
 
   // Buscar um usuário específico
   async getOne(id: string) {
-    return await User.findById(id);
+    return await User.findById(id).select("-userPassword");
   }
 
   // Autenticar usuário

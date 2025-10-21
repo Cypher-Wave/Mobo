@@ -1,8 +1,6 @@
 import axios from "axios";
-import dotenv from "dotenv";
-dotenv.config();
 
-const URI = process.env.URI || "http://localhost:4000";
+const URI = "http://localhost:4000";
 
 // Criar instância da API
 const api = axios.create({

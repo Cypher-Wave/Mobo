@@ -10,8 +10,6 @@ const Sidebar: React.FC = () => {
           <Image
             src="/images/mbBege.png"
             alt="Mobo logo"
-            width={1200}
-            height={300}
           />
         </div>
         <div className="close" id="close-btn">
