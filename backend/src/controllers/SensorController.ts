@@ -41,7 +41,7 @@ class SensorController {
         message: "Não foi possível cadastrar o sensor.",
       });
     }
-    return res.sendStatus(201).json({
+    return res.status(201).json({
       success: true,
       message: "Sensor cadastrado com sucesso.",
       newSensor,
@@ -67,7 +67,7 @@ class SensorController {
         message: "Sensor não encontrado ou não pôde ser atualizado.",
       });
     }
-    return res.sendStatus(200).json({
+    return res.status(200).json({
       success: true,
       message: "Sensor atualizado com sucesso.",
       updatedSensor,
@@ -86,7 +86,7 @@ class SensorController {
 
     await SensorService.delete(id, user);
     return res
-      .sendStatus(204)
+      .status(204)
       .json({ success: true, message: "Sensor deletado com sucesso." });
   });
 

@@ -1,17 +1,20 @@
-// src/components/Layout.tsx
-import React, { ReactNode } from "react";
-import Footer from "../components/Footer";
+// src/app/layout.tsx
+import type { Metadata } from "next";
+import "../styles/globals.css";
 
-interface LayoutProps {
-  children: ReactNode;
-}
-
-const Layout: React.FC<LayoutProps> = ({ children }) => {
-  return (
-    <>
-      <Footer />
-    </>
-  );
+export const metadata: Metadata = {
+  title: "Meu App",
+  description: "Aplicação Next.js",
 };
 
-export default Layout;
+export default function RootLayout({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
+  return (
+    <html lang="pt-BR">
+      <body>{children}</body>
+    </html>
+  );
+}

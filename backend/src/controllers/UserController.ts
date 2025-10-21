@@ -53,18 +53,18 @@ class UserController {
     const id = req.user!.id;
     await UserService.delete(id);
     return res
-      .sendStatus(204)
+      .status(204)
       .json({ success: true, message: "Conta deletada com sucesso." });
   });
 
   // Buscar um usuário - Pessoal
-  getOneUser = asyncHandler(async (req: AuthRequest, res: Response) => {
+  getUser = asyncHandler(async (req: AuthRequest, res: Response) => {
     const id = req.user!.id;
 
     const user = await UserService.getOne(id);
     if (!user) {
       return res
-        .sendStatus(404)
+        .status(404)
         .json({ success: false, message: "Usuário não encontrado." });
     }
 
