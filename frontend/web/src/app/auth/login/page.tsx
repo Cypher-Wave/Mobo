@@ -19,14 +19,15 @@ const Login: React.FC = () => {
       </div>
 
       {/* Formulário de Login */}
-      <div className="second-column">
-        <Image
-          className="logo-container"
-          src="/images/Logo.png"
-          alt="Logo Mobo"
-          width={150}
-          height={150}
-        />
+      <div className="second-column background-login">
+        <div className="logo-container">
+          <Image
+            className="auth-logo"
+            src="/images/Logo.png"
+            alt="Logo Mobo"
+            fill
+          />
+        </div>
         <h2 className="title title-second">Faça seu login!</h2>
         <form className="form" action="/authenticate" method="POST">
           <label className="label-input" htmlFor="userEmail">

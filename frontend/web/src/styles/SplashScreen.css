@@ -4,7 +4,7 @@
   left: 0;
   width: 100%;
   height: 100vh;
-  background: #5d6c3c; /* verde oliva */
+  background: var(--mobo-green); /* verde oliva */
   display: flex;
   justify-content: center;
   align-items: center;

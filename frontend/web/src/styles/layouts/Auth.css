@@ -1,3 +1,176 @@
-.container{
-    
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background-color: rgb(var(--mobo-green));
+  font-family: "Poppins", sans-serif;
+}
+
+/* Caixa de conteúdo central */
+.content {
+  width: 80%;
+  max-width: 1300px;
+  height: 600px;
+  background-color: rgb(var(--mobo-white));
+  border-radius: 15px;
+  filter: drop-shadow(0 0 20px rgba(var(--mobo-black), 0.8));
+  display: flex;
+  overflow: hidden;
+}
+
+/* Coluna esquerda (mensagem + botão) */
+.first-column {
+  width: 40%;
+  background-color: rgb(var(--mobo-red)); /* vermelho mobo */
+  color: rgb(var(--mobo-white));
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 3rem;
+  text-align: center;
+}
+
+.title {
+  font-size: 2rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+}
+
+.title-primary {
+  color: rgb(var(--mobo-white));
+}
+
+.description {
+  font-size: 0.95rem;
+  margin-bottom: 0.3rem;
+}
+
+.second-column {
+  width: 60%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  color: rgb(var(--mobo-white));
+  padding: 2rem 3rem;
+}
+
+.background-login {
+  background: url("/images/agro_Login.jpeg") center/cover no-repeat;
+}
+
+.background-register {
+  background: url("/images/agro_Register.jpeg") center/cover no-repeat;
+}
+
+/* Fundo translúcido atrás do formulário */
+.second-content {
+  position: relative;
+  background-color: rgba(var(--mobo-black), 0.4);
+  backdrop-filter: blur(3px);
+}
+
+/* Logo */
+.logo-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  margin-bottom: 1rem;
+  width: 11rem;
+  height: 6rem;
+}
+
+.auth-logo {
+  object-fit: contain;
+  width: 100%;
+  height: 100%;
+  filter: drop-shadow(0 0 6px rgba(var(--mobo-white), 0.9));
+}
+
+/* Título do formulário */
+.title-second {
+  font-size: 1.6rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+  color: rgb(var(--mobo-white));
+}
+
+/* Formulário */
+.form {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  max-width: 350px;
+}
+
+.label-input {
+  display: flex;
+  align-items: center;
+  background-color: rgba(var(--mobo-white), 0.20);
+  box-shadow: 1px 5px 5px rgba(var(--mobo-red), 0.85);
+  border: 1px solid rgb(var(--mobo-red));
+  border-radius: 30px;
+  padding: 0.6rem 1rem;
+  margin-bottom: 1rem;
+  transition: all 0.3s ease;
+}
+
+.label-input:hover {
+  background-color: rgba(var(--mobo-white), 0.20);
+}
+
+.label-input input {
+  flex: 1;
+  background: transparent;
+  border: none;
+  outline: none;
+  color: rgb(var(--mobo-white));
+  font-size: 0.95rem;
+  margin-left: 0.6rem;
+}
+
+.label-input input::placeholder {
+  color: rgb(var(--mobo-white));
+}
+
+/* Ícones */
+.icon-modify {
+  color: rgb(var(--mobo-white));
+}
+
+/* Link de senha */
+.password {
+  display: block;
+  margin-top: 1rem;
+  text-align: center;
+  color: rgb(var(--mobo-white));
+  font-size: 0.9rem;
+  text-decoration: none;
+  transition: color 0.3s;
+}
+
+.password:hover {
+  color: rgb(var(--mobo-light-red));
+}
+
+/* Responsividade */
+@media (max-width: 900px) {
+  .content {
+    flex-direction: column;
+    height: auto;
+  }
+
+  .first-column,
+  .second-column {
+    width: 100%;
+    border-radius: 0;
+  }
+
+  .second-column {
+    padding: 2rem;
+  }
 }

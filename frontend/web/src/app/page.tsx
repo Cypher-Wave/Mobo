@@ -7,7 +7,7 @@ import "@/styles/layouts/SplashScreen.css";
 
 const SplashScreen: React.FC = () => {
   const router = useRouter();
-  const [fadeIn, setFadeIn] = useState(false);
+  const [, setFadeIn] = useState(false);
 
   useEffect(() => {
     // Inicia a animação de fade-in

@@ -1,23 +1,63 @@
 :root {
+  /* Cores em RGB */
   /* Cores Primárias */
-  --mobo-green: #61743d;
-  --mobo-dark-green: #3c4c27;
-  --mobo-red: #b70a49;
-  --mobo-beige: #ece2d6;
-  --mobo-black: #000000;
-  --mobo-white: #ffffff;
+  --mobo-green: 97, 116, 61;
+  --mobo-dark-green: 60, 76, 39;
+  --mobo-light-red: 230, 31, 104;
+  --mobo-red: 183, 10, 73;
+  --mobo-dark-red: 131, 5, 51;
+  --mobo-beige: 236, 226, 214;
+  --mobo-black: 0, 0, 0;
+  --mobo-white: 255, 255, 255;
+  --mobo-white2: 245, 245, 245;
 
-  /* Cores de Dashboard */
-  --mobo-dashboard-green: #879c5f;
-  --mobo-dashboard-light-green: #B4C297;
-  --mobo-dashboard-dark-red: #830533;
-  --mobo-dashboard-red: #B6295C;
-  --mobo-dashboard-light-red: #AE5877;
+  /* Cores Adicionais de Dashboard */
+  --dashboard-green: 135, 156, 95;
+  --dashboard-light-green: 180, 194, 151;
+  --dashboard-red: 182, 41, 92;
+  --dashboard-light-red: 174, 88, 119;
 }
+
+/* [data-theme="dark"] {
+
+} */
 
 html,
 body {
   margin: 0;
   padding: 0;
   height: 100%;
+}
+
+.btn {
+  margin-top: 2rem;
+  border: none;
+  border-radius: 25px;
+  padding: 0.7rem 2rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.btn-primary {
+  background-color: rgb(var(--mobo-white));
+  color: rgb(var(--mobo-red));
+}
+
+.btn-primary:hover {
+  background-color: rgb(var(--mobo-white2));
+}
+
+/* Botão Vermelho */
+.btn-second {
+  background-color: rgb(var(--mobo-red));
+  color: rgb(var(--mobo-white));
+  border-radius: 30px;
+  padding: 0.7rem;
+  font-weight: 600;
+  margin-top: 0.5rem;
+}
+
+.btn-second:hover {
+  background-color: rgb(var(--mobo-dark-red));
 }
