@@ -19,13 +19,15 @@ const Register: React.FC = () => {
       </div>
 
       {/* Formulário de cadastro */}
-      <div className="second-column">
-        <Image
-          className="logo-container"
-          width={150}
-          src="/images/Logo.png"
-          alt="Logo Mobo"
-        />
+      <div className="second-column background-register">
+        <div className="logo-container">
+          <Image
+            className="auth-logo"
+            src="/images/Logo.png"
+            alt="Logo Mobo"
+            fill
+          />
+        </div>
         <h2 className="title title-second">Deseja criar uma conta?</h2>
         <form className="form" action="/createUser" method="POST">
           <label className="label-input" htmlFor="userProfileImage">
@@ -69,7 +71,7 @@ const Register: React.FC = () => {
           <label className="label-input" htmlFor="userRole">
             <i className="fas fa-seedling icon-modify"></i>
             <select
-              className="fundoInput"
+              className="select-input"
               name="userRole"
               id="userRole"
               required
@@ -82,6 +84,7 @@ const Register: React.FC = () => {
               <option value="company_worker">Funcionário de Empresa</option>
               <option value="family_farmer">Agricultor Familiar</option>
             </select>
+            <i className="bx bx-chevron-down select-icon icon-modify"></i>
           </label>
 
           {/* Bloco para Agricultor Familiar */}
