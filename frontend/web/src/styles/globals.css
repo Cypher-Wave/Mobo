@@ -1,0 +1,23 @@
+:root {
+  /* Cores Primárias */
+  --mobo-green: #61743d;
+  --mobo-dark-green: #3c4c27;
+  --mobo-red: #b70a49;
+  --mobo-beige: #ece2d6;
+  --mobo-black: #000000;
+  --mobo-white: #ffffff;
+
+  /* Cores de Dashboard */
+  --mobo-dashboard-green: #879c5f;
+  --mobo-dashboard-light-green: #B4C297;
+  --mobo-dashboard-dark-red: #830533;
+  --mobo-dashboard-red: #B6295C;
+  --mobo-dashboard-light-red: #AE5877;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+}

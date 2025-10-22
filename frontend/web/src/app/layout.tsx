@@ -1,10 +1,13 @@
-// src/app/layout.tsx
 import type { Metadata } from "next";
-import "../styles/globals.css";
+import "@/styles/globals.css";
+import "@/styles/fonts.css";
 
 export const metadata: Metadata = {
-  title: "Meu App",
-  description: "Aplicação Next.js",
+  title: "Mobo",
+  description: "Monitoramento e Colheita Automatizada de Lichias",
+  icons: {
+    icon: "/mobo.ico",
+  },
 };
 
 export default function RootLayout({
