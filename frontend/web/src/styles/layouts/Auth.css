@@ -108,6 +108,7 @@
 }
 
 .label-input {
+  position: relative;
   display: flex;
   align-items: center;
   background-color: rgba(var(--mobo-white), 0.20);
@@ -123,7 +124,8 @@
   background-color: rgba(var(--mobo-white), 0.20);
 }
 
-.label-input input {
+.label-input input,
+.select-input {
   flex: 1;
   background: transparent;
   border: none;
@@ -131,10 +133,39 @@
   color: rgb(var(--mobo-white));
   font-size: 0.95rem;
   margin-left: 0.6rem;
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
 }
 
 .label-input input::placeholder {
   color: rgb(var(--mobo-white));
+}
+
+.select-input {
+  padding-right: 2rem;
+  cursor: pointer;
+}
+
+.select-input::-ms-expand {
+  display: none;
+}
+
+.select-input option {
+  color: rgb(var(--mobo-black));
+  background: rgb(var(--mobo-beige));
+}
+.select-input option:checked {
+  background: rgb(var(--mobo-red));
+  color: rgb(var(--mobo-white));
+}
+
+.select-icon {
+  position: absolute;
+  right: 0.5rem;
+  color: rgb(var(--mobo-white));
+  font-size: 1.2rem;
+  pointer-events: none;
 }
 
 /* Ícones */
