@@ -1,7 +1,38 @@
-import React from "react";
+"use client";
+
+import React, { useState } from "react";
 import Image from "next/image";
+import { useRouter } from "next/navigation";
+import api from "@/services/api";
 
 const Login: React.FC = () => {
+  const router = useRouter();
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [loading, setLoading] = useState(false);
+  const [errorMsg, setErrorMsg] = useState("");
+
+  const handleLogin = async (event: React.FormEvent) => {
+    event.preventDefault(); // impede refresh da página
+    setLoading(true);
+    setErrorMsg("");
+
+    try {
+      const res = await api.post("/auth/login", { email, password });
+
+      if (res.data?.user) {
+        // redirecionar para a tela de Splash
+        router.push("/");
+      } else {
+        setErrorMsg("Login falhou. Verifique suas credenciais.");
+      }
+    } catch (error: unknown) {
+      console.error("Erro ao tentar logar: ", error);
+    } finally {
+      setLoading(false);
+    }
+  };
+
   return (
     <div className="content second-content">
       {/* Primeira coluna */}
@@ -13,7 +44,11 @@ const Login: React.FC = () => {
         <p className="description description-primary">
           e comece a jornada conosco
         </p>
-        <button id="signup" className="btn btn-primary">
+        <button
+          id="signup"
+          className="btn btn-primary"
+          onClick={() => router.push("/auth/register")}
+        >
           Cadastrar-se
         </button>
       </div>
@@ -29,14 +64,16 @@ const Login: React.FC = () => {
           />
         </div>
         <h2 className="title title-second">Faça seu login!</h2>
-        <form className="form" action="/authenticate" method="POST">
+
+        <form className="form" onSubmit={handleLogin}>
           <label className="label-input" htmlFor="userEmail">
             <i className="far fa-envelope icon-modify"></i>
             <input
               type="email"
-              name="userEmail"
               placeholder="Email"
               required
+              value={email}
+              onChange={(event) => setEmail(event.target.value)}
             />
           </label>
 
@@ -44,15 +81,19 @@ const Login: React.FC = () => {
             <i className="fas fa-lock icon-modify"></i>
             <input
               type="password"
-              name="userPassword"
               placeholder="Senha"
               required
+              value={password}
+              onChange={(event) => setPassword(event.target.value)}
             />
           </label>
 
-          <button className="btn btn-second" type="submit">
-            Entrar
+          {errorMsg && <p className="error-msg">{errorMsg}</p>}
+
+          <button className="btn btn-second" type="submit" disabled={loading}>
+            {loading ? "Entrando..." : "Entrar"}
           </button>
+
           <a className="password" href="#">
             Esqueceu sua senha?
           </a>

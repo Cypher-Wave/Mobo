@@ -1,7 +1,41 @@
-import React from "react";
+"use client";
+
+import React, { useState } from "react";
 import Image from "next/image";
+import { useRouter } from "next/navigation";
+import api from "@/services/api";
 
 const Register: React.FC = () => {
+  const router = useRouter();
+  const [file, setFile] = useState("");
+  const [name, setName] = useState("");
+  const [phone, setPhone] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [role, setRole] = useState("");
+  const [loading, setLoading] = useState(false);
+  const [errorMsg, setErrorMsg] = useState("");
+
+  const handleRegister = async (event: React.FormEvent) => {
+    event.preventDefault();
+    setLoading(true);
+    setErrorMsg("");
+    
+    try {
+      const res = await api.post("/auth/register", { file, name, phone, email, password, role });
+      
+      if (res.data.user) {
+        router.push("/");
+      } else {
+        setErrorMsg("Cadastro falhou. Tente novamente.")
+      }
+    } catch (error: unknown) {
+      console.error("Erro ao tentar cadastrar: ", error);
+    } finally {
+      setLoading(false);
+    }
+  };
+
   return (
     <div className="content first-content">
       {/* Primeira coluna */}
@@ -13,7 +47,7 @@ const Register: React.FC = () => {
         <p className="description description-primary">
           clique no botão abaixo e faça seu login
         </p>
-        <button id="signin" className="btn btn-primary">
+        <button id="signin" className="btn btn-primary" onClick={() => router.push("/auth/login")}>
           Entrar
         </button>
       </div>
@@ -29,7 +63,7 @@ const Register: React.FC = () => {
           />
         </div>
         <h2 className="title title-second">Deseja criar uma conta?</h2>
-        <form className="form" action="/createUser" method="POST">
+        <form className="form" onSubmit={handleRegister} method="POST">
           <label className="label-input" htmlFor="userProfileImage">
             <i className="far fa-image icon-modifys"></i>
             <span className="txtimp">Escolher imagem</span>
@@ -37,33 +71,35 @@ const Register: React.FC = () => {
               className="fundoInput"
               id="userProfileImage"
               type="file"
-              name="userImage"
               accept="image/*"
+              value={file}
+              onChange={(event) => setFile(event.target.value)}
               style={{ display: "none" }}
             />
           </label>
 
           <label className="label-input" htmlFor="userName">
             <i className="far fa-user icon-modify"></i>
-            <input type="text" name="userName" placeholder="Nome" required />
+            <input type="text" placeholder="Nome" value={name} onChange={(event) => setName(event.target.value)} required />
           </label>
 
           <label className="label-input" htmlFor="userPhone">
             <i className="fas fa-phone icon-modify"></i>
-            <input type="text" name="userPhone" placeholder="Telefone" />
+            <input type="text" placeholder="Telefone" value={phone} onChange={(event) => setPhone(event.target.value)} />
           </label>
 
           <label className="label-input" htmlFor="userEmail">
             <i className="far fa-envelope icon-modify"></i>
-            <input type="email" name="userEmail" placeholder="Email" required />
+            <input type="email" placeholder="Email" value={email} onChange={(event) => setEmail(event.target.value)} required />
           </label>
 
           <label className="label-input" htmlFor="userPassword">
             <i className="fas fa-lock icon-modify"></i>
             <input
               type="password"
-              name="userPassword"
               placeholder="Senha"
+              value={password}
+              onChange={(event) => setPassword(event.target.value)}
               required
             />
           </label>
@@ -72,10 +108,10 @@ const Register: React.FC = () => {
             <i className="fas fa-seedling icon-modify"></i>
             <select
               className="select-input"
-              name="userRole"
               id="userRole"
+              value={role}
+              onChange={(event) => setRole(event.target.value)}
               required
-              defaultValue=""
             >
               <option value="" disabled>
                 Tipo de Usuário:
