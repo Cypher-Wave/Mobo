@@ -1,5 +1,6 @@
 import bcrypt from "bcrypt";
 import User from "../models/User";
+import { generateToken, IUserPayload } from "../utils/jwt";
 
 // Tipo para detalhes específicos de agricultores familiares
 interface FarmerDetails {
@@ -13,7 +14,7 @@ export interface UserInput {
   userEmail: string;
   userPassword: string;
   userPhone?: string;
-  userRole?: "family_farmer" | "company_admin" | "company_worker";
+  userRole: "family_farmer" | "company_admin" | "company_worker";
   company?: string;
   farmerDetails?: FarmerDetails;
   userImage?: string;
@@ -23,6 +24,7 @@ export interface UserInput {
 interface CreateUserResult {
   success: boolean;
   message: string;
+  token?: string;
   user?: {
     id: string;
     userName: string;
@@ -30,6 +32,7 @@ interface CreateUserResult {
     userRole: string;
     company?: string;
     userImage?: string;
+    farmerDetails?: FarmerDetails;
   };
 }
 
@@ -85,7 +88,7 @@ class UserService {
       const hashedPassword = await bcrypt.hash(userPassword, 10);
       const newUser = new User({
         userName,
-        userEmail,
+        userEmail: userEmail.toLowerCase().trim(),
         userPassword: hashedPassword,
         userRole,
         userPhone,
@@ -95,9 +98,21 @@ class UserService {
       });
       await newUser.save();
       const newUserId = newUser._id ? newUser._id.toString() : "";
+      const payload: IUserPayload = {
+        id: newUserId,
+        userRole: newUser.userRole as
+          | "family_farmer"
+          | "company_admin"
+          | "company_worker",
+        company: newUser.company as string | undefined,
+      };
+
+      const token = generateToken(payload);
+
       return {
         success: true,
         message: "Usuário criado com sucesso.",
+        token,
         user: {
           id: newUserId,
           userImage: newUser.userImage,
@@ -146,19 +161,32 @@ class UserService {
     try {
       const { userEmail, userPassword } = data;
 
-      const user = await User.findOne({ userEmail });
+      const user = await User.findOne({
+        userEmail: userEmail.toLowerCase().trim(),
+      });
       if (!user) return { success: false, message: "Usuário não encontrado." };
 
       const correct = await bcrypt.compare(userPassword, user.userPassword);
       if (!correct) return { success: false, message: "Senha incorreta." };
 
       const userId = user._id ? user._id.toString() : "";
+      const payload: IUserPayload = {
+        id: userId,
+        userRole: user.userRole as
+          | "family_farmer"
+          | "company_admin"
+          | "company_worker",
+        company: user.company as string | undefined,
+      };
+
+      const token = generateToken(payload);
+
       return {
         success: true,
         message: "Login efetuado com sucesso!",
+        token,
         user: {
           id: userId,
-          userImage: user.userImage,
           userName: user.userName,
           userEmail: user.userEmail,
           userRole: user.userRole,

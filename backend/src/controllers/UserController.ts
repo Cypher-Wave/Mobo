@@ -53,7 +53,7 @@ class UserController {
     const id = req.user!.id;
     await UserService.delete(id);
     return res
-      .status(204)
+      .status(200)
       .json({ success: true, message: "Conta deletada com sucesso." });
   });
 

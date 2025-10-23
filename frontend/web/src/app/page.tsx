@@ -4,37 +4,40 @@ import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
 import "@/styles/layouts/SplashScreen.css";
+import api from "@/services/api"
 
 const SplashScreen: React.FC = () => {
   const router = useRouter();
-  const [, setFadeIn] = useState(false);
+  const [fadeIn, setFadeIn] = useState(false);
 
   useEffect(() => {
     // Inicia a animação de fade-in
     setFadeIn(true);
 
-    // Redireciona após 2.5s
-    const timer = setTimeout(() => {
-      const cookies = document.cookie;
-      const token = cookies
-        .split("; ")
-        .find((row) => row.startsWith("token="))
-        ?.split("=")[1];
-      if (token) {
-        router.replace("/home");
-      } else {
-        router.replace("/auth/login");
-      }
-    }, 2500);
+    const checkAuth = async () => {
+      try {
+        const res = await api.get("/user/me");
 
+        if (res.data?.user) {
+          router.replace("/home"); // usuário logado
+        } else {
+          router.replace("/auth/login"); // não logado
+        }
+      } catch {
+        router.replace("/auth/register"); // erro na requisição
+      }
+    };
+
+    // Aguarda 2.5s para animação e checa autenticação
+    const timer = setTimeout(checkAuth, 2500);
     return () => clearTimeout(timer);
   }, [router]);
 
   return (
     <div className="intro">
-      <h1 className="logo-header">
+      <h1 className={`logo-header ${fadeIn ? "fade-in" : ""}`}>
         <Image
-          className="fade-in imgLogo"
+          className="imgLogo"
           src="/images/mbRosa.png"
           alt="MOBO Logo"
           fill
