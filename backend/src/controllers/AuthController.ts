@@ -1,7 +1,10 @@
 import { Request, Response } from "express";
+import dotenv from "dotenv";
 import UserService, { UserInput } from "../services/UserService";
 import asyncHandler from "../utils/asyncHandler";
 import { generateToken, IUserPayload } from "../utils/jwt";
+
+dotenv.config();
 
 class AuthController {
   // Login
@@ -25,25 +28,13 @@ class AuthController {
       });
     }
 
-    // Payload do JWT
-    const payload: IUserPayload = {
-      id: result.user!.id,
-      userRole: result.user!.userRole as
-        | "family_farmer"
-        | "company_admin"
-        | "company_worker",
-      company: result.user?.company,
-    };
-
-    const token = generateToken(payload);
-
     // Web: envia cookie HTTP-only
     if (req.headers["user-agent"]?.includes("Mozilla")) {
-      res.cookie("token", token, {
+      res.cookie("token", result.token, {
         httpOnly: true,
         secure: process.env.NODE_ENV === "production",
-        sameSite: "strict",
-        maxAge: 1000 * 60 * 60 * 24, // 1 dia
+        sameSite: "lax",
+        maxAge: 1000 * 60 * 60 * 24,
       });
     }
 
@@ -51,7 +42,7 @@ class AuthController {
     return res.status(200).json({
       success: true,
       message: "Login efetuado com sucesso!",
-      token,
+      token: result.token,
       user: result.user,
     });
   });
@@ -74,23 +65,13 @@ class AuthController {
       });
     }
 
-    const payload: IUserPayload = {
-      id: result.user!.id,
-      userRole: result.user!.userRole as
-        | "family_farmer"
-        | "company_admin"
-        | "company_worker",
-      company: result.user?.company,
-    };
-    const token = generateToken(payload);
-
     // Web: envia cookie HTTP-only
     if (req.headers["user-agent"]?.includes("Mozilla")) {
-      res.cookie("token", token, {
+      res.cookie("token", result.token, {
         httpOnly: true,
         secure: process.env.NODE_ENV === "production",
-        sameSite: "strict",
-        maxAge: 1000 * 60 * 60 * 24, // 1 dia
+        sameSite: "lax",
+        maxAge: 1000 * 60 * 60 * 24,
       });
     }
 
@@ -98,7 +79,7 @@ class AuthController {
     return res.status(200).json({
       success: true,
       message: "Cadastro efetuado com sucesso!",
-      token,
+      token: result.token,
       user: result.user,
     });
   });

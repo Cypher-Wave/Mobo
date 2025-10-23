@@ -2,6 +2,7 @@
 import express, { Application, Request, Response } from "express";
 import dotenv from "dotenv";
 import cors from "cors";
+import cookieParser from "cookie-parser";
 import { connectDB } from "./config/db";
 import { errorMiddleware } from "./middlewares/errorMiddleware";
 
@@ -30,6 +31,7 @@ app.use(
 );
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+app.use(cookieParser());
 
 // Definindo rotas principais da API
 app.use("/api/auth", AuthRoutes);
@@ -54,7 +56,7 @@ app.get("/", (_req: Request, res: Response) => {
 app.use(errorMiddleware);
 
 // Inicialização do servidor
-const URI = process.env.URI;
-app.listen(URI, () => {
-  console.log(`Servidor rodando em ${URI}`);
+const PORT = process.env.PORT;
+app.listen(PORT, () => {
+  console.log(`Servidor rodando em http://localhost:${PORT}`);
 });

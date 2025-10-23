@@ -18,7 +18,10 @@ const Login: React.FC = () => {
     setErrorMsg("");
 
     try {
-      const res = await api.post("/auth/login", { email, password });
+      const res = await api.post("/auth/login", {
+        userEmail: email,
+        userPassword: password,
+      });
 
       if (res.data?.user) {
         // redirecionar para a tela de Splash

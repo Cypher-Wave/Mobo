@@ -27,10 +27,12 @@ export const authMiddleware = (
   }
 
   try {
-    const payload = jwt.verify(token, process.env.JWT_SECRET!) as IUserPayload;
+    const secret = process.env.JWT_SECRET;
+    if (!secret) throw new Error("JWT_SECRET não definido");
+    const payload = jwt.verify(token, secret) as IUserPayload;
     req.user = payload;
     next();
   } catch (err) {
-    return res.status(401).json({ success: false, message: "Token inválido." });
+    return res.status(401).json({ success: false, message: "Não autorizado." });
   }
 };

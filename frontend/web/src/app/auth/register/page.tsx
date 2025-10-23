@@ -7,7 +7,7 @@ import api from "@/services/api";
 
 const Register: React.FC = () => {
   const router = useRouter();
-  const [file, setFile] = useState("");
+  const [file, setFile] = useState<File | null>(null);
   const [name, setName] = useState("");
   const [phone, setPhone] = useState("");
   const [email, setEmail] = useState("");
@@ -20,17 +20,29 @@ const Register: React.FC = () => {
     event.preventDefault();
     setLoading(true);
     setErrorMsg("");
-    
+
     try {
-      const res = await api.post("/auth/register", { file, name, phone, email, password, role });
-      
+      const formData = new FormData();
+
+      if (file) formData.append("userImage", file);
+      formData.append("userName", name);
+      formData.append("userPhone", phone);
+      formData.append("userEmail", email);
+      formData.append("userPassword", password);
+      formData.append("userRole", role);
+
+      const res = await api.post("/auth/register", formData, {
+      headers: { "Content-Type": "multipart/form-data" },
+    });
+
       if (res.data.user) {
         router.push("/");
       } else {
-        setErrorMsg("Cadastro falhou. Tente novamente.")
+        setErrorMsg("Cadastro falhou. Tente novamente.");
       }
     } catch (error: unknown) {
       console.error("Erro ao tentar cadastrar: ", error);
+      setErrorMsg("Erro inesperado ao cadastrar.");
     } finally {
       setLoading(false);
     }
@@ -47,7 +59,11 @@ const Register: React.FC = () => {
         <p className="description description-primary">
           clique no botão abaixo e faça seu login
         </p>
-        <button id="signin" className="btn btn-primary" onClick={() => router.push("/auth/login")}>
+        <button
+          id="signin"
+          className="btn btn-primary"
+          onClick={() => router.push("/auth/login")}
+        >
           Entrar
         </button>
       </div>
@@ -72,25 +88,41 @@ const Register: React.FC = () => {
               id="userProfileImage"
               type="file"
               accept="image/*"
-              value={file}
-              onChange={(event) => setFile(event.target.value)}
+              onChange={(event) => setFile(event.target.files?.[0] || null)}
               style={{ display: "none" }}
             />
           </label>
 
           <label className="label-input" htmlFor="userName">
             <i className="far fa-user icon-modify"></i>
-            <input type="text" placeholder="Nome" value={name} onChange={(event) => setName(event.target.value)} required />
+            <input
+              type="text"
+              placeholder="Nome"
+              value={name}
+              onChange={(event) => setName(event.target.value)}
+              required
+            />
           </label>
 
           <label className="label-input" htmlFor="userPhone">
             <i className="fas fa-phone icon-modify"></i>
-            <input type="text" placeholder="Telefone" value={phone} onChange={(event) => setPhone(event.target.value)} />
+            <input
+              type="text"
+              placeholder="Telefone"
+              value={phone}
+              onChange={(event) => setPhone(event.target.value)}
+            />
           </label>
 
           <label className="label-input" htmlFor="userEmail">
             <i className="far fa-envelope icon-modify"></i>
-            <input type="email" placeholder="Email" value={email} onChange={(event) => setEmail(event.target.value)} required />
+            <input
+              type="email"
+              placeholder="Email"
+              value={email}
+              onChange={(event) => setEmail(event.target.value)}
+              required
+            />
           </label>
 
           <label className="label-input" htmlFor="userPassword">
