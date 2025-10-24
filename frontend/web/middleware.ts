@@ -5,17 +5,27 @@ export function middleware(req: NextRequest) {
   const token = req.cookies.get("token")?.value;
   const path = req.nextUrl.pathname;
 
-  // Splash screen sempre pode ser acessada
-  if (path === "/") {
-    if (token) {
+  // Páginas públicas
+  const publicPaths = ["/", "/auth/login", "/auth/register"];
+  if (publicPaths.includes(path)) {
+    if (path === "/" && token) {
       return NextResponse.redirect(new URL("/home", req.url));
-    } else {
-      return NextResponse.redirect(new URL("/auth/login", req.url));
     }
+    return NextResponse.next();
   }
 
-  // Rotas autenticadas
-  const protectedPaths = ["/home", "/harvester", "/alerts", "/dashboard", "/harvestForecast", "/land", "/profile", "/reports", "/sensors"];
+  // Rotas protegidas
+  const protectedPaths = [
+    "/home",
+    "/harvester",
+    "/alerts",
+    "/dashboard",
+    "/harvestForecast",
+    "/land",
+    "/profile",
+    "/reports",
+    "/sensors",
+  ];
   if (protectedPaths.some((p) => path.startsWith(p)) && !token) {
     return NextResponse.redirect(new URL("/auth/login", req.url));
   }
@@ -24,5 +34,16 @@ export function middleware(req: NextRequest) {
 }
 
 export const config = {
-  matcher: ["/", "/home/:path*", "/dashboard/:path*"],
+  matcher: [
+    "/",
+    "/home/:path*",
+    "/harvester/:path*",
+    "/alerts/:path*",
+    "/dashboard/:path*",
+    "/harvestForecast/:path*",
+    "/land/:path*",
+    "/profile/:path*",
+    "/reports/:path*",
+    "/sensors/:path*",
+  ],
 };

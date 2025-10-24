@@ -10,6 +10,7 @@ class AuthController {
   // Login
   login = asyncHandler(async (req: Request, res: Response) => {
     const { userEmail, userPassword } = req.body;
+    console.log(userEmail, userPassword);
 
     if (!userEmail || !userPassword) {
       return res.status(400).json({

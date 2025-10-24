@@ -27,11 +27,12 @@ interface CreateUserResult {
   token?: string;
   user?: {
     id: string;
-    userName: string;
-    userEmail: string;
+    userImage?: string;
+    userName?: string;
+    userEmail?: string;
+    userPhone?: string;
     userRole: string;
     company?: string;
-    userImage?: string;
     farmerDetails?: FarmerDetails;
   };
 }
@@ -118,8 +119,10 @@ class UserService {
           userImage: newUser.userImage,
           userName: newUser.userName,
           userEmail: newUser.userEmail,
+          userPhone: newUser.userPhone,
           userRole: newUser.userRole,
           company: newUser.company?.toString(),
+          farmerDetails: newUser.farmerDetails,
         },
       };
     } catch (error) {
@@ -187,8 +190,6 @@ class UserService {
         token,
         user: {
           id: userId,
-          userName: user.userName,
-          userEmail: user.userEmail,
           userRole: user.userRole,
           company: user.company?.toString(),
         },

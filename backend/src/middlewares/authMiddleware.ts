@@ -30,6 +30,7 @@ export const authMiddleware = (
     const secret = process.env.JWT_SECRET;
     if (!secret) throw new Error("JWT_SECRET não definido");
     const payload = jwt.verify(token, secret) as IUserPayload;
+    console.log(payload);
     req.user = payload;
     next();
   } catch (err) {
