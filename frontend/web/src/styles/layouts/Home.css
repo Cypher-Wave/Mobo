@@ -1,0 +1,80 @@
+html,
+body {
+  font-family: "Poppins", sans-serif;
+  background: linear-gradient(to bottom, rbg(var(--mobo-white2)), rbg(var(--mobo-beige)));
+  overflow-x: hidden;
+  color: #333;
+}
+
+/* === SCREEN WRAPPER === */
+.screen {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+main {
+  text-align: center;
+  padding-top: 2rem;
+}
+
+.imgBanner {
+  width: 100%;
+  max-width: 1200px;
+  height: auto;
+  border-radius: 16px;
+  box-shadow: 0 6px 20px rgba(var(--mobo-black), 0.1);
+}
+
+.logo-container {
+  width: 130px;
+  height: auto;
+  margin: 1.5rem auto 2rem;
+  display: block;
+  animation: floatLogo 3s ease-in-out infinite;
+}
+
+@keyframes floatLogo {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-8px);
+  }
+}
+
+/* === RESPONSIVE === */
+@media (max-width: 768px) {
+  .navbarHome {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .profile-link {
+    flex-direction: column;
+  }
+
+  .profile-img {
+    width: 50px;
+    height: 50px;
+  }
+
+  .card-container {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+
+  .title-Btns {
+    font-size: 1.6rem;
+  }
+
+  .personagem {
+    display: none;
+  }
+
+  .footerimg {
+    width: 70px;
+  }
+}
