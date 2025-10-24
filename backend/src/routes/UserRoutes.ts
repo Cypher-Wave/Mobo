@@ -6,12 +6,11 @@ import { validateObjectId } from "../middlewares/validateObjectId";
 const router = Router();
 
 router.use(authMiddleware); // Todas as rotas abaixo precisam de token
-router.use("/:id", validateObjectId); // Todas as rotas com ID passam pela validação do ObjectId
 
 router.get("/", UserController.getAllUsers);
 // Não possui o create pois está no AuthRouters
-router.put("/:id", UserController.updateUser);
-router.delete("/:id", UserController.deleteUser);
+router.put("/:id", validateObjectId, UserController.updateUser);
+router.delete("/:id", validateObjectId, UserController.deleteUser);
 router.get("/me", UserController.getUser);
 
 export default router;

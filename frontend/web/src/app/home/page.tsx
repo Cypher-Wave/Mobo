@@ -21,9 +21,11 @@ const Home: React.FC = () => {
         const res = await api.get("/user/me");
         if (res.data.success) {
           setUser(res.data.user);
+        } else {
+          router.replace("/auth/login");
         }
       } catch (error) {
-        console.error("Erro ao buscar usuário:", error);
+        router.replace("/auth/login");
       } finally {
         setLoading(false);
       }
@@ -103,7 +105,6 @@ const Home: React.FC = () => {
             <button type="submit" className="ml-3">
               <Image
                 src="/images/icons/lupa-de-pesquisa.png"
-                width={20}
                 alt="Pesquisar"
               />
             </button>
