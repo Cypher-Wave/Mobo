@@ -3,14 +3,34 @@ import Image from "next/image";
 
 const Footer: React.FC = () => {
   return (
-    <footer className="relative mt-20 text-center bg-pink-700 text-white">
-      <Image src="/images/footerBanner.png" alt="Footer Banner" className="w-full" fill />
-      <h2 className="pt-4">@CyperWaves</h2>
-      <Image src="/images/moboFooter.png" alt="Mobo Footer" className="mx-auto w-24 my-4 animate-bounce" fill />
-      <div className="waves absolute bottom-0 left-0 w-full h-16 overflow-hidden">
-        {[1, 2, 3, 4].map((n) => (
-          <div key={n} className={`wave bg-white opacity-${n * 10} h-full`}></div>
-        ))}
+    <footer>
+      <div>
+        <Image
+          className="personagem"
+          src="/images/mobotst3.png"
+          alt="Mascote"
+          fill
+        />
+      </div>
+
+      <Image
+        className="bannerFooter"
+        src="/images/footerBanner.png"
+        alt="Banner Footer"
+        fill
+      />
+      <h2>@CyperWaves</h2>
+      <Image
+        className="footerimg  floating"
+        src="/images/moboFooter.png"
+        alt="Mascote Flutuando"
+        fill
+      />
+      <div className="waves">
+        <div className="wave" id="wave1"></div>
+        <div className="wave" id="wave2"></div>
+        <div className="wave" id="wave3"></div>
+        <div className="wave" id="wave4"></div>
       </div>
     </footer>
   );

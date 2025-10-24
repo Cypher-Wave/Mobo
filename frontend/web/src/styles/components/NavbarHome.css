@@ -1,0 +1,65 @@
+.navbarHome {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.8rem 2rem;
+  background: rgb(var(--mobo-white));
+  box-shadow: 0 2px 10px rgba(var(--mobo-black), 0.08);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.iconNav {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+.iconNav img {
+  width: 55px;
+  height: auto;
+}
+
+.perfilFT {
+  display: flex;
+  align-items: center;
+}
+
+.profile-link {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  text-decoration: none;
+  color: #333;
+  transition: transform 0.2s ease;
+}
+
+.profile-link:hover {
+  transform: scale(1.02);
+}
+
+.profile-img {
+  width: 55px;
+  height: 55px;
+  border-radius: 50%;
+  border: 2px solid rgb(var(--mobo-red));
+  object-fit: cover;
+}
+
+.profile-info p {
+  margin: 2px 0;
+  font-size: 0.9rem;
+  line-height: 1.3;
+}
+
+.txt1Card {
+  color: rgb(var(--mobo-red));
+  font-weight: 600;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.txt1Card:hover {
+  text-decoration: underline;
+}

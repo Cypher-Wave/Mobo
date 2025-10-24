@@ -21,17 +21,15 @@ const Home: React.FC = () => {
         const res = await api.get("/user/me");
         if (res.data.success) {
           setUser(res.data.user);
-        } else {
-          router.replace("/auth/login");
         }
       } catch (error) {
-        router.replace("/auth/login");
+        console.error(error);
       } finally {
         setLoading(false);
       }
     };
     fetchUser();
-  }, []); 
+  }, []);
 
   const tools = [
     {
@@ -81,40 +79,23 @@ const Home: React.FC = () => {
   if (!user) return <div>Carregando...</div>;
 
   return (
-    <div className="min-h-screen flex flex-col items-center bg-gradient-to-b from-green-100 to-pink-50">
+    <div className="screen">
       <NavbarHome user={user} />
 
-      <main className="text-center mt-8">
-        <div className="banner mb-6">
+      <main>
+        <h1 className="txt"></h1>
+        <div className="banner">
           <Image
+            className="imgBanner"
             src="/images/BannerOfc2.png"
             alt="Banner"
-            className="mx-auto rounded-lg shadow-md"
+            fill
           />
         </div>
-
-        <Image src="/images/Logo.png" alt="Logo" className="mx-auto w-28 mb-6" />
-
-        <form action="/search" method="GET" className="flex justify-center mb-12">
-          <div className="flex items-center border-2 border-pink-600 rounded-full px-6 py-3 bg-white shadow-md w-3/4 max-w-2xl">
-            <input
-              type="text"
-              placeholder="Digite sua pesquisa..."
-              className="flex-grow outline-none text-gray-700 placeholder-gray-400"
-            />
-            <button type="submit" className="ml-3">
-              <Image
-                src="/images/icons/lupa-de-pesquisa.png"
-                alt="Pesquisar"
-              />
-            </button>
-          </div>
-        </form>
-
-        <CardSection title="Ferramentas" cards={tools} />
-
-        <Image src="/images/mobotst3.png" alt="Mascote" className="mx-auto mt-16 w-60" />
+        <Image className="logo-container" src="/images/Logo.png" alt="" fill />
       </main>
+
+      <CardSection title="Ferramentas" cards={tools} />
 
       <Footer />
     </div>
