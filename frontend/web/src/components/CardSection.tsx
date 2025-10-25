@@ -19,14 +19,14 @@ const CardSection: React.FC<CardSectionProps> = ({ title, cards }) => (
     <h2 className="title-Btns">{title}</h2>
     <div className="card-container">
       {cards.map((card, i) => (
-        <article key={i} className="article">
-          <div>
-            <a href={card.link}>
+        <article key={i} className="article-container">
+          <a href={card.link}>
+            <div className="image-container">
               <Image src={card.icon} alt={card.title} className="card-img" fill />
-            </a>
+            </div>
             <h1 className="card-title">{card.title}</h1>
             <p className="txtBtns">{card.description}</p>
-          </div>
+          </a>
         </article>
       ))}
     </div>

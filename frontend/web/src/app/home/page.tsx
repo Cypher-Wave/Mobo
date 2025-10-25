@@ -3,7 +3,7 @@
 import React, { useEffect, useState } from "react";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
-import "@/styles/globals.css";
+import "@/styles/layouts/Home.css";
 import NavbarHome from "@/components/NavbarHome";
 import CardSection from "@/components/CardSection";
 import Footer from "@/components/Footer";
@@ -81,7 +81,6 @@ const Home: React.FC = () => {
   return (
     <div className="screen">
       <NavbarHome user={user} />
-
       <main>
         <h1 className="txt"></h1>
         <div className="banner">
@@ -92,11 +91,11 @@ const Home: React.FC = () => {
             fill
           />
         </div>
-        <Image className="logo-container" src="/images/Logo.png" alt="" fill />
+        <div className="logo-container">
+          <Image className="logo" src="/images/Logo.png" alt="" fill />
+        </div>
+        <CardSection title="Ferramentas" cards={tools} />
       </main>
-
-      <CardSection title="Ferramentas" cards={tools} />
-
       <Footer />
     </div>
   );

@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
 import "@/styles/layouts/SplashScreen.css";
-import api from "@/services/api"
+import api from "@/services/api";
 
 const SplashScreen: React.FC = () => {
   const router = useRouter();
@@ -17,13 +17,12 @@ const SplashScreen: React.FC = () => {
     const checkAuth = async () => {
       try {
         const res = await api.get("/user/me");
-
-        if (res.data?.user) {
+        if (res.data.user) {
           router.replace("/home"); // usuário logado
         } else {
           router.replace("/auth/login"); // não logado
         }
-      } catch {
+      } catch (error: unknown) {
         router.replace("/auth/login"); // erro na requisição
       }
     };
@@ -37,7 +36,7 @@ const SplashScreen: React.FC = () => {
     <div className="intro">
       <h1 className={`logo-header ${fadeIn ? "fade-in" : ""}`}>
         <Image
-          className="imgLogo"
+          className="intro-logo"
           src="/images/mbRosa.png"
           alt="MOBO Logo"
           fill
