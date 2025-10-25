@@ -20,7 +20,7 @@
 }
 
 /* Animação de crescimento da logo */
-.imgLogo {
+.intro-logo {
   animation: grow 2s ease-in-out forwards;
   object-fit: contain;
   width: 100%;

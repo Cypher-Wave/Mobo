@@ -12,12 +12,13 @@ export const authMiddleware = (
   res: Response,
   next: NextFunction
 ) => {
-  // 1️⃣ Tenta pegar o token do header Authorization
-  let token = req.headers.authorization?.split(" ")[1];
+  console.log("🔹 Cookies recebidos:", req.cookies);
+  // 1️⃣ Tenta pegar o token do cookie
+  let token = req.cookies?.token;
 
-  // 2️⃣ Se não tiver, tenta pegar do cookie
-  if (!token && req.cookies?.token) {
-    token = req.cookies.token;
+  // 2️⃣ Se não tiver, tenta pegar do header Authorization
+  if (!token && req.headers.authorization?.split(" ")[1]) {
+    token = req.headers.authorization?.split(" ")[1];
   }
 
   if (!token) {

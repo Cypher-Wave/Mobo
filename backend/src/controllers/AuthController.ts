@@ -36,6 +36,8 @@ class AuthController {
         secure: process.env.NODE_ENV === "production",
         sameSite: "lax",
         maxAge: 1000 * 60 * 60 * 24,
+        path: "/",
+        domain: "localhost"
       });
     }
 
@@ -73,6 +75,8 @@ class AuthController {
         secure: process.env.NODE_ENV === "production",
         sameSite: "lax",
         maxAge: 1000 * 60 * 60 * 24,
+        path: "/",
+        domain: "localhost"
       });
     }
 
