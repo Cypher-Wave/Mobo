@@ -1,0 +1,72 @@
+.sidebar-container {
+  flex: 0 0 5%;
+  height: 90vh;
+  background: rgb(var(--mobo-red));
+  color: rgb(var(--mobo-beige));
+  display: flex;
+  flex-direction: column;
+  padding: 2rem 0;
+  border-radius: 20px;
+  position: fixed;
+  justify-content: left;
+  font-family: "Livvic", sans-serif;
+  font-weight: 600;
+}
+
+.sidebar-container .toggle {
+  display: flex;
+  align-items: center;
+  margin-bottom: 2rem;
+}
+
+.toggle {
+  justify-content: center;
+}
+
+.logo {
+  width: 3rem;
+  height: 3rem;
+}
+
+.sidebar .logo {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.sidebar {
+  display: flex;
+  flex-direction: column;
+  gap: 2.5rem;
+  padding: 0 1.5rem;
+}
+
+.sidebar a {
+  text-decoration: none;
+  color: rgb(var(--mobo-beige));
+  font-weight: 500;
+  font-size: 0.8rem;
+  transition: 0.2s ease;
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+}
+
+.sidebar a:hover {
+  transform: translateX(5px);
+  opacity: 0.85;
+}
+
+.sidebar a.active {
+  font-weight: bold;
+  color: rgb(var(--mobo-green));
+}
+
+/* ===== Links especiais ===== */
+.sidebar .land,
+.sidebar .logout {
+  margin-top: auto;
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+}

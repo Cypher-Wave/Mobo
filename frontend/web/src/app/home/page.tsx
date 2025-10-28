@@ -1,35 +1,15 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
+import React from "react";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
-import "@/styles/layouts/Home.css";
-import NavbarHome from "@/components/NavbarHome";
-import CardSection from "@/components/CardSection";
-import Footer from "@/components/Footer";
-import api from "@/services/api";
-import { IUser } from "@/types/User";
+import NavbarHome from "@/components/NavbarHome/NavbarHome";
+import CardSection from "@/components/CardSection/CardSection";
+import Footer from "@/components/Footer/Footer";
+import "./Home.css";
 
 const Home: React.FC = () => {
   const router = useRouter();
-  const [user, setUser] = useState<IUser | null>(null);
-  const [loading, setLoading] = useState(true);
-
-  useEffect(() => {
-    const fetchUser = async () => {
-      try {
-        const res = await api.get("/user/me");
-        if (res.data.success) {
-          setUser(res.data.user);
-        }
-      } catch (error) {
-        console.error(error);
-      } finally {
-        setLoading(false);
-      }
-    };
-    fetchUser();
-  }, []);
 
   const tools = [
     {
@@ -37,7 +17,7 @@ const Home: React.FC = () => {
       description:
         "A garra mecânica possui sensores, câmera que identifica frutos prontos para serem colhidos e controle de direção para precisão na colheita.",
       icon: "/images/icons/garraIcon.png",
-      link: "/clawArm",
+      link: "/harvesters",
     },
     {
       title: "Sensores",
@@ -51,7 +31,7 @@ const Home: React.FC = () => {
       description:
         "A previsão de colheita utiliza dados de sensores e condições climáticas para estimar o momento ideal da colheita.",
       icon: "/images/icons/lembrete-vermelho.png",
-      link: "/harvestForecast",
+      link: "/forecast",
     },
     {
       title: "Relatórios",
@@ -65,7 +45,7 @@ const Home: React.FC = () => {
       description:
         "A dashboard exibe gráficos, proporcionando uma visão clara e em tempo real dos dados do cultivo e da colheita.",
       icon: "/images/icons/dashboard.png",
-      link: "/dashboard",
+      link: "/dashboards",
     },
     {
       title: "Alertas",
@@ -76,28 +56,33 @@ const Home: React.FC = () => {
     },
   ];
 
-  if (!user) return <div>Carregando...</div>;
-
   return (
-    <div className="screen">
-      <NavbarHome user={user} />
+    <>
+      <NavbarHome />
       <main>
-        <h1 className="txt"></h1>
         <div className="banner">
           <Image
-            className="imgBanner"
-            src="/images/BannerOfc2.png"
+            className="img-banner"
+            src="/images/BannerOfc.png"
             alt="Banner"
             fill
           />
-        </div>
-        <div className="logo-container">
-          <Image className="logo" src="/images/Logo.png" alt="" fill />
+          <div className="logo-container">
+            <Image className="logo" src="/images/Logo.png" alt="Logo" fill />
+          </div>
         </div>
         <CardSection title="Ferramentas" cards={tools} />
+        <div className="mascotFooter-container">
+          <Image
+            className="mascotFooter"
+            src="/images/mobotst3.png"
+            alt="Mascote"
+            fill
+          />
+        </div>
+        <Footer />
       </main>
-      <Footer />
-    </div>
+    </>
   );
 };
 

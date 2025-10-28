@@ -9,7 +9,7 @@
   --mobo-beige: 236, 226, 214;
   --mobo-black: 0, 0, 0;
   --mobo-white: 255, 255, 255;
-  --mobo-white2: 245, 245, 245;
+  --mobo-gray: 200, 200, 200;
 
   /* Cores Adicionais de Dashboard */
   --dashboard-green: 135, 156, 95;
@@ -29,35 +29,51 @@ body {
   height: 100%;
 }
 
+.logo {
+  object-fit: contain;
+  filter: drop-shadow(0 0 20px rgba(var(--mobo-white), 0.9));
+}
+
 .btn {
   margin-top: 2rem;
   border: none;
-  border-radius: 25px;
-  padding: 0.7rem 2rem;
-  font-weight: 600;
+  border-radius: 20px;
+  padding: 0.8rem 1.8rem;
+  font-weight: bold;
   cursor: pointer;
   transition: all 0.3s ease;
 }
 
-.btn-primary {
-  background-color: rgb(var(--mobo-white));
-  color: rgb(var(--mobo-red));
-}
-
-.btn-primary:hover {
-  background-color: rgb(var(--mobo-white2));
-}
-
 /* Botão Vermelho */
-.btn-second {
+.btn-primary {
   background-color: rgb(var(--mobo-red));
-  color: rgb(var(--mobo-white));
-  border-radius: 30px;
-  padding: 0.7rem;
+  color: rgb(var(--mobo-beige));
   font-weight: 600;
   margin-top: 0.5rem;
 }
 
-.btn-second:hover {
+.btn-primary:hover {
   background-color: rgb(var(--mobo-dark-red));
+  transform: scale(1.03);
+}
+
+/* Botão Branco */
+.btn-secondary {
+  background-color: rgb(var(--mobo-white));
+  color: rgb(var(--mobo-red));
+}
+
+.btn-secondary:hover {
+  transform: scale(1.03);
+  background-color: rgb(var(--mobo-gray));
+}
+
+/* Botões Menores */
+.btn-item {
+  margin-top: 1rem;
+  border: none;
+  border-radius: 20px;
+  padding: 0.4rem 0.8rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
 }

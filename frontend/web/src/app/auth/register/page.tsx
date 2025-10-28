@@ -3,50 +3,11 @@
 import React, { useState } from "react";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
-import api from "@/services/api";
 
 const Register: React.FC = () => {
   const router = useRouter();
-  const [file, setFile] = useState<File | null>(null);
-  const [name, setName] = useState("");
-  const [phone, setPhone] = useState("");
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [role, setRole] = useState("");
   const [loading, setLoading] = useState(false);
   const [errorMsg, setErrorMsg] = useState("");
-
-  const handleRegister = async (event: React.FormEvent) => {
-    event.preventDefault();
-    setLoading(true);
-    setErrorMsg("");
-
-    try {
-      const formData = new FormData();
-
-      if (file) formData.append("userImage", file);
-      formData.append("userName", name);
-      formData.append("userPhone", phone);
-      formData.append("userEmail", email);
-      formData.append("userPassword", password);
-      formData.append("userRole", role);
-
-      const res = await api.post("/auth/register", formData, {
-      headers: { "Content-Type": "multipart/form-data" },
-    });
-
-      if (res.data.user) {
-        router.push("/");
-      } else {
-        setErrorMsg("Cadastro falhou. Tente novamente.");
-      }
-    } catch (error: unknown) {
-      console.error("Erro ao tentar cadastrar: ", error);
-      setErrorMsg("Erro inesperado ao cadastrar.");
-    } finally {
-      setLoading(false);
-    }
-  };
 
   return (
     <div className="content first-content">
@@ -61,7 +22,7 @@ const Register: React.FC = () => {
         </p>
         <button
           id="signin"
-          className="btn btn-primary"
+          className="btn btn-secondary"
           onClick={() => router.push("/auth/login")}
         >
           Entrar
@@ -79,7 +40,7 @@ const Register: React.FC = () => {
           />
         </div>
         <h2 className="title title-second">Deseja criar uma conta?</h2>
-        <form className="form" onSubmit={handleRegister} method="POST">
+        <form className="form" onSubmit={() => router.push("/home")} method="POST">
           <label className="label-input" htmlFor="userProfileImage">
             <i className="far fa-image icon-modifys"></i>
             <span className="txtimp">Escolher imagem</span>
@@ -88,7 +49,7 @@ const Register: React.FC = () => {
               id="userProfileImage"
               type="file"
               accept="image/*"
-              onChange={(event) => setFile(event.target.files?.[0] || null)}
+              // onChange={(event) => setFile(event.target.files?.[0] || null)}
               style={{ display: "none" }}
             />
           </label>
@@ -98,8 +59,8 @@ const Register: React.FC = () => {
             <input
               type="text"
               placeholder="Nome"
-              value={name}
-              onChange={(event) => setName(event.target.value)}
+              // value={name}
+              // onChange={(event) => setName(event.target.value)}
               required
             />
           </label>
@@ -109,8 +70,8 @@ const Register: React.FC = () => {
             <input
               type="text"
               placeholder="Telefone"
-              value={phone}
-              onChange={(event) => setPhone(event.target.value)}
+              // value={phone}
+              // onChange={(event) => setPhone(event.target.value)}
             />
           </label>
 
@@ -119,8 +80,8 @@ const Register: React.FC = () => {
             <input
               type="email"
               placeholder="Email"
-              value={email}
-              onChange={(event) => setEmail(event.target.value)}
+              // value={email}
+              // onChange={(event) => setEmail(event.target.value)}
               required
             />
           </label>
@@ -130,8 +91,8 @@ const Register: React.FC = () => {
             <input
               type="password"
               placeholder="Senha"
-              value={password}
-              onChange={(event) => setPassword(event.target.value)}
+              // value={password}
+              // onChange={(event) => setPassword(event.target.value)}
               required
             />
           </label>
@@ -141,8 +102,8 @@ const Register: React.FC = () => {
             <select
               className="select-input"
               id="userRole"
-              value={role}
-              onChange={(event) => setRole(event.target.value)}
+              // value={role}
+              // onChange={(event) => setRole(event.target.value)}
               required
             >
               <option value="" disabled>
@@ -156,7 +117,7 @@ const Register: React.FC = () => {
           </label>
 
           {/* Bloco para Agricultor Familiar */}
-          <div id="farmerFields" style={{ display: "none" }}>
+          {/* <div id="farmerFields" style={{ display: "none" }}>
             <label className="label-input" htmlFor="farmerDetailsCpf">
               <i className="fas fa-id-card icon-modify"></i>
               <input
@@ -176,10 +137,10 @@ const Register: React.FC = () => {
                 id="farmerDetailsDap"
               />
             </label>
-          </div>
+          </div> */}
 
           {/* Bloco para Empresa */}
-          <div id="companyFields" style={{ display: "none" }}>
+          {/* <div id="companyFields" style={{ display: "none" }}>
             <label className="label-input" htmlFor="company">
               <i className="fas fa-building icon-modify"></i>
               <select
@@ -190,16 +151,16 @@ const Register: React.FC = () => {
               >
                 <option value="" disabled>
                   Selecione a Empresa
-                </option>
+                </option> */}
                 {/* Exemplo de loop de empresas */}
                 {/* companies.map(company => (
                     <option key={company._id} value={company._id}>{company.companyName}</option>
                 )) */}
-              </select>
+              {/* </select>
             </label>
-          </div>
+          </div> */}
 
-          <button className="btn btn-second" type="submit">
+          <button className="btn btn-primary" type="submit">
             Cadastrar-se
           </button>
         </form>

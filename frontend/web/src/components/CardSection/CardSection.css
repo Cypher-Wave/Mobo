@@ -1,0 +1,95 @@
+.card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  margin: 2rem 0 3rem 0;
+}
+
+.card-theme {
+  font-family: "Rubik Bubbles", sans-serif;
+  font-size: 2rem;
+  color: rgb(var(--mobo-red));
+  font-weight: 700;
+  margin-bottom: 2.5rem;
+}
+
+.card-container {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.5rem;
+  justify-items: center; /* centraliza cada card dentro da célula */
+  max-width: 1200px;    /* evita que a grid fique esticada demais */
+  width: 100%;
+}
+
+.article-container {
+  background-color: transparent;
+  border-radius: 20px;
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+  max-width: 320px;
+  padding: 1.5rem 1rem;
+}
+
+.article-container:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 12px 24px rgba(var(--mobo-black), 0.15);
+}
+
+.article-container:hover .card-img-container {
+  filter: drop-shadow(0 0 20px rgba(var(--mobo-red), 0.9));
+}
+
+.article-container a {
+  text-decoration: none;
+  color: inherit;
+  transition: all 0.25s ease;
+}
+
+.card-img-container {
+  position: relative;
+  width: 100px;
+  height: 100px;
+  margin: 0 auto 1rem auto;
+  animation: floatUpDown 2s ease-in-out infinite;
+}
+
+@keyframes floatUpDown {
+  0% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px); /* sobe 10px */
+  }
+  100% {
+    transform: translateY(0); /* volta para posição original */
+  }
+}
+
+.card-title {
+  font-family: "Rubik Bubbles", sans-serif;
+  font-size: 1.2rem;
+  color: rgb(var(--mobo-red));
+  font-weight: bold;
+  margin-bottom: 0.6rem;
+}
+
+.card-description {
+  font-family: "Livvic", sans-serif;
+  color: rgb(var(--mobo-red));
+  font-size: 0.95rem;
+  line-height: 1.4;
+  text-align: center;
+}
+
+@media (max-width: 600px) {
+  .card-container {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 1024px) {
+  .card-container {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}

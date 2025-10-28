@@ -84,12 +84,6 @@
   height: 6rem;
 }
 
-.auth-logo {
-  object-fit: contain;
-  width: 100%;
-  height: 100%;
-  filter: drop-shadow(0 0 6px rgba(var(--mobo-white), 0.9));
-}
 
 /* Título do formulário */
 .title-second {

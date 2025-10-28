@@ -1,0 +1,112 @@
+.profile {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.profile-img {
+  position: relative;
+  width: 45px;
+  height: 45px;
+  border-radius: 50%;
+  overflow: hidden;
+}
+
+.profile-click:hover {
+  transform: scale(1.05);
+  cursor: pointer;
+  transition: transform 0.2s ease;
+}
+
+/* ===== Dropdown ===== */
+.dropdown-menu {
+  position: absolute;
+  top: 45px;
+  right: -30px;
+  background: rgb(var(--mobo-beige));
+  border: 1px solid rgb(var(--mobo-red));
+  border-radius: 12px;
+  box-shadow: 0 6px 14px rgba(var(--mobo-black), 0.15);
+  padding: 0.5rem 0.5rem;
+  min-width: 150px;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  animation: fadeIn 0.25s ease;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.profile-information {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  overflow: hidden;
+  white-space: nowrap;
+  position: relative;
+}
+
+.display {
+  display: flex;
+  flex-direction: column;
+}
+
+.display p {
+  font-family: "Livvic";
+  color: rgb(var(--mobo-red));
+  margin-left: 6px;
+  margin: 2px;
+  font-weight: light;
+}
+
+.name {
+  display: inline-block;
+  transform: translateX(0);
+  transition: transform 0.3s ease;
+}
+
+.role {
+  font-size: 0.8rem;
+  font-weight: 200px;
+}
+
+.scrolling-text {
+  animation: scrollText 8s linear infinite;
+}
+
+@keyframes scrollText {
+  0% {
+    transform: translateX(100%);
+  }
+  100% {
+    transform: translateX(-100%);
+  }
+}
+
+.dropdown-item {
+  margin-top: 5px;
+  font-family: "Livvic";
+  font-weight: bold;
+  font-size: 0.95rem;
+  border-radius: 5px;
+  color: rgb(var(--mobo-red));
+  padding: 0.6rem 1rem;
+  text-align: left;
+  cursor: pointer;
+  transition: background 0.2s ease, color 0.2s ease;
+}
+
+.dropdown-item:hover {
+  color: rgb(var(--mobo-beige));
+  background-color: rgb(var(--mobo-red));
+}

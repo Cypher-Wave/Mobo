@@ -1,0 +1,148 @@
+footer {
+  position: relative;
+  background: url("/images/footerBanner.png") no-repeat center bottom;
+  background-size: cover;
+  width: 100%;
+  height: 61vh;
+  text-align: center;
+  overflow: hidden;
+  z-index: 99;
+  margin-bottom: 0;
+}
+
+footer h2 {
+  position: absolute;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 101;
+  font-family: "Poppins", sans-serif;
+  color: rgb(var(--mobo-white));
+  font-size: 1.5rem;
+}
+
+.moboFooter-container {
+  position: absolute;
+  bottom: 40px;
+  width: 400px;
+  height: 260px;
+  transform: translateY(-50%);
+  animation: moveAcross 30s linear infinite, float 2s ease-in-out infinite;
+}
+
+/* Animação de movimento horizontal */
+@keyframes moveAcross {
+  0% {
+    left: -10%; /* Começa ligeiramente fora da tela à esquerda */
+  }
+  100% {
+    left: 110%; /* Termina ligeiramente fora da tela à direita */
+  }
+}
+
+/* Animação de flutuação vertical */
+@keyframes float {
+  0%,
+  100% {
+    transform: translate(
+      -50%,
+      0
+    ); /* Ponto inicial e final sem flutuação vertical */
+  }
+  50% {
+    transform: translate(
+      -50%,
+      -30px
+    ); /* Flutuação para cima no meio da animação */
+  }
+}
+
+/* ===== Ondas do Rodapé ===== */
+.waves {
+  position: absolute;
+  bottom: 0;
+  margin-bottom: 0;
+  width: 100%;
+  height: 200px; /* altura das ondas */
+  overflow: hidden;
+  pointer-events: none; /* para não atrapalhar cliques */
+}
+
+.wave {
+  position: absolute;
+  width: 100%; /* para poder repetir e animar */
+  height: 90%;
+  background-image: url("/images/waves2.png");
+  background-repeat: repeat-x;
+  background-size: cover;
+}
+
+#wave1 {
+  z-index: 100;
+  opacity: 1;
+  bottom: 5px;
+  animation: animateWave1 4s linear infinite;
+}
+
+@keyframes animateWave1 {
+  0% {
+    background-position-x: 100vw;
+  }
+  100% {
+    background-position-x: 0vw;
+  }
+}
+
+#wave2 {
+  z-index: 99;
+  opacity: 0.5;
+  bottom: 10px;
+  animation: animateWave2 4s linear infinite;
+}
+
+@keyframes animateWave2 {
+  0% {
+    background-position-x: 0vw;
+  }
+  100% {
+    background-position-x: 100vw;
+  }
+}
+
+#wave3 {
+  z-index: 98;
+  opacity: 0.1;
+  bottom: 15px;
+  animation: animateWave3 3s linear infinite;
+}
+
+@keyframes animateWave3 {
+  0% {
+    background-position-x: 0vw;
+  }
+  100% {
+    background-position-x: 100vw;
+  }
+}
+
+#wave4 {
+  z-index: 97;
+  opacity: 0.75;
+  bottom: 20px;
+  animation: animateWave4 3s linear infinite;
+}
+
+@keyframes animateWave4 {
+  0% {
+    background-position-x: 0vw;
+  }
+  100% {
+    background-position-x: 100vw;
+  }
+}
+
+@media (max-width: 768px) {
+  .moboFooter-container {
+    display: none;
+  }
+}
