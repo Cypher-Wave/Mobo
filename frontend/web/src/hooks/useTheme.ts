@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 
-const useTheme = () => {
+export default function useTheme() {
   const [theme, setTheme] = useState<"light" | "dark">("light");
 
   // Inicializa com valor do localStorage ou padrão do sistema
@@ -24,5 +24,3 @@ const useTheme = () => {
 
   return { theme, toggleTheme };
 };
-
-export default useTheme;

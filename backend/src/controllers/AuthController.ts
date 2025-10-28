@@ -10,7 +10,6 @@ class AuthController {
   // Login
   login = asyncHandler(async (req: Request, res: Response) => {
     const { userEmail, userPassword } = req.body;
-    console.log(userEmail, userPassword);
 
     if (!userEmail || !userPassword) {
       return res.status(400).json({
@@ -20,6 +19,7 @@ class AuthController {
     }
 
     const result = await UserService.authenticate({ userEmail, userPassword });
+    const token = result.token;
 
     if (!result.success) {
       return res.status(401).json({
@@ -31,13 +31,13 @@ class AuthController {
 
     // Web: envia cookie HTTP-only
     if (req.headers["user-agent"]?.includes("Mozilla")) {
-      res.cookie("token", result.token, {
+      res.cookie("token", token, {
         httpOnly: true,
-        secure: process.env.NODE_ENV === "production",
-        sameSite: "lax",
+        secure: process.env.NODE_ENV === "production" ? true : false,
+        sameSite: "none",
         maxAge: 1000 * 60 * 60 * 24,
         path: "/",
-        domain: "localhost"
+        domain: "localhost",
       });
     }
 
@@ -45,7 +45,7 @@ class AuthController {
     return res.status(200).json({
       success: true,
       message: "Login efetuado com sucesso!",
-      token: result.token,
+      token,
       user: result.user,
     });
   });
@@ -60,6 +60,7 @@ class AuthController {
     };
 
     const result = await UserService.create(userData);
+    const token = result.token;
 
     if (!result.success) {
       return res.status(400).json({
@@ -70,13 +71,13 @@ class AuthController {
 
     // Web: envia cookie HTTP-only
     if (req.headers["user-agent"]?.includes("Mozilla")) {
-      res.cookie("token", result.token, {
+      res.cookie("token", token, {
         httpOnly: true,
-        secure: process.env.NODE_ENV === "production",
-        sameSite: "lax",
+        secure: process.env.NODE_ENV === "production" ? true : false,
+        sameSite: "none",
         maxAge: 1000 * 60 * 60 * 24,
         path: "/",
-        domain: "localhost"
+        domain: "localhost",
       });
     }
 
@@ -84,7 +85,7 @@ class AuthController {
     return res.status(200).json({
       success: true,
       message: "Cadastro efetuado com sucesso!",
-      token: result.token,
+      token,
       user: result.user,
     });
   });

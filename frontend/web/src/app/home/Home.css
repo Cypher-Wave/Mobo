@@ -1,0 +1,83 @@
+/* ===== Reset básico ===== */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body, html {
+  display: flex;
+  flex-direction: column;
+  min-height: 100%;
+  width: 100%;
+  background: rgb(var(--mobo-beige));
+  overflow-x: hidden; /* evita scroll horizontal */
+}
+
+/* ===== Banner e Logo ===== */
+.banner {
+  position: relative;
+  width: 100%;      /* ocupa 100% da largura da tela */
+  height: 480px;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.img-banner {
+  width: 100%;      /* ocupa toda a largura do container */
+  height: 100%;     /* ocupa toda a altura do container */
+  object-fit: cover; 
+  object-position: center;
+}
+
+.logo-container {
+  position: absolute;
+  top: 140px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 280px;
+  height: 150px;
+}
+
+/* ===== Mascote ===== */
+.mascotFooter-container {
+  width: 350px;
+  height: 350px;
+  position: absolute;
+  top: 20%;
+  right: -152px;
+  z-index: 100;
+  transform: translateY(-50%);
+  animation: hide-appears 10s infinite;
+}
+
+@keyframes hide-appears {
+  0% {
+    transform: translateY(-50%) translateX(60%);
+  }
+  50% {
+    transform: translateY(20%) translateX(0);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(-50%) translateX(90%);
+    opacity: 0;
+  }
+}
+
+/* ===== Responsividade ===== */
+@media (max-width: 768px) {
+  .mascotFooter-container {
+    display: none;
+  }
+}
+
+@media (max-width: 600px) {
+  .logo-container {
+    width: 180px;
+    height: auto;
+    top: 100px;
+  }
+}

@@ -1,39 +1,16 @@
 "use client";
 
-import React, { useState } from "react";
+import React from "react";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
-import api from "@/services/api";
 
 const Login: React.FC = () => {
   const router = useRouter();
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [loading, setLoading] = useState(false);
-  const [errorMsg, setErrorMsg] = useState("");
 
-  const handleLogin = async (event: React.FormEvent) => {
-    event.preventDefault(); // impede refresh da página
-    setLoading(true);
-    setErrorMsg("");
-
-    try {
-      const res = await api.post("/auth/login", {
-        userEmail: email,
-        userPassword: password,
-      });
-
-      if (res.data?.user) {
-        // redirecionar para a tela de Splash
-        router.push("/");
-      } else {
-        setErrorMsg("Login falhou. Verifique suas credenciais.");
-      }
-    } catch (error: unknown) {
-      console.error("Erro ao tentar logar: ", error);
-    } finally {
-      setLoading(false);
-    }
+  const handleLogin = (event: React.FormEvent) => {
+    event.preventDefault(); // impede reload da página
+    // Aqui você pode depois integrar com sua API (login real)
+    router.push("/home");
   };
 
   return (
@@ -49,7 +26,7 @@ const Login: React.FC = () => {
         </p>
         <button
           id="signup"
-          className="btn btn-primary"
+          className="btn btn-secondary"
           onClick={() => router.push("/auth/register")}
         >
           Cadastrar-se
@@ -73,10 +50,11 @@ const Login: React.FC = () => {
             <i className="far fa-envelope icon-modify"></i>
             <input
               type="email"
+              name="userEmail"
               placeholder="Email"
               required
-              value={email}
-              onChange={(event) => setEmail(event.target.value)}
+              // value={email}
+              // onChange={(event) => setEmail(event.target.value)}
             />
           </label>
 
@@ -84,17 +62,16 @@ const Login: React.FC = () => {
             <i className="fas fa-lock icon-modify"></i>
             <input
               type="password"
+              name="userPassword"
               placeholder="Senha"
               required
-              value={password}
-              onChange={(event) => setPassword(event.target.value)}
+              // value={password}
+              // onChange={(event) => setPassword(event.target.value)}
             />
           </label>
 
-          {errorMsg && <p className="error-msg">{errorMsg}</p>}
-
-          <button className="btn btn-second" type="submit" disabled={loading}>
-            {loading ? "Entrando..." : "Entrar"}
+          <button className="btn btn-primary" type="submit">
+            Entrar
           </button>
 
           <a className="password" href="#">

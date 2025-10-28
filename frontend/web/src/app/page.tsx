@@ -22,7 +22,7 @@ const SplashScreen: React.FC = () => {
         } else {
           router.replace("/auth/login"); // não logado
         }
-      } catch (error: unknown) {
+      } catch (error) {
         router.replace("/auth/login"); // erro na requisição
       }
     };

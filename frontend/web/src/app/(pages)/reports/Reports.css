@@ -1,0 +1,165 @@
+main {
+  flex: 1;
+  /* top right bottom left  */
+  padding: 0.1rem 0;
+  margin: 0 5% 0 13%;
+  transition: all 0.3s ease;
+}
+
+main h1 {
+  font-size: 1.8rem;
+  font-family: "Poppins", sans-serif;
+  font-weight: bold;
+  color: rgb(var(--mobo-red));
+  margin-bottom: 1.5rem;
+}
+
+/* ===== Buttons ===== */
+.button-container {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  margin-bottom: 1.5rem;
+  gap: 1rem;
+}
+
+/* ===== Table ===== */
+.table {
+  background: rgb(var(--mobo-red));
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: 0 4px 16px rgba(var(--mobo-black), 0.08);
+  width: 100%;
+  padding: 30px;
+}
+
+.user-list {
+  background: rgb(var(--mobo-beige));
+  color: rgb(var(--mobo-red));
+  border-radius: 20px;
+  align-items: center;
+  justify-items: center;
+}
+
+.table-header,
+.table-row {
+  display: grid;
+  /* SELECIONAR INDICE DT_COLEHITA HR_INICIO HR_TERMINO DURAÇÃO QTD_COLHIDA PLANTAÇÃO QUALIDADE */
+  grid-template-columns: 100px 100px 150px 120px 120px 120px 180px 160px 120px;
+  align-items: center;
+  justify-items: center;
+  gap: 10px;
+  padding: 1rem 0;
+  text-align: center;
+  font-family: "Poppins", sans-serif;
+  font-size: 0.9rem;
+}
+
+.table-header {
+  font-weight: bold;
+}
+
+.table-row {
+  border-bottom: 1px solid rgba(var(--mobo-black), 0.05);
+  border-radius: 20px;
+  font-size: 0.9rem;
+  transition: background 0.25s ease;
+}
+
+.table-row:hover {
+  background: rgba(var(--mobo-red), 0.05);
+}
+
+.table-cell {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.select-record {
+  transform: scale(1.2);
+}
+
+/* ===== Pagination ===== */
+.pagination {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0.5rem 1rem 0 1rem;
+  gap: 0.5rem;
+}
+
+.pagination a {
+  display: inline-block;
+  padding: 0.5rem 0.9rem;
+  border-radius: 8px;
+  background: rgb(var(--mobo-red));
+  color: rgb(var(--mobo-beige));
+  text-decoration: none;
+  font-weight: 600;
+  transition: all 0.25s ease;
+}
+
+.pagination a:hover {
+  background: rgb(var(--mobo-dark-red));
+  color: rgb(var(--mobo-beige));
+  transform: scale(1.03);
+}
+
+.pagination a.active {
+  background: rgb(var(--mobo-green));
+  color: rgb(var(--mobo-beige));
+  transform: scale(1.03);
+}
+
+#menu-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 1.8rem;
+}
+
+/* ===== Responsividade ===== */
+@media (max-width: 1250px) {
+  .table-header,
+  .table-row {
+    grid-template-columns: 70px 80px 130px 130px 130px 100px 140px 140px 90px;
+    font-size: 0.85rem;
+  }
+}
+
+@media (max-width: 950px) {
+  .new-users {
+    margin-left: 0;
+    padding: 1.5rem;
+  }
+
+  .table-header {
+    display: none;
+  }
+
+  .table-row {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 1rem;
+    border-bottom: 1px solid rgba(var(--mobo-black), 0.1);
+  }
+
+  .table-cell {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.9rem;
+  }
+
+  .table-cell::before {
+    content: attr(data-label);
+    font-weight: 600;
+    color: rgb(var(--mobo-red));
+  }
+
+  .right-section {
+    display: none;
+  }
+}

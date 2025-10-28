@@ -1,0 +1,22 @@
+.right-section {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 1.5rem;
+  position: absolute;
+  top: 0;
+  right: 0;
+  padding: 1.5rem 2rem;
+}
+
+.dark-mode {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+@media (max-width: 950px) {
+  .right-section {
+    display: none;
+  }
+}

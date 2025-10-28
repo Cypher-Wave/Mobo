@@ -12,7 +12,6 @@ export const authMiddleware = (
   res: Response,
   next: NextFunction
 ) => {
-  console.log("🔹 Cookies recebidos:", req.cookies);
   // 1️⃣ Tenta pegar o token do cookie
   let token = req.cookies?.token;
 

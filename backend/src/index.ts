@@ -2,6 +2,7 @@
 import express, { Application, Request, Response } from "express";
 import dotenv from "dotenv";
 import cors from "cors";
+import path from "path";
 import cookieParser from "cookie-parser";
 import { connectDB } from "./config/db";
 import { errorMiddleware } from "./middlewares/errorMiddleware";
@@ -25,13 +26,18 @@ import UserRoutes from "./routes/UserRoutes";
 // Configurações do Express
 app.use(
   cors({
-    origin: "http://localhost:3000",
+    origin: "localhost",
     credentials: true,
+    allowedHeaders: "content-type",
+    methods: ["GET", "POST", "PUT", "DELETE", "HEAD"],
   })
 );
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
+
+// Caminho absoluto para a pasta uploads
+app.use("/uploads", express.static(path.resolve(__dirname, "..", "uploads")));
 
 // Definindo rotas principais da API
 app.use("/api/auth", AuthRoutes);
