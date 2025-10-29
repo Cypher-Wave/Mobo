@@ -5,9 +5,10 @@ import "./RightSection.css";
 
 interface RightSectionProps {
   showProfile?: boolean;
+  showNotification?: boolean;
 }
 
-const RightSection: React.FC<RightSectionProps> = ({showProfile = true}) => {
+const RightSection: React.FC<RightSectionProps> = ({showProfile = true, showNotification = true}) => {
   return (
     <div className="right-section">
       <div className="dark-mode">
@@ -16,7 +17,7 @@ const RightSection: React.FC<RightSectionProps> = ({showProfile = true}) => {
       </div>
 
       {showProfile && <Profile />}
-      <Notification />
+      {showNotification && <Notification />}
     </div>
   );
 };
