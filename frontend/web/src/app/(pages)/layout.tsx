@@ -13,11 +13,12 @@ export default function PagesLayout({
 }) {
   const pathname = usePathname();
   const showProfile = !pathname.includes("/profile");
+  const showNotification = !pathname.includes("/alerts");
   return (
     <div className="container">
       <Sidebar />
       <main>{children}</main>
-      <RightSection showProfile={showProfile} />
+      <RightSection showProfile={showProfile} showNotification={showNotification} />
     </div>
   );
 }

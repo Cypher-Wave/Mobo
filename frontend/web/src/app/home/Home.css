@@ -26,8 +26,6 @@ body, html {
 }
 
 .img-banner {
-  width: 100%;      /* ocupa toda a largura do container */
-  height: 100%;     /* ocupa toda a altura do container */
   object-fit: cover; 
   object-position: center;
 }

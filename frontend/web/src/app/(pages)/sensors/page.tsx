@@ -10,7 +10,7 @@ const MapClient = dynamic(() => import("./components/MapClient"), { ssr: false }
 const Sensors: React.FC = () => {
   return (
     <>
-      <h1 className="txt">Sensores</h1>
+      <h1>Sensores</h1>
 
       <div className="new-users">
         <div className="user-list">
@@ -18,8 +18,8 @@ const Sensors: React.FC = () => {
         </div>
       </div>
       {/* Gráfico */}
-      <div className="graficos">
-        <div className="chart-container">
+      <div className="graphics">
+        <div className="alerts-container">
           <a href="/alerts">
             <Image
               className="alertIcons"

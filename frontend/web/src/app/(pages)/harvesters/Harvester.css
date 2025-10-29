@@ -1,0 +1,260 @@
+.camera {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #A70240;
+  border-radius: 30px;
+  width: 80%;
+  height: 350px;
+  box-shadow: 0px 4px 10px rgba(0,0,0,0.2);
+}
+
+.video {
+  width: 95%;
+  height: 90%;
+  border-radius: 20px;
+  background-color: black;
+  object-fit: cover;
+}
+
+/* ==============================
+   CONTROLES DE CÂMERA
+   ============================== */
+.harvester-area {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 15px;
+  margin-top: 30px;
+  text-align: center;
+}
+
+#controls {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 15px;
+  background-color: transparent;
+}
+
+.txt-button {
+  font-weight: 600;
+  color: #A70240;
+  margin-bottom: 5px;
+}
+
+button {
+  cursor: pointer;
+  border: none;
+  background: none;
+  transition: all 0.2s ease-in-out;
+}
+
+button:hover {
+  transform: scale(1.05);
+}
+
+.button {
+  position: relative;
+  width: 40px;
+  height: 40px;
+}
+
+.txt-icon {
+  font-size: 0.85rem;
+  margin-top: 4px;
+  color: #A70240;
+}
+
+/* ==============================
+   MAPA
+   ============================== */
+.map {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 25px;
+  gap: 10px;
+}
+
+.map-area {
+  width: 320px;
+  height: 200px;
+  border: 3px solid #A70240;
+  border-radius: 15px;
+}
+
+.map-button {
+  margin-top: 8px;
+}
+
+.btn-primary {
+  background-color: #A70240;
+  color: #FFF;
+  font-weight: 600;
+  border-radius: 10px;
+  padding: 10px 16px;
+  transition: all 0.2s ease;
+}
+
+.btn-primary:hover {
+  background-color: #C73460;
+}
+
+/* ==============================
+   CONTROLES DE VELOCIDADE
+   ============================== */
+.btn-speed {
+  background: none;
+  border: none;
+  cursor: pointer;
+  transition: transform 0.3s;
+}
+
+.btn-speed:hover {
+  transform: scale(1.1);
+}
+
+.btn-big, .btn-small {
+  position: relative;
+  width: 50px;
+  height: 50px;
+}
+
+/* ==============================
+   JOYSTICK / CONTROLE
+   ============================== */
+.remote {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  margin: 40px 0;
+  position: relative;
+}
+
+.center-button {
+  background-color: #A70240;
+  color: #fff;
+  font-weight: bold;
+  border: none;
+  border-radius: 50%;
+  width: 90px;
+  height: 90px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+  cursor: pointer;
+  transition: transform 0.2s;
+  z-index: 10;
+}
+
+.center-button:hover {
+  transform: scale(1.1);
+}
+
+.direction-buttons {
+  position: absolute;
+  width: 220px;
+  height: 220px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.direction-button {
+  position: absolute;
+  width: 50px;
+  height: 50px;
+}
+
+.up { top: 0; }
+.down { bottom: 0; }
+.left { left: 0; }
+.right { right: 0; }
+
+.btn-up, .btn-down, .btn-left, .btn-right {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+/* ==============================
+   BRAÇO MECÂNICO / ÍCONES FINAIS
+   ============================== */
+.harvester-direction, .harvester {
+  position: relative;
+  width: 160px;
+  height: 160px;
+  margin: 10px auto;
+}
+
+.harvester img, .harvester-direction img {
+  object-fit: contain;
+}
+
+.txt-gallery {
+  display: block;
+  text-align: center;
+  margin-top: 10px;
+  font-weight: 500;
+  color: #A70240;
+  text-decoration: none;
+}
+
+.txt-gallery:hover {
+  text-decoration: underline;
+}
+
+/* ==============================
+   RESPONSIVIDADE
+   ============================== */
+@media (max-width: 1200px) {
+  .camera {
+    width: 90%;
+    height: 300px;
+  }
+
+  .map-area {
+    width: 280px;
+  }
+}
+
+@media (max-width: 900px) {
+  .harvester-area {
+    flex-direction: column;
+  }
+
+  .camera {
+    height: 250px;
+  }
+
+  .remote {
+    transform: scale(0.9);
+  }
+}
+
+@media (min-width: 1600px) {
+  h1 {
+    font-size: 2.2rem;
+  }
+
+  .camera {
+    height: 480px;
+    width: 75%;
+  }
+
+  .map-area {
+    width: 400px;
+    height: 280px;
+  }
+
+  .center-button {
+    width: 120px;
+    height: 120px;
+    font-size: 1.1rem;
+  }
+
+  .direction-button {
+    width: 70px;
+    height: 70px;
+  }
+}
