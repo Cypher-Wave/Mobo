@@ -26,7 +26,7 @@ const Harvester: React.FC = () => {
             <div className="button">
               <Image
                 className="button"
-                src="/images/icons/camera (1).png"
+                src="/images/icons/camera.png"
                 alt=""
                 fill
               />
@@ -95,7 +95,7 @@ const Harvester: React.FC = () => {
             <div className="button">
               <Image
                 className="button"
-                src="/images/mais-zoom (1).png"
+                src="/images/mais-zoom.png"
                 alt=""
                 fill
               />
@@ -106,7 +106,7 @@ const Harvester: React.FC = () => {
             <div className="button">
               <Image
                 className="button"
-                src="/images/reduzir-o-zoom (1).png"
+                src="/images/reduzir-o-zoom.png"
                 alt=""
                 fill
               />

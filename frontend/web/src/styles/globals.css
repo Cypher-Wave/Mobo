@@ -7,9 +7,12 @@
   --mobo-red: 183, 10, 73;
   --mobo-dark-red: 131, 5, 51;
   --mobo-beige: 236, 226, 214;
+  --mobo-beige2: 244, 236, 227;
+  --mobo-beige3: 248, 216, 218;
   --mobo-black: 0, 0, 0;
   --mobo-white: 255, 255, 255;
   --mobo-gray: 200, 200, 200;
+  --mobo-gray2: 170, 170, 170;
 
   /* Cores Adicionais de Dashboard */
   --dashboard-green: 135, 156, 95;
