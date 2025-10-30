@@ -1,0 +1,246 @@
+.calendar {
+  display: flex;
+  justify-content: space-between;
+  align-items: stretch;
+  border-radius: 24px;
+  position: relative;
+  min-height: 600px;
+  box-shadow: 0 0 15px rgba(var(--mobo-black), 0.25);
+}
+
+/* ==== LADO ESQUERDO ==== */
+.left {
+  flex: 1.3;
+  background-color: rgb(var(--mobo-beige2)); /* bege claro */
+  border-radius: 24px 0 0 24px;
+  padding: 30px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.month {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: rgb(var(--mobo-red));
+  font-weight: 600;
+  font-size: 1.4rem;
+  margin-bottom: 20px;
+}
+
+.month i {
+  cursor: pointer;
+  font-size: 1.2rem;
+  color: rgb(var(--mobo-red));
+  transition: 0.2s;
+}
+
+.month i:hover {
+  transform: scale(1.1);
+}
+
+.weekdays {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  text-align: center;
+  color: rgb(var(--mobo-red));
+  font-weight: 600;
+  margin-bottom: 10px;
+}
+
+/* Dias que não pertencem ao mês atual */
+.prev-date,
+.next-date {
+  color: rgb(var(--mobo-gray2));          /* cinza mais claro */
+  opacity: 0.5;         /* mais apagado */
+  pointer-events: none; /* impede clique se quiser */
+}
+
+/* Dia ativo ou do mês normal */
+.day {
+  color: rgb(var(--mobo-black));          /* cor padrão */
+  transition: all 0.2s ease;
+}
+
+/* Hover no dia do mês */
+.day:not(.prev-date):not(.next-date):hover {
+  background-color: rgb(var(--mobo-white));
+  border-radius: 6px;
+}
+
+.days {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  border: 3px solid rgb(var(--mobo-red));
+  border-radius: 6px;
+  gap: 3px;
+  flex-grow: 1;
+}
+
+.days div {
+  border: 1px solid rgb(var(--mobo-red));
+  border-radius: 6px;
+  padding: 10px 0;
+  font-size: 1rem;
+  color: rgb(var(--mobo-red));
+  background-color: rgb(var(--mobo-beige3));
+  position: relative;
+}
+
+.days div:hover {
+  background-color: rgb(var(--mobo-beige));
+  cursor: pointer;
+}
+
+.days div.current-day {
+  background-color: rgb(var(--mobo-beige));
+  color: rgb(var(--mobo-red));
+  font-weight: 700;
+}
+
+.goto-today {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 25px;
+}
+
+.goto {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.date-input {
+  padding: 6px 8px;
+  border: 1px solid rgb(var(--mobo-red));
+  border-radius: 8px;
+  outline: none;
+  background-color: rgb(var(--mobo-white));
+  color: rgb(var(--mobo-red));
+}
+
+.goto-btn,
+.today-btn {
+  background-color: rgb(var(--mobo-red));
+  color: rgb(var(--mobo-beige));
+  border: none;
+  border-radius: 8px;
+  padding: 6px 12px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.goto-btn:hover,
+.today-btn:hover {
+  opacity: 0.85;
+}
+
+/* ==== LADO DIREITO ==== */
+.right {
+  flex: 1;
+  background-color: rgb(var(--mobo-red));
+  border-radius: 0 24px 24px 0;
+  color: rgb(var(--mobo-beige));
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  position: relative;
+  padding: 40px;
+}
+
+.today-date {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+}
+
+.today-date .event-day {
+  font-size: 2rem;
+  font-weight: bold;
+}
+
+.today-date .event-date {
+  font-size: 1rem;
+  opacity: 0.8;
+}
+
+/* Caixa de eventos */
+.events {
+  margin-top: 40px;
+  text-align: center;
+  font-size: 1rem;
+}
+
+/* ==== BOTÃO DE ADICIONAR EVENTO ==== */
+.add-event {
+  position: absolute;
+  bottom: 25px;
+  right: 25px;
+  background-color: rgb(var(--mobo-red));
+  color: rgb(var(--mobo-beige));
+  border: 2px solid rgb(var(--mobo-beige));
+  border-radius: 50%;
+  width: 48px;
+  height: 48px;
+  font-size: 1.6rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.add-event:hover {
+  background-color: rgb(var(--mobo-red));
+  transform: scale(1.05);
+}
+
+/* ==== RESPONSIVIDADE ==== */
+@media (max-width: 1200px) {
+  .calendar {
+    margin: 30px 40px;
+  }
+  .left {
+    padding: 20px;
+  }
+}
+
+@media (max-width: 992px) {
+  .calendar {
+    flex-direction: column;
+    border-radius: 24px;
+  }
+
+  .left,
+  .right {
+    border-radius: 0;
+    width: 100%;
+  }
+
+  .right {
+    padding: 20px;
+  }
+
+  .add-event {
+    right: 20px;
+    bottom: 20px;
+  }
+}
+
+@media (max-width: 768px) {
+  .month .date {
+    font-size: 1.2rem;
+  }
+
+  .days div {
+    font-size: 0.9rem;
+    padding: 8px 0;
+  }
+
+  .goto-btn,
+  .today-btn {
+    font-size: 0.85rem;
+  }
+}
