@@ -10,113 +10,102 @@ const Harvester: React.FC = () => {
       <h1>Configurações do Braço Mecânico</h1>
       {/* Camêra */}
       
-      <div className="camera">
-        {/* Visor da Câmera */}
-        <video className="video" id="video" autoPlay></video>
-      </div>
-      <div className="column">
-        <canvas className="is-hidden" id="canvas"></canvas>
-      </div>
-
-      <div className="harvester-area">
-        {/* Controles da Câmera */}
-        <div id="controls">
+      <div className="camera-container">
+        <div className="camera">
+          {/* Visor da Câmera */}
+          <video className="video" id="video" autoPlay></video>
+        </div>
+        <div className="harvester-area">
+          {/* Controles da Câmera */}
           <p className="txt-button">Botões</p>
-          <button id="take-photo">
-            <div className="button">
-              <Image
-                className="button"
-                src="/images/icons/camera.png"
-                alt=""
-                fill
-              />
-            </div>
-            <p className="txt-icon">Foto</p>
-          </button>
-          <button id="start-recording">
-            <div className="button">
-              <Image
-                className="button"
-                src="/images/icons/camera-de-video.png"
-                alt=""
-                fill
-              />
-            </div>
-            <p className="txt-icon">Video</p>
-          </button>
-          <button id="stop-recording" disabled>
-            <div className="button">
-              <Image
-                className="button"
-                src="/images/icons/pare.png"
-                alt=""
-                fill
-              />
-            </div>
-            <p className="txt-icon">Parar</p>
-          </button>
-          <button id="toggle-fullscreen">
+          <div className="controls" id="controls">
+            <button id="take-photo">
               <div className="button">
                 <Image
-                  className="button"
-                  src="/images/icons/expandir.png"
+                  src="/images/icons/camera.png"
                   alt=""
                   fill
                 />
-            </div>
-            <p className="txt-icon">Expandir</p>
-          </button>
+              </div>
+              <p className="txt-icon">Foto</p>
+            </button>
+            <button id="start-recording">
+              <div className="button">
+                <Image
+                  src="/images/icons/camera-de-video.png"
+                  alt=""
+                  fill
+                />
+              </div>
+              <p className="txt-icon">Video</p>
+            </button>
+            <button id="stop-recording" disabled>
+              <div className="button">
+                <Image
+                  src="/images/icons/pare.png"
+                  alt=""
+                  fill
+                />
+              </div>
+              <p className="txt-icon">Parar</p>
+            </button>
+            <button id="toggle-fullscreen">
+                <div className="button">
+                  <Image
+                    src="/images/icons/expandir.png"
+                    alt=""
+                    fill
+                  />
+              </div>
+              <p className="txt-icon">Expandir</p>
+            </button>
+          </div>
+          <div className="controls" id="controls">
+            <button>
+              <div className="button">
+                <Image
+                  src="/images/icons/relampago.png"
+                  alt=""
+                  fill
+                />
+              </div>
+              <p className="txt-icon">Flash</p>
+            </button>
+            <button>
+              <div className="button">
+                <Image
+                  src="/images/icons/sem-flash.png"
+                  alt=""
+                  fill
+                />
+              </div>
+              <p className="txt-icon">Sem Flash</p>
+            </button>
+            <button>
+              <div className="button">
+                <Image
+                  src="/images/mais-zoom.png"
+                  alt=""
+                  fill
+                />
+              </div>
+              <p className="txt-icon">+Zoom</p>
+            </button>
+            <button>
+              <div className="button">
+                <Image
+                  src="/images/reduzir-o-zoom.png"
+                  alt=""
+                  fill
+                />
+              </div>
+              <p className="txt-icon">-Zoom</p>
+            </button>
+          </div>
+          <a className="txt-gallery" href="/profile">
+            Visualizar Registros de Fotos
+          </a>
         </div>
-
-        <div className="harvester-area">
-          <button>
-            <div className="button">
-              <Image
-                className="button"
-                src="/images/icons/relampago.png"
-                alt=""
-                fill
-              />
-            </div>
-            <p className="txt-icon">Flash</p>
-          </button>
-          <button>
-            <div className="button">
-              <Image
-                className="button"
-                src="/images/icons/sem-flash.png"
-                alt=""
-                fill
-              />
-            </div>
-            <p className="txt-icon">Sem Flash</p>
-          </button>
-          <button>
-            <div className="button">
-              <Image
-                className="button"
-                src="/images/mais-zoom.png"
-                alt=""
-                fill
-              />
-            </div>
-            <p className="txt-icon">+Zoom</p>
-          </button>
-          <button>
-            <div className="button">
-              <Image
-                className="button"
-                src="/images/reduzir-o-zoom.png"
-                alt=""
-                fill
-              />
-            </div>
-            <p className="txt-icon">-Zoom</p>
-          </button>
-        </div>
-        <a className="txt-gallery" href="/profile">
-          Visualizar Registros de Fotos
-        </a>
       </div>
 
       <div className="map">
@@ -130,8 +119,6 @@ const Harvester: React.FC = () => {
 
         <div className="map-button">
           <button className="btn btn-primary">Adicionar Sensores</button>
-        </div>
-        <div className="map-button">
           <button className="btn btn-primary">Ativar Alertas</button>
         </div>
       </div>

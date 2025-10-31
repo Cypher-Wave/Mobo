@@ -1,158 +1,138 @@
+.camera-container {
+  display: flex;
+  align-items: flex-start; 
+  margin-top: 2rem;
+  gap: 5rem;
+}
+
 .camera {
+  width: 55%;
+  background-color: #8b0037;
+  border-radius: 1.5rem;
+  padding: 0.6rem;
   display: flex;
   justify-content: center;
   align-items: center;
-  background: #A70240;
-  border-radius: 30px;
-  width: 80%;
-  height: 350px;
-  box-shadow: 0px 4px 10px rgba(0,0,0,0.2);
 }
 
 .video {
-  width: 95%;
-  height: 90%;
-  border-radius: 20px;
+  width: 80vw;
+  height: 380px;
   background-color: black;
+  border-radius: 1rem;
   object-fit: cover;
 }
 
-/* ==============================
-   CONTROLES DE CÂMERA
-   ============================== */
+/* === CONTROLES E BOTÕES === */
 .harvester-area {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 15px;
-  margin-top: 30px;
-  text-align: center;
-}
-
-#controls {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 15px;
-  background-color: transparent;
+  gap: 1rem;
+}
+
+.controls {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  border: 2px solid #8b0037;
+  border-radius: 5rem;
+  padding: 1rem 1.5rem;
+  gap: 0.6rem;
 }
 
 .txt-button {
   font-weight: 600;
-  color: #A70240;
-  margin-bottom: 5px;
+  color: #8b0037;
+  margin-bottom: 0.3rem;
 }
 
 button {
-  cursor: pointer;
-  border: none;
   background: none;
-  transition: all 0.2s ease-in-out;
-}
-
-button:hover {
-  transform: scale(1.05);
+  border: none;
+  cursor: pointer;
+  text-align: center;
 }
 
 .button {
   position: relative;
-  width: 40px;
-  height: 40px;
+  width: 35px;
+  height: 35px;
+  margin: 0 auto;
 }
 
 .txt-icon {
-  font-size: 0.85rem;
-  margin-top: 4px;
-  color: #A70240;
+  font-size: 0.8rem;
+  font-weight: 500;
+  color: #8b0037;
+  margin-top: 0.3rem;
 }
 
-/* ==============================
-   MAPA
-   ============================== */
+.txt-gallery {
+  color: #8b0037;
+  text-decoration: underline;
+  margin-top: 1rem;
+  font-weight: 600;
+  transition: 0.3s;
+}
+.txt-gallery:hover {
+  color: #b00045;
+}
+
+/* === MAPA E BOTÕES === */
 .map {
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   align-items: center;
-  margin-top: 25px;
-  gap: 10px;
+  margin-top: 2rem;
+  border: 3px solid #8b0037;
+  border-radius: 1.5rem;
+  padding: 1rem;
+  width: 45%;
+  background-color: #f8f0e9;
+  box-shadow: 0px 4px 10px rgba(139, 0, 55, 0.15);
 }
 
 .map-area {
-  width: 320px;
+  width: 100%;
   height: 200px;
-  border: 3px solid #A70240;
-  border-radius: 15px;
+  border: none;
+  border-radius: 1rem;
 }
 
 .map-button {
-  margin-top: 8px;
+  margin-top: 0.8rem;
 }
 
-.btn-primary {
-  background-color: #A70240;
-  color: #FFF;
-  font-weight: 600;
-  border-radius: 10px;
-  padding: 10px 16px;
-  transition: all 0.2s ease;
-}
-
-.btn-primary:hover {
-  background-color: #C73460;
-}
-
-/* ==============================
-   CONTROLES DE VELOCIDADE
-   ============================== */
-.btn-speed {
-  background: none;
-  border: none;
-  cursor: pointer;
-  transition: transform 0.3s;
-}
-
-.btn-speed:hover {
-  transform: scale(1.1);
-}
-
-.btn-big, .btn-small {
-  position: relative;
-  width: 50px;
-  height: 50px;
-}
-
-/* ==============================
-   JOYSTICK / CONTROLE
-   ============================== */
+/* === CONTROLE REMOTO CENTRAL === */
 .remote {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-  margin: 40px 0;
   position: relative;
+  margin-top: 2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .center-button {
-  background-color: #A70240;
+  background-color: #8b0037;
   color: #fff;
-  font-weight: bold;
-  border: none;
+  font-weight: 600;
   border-radius: 50%;
-  width: 90px;
-  height: 90px;
-  box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+  width: 120px;
+  height: 120px;
+  border: 6px solid #f8f0e9;
+  box-shadow: 0 3px 10px rgba(139, 0, 55, 0.2);
   cursor: pointer;
-  transition: transform 0.2s;
-  z-index: 10;
+  z-index: 2;
+  transition: 0.3s;
 }
-
 .center-button:hover {
-  transform: scale(1.1);
+  background-color: #b00045;
 }
 
 .direction-buttons {
   position: absolute;
+  top: 0;
   width: 220px;
   height: 220px;
   display: flex;
@@ -162,99 +142,76 @@ button:hover {
 
 .direction-button {
   position: absolute;
+  background: transparent;
+  border: none;
+  cursor: pointer;
   width: 50px;
   height: 50px;
 }
 
-.up { top: 0; }
-.down { bottom: 0; }
-.left { left: 0; }
-.right { right: 0; }
+.direction-button.up { top: 10px; }
+.direction-button.down { bottom: 10px; }
+.direction-button.left { left: 10px; }
+.direction-button.right { right: 10px; }
 
 .btn-up, .btn-down, .btn-left, .btn-right {
   position: relative;
-  width: 100%;
-  height: 100%;
+  width: 35px;
+  height: 35px;
 }
 
-/* ==============================
-   BRAÇO MECÂNICO / ÍCONES FINAIS
-   ============================== */
-.harvester-direction, .harvester {
+/* === VELOCIDADE (+/-) === */
+.btn-speed {
+  margin: 0.5rem;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+}
+
+.btn-big, .btn-small {
   position: relative;
-  width: 160px;
-  height: 160px;
-  margin: 10px auto;
+  width: 60px;
+  height: 60px;
 }
 
-.harvester img, .harvester-direction img {
-  object-fit: contain;
+/* === BRAÇO MECÂNICO E ÍCONE === */
+.harvester {
+  position: relative;
+  width: 150px;
+  height: 150px;
+  background-color: #8b0037;
+  border-radius: 1.5rem;
+  margin-top: 2rem;
 }
 
-.txt-gallery {
-  display: block;
-  text-align: center;
-  margin-top: 10px;
-  font-weight: 500;
-  color: #A70240;
-  text-decoration: none;
+.harvester-direction {
+  position: relative;
+  width: 150px;
+  height: 150px;
+  background-color: #8b0037;
+  border-radius: 1.5rem;
+  margin-top: 2rem;
 }
 
-.txt-gallery:hover {
-  text-decoration: underline;
-}
-
-/* ==============================
-   RESPONSIVIDADE
-   ============================== */
-@media (max-width: 1200px) {
+/* === RESPONSIVIDADE === */
+@media (max-width: 1024px) {
   .camera {
-    width: 90%;
-    height: 300px;
+    width: 95%;
   }
-
-  .map-area {
-    width: 280px;
+  .map {
+    width: 80%;
   }
-}
-
-@media (max-width: 900px) {
-  .harvester-area {
-    flex-direction: column;
-  }
-
-  .camera {
-    height: 250px;
-  }
-
-  .remote {
-    transform: scale(0.9);
+  .remote .center-button {
+    width: 90px;
+    height: 90px;
   }
 }
 
-@media (min-width: 1600px) {
+@media (max-width: 768px) {
   h1 {
-    font-size: 2.2rem;
+    font-size: 1.2rem;
   }
-
-  .camera {
-    height: 480px;
-    width: 75%;
-  }
-
-  .map-area {
-    width: 400px;
-    height: 280px;
-  }
-
-  .center-button {
-    width: 120px;
-    height: 120px;
-    font-size: 1.1rem;
-  }
-
-  .direction-button {
-    width: 70px;
-    height: 70px;
+  .map {
+    width: 90%;
   }
 }

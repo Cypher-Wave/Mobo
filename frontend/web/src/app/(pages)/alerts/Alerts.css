@@ -36,7 +36,7 @@
   align-items: center;
   background-color: rgb(var(--mobo-beige));
   border-radius: 40px;
-  padding: 10px 20px;
+  padding: 0 10px;
   width: 320px;
   box-shadow: 0 4px 10px rgba(var(--mobo-black), 0.15);
 }
