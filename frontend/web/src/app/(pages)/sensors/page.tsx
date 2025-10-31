@@ -2,10 +2,15 @@
 
 import React from "react";
 import Image from "next/image";
-import dynamic from "next/dynamic";
+import {
+  temperature,
+  airHumidity,
+  soilHumidity,
+} from "./libraries/SensorService";
+import Chart from "@/components/Chart/Chart";
+import MapClient from "./components/MapClient";
+import "leaflet/dist/leaflet.css";
 import "./Sensors.css";
-
-const MapClient = dynamic(() => import("./components/MapClient"), { ssr: false });
 
 const Sensors: React.FC = () => {
   return (
@@ -19,35 +24,29 @@ const Sensors: React.FC = () => {
       </div>
       {/* Gráfico */}
       <div className="graphics">
-        <div className="alerts-container">
+        <div className="dash" style={{ width: "100%", height: "300px" }}>
           <a href="/alerts">
-            <Image
-              className="alertIcons"
-              src="/assets/img/icon/alerta.png"
-              alt=""
-              width={50}
-              height={50}
-            />
+            <div className="alert-icons">
+              <Image src="/images/icons/alerta.png" alt="" fill />
+            </div>
           </a>
-          <h3 className="txtGrafic">Umidade do Solo</h3>
-          <canvas id="myChart"></canvas>
+          <Chart type="pie" data={soilHumidity} title="Umidade do Solo" />
         </div>
-        <div>
-          <h3 className="txtGrafic2">Temperatura</h3>
-          <canvas id="myChart3"></canvas>
-        </div>
-        <div>
+        <div className="dash" style={{ width: "100%", height: "300px" }}>
           <a href="/alerts">
-            <Image
-              className="alertIcons"
-              src="/assets/img/icon/alerta.png"
-              alt=""
-              width={50}
-              height={50}
-            />
+            <div className="alert-icons">
+              <Image src="/images/icons/alerta.png" alt="" fill />
+            </div>
           </a>
-          <h3 className="txtGrafic">Umidade do Ar</h3>
-          <canvas id="myChart2"></canvas>
+          <Chart type="pie" data={temperature} title="Temperatura" />
+        </div>
+        <div className="dash" style={{ width: "100%", height: "300px" }}>
+          <a href="/alerts">
+            <div className="alert-icons">
+              <Image src="/images/icons/alerta.png" alt="" fill />
+            </div>
+          </a>
+          <Chart type="pie" data={airHumidity} title="Umidade do Ar" />
         </div>
       </div>
     </>

@@ -4,6 +4,7 @@
   align-items: stretch;
   border-radius: 24px;
   position: relative;
+  background-color: rgb(var(--mobo-red));
   min-height: 600px;
   box-shadow: 0 0 15px rgba(var(--mobo-black), 0.25);
 }

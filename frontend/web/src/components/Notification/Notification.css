@@ -5,15 +5,25 @@
 .notification-container {
   position: relative;
   cursor: pointer;
+  transition: transform 0.2s ease;
+}
+
+.notification-container:hover {
+  transform: scale(1.05);
+}
+
+.notification-icon {
+  color: rgb(var(--mobo-red));
 }
 
 .notification-badge {
   position: absolute;
   top: 0;
   right: 0;
-  background: rgb(var(--mobo-red));
+  background: rgb(var(--mobo-green));
   color: rgb(var(--mobo-white));
   border-radius: 50%;
+  font-family: var(--font-secondary);
   font-size: 0.8rem;
   font-weight: 600;
   width: 20px;

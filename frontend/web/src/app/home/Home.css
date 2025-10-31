@@ -1,23 +1,17 @@
-/* ===== Reset básico ===== */
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
+body {
+  overflow-x: hidden;
 }
 
-body, html {
-  display: flex;
-  flex-direction: column;
-  min-height: 100%;
+.home-main {
   width: 100%;
+  min-height: 100vh;
   background: rgb(var(--mobo-beige));
-  overflow-x: hidden; /* evita scroll horizontal */
 }
 
 /* ===== Banner e Logo ===== */
 .banner {
   position: relative;
-  width: 100%;      /* ocupa 100% da largura da tela */
+  width: 100%;
   height: 480px;
   overflow: hidden;
   display: flex;
@@ -44,7 +38,7 @@ body, html {
   width: 350px;
   height: 350px;
   position: absolute;
-  top: 20%;
+  bottom: -50vh;
   right: -152px;
   z-index: 100;
   transform: translateY(-50%);

@@ -14,6 +14,7 @@ import {
   Title,
   Tooltip,
   Legend,
+  ChartDataset,
 } from "chart.js";
 
 ChartJS.register(
@@ -28,17 +29,17 @@ ChartJS.register(
   Legend
 );
 
-interface DashboardChartProps<T extends "bar" | "line" | "pie"> {
+interface ChartProps<T extends "bar" | "line" | "pie"> {
   type: T;
   data: ChartData<T>;
   title: string;
 }
 
-const DashboardChart = <T extends "bar" | "line" | "pie">({
+const Chart = <T extends "bar" | "line" | "pie">({
   type,
   data,
   title,
-}: DashboardChartProps<T>) => {
+}: ChartProps<T>) => {
   const commonOptions: ChartOptions<"bar" | "line" | "pie"> = {
     responsive: true,
     plugins: {
@@ -47,11 +48,29 @@ const DashboardChart = <T extends "bar" | "line" | "pie">({
     },
   };
 
-  if (type === "bar") return <Bar data={data as ChartData<"bar">} options={commonOptions as ChartOptions<"bar">} />;
-  if (type === "line") return <Line data={data as ChartData<"line">} options={commonOptions as ChartOptions<"line">} />;
-  if (type === "pie") return <Pie data={data as ChartData<"pie">} options={commonOptions as ChartOptions<"pie">} />;
+  if (type === "bar")
+    return (
+      <Bar
+        data={data as ChartData<"bar">}
+        options={commonOptions as ChartOptions<"bar">}
+      />
+    );
+  if (type === "line")
+    return (
+      <Line
+        data={data as ChartData<"line">}
+        options={commonOptions as ChartOptions<"line">}
+      />
+    );
+  if (type === "pie")
+    return (
+      <Pie
+        data={data as ChartData<"pie">}
+        options={commonOptions as ChartOptions<"pie">}
+      />
+    );
 
   return null;
 };
 
-export default DashboardChart;
+export default Chart;

@@ -15,11 +15,11 @@ const Notification: React.FC = () => {
       {/* Ícone da notificação */}
       <div className="notification-container" onClick={toggleDropbox}>
         <Image
-          src="/images/icons/notificacao.png"
+          src="/images/icons/notificacion.png"
           alt="Ícone de Notificação"
           id="notification-icon"
-          width={40}
-          height={40}
+          width={45}
+          height={45}
         />
         <span className="notification-badge" id="notification-badge">
           3

@@ -1,6 +1,6 @@
 "use client";
 
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import NavbarHome from "@/components/NavbarHome/NavbarHome";
@@ -10,6 +10,18 @@ import "./Home.css";
 
 const Home: React.FC = () => {
   const router = useRouter();
+  const [ready, setReady] = useState(false);
+
+  useEffect(() => {
+    // Espera um tick para garantir que CSS, DOM e layout inicial foram aplicados
+    requestAnimationFrame(() => {
+      setReady(true);
+    });
+  }, []);
+
+  if (!ready) {
+    return <div style={{ opacity: 0 }} />; // Placeholder invisível
+  }
 
   const tools = [
     {
@@ -59,7 +71,7 @@ const Home: React.FC = () => {
   return (
     <>
       <NavbarHome />
-      <main>
+      <main className="home-main">
         <div className="banner">
           <Image
             className="img-banner"

@@ -1,0 +1,36 @@
+:root {
+  /* Fontes */
+  --font-primary: "Poppins", sans-serif;
+  --font-secondary: "Livvic", sans-serif;
+  --font-tertiary: "Rubik", sans-serif;
+
+  /* Cores em RGB */
+  /* Cores Primárias */
+  --mobo-green: 97, 116, 61;
+  --mobo-dark-green: 60, 76, 39;
+  --mobo-light-red: 230, 31, 104;
+  --mobo-red: 183, 10, 73;
+  --red: #b70a49;
+  --mobo-dark-red: 131, 5, 51;
+  --mobo-beige: 236, 226, 214;
+  --mobo-beige2: 244, 236, 227;
+  --mobo-beige3: 248, 216, 218;
+  --mobo-black: 0, 0, 0;
+  --mobo-white: 255, 255, 255;
+  --mobo-gray: 200, 200, 200;
+  --mobo-gray2: 170, 170, 170;
+  --mobo-gray3: 122, 111, 111;
+
+  /* Cores de Dashboard */
+  --dashboard-lightest-green: rgb(203, 232, 144);
+  --dashboard-light-green: rgb(144, 171, 96);
+  --dashboard-green: rgb(97, 116, 61);
+  --dashboard-dark-green: rgb(60, 76, 39);
+  --dashboard-darkest-green: rgb(34, 44, 21);
+
+  --dashboard-lightest-red: rgb(174, 88, 119);
+  --dashboard-light-red: rgb(241, 43, 115);
+  --dashboard-red: rgb(183, 10, 73);
+  --dashboard-dark-red: rgb(131, 5, 51);
+  --dashboard-darkest-red: rgb(92, 6, 37);
+}
