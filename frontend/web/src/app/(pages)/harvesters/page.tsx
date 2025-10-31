@@ -2,14 +2,17 @@
 
 import React from "react";
 import Image from "next/image";
+import { useRouter } from "next/navigation";
 import "./Harvester.css";
 
 const Harvester: React.FC = () => {
+  const router = useRouter();
+
   return (
     <>
       <h1>Configurações do Braço Mecânico</h1>
       {/* Camêra */}
-      
+
       <div className="camera-container">
         <div className="camera">
           {/* Visor da Câmera */}
@@ -21,41 +24,25 @@ const Harvester: React.FC = () => {
           <div className="controls" id="controls">
             <button id="take-photo">
               <div className="button">
-                <Image
-                  src="/images/icons/camera.png"
-                  alt=""
-                  fill
-                />
+                <Image src="/images/icons/camera.png" alt="Foto" fill />
               </div>
               <p className="txt-icon">Foto</p>
             </button>
             <button id="start-recording">
               <div className="button">
-                <Image
-                  src="/images/icons/camera-de-video.png"
-                  alt=""
-                  fill
-                />
+                <Image src="/images/icons/camera-de-video.png" alt="Video" fill />
               </div>
               <p className="txt-icon">Video</p>
             </button>
             <button id="stop-recording" disabled>
               <div className="button">
-                <Image
-                  src="/images/icons/pare.png"
-                  alt=""
-                  fill
-                />
+                <Image src="/images/icons/pare.png" alt="Parar" fill />
               </div>
               <p className="txt-icon">Parar</p>
             </button>
             <button id="toggle-fullscreen">
-                <div className="button">
-                  <Image
-                    src="/images/icons/expandir.png"
-                    alt=""
-                    fill
-                  />
+              <div className="button">
+                <Image src="/images/icons/expandir.png" alt="Expandir" fill />
               </div>
               <p className="txt-icon">Expandir</p>
             </button>
@@ -63,48 +50,35 @@ const Harvester: React.FC = () => {
           <div className="controls" id="controls">
             <button>
               <div className="button">
-                <Image
-                  src="/images/icons/relampago.png"
-                  alt=""
-                  fill
-                />
+                <Image src="/images/icons/relampago.png" alt="Flash" fill />
               </div>
               <p className="txt-icon">Flash</p>
             </button>
             <button>
               <div className="button">
-                <Image
-                  src="/images/icons/sem-flash.png"
-                  alt=""
-                  fill
-                />
+                <Image src="/images/icons/sem-flash.png" alt="Sem Flash" fill />
               </div>
               <p className="txt-icon">Sem Flash</p>
             </button>
             <button>
               <div className="button">
-                <Image
-                  src="/images/mais-zoom.png"
-                  alt=""
-                  fill
-                />
+                <Image src="/images/mais-zoom.png" alt="+Zoom" fill />
               </div>
               <p className="txt-icon">+Zoom</p>
             </button>
             <button>
               <div className="button">
-                <Image
-                  src="/images/reduzir-o-zoom.png"
-                  alt=""
-                  fill
-                />
+                <Image src="/images/reduzir-o-zoom.png" alt="-Zoom" fill />
               </div>
               <p className="txt-icon">-Zoom</p>
             </button>
           </div>
-          <a className="txt-gallery" href="/profile">
+          <button
+            className="btn btn-primary"
+            onClick={() => router.push("/profile")}
+          >
             Visualizar Registros de Fotos
-          </a>
+          </button>
         </div>
       </div>
 
@@ -121,79 +95,54 @@ const Harvester: React.FC = () => {
           <button className="btn btn-primary">Adicionar Sensores</button>
           <button className="btn btn-primary">Ativar Alertas</button>
         </div>
-      </div>
 
-      <button className="btn-speed">
-        <div className="btn-big">
-          <Image src="/images/icons/btnMaior.png" alt="" fill />
-        </div>
-      </button>
-      <button className="btn-speed">
-        <div className="btn-small">
-          <Image src="/images/icons/btnMenor.png" alt="" fill />
-        </div>
-      </button>
+        <button className="btn-speed">
+          <div className="btn-big">
+            <Image src="/images/icons/btnMaior.png" alt="" fill />
+          </div>
+        </button>
+        <div className="remote">
+          {/* Botão Central de Stop */}
+          <button className="center-button">START</button>
 
-      <div className="remote">
-        {/* Botão Central de Stop */}
-        <button className="center-button">START</button>
-
-        {/* Botões de Direção */}
-        <div className="direction-buttons">
-          <button className="direction-button up">
-            {" "}
-            <div className="btn-up">
-              <Image
-                src="/images/icons/btnCima.png"
-                alt=""
-                fill
-              />
-            </div>
-          </button>
-          <button className="direction-button down">
-            <div className="btn-down">
-              <Image
-                src="/images/icons/btnBaixo.png"
-                alt=""
-                fill
-              />
-            </div>
-          </button>
-          <button className="direction-button left">
-            <div className="btn-left">
-              <Image
-                src="/images/icons/btnEsquerda.png"
-                alt=""
-                fill
-              />
-            </div>
-          </button>
-          <button className="direction-button right">
-            <div className="btn-right">
-              <Image
-                src="/images/icons/btnDireita.png"
-                alt=""
-                fill
-              />
-            </div>
-          </button>
+          {/* Botões de Direção */}
+          <div className="direction-buttons">
+            <button className="direction-button up">
+              {" "}
+              <div className="btn-up">
+                <Image src="/images/icons/btnCima.png" alt="" fill />
+              </div>
+            </button>
+            <button className="direction-button down">
+              <div className="btn-down">
+                <Image src="/images/icons/btnBaixo.png" alt="" fill />
+              </div>
+            </button>
+            <button className="direction-button left">
+              <div className="btn-left">
+                <Image src="/images/icons/btnEsquerda.png" alt="" fill />
+              </div>
+            </button>
+            <button className="direction-button right">
+              <div className="btn-right">
+                <Image src="/images/icons/btnDireita.png" alt="" fill />
+              </div>
+            </button>
+          </div>
         </div>
+        <button className="btn-speed">
+          <div className="btn-small">
+            <Image src="/images/icons/btnMenor.png" alt="" fill />
+          </div>
+        </button>
       </div>
 
       <div className="harvester-area">
         <div className="harvester-direction">
-          <Image
-            src="/images/icons/direcao.png"
-            alt=""
-            fill
-          />
+          <Image src="/images/icons/direcao.png" alt="" fill />
         </div>
         <div className="harvester">
-          <Image
-            src="/images/icons/garra.png"
-            alt=""
-            fill
-          />
+          <Image src="/images/icons/garra.png" alt="" fill />
         </div>
       </div>
     </>

@@ -1,13 +1,13 @@
 .camera-container {
   display: flex;
-  align-items: flex-start; 
+  align-items: flex-start;
   margin-top: 2rem;
   gap: 5rem;
 }
 
 .camera {
-  width: 55%;
-  background-color: #8b0037;
+  width: 59vw;
+  background-color: rgb(var(--mobo-red));
   border-radius: 1.5rem;
   padding: 0.6rem;
   display: flex;
@@ -16,9 +16,9 @@
 }
 
 .video {
-  width: 80vw;
+  width: 95%;
   height: 380px;
-  background-color: black;
+  background-color: rgb(var(--mobo-black));
   border-radius: 1rem;
   object-fit: cover;
 }
@@ -35,7 +35,7 @@
   display: flex;
   flex-direction: row;
   align-items: center;
-  border: 2px solid #8b0037;
+  border: 2px solid rgb(var(--mobo-red));
   border-radius: 5rem;
   padding: 1rem 1.5rem;
   gap: 0.6rem;
@@ -43,7 +43,7 @@
 
 .txt-button {
   font-weight: 600;
-  color: #8b0037;
+  color: rgb(var(--mobo-red));
   margin-bottom: 0.3rem;
 }
 
@@ -54,6 +54,10 @@ button {
   text-align: center;
 }
 
+button:hover {
+  transform: scale(1.05);
+}
+
 .button {
   position: relative;
   width: 35px;
@@ -62,21 +66,21 @@ button {
 }
 
 .txt-icon {
-  font-size: 0.8rem;
+  font-size: 0.5rem;
   font-weight: 500;
-  color: #8b0037;
+  color: rgb(var(--mobo-red));
   margin-top: 0.3rem;
 }
 
 .txt-gallery {
-  color: #8b0037;
+  color: rgb(var(--mobo-red));
   text-decoration: underline;
   margin-top: 1rem;
   font-weight: 600;
   transition: 0.3s;
 }
 .txt-gallery:hover {
-  color: #b00045;
+  color: rgb(var(--mobo-red));
 }
 
 /* === MAPA E BOTÕES === */
@@ -85,28 +89,34 @@ button {
   flex-direction: row;
   align-items: center;
   margin-top: 2rem;
-  border: 3px solid #8b0037;
+  border: 4px solid rgb(var(--mobo-red));
   border-radius: 1.5rem;
-  padding: 1rem;
-  width: 45%;
-  background-color: #f8f0e9;
-  box-shadow: 0px 4px 10px rgba(139, 0, 55, 0.15);
+  padding: 1.5rem;
+  width: 57vw;
+  background-color: rgb(var(--mobo-white));
+  box-shadow: 0px 4px 10px rgba(var(--mobo-red), 0.15);
 }
 
 .map-area {
-  width: 100%;
-  height: 200px;
-  border: none;
+  width: 50%;
+  height: 280px;
+  border: 4px solid rgb(var(--mobo-red));
   border-radius: 1rem;
 }
 
 .map-button {
-  margin-top: 0.8rem;
+  flex-direction: column;
+  justify-content: center;
+  gap: 3rem;
 }
 
 /* === CONTROLE REMOTO CENTRAL === */
 .remote {
   position: relative;
+  width: 240px;
+  height: 240px;
+  border-radius: 50%;
+  background-color: rgb(var(--mobo-beige3));
   margin-top: 2rem;
   display: flex;
   flex-direction: column;
@@ -114,25 +124,25 @@ button {
 }
 
 .center-button {
-  background-color: #8b0037;
-  color: #fff;
+  background-color: rgb(var(--mobo-red));
+  color: rgb(var(--mobo-white));
   font-weight: 600;
   border-radius: 50%;
   width: 120px;
   height: 120px;
-  border: 6px solid #f8f0e9;
-  box-shadow: 0 3px 10px rgba(139, 0, 55, 0.2);
+  border: 6px solid rgb(var(--mobo-white));
+  box-shadow: 0 3px 10px rgba(var(--mobo-red), 0.2);
   cursor: pointer;
   z-index: 2;
   transition: 0.3s;
 }
 .center-button:hover {
-  background-color: #b00045;
+  background-color: rgb(var(--mobo-dark-red));
 }
 
 .direction-buttons {
   position: absolute;
-  top: 0;
+  top: -50;
   width: 220px;
   height: 220px;
   display: flex;
@@ -149,12 +159,23 @@ button {
   height: 50px;
 }
 
-.direction-button.up { top: 10px; }
-.direction-button.down { bottom: 10px; }
-.direction-button.left { left: 10px; }
-.direction-button.right { right: 10px; }
+.direction-button.up {
+  top: 0;
+}
+.direction-button.down {
+  bottom: 0;
+}
+.direction-button.left {
+  left: 0;
+}
+.direction-button.right {
+  right: 0;
+}
 
-.btn-up, .btn-down, .btn-left, .btn-right {
+.btn-up,
+.btn-down,
+.btn-left,
+.btn-right {
   position: relative;
   width: 35px;
   height: 35px;
@@ -168,7 +189,8 @@ button {
   cursor: pointer;
 }
 
-.btn-big, .btn-small {
+.btn-big,
+.btn-small {
   position: relative;
   width: 60px;
   height: 60px;
@@ -179,7 +201,7 @@ button {
   position: relative;
   width: 150px;
   height: 150px;
-  background-color: #8b0037;
+  background-color: rgb(var(--mobo-red));
   border-radius: 1.5rem;
   margin-top: 2rem;
 }
@@ -188,7 +210,7 @@ button {
   position: relative;
   width: 150px;
   height: 150px;
-  background-color: #8b0037;
+  background-color: rgb(var(--mobo-red));
   border-radius: 1.5rem;
   margin-top: 2rem;
 }

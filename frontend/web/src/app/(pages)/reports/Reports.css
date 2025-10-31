@@ -13,16 +13,16 @@
   border-radius: 20px;
   overflow: hidden;
   box-shadow: 0 4px 16px rgba(var(--mobo-black), 0.08);
-  width: 100%;
-  padding: 30px;
+  width: 95%;
+  padding: 20px;
 }
 
 .user-list {
+  display: grid;
+  place-items: center;
   background: rgb(var(--mobo-beige));
   color: rgb(var(--mobo-red));
   border-radius: 20px;
-  align-items: center;
-  justify-items: center;
 }
 
 .table-header,

@@ -11,7 +11,7 @@ const Alerts: React.FC = () => {
       {/* Previsão de clima */}
       <div className="weather-forecast">
         <div className="mobo-alert">
-          <Image src="/images/alertMobo.png" alt="" fill/>
+          <Image src="/images/alertMobo.png" alt="" fill />
         </div>
         {/* Pesquisa clima  */}
         <div className="weather-search" id="weather-search">

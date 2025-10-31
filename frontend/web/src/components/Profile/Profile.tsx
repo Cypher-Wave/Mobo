@@ -46,14 +46,14 @@ const Profile: React.FC = () => {
   return (
     <div className="profile">
       <div className="profile-img profile-click" onClick={toggleMenu}>
-        <Image src="/images/icons/perfil.png" alt="Profile" fill />
+        <Image src="/images/icons/profile.png" alt="Profile" fill />
       </div>
 
       {isOpen && (
         <div className="dropdown-menu">
           <div ref={containerRef} className="profile-information">
             <div className="profile-img">
-              <Image src="/images/icons/perfil.png" alt="Profile" fill />
+              <Image src="/images/icons/profile.png" alt="Profile" fill />
             </div>
             <div className="display">
               <p
@@ -62,11 +62,7 @@ const Profile: React.FC = () => {
               >
                 Pedro Henrique Venâncio
               </p>
-              <p
-                className="role"
-              >
-                Agricultor Familiar
-              </p>
+              <p className="role">Agricultor Familiar</p>
             </div>
           </div>
 

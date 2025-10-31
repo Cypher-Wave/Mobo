@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import '@fortawesome/fontawesome-free/css/all.min.css';
 import 'boxicons/css/boxicons.min.css';
+import "@/styles/variables.css";
 import "@/styles/globals.css";
 import "@/styles/fonts.css";
 

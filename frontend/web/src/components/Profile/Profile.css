@@ -13,10 +13,17 @@
   overflow: hidden;
 }
 
-.profile-click:hover {
-  transform: scale(1.05);
+.icon-modify {
+  color: rgb(var(--mobo-red));
+}
+
+.profile-click {
   cursor: pointer;
   transition: transform 0.2s ease;
+}
+
+.profile-click:hover {
+  transform: scale(1.05);
 }
 
 /* ===== Dropdown ===== */

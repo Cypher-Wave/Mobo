@@ -1,26 +1,3 @@
-:root {
-  /* Cores em RGB */
-  /* Cores Primárias */
-  --mobo-green: 97, 116, 61;
-  --mobo-dark-green: 60, 76, 39;
-  --mobo-light-red: 230, 31, 104;
-  --mobo-red: 183, 10, 73;
-  --mobo-dark-red: 131, 5, 51;
-  --mobo-beige: 236, 226, 214;
-  --mobo-beige2: 244, 236, 227;
-  --mobo-beige3: 248, 216, 218;
-  --mobo-black: 0, 0, 0;
-  --mobo-white: 255, 255, 255;
-  --mobo-gray: 200, 200, 200;
-  --mobo-gray2: 170, 170, 170;
-
-  /* Cores Adicionais de Dashboard */
-  --dashboard-green: 135, 156, 95;
-  --dashboard-light-green: 180, 194, 151;
-  --dashboard-red: 182, 41, 92;
-  --dashboard-light-red: 174, 88, 119;
-  --dashboard-beige: 244, 236, 227;
-}
 
 /* [data-theme="dark"] {
 
