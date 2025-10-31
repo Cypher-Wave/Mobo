@@ -146,58 +146,6 @@ const Alerts: React.FC = () => {
       </div>
 
       <div className="calendar-container">
-        <div className="calendar">
-          <div className="month">
-            <button className="prev">&lt;</button>
-            <h3>Novembro 2024</h3>
-            <button className="next">&gt;</button>
-          </div>
-          <div className="weekdays">
-            <span>Dom</span>
-            <span>Seg</span>
-            <span>Ter</span>
-            <span>Qua</span>
-            <span>Qui</span>
-            <span>Sex</span>
-            <span>Sáb</span>
-          </div>
-          <div className="days">
-            {/* Exemplo de dias (adicione dinamicamente conforme necessário) */}
-            <span className="prev-month">29</span>
-            <span className="prev-month">30</span>
-            <span>1</span>
-            <span>2</span>
-            <span>3</span>
-            <span>4</span>
-            <span>5</span>
-            <span>6</span>
-            <span>7</span>
-            <span>8</span>
-            <span>9</span>
-            <span>10</span>
-            <span>11</span>
-            <span>12</span>
-            <span>13</span>
-            <span>14</span>
-            <span>15</span>
-            <span>16</span>
-            <span>17</span>
-            <span>18</span>
-            <span>19</span>
-            <span>20</span>
-            <span>21</span>
-            <span>22</span>
-            <span>23</span>
-            <span>24</span>
-            <span>25</span>
-            <span>26</span>
-            <span>27</span>
-            <span>28</span>
-            <span>29</span>
-            <span>30</span>
-          </div>
-        </div>
-
         <p className="alert-txt">
           As informações foram coletadas a partir dos dados fornecidos pelo
           braço mecânico, que realizou a análise e a transmissão de dados de
