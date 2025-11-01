@@ -1,27 +1,15 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
+import React from "react";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import NavbarHome from "@/components/NavbarHome/NavbarHome";
 import CardSection from "@/components/CardSection/CardSection";
 import Footer from "@/components/Footer/Footer";
-import "./Home.css";
+import home from "./Home.module.css";
 
 const Home: React.FC = () => {
   const router = useRouter();
-  const [ready, setReady] = useState(false);
-
-  useEffect(() => {
-    // Espera um tick para garantir que CSS, DOM e layout inicial foram aplicados
-    requestAnimationFrame(() => {
-      setReady(true);
-    });
-  }, []);
-
-  if (!ready) {
-    return <div style={{ opacity: 0 }} />; // Placeholder invisível
-  }
 
   const tools = [
     {
@@ -71,27 +59,37 @@ const Home: React.FC = () => {
   return (
     <>
       <NavbarHome />
-      <main className="home-main">
-        <div className="banner">
+
+      <main className={home.homeMain}>
+        <div className={home.banner}>
           <Image
-            className="img-banner"
+            className={home.imgBanner}
             src="/images/BannerOfc.png"
             alt="Banner"
             fill
           />
-          <div className="logo-container">
-            <Image className="logo" src="/images/Logo.png" alt="Logo" fill />
+
+          <div className={home.logoContainer}>
+            <Image
+              className={home.logo}
+              src="/images/Logo.png"
+              alt="Logo"
+              fill
+            />
           </div>
         </div>
+
         <CardSection title="Ferramentas" cards={tools} />
-        <div className="mascotFooter-container">
+
+        <div className={home.mascotFooter}>
           <Image
-            className="mascotFooter"
+            className={home.mascot}
             src="/images/mobotst3.png"
             alt="Mascote"
             fill
           />
         </div>
+
         <Footer />
       </main>
     </>

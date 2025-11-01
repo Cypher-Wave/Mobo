@@ -1,5 +1,5 @@
 /* ===== Buttons ===== */
-.button-container {
+.buttonContainer {
   display: flex;
   justify-content: flex-start;
   align-items: center;
@@ -17,7 +17,7 @@
   padding: 20px;
 }
 
-.user-list {
+.userList {
   display: grid;
   place-items: center;
   background: rgb(var(--mobo-beige));
@@ -25,8 +25,8 @@
   border-radius: 20px;
 }
 
-.table-header,
-.table-row {
+.tableHeader,
+.tableRow {
   display: grid;
   /* SELECIONAR INDICE DT_COLEHITA HR_INICIO HR_TERMINO DURAÇÃO QTD_COLHIDA PLANTAÇÃO QUALIDADE */
   grid-template-columns: 100px 100px 150px 120px 120px 120px 180px 160px 120px;
@@ -39,28 +39,28 @@
   font-size: 0.9rem;
 }
 
-.table-header {
+.tableHeader {
   font-weight: bold;
 }
 
-.table-row {
+.tableRow {
   border-bottom: 1px solid rgba(var(--mobo-black), 0.05);
   border-radius: 20px;
   font-size: 0.9rem;
   transition: background 0.25s ease;
 }
 
-.table-row:hover {
+.tableRow:hover {
   background: rgba(var(--mobo-red), 0.05);
 }
 
-.table-cell {
+.tableCell {
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
 }
 
-.select-record {
+.selectRecord {
   transform: scale(1.2);
 }
 
@@ -105,24 +105,24 @@
 
 /* ===== Responsividade ===== */
 @media (max-width: 1250px) {
-  .table-header,
-  .table-row {
+  .tableHeader,
+  .tableRow {
     grid-template-columns: 70px 80px 130px 130px 130px 100px 140px 140px 90px;
     font-size: 0.85rem;
   }
 }
 
 @media (max-width: 950px) {
-  .new-users {
+  .newUsers {
     margin-left: 0;
     padding: 1.5rem;
   }
 
-  .table-header {
+  .tableHeader {
     display: none;
   }
 
-  .table-row {
+  .tableRow {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
@@ -130,20 +130,16 @@
     border-bottom: 1px solid rgba(var(--mobo-black), 0.1);
   }
 
-  .table-cell {
+  .tableCell {
     width: 100%;
     display: flex;
     justify-content: space-between;
     font-size: 0.9rem;
   }
 
-  .table-cell::before {
+  .tableCell::before {
     content: attr(data-label);
     font-weight: 600;
     color: rgb(var(--mobo-red));
-  }
-
-  .right-section {
-    display: none;
   }
 }

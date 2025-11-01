@@ -10,7 +10,6 @@
   --mobo-dark-green: 60, 76, 39;
   --mobo-light-red: 230, 31, 104;
   --mobo-red: 183, 10, 73;
-  --red: #b70a49;
   --mobo-dark-red: 131, 5, 51;
   --mobo-beige: 236, 226, 214;
   --mobo-beige2: 244, 236, 227;
@@ -34,3 +33,7 @@
   --dashboard-dark-red: rgb(131, 5, 51);
   --dashboard-darkest-red: rgb(92, 6, 37);
 }
+
+/* [data-theme="dark"] {
+
+} */

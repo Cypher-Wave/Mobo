@@ -10,39 +10,40 @@ import {
 import Chart from "@/components/Chart/Chart";
 import MapClient from "./components/MapClient";
 import "leaflet/dist/leaflet.css";
-import "./Sensors.css";
+import sensor from "./Sensors.module.css";
 
 const Sensors: React.FC = () => {
   return (
     <>
       <h1>Sensores</h1>
 
-      <div className="new-users">
-        <div className="user-list">
-          <MapClient />
-        </div>
+      <div className={sensor.userList}>
+        <MapClient />
       </div>
-      {/* Gráfico */}
-      <div className="graphics">
-        <div className="dash" style={{ width: "100%", height: "300px" }}>
+
+      {/* Gráficos */}
+      <div className={sensor.graphics}>
+        <div className={sensor.dash} style={{ width: "100%", height: "300px" }}>
           <a href="/alerts">
-            <div className="alert-icons">
+            <div className={sensor.alertIcons}>
               <Image src="/images/icons/alerta.png" alt="" fill />
             </div>
           </a>
           <Chart type="pie" data={soilHumidity} title="Umidade do Solo" />
         </div>
-        <div className="dash" style={{ width: "100%", height: "300px" }}>
+
+        <div className={sensor.dash} style={{ width: "100%", height: "300px" }}>
           <a href="/alerts">
-            <div className="alert-icons">
+            <div className={sensor.alertIcons}>
               <Image src="/images/icons/alerta.png" alt="" fill />
             </div>
           </a>
           <Chart type="pie" data={temperature} title="Temperatura" />
         </div>
-        <div className="dash" style={{ width: "100%", height: "300px" }}>
+
+        <div className={sensor.dash} style={{ width: "100%", height: "300px" }}>
           <a href="/alerts">
-            <div className="alert-icons">
+            <div className={sensor.alertIcons}>
               <Image src="/images/icons/alerta.png" alt="" fill />
             </div>
           </a>

@@ -1,4 +1,4 @@
-.camera-container {
+.cameraContainer {
   display: flex;
   align-items: flex-start;
   margin-top: 2rem;
@@ -24,7 +24,7 @@
 }
 
 /* === CONTROLES E BOTÕES === */
-.harvester-area {
+.harvesterArea {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -41,20 +41,20 @@
   gap: 0.6rem;
 }
 
-.txt-button {
+.txtButton {
   font-weight: 600;
   color: rgb(var(--mobo-red));
   margin-bottom: 0.3rem;
 }
 
-button {
+.controlsCamera {
   background: none;
   border: none;
   cursor: pointer;
   text-align: center;
 }
 
-button:hover {
+.controlsCamera:hover {
   transform: scale(1.05);
 }
 
@@ -65,21 +65,21 @@ button:hover {
   margin: 0 auto;
 }
 
-.txt-icon {
+.txtIcon {
   font-size: 0.5rem;
   font-weight: 500;
   color: rgb(var(--mobo-red));
   margin-top: 0.3rem;
 }
 
-.txt-gallery {
+.txtGallery {
   color: rgb(var(--mobo-red));
   text-decoration: underline;
   margin-top: 1rem;
   font-weight: 600;
   transition: 0.3s;
 }
-.txt-gallery:hover {
+.txtGallery:hover {
   color: rgb(var(--mobo-red));
 }
 
@@ -97,14 +97,14 @@ button:hover {
   box-shadow: 0px 4px 10px rgba(var(--mobo-red), 0.15);
 }
 
-.map-area {
+.mapArea {
   width: 50%;
   height: 280px;
   border: 4px solid rgb(var(--mobo-red));
   border-radius: 1rem;
 }
 
-.map-button {
+.mapButton {
   flex-direction: column;
   justify-content: center;
   gap: 3rem;
@@ -123,7 +123,7 @@ button:hover {
   align-items: center;
 }
 
-.center-button {
+.centerButton {
   background-color: rgb(var(--mobo-red));
   color: rgb(var(--mobo-white));
   font-weight: 600;
@@ -136,11 +136,11 @@ button:hover {
   z-index: 2;
   transition: 0.3s;
 }
-.center-button:hover {
+.centerButton:hover {
   background-color: rgb(var(--mobo-dark-red));
 }
 
-.direction-buttons {
+.directionButtons {
   position: absolute;
   top: -50;
   width: 220px;
@@ -150,7 +150,7 @@ button:hover {
   align-items: center;
 }
 
-.direction-button {
+.directionButton {
   position: absolute;
   background: transparent;
   border: none;
@@ -159,38 +159,38 @@ button:hover {
   height: 50px;
 }
 
-.direction-button.up {
+.directionButton.up {
   top: 0;
 }
-.direction-button.down {
+.directionButton.down {
   bottom: 0;
 }
-.direction-button.left {
+.directionButton.left {
   left: 0;
 }
-.direction-button.right {
+.directionButton.right {
   right: 0;
 }
 
-.btn-up,
-.btn-down,
-.btn-left,
-.btn-right {
+.btnUp,
+.btnDown,
+.btnLeft,
+.btnRight {
   position: relative;
   width: 35px;
   height: 35px;
 }
 
 /* === VELOCIDADE (+/-) === */
-.btn-speed {
+.btnSpeed {
   margin: 0.5rem;
   background: transparent;
   border: none;
   cursor: pointer;
 }
 
-.btn-big,
-.btn-small {
+.btnBig,
+.btnSmall {
   position: relative;
   width: 60px;
   height: 60px;
@@ -206,7 +206,7 @@ button:hover {
   margin-top: 2rem;
 }
 
-.harvester-direction {
+.harvesterDirection {
   position: relative;
   width: 150px;
   height: 150px;
@@ -223,16 +223,13 @@ button:hover {
   .map {
     width: 80%;
   }
-  .remote .center-button {
+  .remote .centerButton {
     width: 90px;
     height: 90px;
   }
 }
 
 @media (max-width: 768px) {
-  h1 {
-    font-size: 1.2rem;
-  }
   .map {
     width: 90%;
   }

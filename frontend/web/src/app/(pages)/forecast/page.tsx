@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect } from "react";
 import Image from "next/image";
-import "./Forecast.css";
+import forecastStyle from "./Forecast.module.css";
 
 interface EventItem {
   title: string;
@@ -39,13 +39,13 @@ const Forecast: React.FC = () => {
   const [eventsArr, setEventsArr] = useState<DayEvents[]>([]);
   const [dateInput, setDateInput] = useState<string>("");
 
-  // Carrega eventos do localStorage
+  /** Carrega eventos do localStorage */
   useEffect(() => {
     const saved = localStorage.getItem("events");
     if (saved) setEventsArr(JSON.parse(saved));
   }, []);
 
-  // Salva eventos no localStorage
+  /** Salva eventos no localStorage */
   useEffect(() => {
     localStorage.setItem("events", JSON.stringify(eventsArr));
   }, [eventsArr]);
@@ -61,6 +61,7 @@ const Forecast: React.FC = () => {
   function changeMonth(offset: number) {
     let newMonth = month + offset;
     let newYear = year;
+
     if (newMonth < 0) {
       newMonth = 11;
       newYear -= 1;
@@ -68,6 +69,7 @@ const Forecast: React.FC = () => {
       newMonth = 0;
       newYear += 1;
     }
+
     setMonth(newMonth);
     setYear(newYear);
   }
@@ -139,10 +141,12 @@ const Forecast: React.FC = () => {
     );
   }
 
+  /** Monta os dias */
   const days: React.ReactNode[] = [];
+
   for (let x = day; x > 0; x--) {
     days.push(
-      <div key={`p${x}`} className="day prev-date">
+      <div key={`p${x}`} className={forecastStyle.prevDate}>
         {prevDays - x + 1}
       </div>
     );
@@ -158,22 +162,16 @@ const Forecast: React.FC = () => {
       month === new Date().getMonth();
 
     const classes = [
-      "day",
-      isToday ? "today" : "",
-      activeDay === i ? "active" : "",
-      hasEvent ? "event" : "",
+      forecastStyle.day,
+      isToday ? forecastStyle.today : "",
+      activeDay === i ? forecastStyle.active : "",
+      hasEvent ? forecastStyle.event : "",
     ]
       .filter(Boolean)
       .join(" ");
 
     days.push(
-      <div
-        key={i}
-        className={classes}
-        onClick={() => {
-          setActiveDay(i);
-        }}
-      >
+      <div key={i} className={classes} onClick={() => setActiveDay(i)}>
         {i}
       </div>
     );
@@ -181,7 +179,7 @@ const Forecast: React.FC = () => {
 
   for (let j = 1; j <= nextDays; j++) {
     days.push(
-      <div key={`n${j}`} className="day next-date">
+      <div key={`n${j}`} className={forecastStyle.nextDate}>
         {j}
       </div>
     );
@@ -191,43 +189,51 @@ const Forecast: React.FC = () => {
 
   return (
     <>
-      <h1>Previsão Colheita</h1>
-      <div className="calendar">
-        <div className="left">
-          <div className="month">
+      <h1 className={forecastStyle.title}>Previsão Colheita</h1>
+
+      <div className={forecastStyle.calendar}>
+        {/* LEFT */}
+        <div className={forecastStyle.left}>
+          <div className={forecastStyle.month}>
             <i
-              className="fas fa-angle-left prev"
+              className={`fas fa-angle-left ${forecastStyle.prev}`}
               onClick={() => changeMonth(-1)}
             ></i>
-            <div className="date">
+
+            <div className={forecastStyle.date}>
               {months[month]} {year}
             </div>
+
             <i
-              className="fas fa-angle-right next"
+              className={`fas fa-angle-right ${forecastStyle.next}`}
               onClick={() => changeMonth(1)}
             ></i>
           </div>
-          <div className="weekdays">
+
+          <div className={forecastStyle.weekdays}>
             {["Dom", "Seg", "Ter", "Qua", "Qui", "Sex", "Sáb"].map((d) => (
               <div key={d}>{d}</div>
             ))}
           </div>
-          <div className="days">{days}</div>
-          <div className="goto-today">
-            <div className="goto">
+
+          <div className={forecastStyle.days}>{days}</div>
+
+          <div className={forecastStyle.gotoToday}>
+            <div className={forecastStyle.goto}>
               <input
                 type="text"
                 placeholder="mes/ano"
-                className="date-input"
+                className={forecastStyle.dateInput}
                 value={dateInput}
                 onChange={(e) => setDateInput(e.target.value)}
               />
-              <button className="goto-btn" onClick={gotoDate}>
+              <button className={forecastStyle.gotoBtn} onClick={gotoDate}>
                 Procurar
               </button>
             </div>
+
             <button
-              className="today-btn"
+              className={forecastStyle.todayBtn}
               onClick={() => {
                 const now = new Date();
                 setMonth(now.getMonth());
@@ -239,34 +245,38 @@ const Forecast: React.FC = () => {
             </button>
           </div>
         </div>
-        <div className="right">
-          <div className="today-date">
-            <div className="event-day">
+
+        {/* RIGHT */}
+        <div className={forecastStyle.right}>
+          <div className={forecastStyle.todayDate}>
+            <div className={forecastStyle.eventDay}>
               {new Date(year, month, activeDay).toLocaleDateString("pt-BR", {
                 weekday: "long",
               })}
             </div>
-            <div className="event-date">
+
+            <div className={forecastStyle.eventDate}>
               {activeDay} {months[month]} {year}
             </div>
           </div>
-          <div className="events">
+
+          <div className={forecastStyle.events}>
             {activeEvents.length > 0 ? (
               activeEvents.map((ev, i) => (
                 <div
                   key={i}
-                  className="event"
+                  className={forecastStyle.eventCard}
                   onClick={() => deleteEvent(ev.title)}
                 >
-                  <div className="title">
+                  <div className={forecastStyle.titleRow}>
                     <i className="fas fa-circle"></i>
-                    <h3 className="event-title">{ev.title}</h3>
+                    <h3 className={forecastStyle.eventTitle}>{ev.title}</h3>
                   </div>
-                  <div className="event-time">{ev.time}</div>
+                  <div className={forecastStyle.eventTime}>{ev.time}</div>
                 </div>
               ))
             ) : (
-              <div className="no-event">
+              <div className={forecastStyle.noEvent}>
                 <Image
                   src="/images/eventsCalend.png"
                   alt="Sem Eventos"
@@ -277,8 +287,9 @@ const Forecast: React.FC = () => {
               </div>
             )}
           </div>
+
           <button
-            className="add-event"
+            className={forecastStyle.addEvent}
             onClick={() => {
               const title = prompt("Título do evento:");
               const from = prompt("Hora início (hh:mm):");
