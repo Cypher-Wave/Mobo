@@ -51,8 +51,8 @@
 }
 
 /* Dias que não pertencem ao mês atual */
-.prev-date,
-.next-date {
+.prevDate,
+.nextDate {
   color: rgb(var(--mobo-gray2));          /* cinza mais claro */
   opacity: 0.5;         /* mais apagado */
   pointer-events: none; /* impede clique se quiser */
@@ -65,7 +65,7 @@
 }
 
 /* Hover no dia do mês */
-.day:not(.prev-date):not(.next-date):hover {
+.day:not(.prevDate):not(.nextDate):hover {
   background-color: rgb(var(--mobo-white));
   border-radius: 6px;
 }
@@ -94,13 +94,13 @@
   cursor: pointer;
 }
 
-.days div.current-day {
+.days div.currentDay {
   background-color: rgb(var(--mobo-beige));
   color: rgb(var(--mobo-red));
   font-weight: 700;
 }
 
-.goto-today {
+.gotoToday {
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -113,7 +113,7 @@
   gap: 10px;
 }
 
-.date-input {
+.dateInput {
   padding: 6px 8px;
   border: 1px solid rgb(var(--mobo-red));
   border-radius: 8px;
@@ -122,8 +122,8 @@
   color: rgb(var(--mobo-red));
 }
 
-.goto-btn,
-.today-btn {
+.gotoBtn,
+.todayBtn {
   background-color: rgb(var(--mobo-red));
   color: rgb(var(--mobo-beige));
   border: none;
@@ -134,8 +134,8 @@
   transition: 0.2s;
 }
 
-.goto-btn:hover,
-.today-btn:hover {
+.gotoBtn:hover,
+.todayBtn:hover {
   opacity: 0.85;
 }
 
@@ -153,19 +153,19 @@
   padding: 40px;
 }
 
-.today-date {
+.todayDate {
   display: flex;
   justify-content: space-between;
   align-items: center;
   width: 100%;
 }
 
-.today-date .event-day {
+.todayDate .eventDay {
   font-size: 2rem;
   font-weight: bold;
 }
 
-.today-date .event-date {
+.todayDate .eventDate {
   font-size: 1rem;
   opacity: 0.8;
 }
@@ -178,7 +178,7 @@
 }
 
 /* ==== BOTÃO DE ADICIONAR EVENTO ==== */
-.add-event {
+.addEvent {
   position: absolute;
   bottom: 25px;
   right: 25px;
@@ -193,7 +193,7 @@
   transition: all 0.2s ease;
 }
 
-.add-event:hover {
+.addEvent:hover {
   background-color: rgb(var(--mobo-red));
   transform: scale(1.05);
 }
@@ -224,7 +224,7 @@
     padding: 20px;
   }
 
-  .add-event {
+  .addEvent {
     right: 20px;
     bottom: 20px;
   }
@@ -240,8 +240,8 @@
     padding: 8px 0;
   }
 
-  .goto-btn,
-  .today-btn {
+  .gotoBtn,
+  .todayBtn {
     font-size: 0.85rem;
   }
 }

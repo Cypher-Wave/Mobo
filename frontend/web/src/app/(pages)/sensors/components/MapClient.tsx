@@ -4,6 +4,7 @@ import React, { useState } from "react";
 import { MapContainer, TileLayer, Marker, useMapEvents } from "react-leaflet";
 import L from "leaflet";
 import api from "@/services/api";
+import map from "./MapClient.module.css";
 
 // ícone padrão do Leaflet (ajuste necessário no Next)
 const DefaultIcon = L.icon({
@@ -86,7 +87,7 @@ export default function MapClient() {
       <MapContainer
         center={marker ?? defaultCenter}
         zoom={marker ? 14 : 12}
-        className="map"
+        className={map.map}
       >
         <TileLayer
           attribution="© OpenStreetMap"

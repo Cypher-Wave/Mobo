@@ -1,5 +1,5 @@
 /* ===== BOTÕES DO TOPO (Voltar / Carregar Foto) ===== */
-.btn-container {
+.btnContainer {
   display: flex;
   justify-content: flex-start;
   gap: 2rem;
@@ -7,7 +7,7 @@
   width: fit-content;
 }
 
-.profile-container {
+.profileContainer {
   margin-top: 20px;
   display: flex;
   align-items: flex-start;
@@ -16,7 +16,7 @@
 }
 
 /* ===== CARD DO USUÁRIO ===== */
-.informations-card {
+.informationsCard {
   width: 280px;
   background: rgb(var(--mobo-beige));
   border-radius: 1.5rem;
@@ -29,20 +29,20 @@
   align-items: center;
 }
 
-.informations-card a {
+.informationsCard a {
   font-size: 0.9rem;
   text-decoration: none;
   color: rgb(var(--mobo-red));
 }
 
-.informations-card a:hover {
+.informationsCard a:hover {
   color: rgb(var(--mobo-dark-red));
   text-decoration: underline;
   transform: scale(1.03);
 }
 
 /* Foto do usuário */
-.profile-card {
+.profileCard {
   width: 130px;
   height: 130px;
   border-radius: 50%;
@@ -53,7 +53,7 @@
 }
 
 /* Nome */
-.profile-title {
+.profileTitle {
   font-size: 1.3rem;
   color: rgb(var(--mobo-red));
   font-weight: 600;
@@ -61,14 +61,14 @@
 }
 
 /* Email */
-.profile-email {
+.profileEmail {
   font-size: 1rem;
   color: rgb(var(--mobo-gray3));
   margin-top: 0;
 }
 
 /* Papel */
-.profile-role {
+.profileRole {
   font-size: 1rem;
   color: rgb(var(--mobo-red));
   font-weight: 500;
@@ -81,11 +81,6 @@
   justify-content: space-between;
   gap: 4rem;
   margin-top: 2rem;
-}
-
-.btn-item {
-  width: 100%;
-  margin-top: 0.8rem;
 }
 
 /* ===== GALERIA ===== */
@@ -149,7 +144,7 @@
     grid-template-columns: 1fr;
   }
 
-  .btn-container {
+  .btnContainer {
     flex-direction: column;
     align-items: flex-end;
   }

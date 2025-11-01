@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import "./Reports.css";
+import report from "./Reports.module.css";
 
 interface Harvest {
   _id: string;
@@ -29,96 +29,64 @@ const Reports: React.FC<PagesLayoutProps> = ({
   currentPage = 1,
   totalPages = 1,
   itemsPerPage = 10,
-  onCreate,
-  onDelete,
 }) => {
   return (
     <>
       <h1>Relatórios</h1>
 
-      {/* Formulário de Criação */}
-      <div className="button-container">
+      {/* Botões */}
+      <div className={report.buttonContainer}>
         <button className="btn btn-primary">Criar Registro</button>
         <button className="btn btn-primary" type="submit">
           Excluir Registro
         </button>
       </div>
 
-      {/* Formulário de Exclusão */}
-      <div className="table">
-        <div className="user-list">
-          {/* Cabeçalho da Tabela */}
-          <div className="table-header">
-            <div className="table-cell">SELECIONAR</div>
-            <div className="table-cell">ÍNDICE</div>
-            <div className="table-cell">DATA COLHEITA</div>
-            <div className="table-cell">HORA INÍCIO</div>
-            <div className="table-cell">HORA TÉRMINO</div>
-            <div className="table-cell">DURAÇÃO</div>
-            <div className="table-cell">QUANTIDADE COLHIDA</div>
-            <div className="table-cell">PLANTAÇÃO</div>
-            <div className="table-cell">QUALIDADE</div>
+      {/* Tabela */}
+      <div className={report.table}>
+        <div className={report.userList}>
+          {/* Cabeçalho */}
+          <div className={report.tableHeader}>
+            <div className={report.tableCell}>SELECIONAR</div>
+            <div className={report.tableCell}>ÍNDICE</div>
+            <div className={report.tableCell}>DATA COLHEITA</div>
+            <div className={report.tableCell}>HORA INÍCIO</div>
+            <div className={report.tableCell}>HORA TÉRMINO</div>
+            <div className={report.tableCell}>DURAÇÃO</div>
+            <div className={report.tableCell}>QUANTIDADE COLHIDA</div>
+            <div className={report.tableCell}>PLANTAÇÃO</div>
+            <div className={report.tableCell}>QUALIDADE</div>
           </div>
 
-          {/* Linhas da Tabela */}
-          {/* {harvests.map((harvest, i) => (
-            <div className="table-row" key={harvest._id}>
-              <div className="table-cell">
-                <input
-                  type="checkbox"
-                  className="select-record"
-                  name="selected_id"
-                  value={harvest._id}
-                />
-              </div>
-              <div className="table-cell">
-                {(currentPage - 1) * itemsPerPage + i + 1}
-              </div>
-              <div className="table-cell">
-                {new Date(harvest.harvestDate).toLocaleDateString("pt-BR")}
-              </div>
-              <div className="table-cell">{harvest.harvestStart}</div>
-              <div className="table-cell">{harvest.harvestEnd}</div>
-              <div className="table-cell">{harvest.harvestDuration}</div>
-              <div className="table-cell">{harvest.harvestedQuantity}</div>
-              <div className="table-cell">
-                {harvest.planting?.plantingName || "-"}
-              </div>
-              <div className="table-cell">{harvest.quality}/10</div>
+          {/* Linha mockada */}
+          <div className={report.tableRow}>
+            <div className={report.tableCell}>
+              <input
+                type="checkbox"
+                className={report.selectRecord}
+                name="selected_id"
+              />
             </div>
-          ))} */}
-          <div className="table-row">
-              <div className="table-cell">
-                <input
-                  type="checkbox"
-                  className="select-record"
-                  name="selected_id"
-                />
-              </div>
-              <div className="table-cell">
-                1
-              </div>
-              <div className="table-cell">
-                27/10/2025
-              </div>
-              <div className="table-cell">10:00</div>
-              <div className="table-cell">12:00</div>
-              <div className="table-cell">2:00</div>
-              <div className="table-cell">500kg</div>
-              <div className="table-cell">
-                Area 1
-              </div>
-              <div className="table-cell">9/10</div>
-            </div>
+            <div className={report.tableCell}>1</div>
+            <div className={report.tableCell}>27/10/2025</div>
+            <div className={report.tableCell}>10:00</div>
+            <div className={report.tableCell}>12:00</div>
+            <div className={report.tableCell}>2:00</div>
+            <div className={report.tableCell}>500kg</div>
+            <div className={report.tableCell}>Área 1</div>
+            <div className={report.tableCell}>9/10</div>
+          </div>
         </div>
 
         {/* Paginação */}
-        <div className="pagination">
+        <div className={report.pagination}>
           {Array.from({ length: totalPages }, (_, i) => i + 1).map((page) => (
             <a
               key={page}
               href={`?page=${page}`}
-              className={page === currentPage ? "active" : ""}
+              className={
+                page === currentPage ? report.active : report.pageLink
+              }
             >
               {page}
             </a>

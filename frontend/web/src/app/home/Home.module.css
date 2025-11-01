@@ -1,8 +1,4 @@
-body {
-  overflow-x: hidden;
-}
-
-.home-main {
+.homeMain {
   width: 100%;
   min-height: 100vh;
   background: rgb(var(--mobo-beige));
@@ -19,12 +15,12 @@ body {
   justify-content: center;
 }
 
-.img-banner {
+.imgBanner {
   object-fit: cover; 
   object-position: center;
 }
 
-.logo-container {
+.logoContainer {
   position: absolute;
   top: 140px;
   left: 50%;
@@ -34,7 +30,7 @@ body {
 }
 
 /* ===== Mascote ===== */
-.mascotFooter-container {
+.mascotFooter {
   width: 350px;
   height: 350px;
   position: absolute;
@@ -61,13 +57,13 @@ body {
 
 /* ===== Responsividade ===== */
 @media (max-width: 768px) {
-  .mascotFooter-container {
+  .mascotFooter {
     display: none;
   }
 }
 
 @media (max-width: 600px) {
-  .logo-container {
+  .logoContainer {
     width: 180px;
     height: auto;
     top: 100px;

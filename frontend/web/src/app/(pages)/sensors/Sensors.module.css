@@ -1,17 +1,11 @@
 /* ====== MAPA ====== */
-.user-list {
+.userList {
   width: 95%;
   border: 4px solid rgb(var(--mobo-red));
   border-radius: 1.5rem;
   padding: 0.4rem;
   background-color: rgb(var(--mobo-white));
   height: 400px;
-}
-
-.map {
-  width: 100%;
-  height: 300px;
-  border-radius: 1.5rem;
 }
 
 /* ====== GRÁFICOS ====== */
@@ -37,7 +31,7 @@
 }
 
 /* Ícone de alerta */
-.alert-icons {
+.alertIcons {
   position: relative;
   top: -150px;
   left: -15px;
@@ -52,18 +46,10 @@
     flex-wrap: wrap;
     justify-content: center;
   }
-
-  .graphics > div {
-    max-width: 45%;
-  }
 }
 
 @media (max-width: 800px) {
-  .graphics > div {
-    max-width: 100%;
-  }
-
-  .user-list {
+  .userList {
     width: 100%;
   }
 
@@ -74,7 +60,7 @@
 }
 
 @media (max-width: 500px) {
-  .dash {
+  .dashSensor {
     padding: 1rem;
   }
 }

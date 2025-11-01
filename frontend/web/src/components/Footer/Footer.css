@@ -1,4 +1,4 @@
-footer {
+.footer {
   position: relative;
   background: url("/images/footerBanner.png") no-repeat center bottom;
   background-size: cover;
@@ -10,7 +10,7 @@ footer {
   margin-bottom: 0;
 }
 
-footer h2 {
+.footer-title {
   position: absolute;
   bottom: 20px;
   left: 50%;

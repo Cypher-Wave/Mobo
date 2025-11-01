@@ -1,4 +1,4 @@
-.weather-forecast {
+.weatherForecast {
   position: relative;
   background-color: rgb(var(--mobo-red));
   border-radius: 20px;
@@ -15,7 +15,7 @@
 }
 
 /* ===== PERSONAGEM (MOBO) ===== */
-.mobo-alert {
+.moboAlert {
   position: absolute;
   width: 40vw;
   height: 70vh;
@@ -25,13 +25,13 @@
 }
 
 /* ===== PESQUISA DE CLIMA ===== */
-.weather-search {
+.weatherSearch {
   display: flex;
   justify-content: flex-end;
   position: relative;
 }
 
-.weather-search form {
+.weatherSearch form {
   display: flex;
   align-items: center;
   background-color: rgb(var(--mobo-beige));
@@ -41,7 +41,7 @@
   box-shadow: 0 4px 10px rgba(var(--mobo-black), 0.15);
 }
 
-.weather-search input {
+.weatherSearch input {
   flex: 1;
   border: none;
   background: transparent;
@@ -50,7 +50,7 @@
   outline: none;
 }
 
-.weather-search button {
+.weatherSearch button {
   background: none;
   border: none;
   color: rgb(var(--mobo-red));
@@ -92,14 +92,14 @@
   line-height: 1.3;
 }
 
-.alert-icons {
+.alertIcons {
   display: flex;
   justify-content: center;
   margin-bottom: 10px;
 }
 
 /* ===== BLOCO VERDE ===== */
-.calendar-container {
+.calendarContainer {
   background-color: rgb(var(--mobo-green));
   color: rgb(var(--mobo-beige));
   margin-top: 40px;
@@ -168,14 +168,14 @@
 }
 
 /* ===== TEXTOS DE ALERTA ===== */
-.alert-txt,
-.alert-txt2 {
+.alertTxt,
+.alertTxt2 {
   font-size: 0.95rem;
   line-height: 1.6;
 }
 
 /* ===== PERSONAGEM DIREITA ===== */
-.img-alert {
+.imgAlert {
   display: flex;
   justify-content: flex-end;
   align-items: flex-end;
@@ -187,26 +187,26 @@
 
 /* ==== Tela média: notebooks ==== */
 @media (max-width: 1280px) {
-  .weather-forecast {
+  .weatherForecast {
     margin-right: 40px;
     padding: 30px 40px;
   }
 
-  .calendar-container {
+  .calendarContainer {
     grid-template-columns: 250px 1fr;
     gap: 30px;
     padding: 40px;
     width: calc(100vw - 80px);
   }
 
-  .img-alert {
+  .imgAlert {
     display: none; /* oculta personagem direita para economizar espaço */
   }
 }
 
 /* ==== Tela menor: até 900px ==== */
 @media (max-width: 900px) {
-  .weather-forecast {
+  .weatherForecast {
     margin-left: 60px;
     margin-right: 20px;
     padding: 25px;
@@ -217,7 +217,7 @@
     align-items: stretch;
   }
 
-  .calendar-container {
+  .calendarContainer {
     grid-template-columns: 1fr;
     padding: 30px;
     gap: 20px;
@@ -229,19 +229,19 @@
     margin: 0 auto;
   }
 
-  .alert-txt,
-  .alert-txt2 {
+  .alertTxt,
+  .alertTxt2 {
     text-align: justify;
   }
 }
 
 /* ==== TV ou telas grandes ==== */
 @media (min-width: 1600px) {
-  .weather-forecast {
+  .weatherForecast {
     padding: 60px 80px;
   }
 
-  .calendar-container {
+  .calendarContainer {
     padding: 60px 80px;
     gap: 60px;
   }
