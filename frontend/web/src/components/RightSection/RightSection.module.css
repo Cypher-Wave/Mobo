@@ -1,4 +1,4 @@
-.right-section {
+.rightSection {
   display: flex;
   align-items: center;
   justify-content: flex-end;
@@ -9,7 +9,7 @@
   padding: 1.5rem 2rem;
 }
 
-.dark-mode {
+.darkMode {
   display: flex;
   align-items: center;
   gap: 0.5rem;

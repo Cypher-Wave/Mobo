@@ -1,8 +1,8 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import Image from "next/image";
-import forecastStyle from "./Forecast.module.css";
+import styles from "./Forecast.module.css";
 
 interface EventItem {
   title: string;
@@ -31,7 +31,7 @@ const months = [
   "Dezembro",
 ];
 
-const Forecast: React.FC = () => {
+const Forecast = () => {
   const [today, setToday] = useState(new Date());
   const [activeDay, setActiveDay] = useState<number>(today.getDate());
   const [month, setMonth] = useState<number>(today.getMonth());
@@ -146,7 +146,7 @@ const Forecast: React.FC = () => {
 
   for (let x = day; x > 0; x--) {
     days.push(
-      <div key={`p${x}`} className={forecastStyle.prevDate}>
+      <div key={`p${x}`} className={styles.prevDate}>
         {prevDays - x + 1}
       </div>
     );
@@ -162,10 +162,10 @@ const Forecast: React.FC = () => {
       month === new Date().getMonth();
 
     const classes = [
-      forecastStyle.day,
-      isToday ? forecastStyle.today : "",
-      activeDay === i ? forecastStyle.active : "",
-      hasEvent ? forecastStyle.event : "",
+      styles.day,
+      isToday ? styles.today : "",
+      activeDay === i ? styles.active : "",
+      hasEvent ? styles.event : "",
     ]
       .filter(Boolean)
       .join(" ");
@@ -179,7 +179,7 @@ const Forecast: React.FC = () => {
 
   for (let j = 1; j <= nextDays; j++) {
     days.push(
-      <div key={`n${j}`} className={forecastStyle.nextDate}>
+      <div key={`n${j}`} className={styles.nextDate}>
         {j}
       </div>
     );
@@ -189,51 +189,49 @@ const Forecast: React.FC = () => {
 
   return (
     <>
-      <h1 className={forecastStyle.title}>Previsão Colheita</h1>
-
-      <div className={forecastStyle.calendar}>
+      <div className={styles.calendar}>
         {/* LEFT */}
-        <div className={forecastStyle.left}>
-          <div className={forecastStyle.month}>
+        <div className={styles.left}>
+          <div className={styles.month}>
             <i
-              className={`fas fa-angle-left ${forecastStyle.prev}`}
+              className={`fas fa-angle-left ${styles.prev}`}
               onClick={() => changeMonth(-1)}
             ></i>
 
-            <div className={forecastStyle.date}>
+            <div className={styles.date}>
               {months[month]} {year}
             </div>
 
             <i
-              className={`fas fa-angle-right ${forecastStyle.next}`}
+              className={`fas fa-angle-right ${styles.next}`}
               onClick={() => changeMonth(1)}
             ></i>
           </div>
 
-          <div className={forecastStyle.weekdays}>
+          <div className={styles.weekdays}>
             {["Dom", "Seg", "Ter", "Qua", "Qui", "Sex", "Sáb"].map((d) => (
               <div key={d}>{d}</div>
             ))}
           </div>
 
-          <div className={forecastStyle.days}>{days}</div>
+          <div className={styles.days}>{days}</div>
 
-          <div className={forecastStyle.gotoToday}>
-            <div className={forecastStyle.goto}>
+          <div className={styles.gotoToday}>
+            <div className={styles.goto}>
               <input
                 type="text"
                 placeholder="mes/ano"
-                className={forecastStyle.dateInput}
+                className={styles.dateInput}
                 value={dateInput}
                 onChange={(e) => setDateInput(e.target.value)}
               />
-              <button className={forecastStyle.gotoBtn} onClick={gotoDate}>
+              <button className={styles.gotoBtn} onClick={gotoDate}>
                 Procurar
               </button>
             </div>
 
             <button
-              className={forecastStyle.todayBtn}
+              className={styles.todayBtn}
               onClick={() => {
                 const now = new Date();
                 setMonth(now.getMonth());
@@ -247,36 +245,36 @@ const Forecast: React.FC = () => {
         </div>
 
         {/* RIGHT */}
-        <div className={forecastStyle.right}>
-          <div className={forecastStyle.todayDate}>
-            <div className={forecastStyle.eventDay}>
+        <div className={styles.right}>
+          <div className={styles.todayDate}>
+            <div className={styles.eventDay}>
               {new Date(year, month, activeDay).toLocaleDateString("pt-BR", {
                 weekday: "long",
               })}
             </div>
 
-            <div className={forecastStyle.eventDate}>
+            <div className={styles.eventDate}>
               {activeDay} {months[month]} {year}
             </div>
           </div>
 
-          <div className={forecastStyle.events}>
+          <div className={styles.events}>
             {activeEvents.length > 0 ? (
               activeEvents.map((ev, i) => (
                 <div
                   key={i}
-                  className={forecastStyle.eventCard}
+                  className={styles.eventCard}
                   onClick={() => deleteEvent(ev.title)}
                 >
-                  <div className={forecastStyle.titleRow}>
+                  <div className={styles.titleRow}>
                     <i className="fas fa-circle"></i>
-                    <h3 className={forecastStyle.eventTitle}>{ev.title}</h3>
+                    <h3 className={styles.eventTitle}>{ev.title}</h3>
                   </div>
-                  <div className={forecastStyle.eventTime}>{ev.time}</div>
+                  <div className={styles.eventTime}>{ev.time}</div>
                 </div>
               ))
             ) : (
-              <div className={forecastStyle.noEvent}>
+              <div className={styles.noEvent}>
                 <Image
                   src="/images/eventsCalend.png"
                   alt="Sem Eventos"
@@ -289,7 +287,7 @@ const Forecast: React.FC = () => {
           </div>
 
           <button
-            className={forecastStyle.addEvent}
+            className={styles.addEvent}
             onClick={() => {
               const title = prompt("Título do evento:");
               const from = prompt("Hora início (hh:mm):");

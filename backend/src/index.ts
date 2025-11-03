@@ -62,7 +62,7 @@ app.get("/", (_req: Request, res: Response) => {
 app.use(errorMiddleware);
 
 // Inicialização do servidor
-const PORT = process.env.PORT;
+const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {
   console.log(`Servidor rodando em http://localhost:${PORT}`);
 });

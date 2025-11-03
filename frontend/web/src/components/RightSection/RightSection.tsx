@@ -1,17 +1,19 @@
-import React from "react";
 import Profile from "@/components/Profile/Profile";
 import Notification from "@/components/Notification/Notification";
-import "./RightSection.css";
+import styles from "./RightSection.module.css";
 
 interface RightSectionProps {
   showProfile?: boolean;
   showNotification?: boolean;
 }
 
-const RightSection: React.FC<RightSectionProps> = ({showProfile = true, showNotification = true}) => {
+const RightSection = ({
+  showProfile = true,
+  showNotification = true,
+}: RightSectionProps) => {
   return (
-    <div className="right-section">
-      <div className="dark-mode">
+    <div className={styles.rightSection}>
+      <div className={styles.darkMode}>
         <span className="material-icons-sharp active"></span>
         <span className="material-icons-sharp"></span>
       </div>

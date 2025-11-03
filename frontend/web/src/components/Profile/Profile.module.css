@@ -3,9 +3,10 @@
   display: flex;
   align-items: center;
   gap: 1rem;
+  z-index: 1000;
 }
 
-.profile-img {
+.profileImg {
   position: relative;
   width: 45px;
   height: 45px;
@@ -13,21 +14,21 @@
   overflow: hidden;
 }
 
-.icon-modify {
+.iconModify {
   color: rgb(var(--mobo-red));
 }
 
-.profile-click {
+.profileClick {
   cursor: pointer;
   transition: transform 0.2s ease;
 }
 
-.profile-click:hover {
+.profileClick:hover {
   transform: scale(1.05);
 }
 
 /* ===== Dropdown ===== */
-.dropdown-menu {
+.dropdownMenu {
   position: absolute;
   top: 45px;
   right: -30px;
@@ -54,7 +55,7 @@
   }
 }
 
-.profile-information {
+.profileInformation {
   display: flex;
   align-items: center;
   width: 100%;
@@ -68,8 +69,8 @@
   flex-direction: column;
 }
 
-.display p {
-  font-family: "Livvic";
+.displayText {
+  font-family: var(--font-secondary);
   color: rgb(var(--mobo-red));
   margin-left: 6px;
   margin: 2px;
@@ -87,7 +88,7 @@
   font-weight: 200px;
 }
 
-.scrolling-text {
+.scrollingText {
   animation: scrollText 8s linear infinite;
 }
 
@@ -100,9 +101,9 @@
   }
 }
 
-.dropdown-item {
+.dropdownItem {
   margin-top: 5px;
-  font-family: "Livvic";
+  font-family: var(--font-secondary);
   font-weight: bold;
   font-size: 0.95rem;
   border-radius: 5px;
@@ -113,7 +114,7 @@
   transition: background 0.2s ease, color 0.2s ease;
 }
 
-.dropdown-item:hover {
+.dropdownItem:hover {
   color: rgb(var(--mobo-beige));
   background-color: rgb(var(--mobo-red));
 }

@@ -1,72 +1,59 @@
 "use client";
 
-import React from "react";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
+import FirstColumn from "@/components/FirstColumn/FirstColumn";
+import styles from "../Auth.module.css";
 
-const Login: React.FC = () => {
+const Login = () => {
   const router = useRouter();
 
   const handleLogin = (event: React.FormEvent) => {
-    event.preventDefault(); // impede reload da página
-    // Aqui você pode depois integrar com sua API (login real)
+    event.preventDefault();
     router.push("/home");
   };
 
+  const infos = {
+    title: "Olá!",
+    description1: "Se ainda não possui conta, cadastre-se",
+    description2: "e comece a jornada conosco",
+    link: "/auth/register",
+    button: "Cadastrar-se",
+  };
+
   return (
-    <div className="content second-content">
+    <div className={styles.content}>
       {/* Primeira coluna */}
-      <div className="first-column">
-        <h2 className="title title-primary">Olá!</h2>
-        <p className="description description-primary">
-          Se ainda não possui conta, cadastre-se
-        </p>
-        <p className="description description-primary">
-          e comece a jornada conosco
-        </p>
-        <button
-          id="signup"
-          className="btn btn-secondary"
-          onClick={() => router.push("/auth/register")}
-        >
-          Cadastrar-se
-        </button>
-      </div>
+      <FirstColumn info={infos} />
 
       {/* Formulário de Login */}
-      <div className="second-column background-login">
-        <div className="logo-container">
+      <div className={`${styles.secondColumn} ${styles.backgroundLogin}`}>
+        <div className={styles.logoContainer}>
           <Image
-            className="auth-logo"
+            className={styles.authLogo}
             src="/images/Logo.png"
             alt="Logo Mobo"
             fill
           />
         </div>
-        <h2 className="title title-second">Faça seu login!</h2>
 
-        <form className="form" onSubmit={handleLogin}>
-          <label className="label-input" htmlFor="userEmail">
-            <i className="far fa-envelope icon-modify"></i>
-            <input
-              type="email"
-              name="userEmail"
-              placeholder="Email"
-              required
-              // value={email}
-              // onChange={(event) => setEmail(event.target.value)}
-            />
+        <h2 className={`${styles.title} ${styles.titleSecond}`}>
+          Faça seu login!
+        </h2>
+
+        <form className={styles.form} onSubmit={handleLogin}>
+          <label className={styles.labelInput} htmlFor="userEmail">
+            <i className="far fa-envelope iconModify"></i>
+            <input type="email" name="userEmail" placeholder="Email" required />
           </label>
 
-          <label className="label-input" htmlFor="userPassword">
-            <i className="fas fa-lock icon-modify"></i>
+          <label className={styles.labelInput} htmlFor="userPassword">
+            <i className="fas fa-lock iconModify"></i>
             <input
               type="password"
               name="userPassword"
               placeholder="Senha"
               required
-              // value={password}
-              // onChange={(event) => setPassword(event.target.value)}
             />
           </label>
 
@@ -74,7 +61,7 @@ const Login: React.FC = () => {
             Entrar
           </button>
 
-          <a className="password" href="#">
+          <a className={styles.password} href="#">
             Esqueceu sua senha?
           </a>
         </form>

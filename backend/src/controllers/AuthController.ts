@@ -33,14 +33,12 @@ class AuthController {
     if (req.headers["user-agent"]?.includes("Mozilla")) {
       res.cookie("token", token, {
         httpOnly: true,
-        secure: process.env.NODE_ENV === "production" ? true : false,
-        sameSite: "none",
+        secure: process.env.NODE_ENV === "production",
+        sameSite: process.env.NODE_ENV === "production" ? "none" : "lax",
         maxAge: 1000 * 60 * 60 * 24,
         path: "/",
-        domain: "localhost",
       });
     }
-
     // Mobile / Web SPA: retorna token no JSON
     return res.status(200).json({
       success: true,
@@ -73,14 +71,12 @@ class AuthController {
     if (req.headers["user-agent"]?.includes("Mozilla")) {
       res.cookie("token", token, {
         httpOnly: true,
-        secure: process.env.NODE_ENV === "production" ? true : false,
-        sameSite: "none",
+        secure: process.env.NODE_ENV === "production",
+        sameSite: process.env.NODE_ENV === "production" ? "none" : "lax",
         maxAge: 1000 * 60 * 60 * 24,
         path: "/",
-        domain: "localhost",
       });
     }
-
     // Mobile / Web SPA: retorna token no JSON
     return res.status(200).json({
       success: true,

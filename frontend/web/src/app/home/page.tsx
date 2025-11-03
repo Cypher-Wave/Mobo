@@ -1,14 +1,13 @@
 "use client";
 
-import React from "react";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import NavbarHome from "@/components/NavbarHome/NavbarHome";
 import CardSection from "@/components/CardSection/CardSection";
 import Footer from "@/components/Footer/Footer";
-import home from "./Home.module.css";
+import styles from "./Home.module.css";
 
-const Home: React.FC = () => {
+const Home = () => {
   const router = useRouter();
 
   const tools = [
@@ -60,18 +59,18 @@ const Home: React.FC = () => {
     <>
       <NavbarHome />
 
-      <main className={home.homeMain}>
-        <div className={home.banner}>
+      <main className={styles.homeMain}>
+        <div className={styles.banner}>
           <Image
-            className={home.imgBanner}
+            className={styles.imgBanner}
             src="/images/BannerOfc.png"
             alt="Banner"
             fill
           />
 
-          <div className={home.logoContainer}>
+          <div className={styles.logoContainer}>
             <Image
-              className={home.logo}
+              className={styles.logo}
               src="/images/Logo.png"
               alt="Logo"
               fill
@@ -81,9 +80,9 @@ const Home: React.FC = () => {
 
         <CardSection title="Ferramentas" cards={tools} />
 
-        <div className={home.mascotFooter}>
+        <div className={styles.mascotFooter}>
           <Image
-            className={home.mascot}
+            className={styles.mascot}
             src="/images/mobotst3.png"
             alt="Mascote"
             fill

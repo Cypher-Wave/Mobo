@@ -1,15 +1,15 @@
-import React, { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { IUser } from "@/types/User";
 import api from "@/services/api";
-import "./Profile.css";
+import styles from "./Profile.module.css";
 
 interface ProfileProps {
   user: IUser;
 }
 
-const Profile: React.FC = () => {
+const Profile = () => {
   const router = useRouter();
   const [isOpen, setIsOpen] = useState(false);
   const [isOverflowing, setIsOverflowing] = useState(false);
@@ -28,7 +28,6 @@ const Profile: React.FC = () => {
 
   const toggleMenu = () => setIsOpen(!isOpen);
 
-  // Checa se o texto ultrapassa o limite
   useEffect(() => {
     const checkOverflow = () => {
       if (textRef.current && containerRef.current) {
@@ -44,32 +43,45 @@ const Profile: React.FC = () => {
   }, []);
 
   return (
-    <div className="profile">
-      <div className="profile-img profile-click" onClick={toggleMenu}>
+    <div className={styles.profile}>
+      <div
+        className={`${styles.profileImg} ${styles.profileClick}`}
+        onClick={toggleMenu}
+      >
         <Image src="/images/icons/profile.png" alt="Profile" fill />
       </div>
 
       {isOpen && (
-        <div className="dropdown-menu">
-          <div ref={containerRef} className="profile-information">
-            <div className="profile-img">
+        <div className={styles.dropdownMenu}>
+          <div ref={containerRef} className={styles.profileInformation}>
+            <div className={styles.profileImg}>
               <Image src="/images/icons/profile.png" alt="Profile" fill />
             </div>
-            <div className="display">
+
+            <div className={styles.display}>
               <p
                 ref={textRef}
-                className={isOverflowing ? "scrolling-text name" : "name"}
+                className={
+                  isOverflowing
+                    ? `${styles.scrollingText} ${styles.name} ${styles.displayText}`
+                    : `${styles.name} ${styles.displayText}`
+                }
               >
                 Pedro Henrique Venâncio
               </p>
-              <p className="role">Agricultor Familiar</p>
+
+              <p className={`${styles.role} ${styles.displayText}`}>Agricultor Familiar</p>
             </div>
           </div>
 
-          <a onClick={() => router.push("/profile")} className="dropdown-item">
+          <a
+            onClick={() => router.push("/profile")}
+            className={styles.dropdownItem}
+          >
             Perfil
           </a>
-          <a onClick={handlerLogout} className="dropdown-item">
+
+          <a onClick={handlerLogout} className={styles.dropdownItem}>
             Logout
           </a>
         </div>

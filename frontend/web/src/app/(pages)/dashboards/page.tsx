@@ -1,9 +1,8 @@
 "use client";
 
-import React from "react";
 import { qualityData, weeklyHarvestData, growthData, totalHarvestData } from "./libraries/DashboardService";
 import Chart from "@/components/Chart/Chart";
-import dashStyle from "./Dashboards.module.css";
+import styles from "./Dashboards.module.css";
 
 interface Harvest {
   _id: string;
@@ -20,25 +19,23 @@ interface DashboardsProps {
   harvests?: Harvest[];
 }
 
-const Dashboards: React.FC<DashboardsProps> = ({ harvests = [] }) => {
+const Dashboards = ({ harvests = [] }: DashboardsProps) => {
   return (
     <>
-      <h1>Dashboard</h1>
-
-      <div className={dashStyle.graphics}>
-        <div className={dashStyle.dash} style={{ width: "100%", height: "300px" }}>
+      <div className={styles.graphics}>
+        <div className={styles.dash} style={{ width: "100%", height: "300px" }}>
           <Chart type="bar" data={qualityData} title="Qualidade de Colheita" />
         </div>
 
-        <div className={dashStyle.dash} style={{ width: "100%", height: "300px" }}>
+        <div className={styles.dash} style={{ width: "100%", height: "300px" }}>
           <Chart type="line" data={weeklyHarvestData} title="Colheita da Semana" />
         </div>
 
-        <div className={dashStyle.dash} style={{ width: "100%", height: "300px" }}>
+        <div className={styles.dash} style={{ width: "100%", height: "300px" }}>
           <Chart type="line" data={growthData} title="Tendência Crescimento" />
         </div>
 
-        <div className={dashStyle.dash} style={{ width: "100%", height: "300px" }}>
+        <div className={styles.dash} style={{ width: "100%", height: "300px" }}>
           <Chart type="pie" data={totalHarvestData} title="Total Colhido" />
         </div>
       </div>

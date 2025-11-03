@@ -1,13 +1,11 @@
-import React from "react";
 import Image from "next/image";
-import "./CardSection.css";
+import styles from "./CardSection.module.css";
 
 interface Card {
   title: string;
   description: string;
   icon: string;
   link: string;
-  style?: React.CSSProperties;
 }
 
 interface CardSectionProps {
@@ -15,18 +13,21 @@ interface CardSectionProps {
   cards: Card[];
 }
 
-const CardSection: React.FC<CardSectionProps> = ({ title, cards }) => (
-  <div className="card">
-    <h2 className="card-theme">{title}</h2>
-    <div className="card-container">
-      {cards.map((card, i) => (
-        <article key={i} className="article-container">
+const CardSection = ({ title, cards }: CardSectionProps) => (
+  <div className={styles.card}>
+    <h2 className={styles.cardTheme}>{title}</h2>
+
+    <div className={styles.cardContainer}>
+      {cards.map((card, index) => (
+        <article key={index} className={styles.articleContainer}>
           <a href={card.link}>
-            <div className="card-img-container">
+            <div className={styles.cardImg}>
               <Image src={card.icon} alt={card.title} fill />
             </div>
-            <h1 className="card-title">{card.title}</h1>
-            <p className="card-description">{card.description}</p>
+
+            <h1 className={styles.cardTitle}>{card.title}</h1>
+
+            <p className={styles.cardDescription}>{card.description}</p>
           </a>
         </article>
       ))}

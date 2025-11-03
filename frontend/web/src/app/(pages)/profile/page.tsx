@@ -1,11 +1,10 @@
 "use client";
 
-import React from "react";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 import api from "@/services/api";
-import profile from "./Profile.module.css";
+import styles from "./Profile.module.css";
 
 interface User {
   userImage?: string;
@@ -24,16 +23,14 @@ interface ProfileProps {
   images: HarvestImage[];
 }
 
-const Profile: React.FC<ProfileProps> = ({ user, images }) => {
+const Profile = ({ user, images }: ProfileProps) => {
   const router = useRouter();
   const baseURL = api.defaults.baseURL?.replace("/api", "");
 
   return (
     <>
-      <h1>Perfil</h1>
-
       {/* Botões de ação */}
-      <div className={profile.btnContainer}>
+      <div className={styles.btnContainer}>
         <button
           className="btn btn-primary"
           onClick={() => router.push("/harvester")}
@@ -47,9 +44,9 @@ const Profile: React.FC<ProfileProps> = ({ user, images }) => {
       </div>
 
       {/* Card do Usuário */}
-      <div className={profile.profileContainer}>
-        <div className={profile.informationsCard}>
-          <div className={profile.profileCard}>
+      <div className={styles.profileContainer}>
+        <div className={styles.informationsCard}>
+          <div className={styles.profileCard}>
             <Image
               src="/images/icons/user_profile.png"
               alt="Foto de Perfil"
@@ -57,40 +54,40 @@ const Profile: React.FC<ProfileProps> = ({ user, images }) => {
             />
           </div>
 
-          <h2 className={profile.profileTitle}>
+          <h2 className={styles.profileTitle}>
             {/* {user.userName} */}Pedro Henrique Venâncio
           </h2>
 
-          <p className={profile.profileEmail}>
+          <p className={styles.profileEmail}>
             {/* {user.userEmail} */}pedro@email.com
           </p>
 
-          <p className={profile.profileRole}>
+          <p className={styles.profileRole}>
             {/* {user.userRole} */}Agricultor Familiar
           </p>
 
           <button className="btn btn-primary">Editar Perfil</button>
 
-          <div className={profile.links}>
+          <div className={styles.links}>
             <Link href="/reports">Relatórios</Link>
             <Link href="/alerts">Alertas</Link>
           </div>
         </div>
 
         {/* Galeria */}
-        <div className={profile.gallery} id="gallery">
+        <div className={styles.gallery} id="gallery">
 
           {/* Exemplo mockado */}
-          {[1,2,3,4,5,6,7,8].map((i) => (
-            <div className={profile.item} key={i}>
-              <div className={profile.photo}>
+          {[1].map((i) => (
+            <div className={styles.item} key={i}>
+              <div className={styles.photo}>
                 <Image
                   src={`${baseURL}/uploads/harvests/fotoLichia1.jpg`}
                   alt=""
                   fill
                 />
               </div>
-              <div className={profile.description}>Dia 27/10/2025</div>
+              <div className={styles.description}>Dia 27/10/2025</div>
             </div>
           ))}
 

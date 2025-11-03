@@ -54,10 +54,6 @@
 
 /* Telas grandes (monitores e televisões) */
 @media (min-width: 1600px) {
-  h1 {
-    font-size: 2.2rem;
-  }
-
   .dash {
     height: 400px;
   }

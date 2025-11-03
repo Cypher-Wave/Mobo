@@ -10,18 +10,18 @@
   margin-bottom: 0;
 }
 
-.footer-title {
+.footerTitle {
   position: absolute;
   bottom: 20px;
   left: 50%;
   transform: translateX(-50%);
   z-index: 101;
-  font-family: "Poppins", sans-serif;
+  font-family: var(--font-primary);
   color: rgb(var(--mobo-white));
   font-size: 1.5rem;
 }
 
-.moboFooter-container {
+.moboFooter {
   position: absolute;
   bottom: 40px;
   width: 400px;
@@ -77,7 +77,7 @@
   background-size: cover;
 }
 
-#wave1 {
+.wave1 {
   z-index: 100;
   opacity: 1;
   bottom: 5px;
@@ -93,7 +93,7 @@
   }
 }
 
-#wave2 {
+.wave2 {
   z-index: 99;
   opacity: 0.5;
   bottom: 10px;
@@ -109,7 +109,7 @@
   }
 }
 
-#wave3 {
+.wave3 {
   z-index: 98;
   opacity: 0.1;
   bottom: 15px;
@@ -125,7 +125,7 @@
   }
 }
 
-#wave4 {
+.wave4 {
   z-index: 97;
   opacity: 0.75;
   bottom: 20px;
@@ -142,7 +142,7 @@
 }
 
 @media (max-width: 768px) {
-  .moboFooter-container {
+  .moboFooter {
     display: none;
   }
 }

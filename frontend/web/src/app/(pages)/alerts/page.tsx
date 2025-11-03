@@ -1,113 +1,54 @@
 "use client";
 
-import React from "react";
+import { useState, FormEvent } from "react";
 import Image from "next/image";
-import alertStyle from "./Alerts.module.css";
+import WeatherSearch from "./components/WeatherSearch";
+import useWeather from "./hooks/useWeather";
+import styles from "./Alerts.module.css";
 
-const Alerts: React.FC = () => {
+const Alerts = () => {
+  const { weather, alertMsg, fetchWeather } = useWeather();
+  const [city, setCity] = useState("");
+
+  const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    fetchWeather(city);
+  };
+
   return (
     <>
       {/* Previsão de clima */}
-      <div className={alertStyle.weatherForecast}>
-        <div className={alertStyle.moboAlert}>
+      <div className={styles.weatherForecast}>
+        <div className={styles.moboAlert}>
           <Image src="/images/alertMobo.png" alt="" fill />
         </div>
 
         {/* Pesquisa clima */}
-        <div className={alertStyle.weatherSearch} id="weather-search">
-          <form id="search" className={alertStyle.searchForm}>
+        <div className={styles.weatherSearch} id="weather-search">
+          <form
+            id="search"
+            className={styles.searchForm}
+            onSubmit={handleSubmit}
+          >
             <i className="fa-solid fa-location-dot"></i>
             <input
+              className={styles.input}
               type="search"
               name="city_name"
-              id="city_name"
+              value={city}
+              onChange={(event) => setCity(event.target.value)}
               placeholder="Buscar cidade"
             />
-            <button type="submit">
+            <button className={styles.button} type="submit">
               <i className="fa-solid fa-magnifying-glass"></i>
             </button>
           </form>
-
-          <div id="weather" className={alertStyle.weatherBox}>
-            <h1>Rolante, BR</h1>
-
-            <div id="infos" className={alertStyle.infos}>
-              <div id="temp" className={alertStyle.temp}>
-                <div className={alertStyle.tempImg} id="temp-img">
-                  <Image
-                    src="http://openweathermap.org/img/wn/04d@2x.png"
-                    alt=""
-                    width={40}
-                    height={40}
-                  />
-                </div>
-
-                <div>
-                  <p id="temp-value">32</p>
-                  <p id="temp-description">Ensolarado</p>
-                </div>
-              </div>
-
-              <div id="other-infos" className={alertStyle.otherInfos}>
-                <div className={alertStyle.info}>
-                  <i
-                    id="temp-max-icon"
-                    className="fa-solid fa-temperature-high"
-                  ></i>
-
-                  <div>
-                    <h2 className={alertStyle.weatherTitle}>Temp. max</h2>
-                    <p className={alertStyle.txtWeather} id="temp-max">
-                      32 <sup>C°</sup>
-                    </p>
-                  </div>
-                </div>
-
-                <div className={alertStyle.info}>
-                  <i
-                    id="temp-min-icon"
-                    className="fa-solid fa-temperature-low"
-                  ></i>
-
-                  <div>
-                    <h2 className={alertStyle.weatherTitle}>Temp. min</h2>
-                    <p className={alertStyle.txtWeather} id="temp-min">
-                      12 <sup>C°</sup>
-                    </p>
-                  </div>
-                </div>
-
-                <div className={alertStyle.info}>
-                  <i id="humidity-icon" className="fa-solid fa-droplet"></i>
-
-                  <div>
-                    <h2 className={alertStyle.weatherTitle}>Humidade</h2>
-                    <p className={alertStyle.txtWeather} id="humidity">
-                      50%
-                    </p>
-                  </div>
-                </div>
-
-                <div className={alertStyle.info}>
-                  <i id="wind-icon" className="fa-solid fa-wind"></i>
-
-                  <div>
-                    <h2 className={alertStyle.weatherTitle}>Vento</h2>
-                    <p className={alertStyle.txtWeather} id="wind">
-                      50 km/h
-                    </p>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div id="alert"></div>
+          <div id="alert">{alertMsg}</div>
         </div>
 
-        <div className={alertStyle.alerts}>
-          <div className={`${alertStyle.card} ${alertStyle.tempAlerts}`}>
-            <div className={alertStyle.alertIcons}>
+        <div className={styles.alerts}>
+          <div className={styles.card}>
+            <div className={styles.alertIcons}>
               <Image
                 src="/images/icons/sucesso.png"
                 alt=""
@@ -115,12 +56,12 @@ const Alerts: React.FC = () => {
                 height={40}
               />
             </div>
-            <h3>Alerta de Temperatura</h3>
-            <p>Temperatura estável!</p>
+            <h3 className={styles.h3}>Alerta de Temperatura</h3>
+            <p className={styles.p}>Temperatura estável!</p>
           </div>
 
-          <div className={`${alertStyle.card} ${alertStyle.airHumidity}`}>
-            <div className={alertStyle.alertIcons}>
+          <div className={styles.card}>
+            <div className={styles.alertIcons}>
               <Image
                 src="/images/icons/alerta.png"
                 alt=""
@@ -128,12 +69,12 @@ const Alerts: React.FC = () => {
                 height={40}
               />
             </div>
-            <h3>Alerta de Umidade do Ar</h3>
-            <p>Umidade do ar baixa, risco de secura.</p>
+            <h3 className={styles.h3}>Alerta de Umidade do Ar</h3>
+            <p className={styles.p}>Umidade do ar baixa, risco de secura.</p>
           </div>
 
-          <div className={`${alertStyle.card} ${alertStyle.soilHumidity}`}>
-            <div className={alertStyle.alertIcons}>
+          <div className={styles.card}>
+            <div className={styles.alertIcons}>
               <Image
                 src="/images/icons/alerta.png"
                 alt=""
@@ -141,27 +82,31 @@ const Alerts: React.FC = () => {
                 height={40}
               />
             </div>
-            <h3>Alerta de Umidade do Solo</h3>
-            <p>Solo seco, irrigação necessária.</p>
+            <h3 className={styles.h3}>Alerta de Umidade do Solo</h3>
+            <p className={styles.p}>Solo seco, irrigação necessária.</p>
           </div>
         </div>
       </div>
 
-      <div className={alertStyle.calendarContainer}>
-        <p className={alertStyle.alertTxt}>
+      <div className={styles.calendarContainer}>
+        <p className={styles.alertTxt}>
           As informações foram coletadas a partir dos dados fornecidos pelo
           braço mecânico, que realizou a análise e a transmissão de dados de
           forma precisa.
         </p>
 
-        <p className={alertStyle.alertTxt2}>
+        <p className={styles.alertTxt2}>
           Para uma visão mais detalhada, explore o menu e consulte as seções
           específicas de cada ferramenta, onde você encontrará as informações
           detalhadas sobre os alertas correspondentes.
         </p>
 
-        <div className={alertStyle.imgAlert}>
-          <Image src="/images/mboAlert.png" alt="" width={40} height={40} />
+        <div className={styles.weatherComponent}>
+          <WeatherSearch weather={weather} />
+        </div>
+
+        <div className={styles.imgAlert}>
+          <Image src="/images/mboAlert.png" alt="" width={400} height={400} />
         </div>
       </div>
     </>

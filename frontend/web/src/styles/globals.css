@@ -4,9 +4,9 @@ body {
   overflow-x: hidden;
 }
 
-.logo {
-  object-fit: contain;
-  filter: drop-shadow(0 0 20px rgba(var(--mobo-white), 0.9));
+/* Ícones */
+.iconModify {
+  color: rgb(var(--mobo-white));
 }
 
 .btn {

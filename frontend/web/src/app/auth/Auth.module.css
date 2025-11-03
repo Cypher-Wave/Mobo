@@ -4,7 +4,7 @@
   align-items: center;
   height: 100vh;
   background-color: rgb(var(--mobo-green));
-  font-family: "Poppins", sans-serif;
+  font-family: var(--font-primary);
 }
 
 /* Caixa de conteúdo central */
@@ -20,7 +20,7 @@
 }
 
 /* Coluna esquerda (mensagem + botão) */
-.first-column {
+.firstColumn {
   width: 40%;
   background-color: rgb(var(--mobo-red)); /* vermelho mobo */
   color: rgb(var(--mobo-white));
@@ -38,7 +38,7 @@
   margin-bottom: 1rem;
 }
 
-.title-primary {
+.titlePrimary {
   color: rgb(var(--mobo-white));
 }
 
@@ -47,7 +47,7 @@
   margin-bottom: 0.3rem;
 }
 
-.second-column {
+.secondColumn {
   width: 60%;
   display: flex;
   flex-direction: column;
@@ -58,23 +58,23 @@
   padding: 2rem 3rem;
 }
 
-.background-login {
+.backgroundLogin {
   background: url("/images/agro_Login.jpeg") center/cover no-repeat;
 }
 
-.background-register {
+.backgroundRegister {
   background: url("/images/agro_Register.jpeg") center/cover no-repeat;
 }
 
 /* Fundo translúcido atrás do formulário */
-.second-content {
+.secondContent {
   position: relative;
   background-color: rgba(var(--mobo-black), 0.4);
   backdrop-filter: blur(3px);
 }
 
 /* Logo */
-.logo-container {
+.logoContainer {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -86,7 +86,7 @@
 
 
 /* Título do formulário */
-.title-second {
+.titleSecond {
   font-size: 1.6rem;
   font-weight: 700;
   margin-bottom: 1rem;
@@ -101,7 +101,7 @@
   max-width: 350px;
 }
 
-.label-input {
+.labelInput {
   position: relative;
   display: flex;
   align-items: center;
@@ -114,12 +114,12 @@
   transition: all 0.3s ease;
 }
 
-.label-input:hover {
+.labelInput:hover {
   background-color: rgba(var(--mobo-white), 0.20);
 }
 
-.label-input input,
-.select-input {
+.labelInput input,
+.selectInput {
   flex: 1;
   background: transparent;
   border: none;
@@ -132,29 +132,29 @@
   -moz-appearance: none;
 }
 
-.label-input input::placeholder {
+.labelInput input::placeholder {
   color: rgb(var(--mobo-white));
 }
 
-.select-input {
+.selectInput {
   padding-right: 2rem;
   cursor: pointer;
 }
 
-.select-input::-ms-expand {
+.selectInput::-ms-expand {
   display: none;
 }
 
-.select-input option {
+.selectInput option {
   color: rgb(var(--mobo-black));
   background: rgb(var(--mobo-beige));
 }
-.select-input option:checked {
+.selectInput option:checked {
   background: rgb(var(--mobo-red));
   color: rgb(var(--mobo-white));
 }
 
-.select-icon {
+.selectIcon {
   position: absolute;
   right: 0.5rem;
   color: rgb(var(--mobo-white));
@@ -163,7 +163,7 @@
 }
 
 /* Ícones */
-.icon-modify {
+.iconModify {
   color: rgb(var(--mobo-white));
 }
 
@@ -189,13 +189,13 @@
     height: auto;
   }
 
-  .first-column,
-  .second-column {
+  .firstColumn,
+  .secondColumn {
     width: 100%;
     border-radius: 0;
   }
 
-  .second-column {
+  .secondColumn {
     padding: 2rem;
   }
 }

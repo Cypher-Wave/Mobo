@@ -1,6 +1,5 @@
 "use client";
 
-import React from "react";
 import Sidebar from "@/components/Sidebar/Sidebar";
 import RightSection from "@/components/RightSection/RightSection";
 import { usePathname } from "next/navigation";
@@ -11,8 +10,6 @@ export default function PagesLayout({
 }: {
   children: React.ReactNode;
 }) {
-  let title;
-
   const pathname = usePathname();
   const showProfile = !pathname.includes("/profile");
   const showNotification = !pathname.includes("/alerts");
@@ -24,10 +21,9 @@ export default function PagesLayout({
     dashboards: "Dashboard",
     profile: "Perfil",
     sensors: "Sensores",
-    forecast: "Previsão",
+    forecast: "Previsão de Colheita",
     reports: "Relatórios",
-    harvesters: "Colheitadeiras",
-    home: "Home",
+    harvesters: "Configurações do Braço Mecânico",
   };
 
   const pageTitle =
@@ -37,11 +33,11 @@ export default function PagesLayout({
     .replace(/\b\w/g, (c) => c.toUpperCase());
 
   return (
-    <div className="container">
+    <div className={styles.container}>
       <Sidebar />
 
-      <main>
-        <h1 className={style.title}>{pageTitle}</h1>
+      <main className={styles.main}>
+        <h1 className={styles.title}>{pageTitle}</h1>
         {children}
       </main>
 

@@ -8,16 +8,16 @@
 }
 
 /* ===== Conteúdo ===== */
-main {
+.main {
   flex: 1;
   /* top right bottom left  */
   padding: 0.1rem 0 0 13rem;
   margin: 0
 }
 
-main h1 {
+.title {
   font-size: 1.8rem;
-  font-family: "Poppins", sans-serif;
+  font-family: var(--font-primary);
   font-weight: bold;
   color: rgb(var(--mobo-red));
   margin-bottom: 1.5rem;
