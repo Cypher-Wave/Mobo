@@ -111,7 +111,7 @@ export default function MapClient() {
       </MapContainer>
 
       {/* INFO */}
-      <div style={{ marginTop: 12 }}>
+      <div className={styles.info}>
         {marker ? (
           <>
             <button
@@ -124,7 +124,7 @@ export default function MapClient() {
             </button>
           </>
         ) : (
-          <div>Clique no mapa para marcar uma posição.</div>
+          <div className={styles.message}>Clique no mapa para marcar uma posição.</div>
         )}
 
         {status && <div style={{ marginTop: 8 }}>{status}</div>}
