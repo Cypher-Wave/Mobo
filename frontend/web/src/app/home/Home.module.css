@@ -29,6 +29,11 @@
   height: 150px;
 }
 
+.logo {
+  object-fit: contain;
+  filter: drop-shadow(0 0 20px rgba(var(--mobo-white), 0.9));
+} 
+
 /* ===== Mascote ===== */
 .mascotFooter {
   width: 350px;

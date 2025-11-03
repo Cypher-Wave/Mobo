@@ -1,23 +1,24 @@
-import React from "react";
 import Image from "next/image";
-import "./Footer.css";
+import styles from "./Footer.module.css";
 
-const Footer: React.FC = () => {
+const Footer = () => {
   return (
-    <footer className="footer">
-      <h2 className="footer-title">@CyperWaves</h2>
-      <div className="moboFooter-container">
+    <footer className={styles.footer}>
+      <h2 className={styles.footerTitle}>@CyperWaves</h2>
+
+      <div className={styles.moboFooter}>
         <Image
           src="/images/moboFooter.png"
           alt="Mascote Flutuando"
           fill
         />
       </div>
-      <div className="waves">
-        <div className="wave" id="wave1"></div>
-        <div className="wave" id="wave2"></div>
-        <div className="wave" id="wave3"></div>
-        <div className="wave" id="wave4"></div>
+
+      <div className={styles.waves}>
+        <div className={`${styles.wave} ${styles.wave1}`}></div>
+        <div className={`${styles.wave} ${styles.wave2}`}></div>
+        <div className={`${styles.wave} ${styles.wave3}`}></div>
+        <div className={`${styles.wave} ${styles.wave4}`}></div>
       </div>
     </footer>
   );

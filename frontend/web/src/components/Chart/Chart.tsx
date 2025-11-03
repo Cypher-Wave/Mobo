@@ -1,6 +1,5 @@
 "use client";
 
-import React from "react";
 import { Bar, Line, Pie } from "react-chartjs-2";
 import type { ChartData, ChartOptions } from "chart.js";
 import {
@@ -14,7 +13,6 @@ import {
   Title,
   Tooltip,
   Legend,
-  ChartDataset,
 } from "chart.js";
 
 ChartJS.register(

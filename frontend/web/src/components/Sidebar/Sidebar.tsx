@@ -1,13 +1,12 @@
-import React from "react";
 import Image from "next/image";
 import Link from "next/link";
-import "./Sidebar.css";
+import styles from "./Sidebar.module.css";
 
-const Sidebar: React.FC = () => {
+const Sidebar = () => {
   return (
-    <aside className="sidebar-container">
-      <div className="toggle">
-        <div className="logo">
+    <aside className={styles.sidebarContainer}>
+      <div className={styles.toggle}>
+        <div className={styles.logo}>
           <Image
             src="/images/mbBege.png"
             alt="Mobo logo"
@@ -16,7 +15,7 @@ const Sidebar: React.FC = () => {
         </div>
       </div>
 
-      <nav className="sidebar">
+      <nav className={styles.sidebar}>
         <Link href="/home">
           <span>Home</span>
         </Link>
@@ -42,9 +41,9 @@ const Sidebar: React.FC = () => {
           <span>Perfil</span>
         </Link>
 
-        <Link className="land" href="/land">
+        <Link className={styles.land} href="/land">
           <Image
-            className="icon-land"
+            className={styles.iconLand}
             src="/images/icons/adicionar.png"
             alt="Adicionar Terreno"
             width={20}
@@ -53,7 +52,7 @@ const Sidebar: React.FC = () => {
           Terreno
         </Link>
 
-        <Link className="logout" href="/logout">
+        <Link className={styles.logout} href="/logout">
           <Image
             src="/images/icons/botao-de-logout.png"
             alt="Logout"

@@ -10,7 +10,7 @@
 }
 
 /* Contêiner da logo */
-.logo-header {
+.logoHeader {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -20,7 +20,7 @@
 }
 
 /* Animação de crescimento da logo */
-.intro-logo {
+.introLogo {
   animation: grow 2s ease-in-out forwards;
   object-fit: contain;
   width: 100%;
@@ -45,7 +45,7 @@
 
 /* Responsividade extra */
 @media (max-width: 768px) {
-  .logo-header {
+  .logoHeader {
     width: 8rem;
     height: 8rem; 
   }

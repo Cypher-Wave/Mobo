@@ -1,3 +1,4 @@
+/* === PRIMEIRA LINHA === */
 .cameraContainer {
   display: flex;
   align-items: flex-start;
@@ -5,6 +6,7 @@
   gap: 5rem;
 }
 
+/* === CÂMERA === */
 .camera {
   width: 59vw;
   background-color: rgb(var(--mobo-red));
@@ -83,6 +85,15 @@
   color: rgb(var(--mobo-red));
 }
 
+/* === SEGUNDA LINHA === */
+.controlContainer {
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+  margin-top: 0;
+  gap: 3rem;
+}
+
 /* === MAPA E BOTÕES === */
 .map {
   display: flex;
@@ -93,7 +104,7 @@
   border-radius: 1.5rem;
   padding: 1.5rem;
   width: 57vw;
-  background-color: rgb(var(--mobo-white));
+  background-color: rgb(var(--mobo-beige));
   box-shadow: 0px 4px 10px rgba(var(--mobo-red), 0.15);
 }
 
@@ -105,44 +116,55 @@
 }
 
 .mapButton {
+  display: flex;
   flex-direction: column;
-  justify-content: center;
-  gap: 3rem;
+  padding: 1rem;
+  align-items: center;
+  gap: 2rem;
+  margin: 0 1rem;
 }
 
 /* === CONTROLE REMOTO CENTRAL === */
 .remote {
   position: relative;
-  width: 240px;
-  height: 240px;
+  width: 250px;
+  height: 220px;
   border-radius: 50%;
-  background-color: rgb(var(--mobo-beige3));
-  margin-top: 2rem;
   display: flex;
-  flex-direction: column;
   align-items: center;
+  justify-content: center;
+  background: rgba(var(--mobo-white), 0.3);
+  box-shadow: 0 6px 12px rgba(var(--mobo-white), 0.15),
+    inset 0 4px 6px rgba(var(--mobo-black), 0.15),
+    inset 0 -4px 6px rgba(var(--mobo-black), 0.15);
+  border: 2px solid rgba(var(--mobo-white), 0.2);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
 }
 
 .centerButton {
+  position: absolute;
   background-color: rgb(var(--mobo-red));
   color: rgb(var(--mobo-white));
   font-weight: 600;
   border-radius: 50%;
   width: 120px;
   height: 120px;
-  border: 6px solid rgb(var(--mobo-white));
+  top: 45px;
+  border: 2px solid rgb(var(--mobo-white));
   box-shadow: 0 3px 10px rgba(var(--mobo-red), 0.2);
   cursor: pointer;
   z-index: 2;
   transition: 0.3s;
 }
 .centerButton:hover {
+  transform: scale(1.05);
   background-color: rgb(var(--mobo-dark-red));
 }
 
 .directionButtons {
+  top: -5px;
   position: absolute;
-  top: -50;
   width: 220px;
   height: 220px;
   display: flex;
@@ -157,6 +179,11 @@
   cursor: pointer;
   width: 50px;
   height: 50px;
+  transition: 0.3s;
+}
+
+.directionButton:hover {
+  transform: scale(1.05);
 }
 
 .directionButton.up {
@@ -183,36 +210,58 @@
 
 /* === VELOCIDADE (+/-) === */
 .btnSpeed {
-  margin: 0.5rem;
   background: transparent;
   border: none;
   cursor: pointer;
-}
-
-.btnBig,
-.btnSmall {
+  transition: 0.3s;
   position: relative;
   width: 60px;
-  height: 60px;
+  height: 120px;
+}
+
+.btnSpeed:hover {
+  transform: scale(1.05);
+}
+
+.btnSmall {
+  margin-right: -0.5rem;
+}
+
+.btnBig {
+  margin-left: -0.5rem;
 }
 
 /* === BRAÇO MECÂNICO E ÍCONE === */
+.harvesterArea {
+  position: relative;
+  padding-top: 2rem;
+}
+
 .harvester {
   position: relative;
-  width: 150px;
-  height: 150px;
+  width: 18rem;
+  height: 20rem;
   background-color: rgb(var(--mobo-red));
   border-radius: 1.5rem;
-  margin-top: 2rem;
+}
+
+.harvesterClaw {
+  position: absolute;
+  bottom: 10px;
+  left: 20px;
+  width: 16rem;
+  height: 15rem;
 }
 
 .harvesterDirection {
-  position: relative;
-  width: 150px;
-  height: 150px;
+  position: absolute;
+  width: 3rem;
+  height: 3rem;
+  top: 10px;
+  right: 10px;
   background-color: rgb(var(--mobo-red));
   border-radius: 1.5rem;
-  margin-top: 2rem;
+  z-index: 10;
 }
 
 /* === RESPONSIVIDADE === */

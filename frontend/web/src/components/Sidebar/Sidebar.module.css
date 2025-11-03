@@ -1,4 +1,4 @@
-.sidebar-container {
+.sidebarContainer {
   flex: 0 0 5%;
   height: 90vh;
   background: rgb(var(--mobo-red));
@@ -9,11 +9,11 @@
   border-radius: 20px;
   position: fixed;
   justify-content: left;
-  font-family: "Livvic", sans-serif;
+  font-family: var(--font-secondary);
   font-weight: 600;
 }
 
-.sidebar-container .toggle {
+.sidebarContainer .toggle {
   display: flex;
   align-items: center;
   margin-bottom: 2rem;
@@ -24,14 +24,9 @@
 }
 
 .logo {
-  width: 3rem;
-  height: 3rem;
-}
-
-.sidebar .logo {
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  width: 4rem;
+  height: 4rem;
+  position: relative;
 }
 
 .sidebar {

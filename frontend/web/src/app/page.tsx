@@ -3,10 +3,10 @@
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
-import "@/styles/layouts/SplashScreen.css";
 import api from "@/services/api";
+import styles from "@/styles/layouts/SplashScreen.module.css";
 
-const SplashScreen: React.FC = () => {
+const SplashScreen = () => {
   const router = useRouter();
   const [fadeIn, setFadeIn] = useState(false);
 
@@ -33,10 +33,10 @@ const SplashScreen: React.FC = () => {
   }, [router]);
 
   return (
-    <div className="intro">
-      <h1 className={`logo-header ${fadeIn ? "fade-in" : ""}`}>
+    <div className={styles.intro}>
+      <h1 className={`${styles.logoHeader} ${fadeIn ? "fade-in" : ""}`}>
         <Image
-          className="intro-logo"
+          className={styles.introLogo}
           src="/images/mbRosa.png"
           alt="MOBO Logo"
           fill

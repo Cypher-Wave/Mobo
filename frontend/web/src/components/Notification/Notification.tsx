@@ -1,9 +1,9 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
-import "./Notification.css";
+import styles from "./Notification.module.css";
 
-const Notification: React.FC = () => {
+const Notification = () => {
   const router = useRouter();
   const [isOpen, setIsOpen] = useState(false);
 
@@ -11,9 +11,9 @@ const Notification: React.FC = () => {
   const closeDropbox = () => setIsOpen(false);
 
   return (
-    <div className="notification">
+    <div className={styles.notification}>
       {/* Ícone da notificação */}
-      <div className="notification-container" onClick={toggleDropbox}>
+      <div className={styles.notificationContainer} onClick={toggleDropbox}>
         <Image
           src="/images/icons/notificacion.png"
           alt="Ícone de Notificação"
@@ -21,39 +21,69 @@ const Notification: React.FC = () => {
           width={45}
           height={45}
         />
-        <span className="notification-badge" id="notification-badge">
+        <span className={styles.notificationBadge} id="notification-badge">
           3
         </span>
       </div>
 
       {/* DropBox de notificações */}
       {isOpen && (
-        <div className="notification-dropbox" id="notification-dropbox">
-          <h3>Notificações</h3>
-          <ul id="notification-list">
-            <li className="notification-item alert">
-              <p>Atenção chuvas fortes se aproximam, proteja sua Plantação!</p>
-              <div className="notification-buttons">
-                  <button className="btn-item btn-primary" onClick={() => router.push("/reports")}>Ver Alerta</button>
-                  <button className="btn-item btn-primary">Excluir</button>
+        <div className={styles.notificationDropbox} id="notification-dropbox">
+          <h3 className={styles.dropboxTitle}>Notificações</h3>
+          <ul id="notificationList">
+            <li className={`${styles.notificationItem} ${styles.alert}`}>
+              <p>
+                Atenção chuvas fortes se aproximam, proteja sua Plantação!
+              </p>
+              <div className={styles.notificationButtons}>
+                <button
+                  className="btn-item btn-primary"
+                  onClick={() => router.push("/reports")}
+                >
+                  Ver Alerta
+                </button>
+                <button className="btn-item btn-primary">
+                  Excluir
+                </button>
               </div>
             </li>
-            <li className="notification-item">
+
+            <li className={styles.notificationItem}>
               <p>Alta Temperatura</p>
-              <div className="notification-buttons">
-                  <button className="btn-item btn-primary" onClick={() => router.push("/reports")}>Ver Alerta</button>
-                  <button className="btn-item btn-primary">Excluir</button>
+              <div className={styles.notificationButtons}>
+                <button
+                  className="btn-item btn-primary"
+                  onClick={() => router.push("/reports")}
+                >
+                  Ver Alerta
+                </button>
+                <button className="btn-item btn-primary">
+                  Excluir
+                </button>
               </div>
             </li>
-            <li className="notification-item">
+
+            <li className={styles.notificationItem}>
               <p>Baixa Umidade.</p>
-              <div className="notification-buttons">
-                  <button className="btn-item btn-primary" onClick={() => router.push("/reports")}>Ver Alerta</button>
-                  <button className="btn-item btn-primary">Excluir</button>
+              <div className={styles.notificationButtons}>
+                <button
+                  className="btn-item btn-primary"
+                  onClick={() => router.push("/reports")}
+                >
+                  Ver Alerta
+                </button>
+                <button className="btn-item btn-primary">
+                  Excluir
+                </button>
               </div>
             </li>
           </ul>
-          <button className="btn-item btn-primary" id="close-box" onClick={closeDropbox}>
+
+          <button
+            className="btn-item btn-primary"
+            id="close-box"
+            onClick={closeDropbox}
+          >
             Fechar
           </button>
         </div>

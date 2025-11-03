@@ -1,0 +1,123 @@
+.alert {
+  position: relative;
+  color: rgb(var(--mobo-beige));
+  border-radius: 20px;
+  padding: 20px;
+  width: 350px;
+  height: 100px;
+  font-family: var(--font-primary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.2rem;
+  font-weight: 700;
+}
+
+.weatherBox {
+  position: relative;
+  background-color: rgb(var(--mobo-red));
+  color: rgb(var(--mobo-beige));
+  border-radius: 20px;
+  padding: 20px;
+  width: 350px;
+  height: 250px;
+  font-family: var(--font-primary);
+  box-shadow: 0 8px 20px rgba(var(--mobo-black), 0.2);
+  display: flex;
+  flex-direction: column;
+  align-self: flex-start;
+}
+
+.city {
+  font-size: 1.5rem;
+  font-weight: 700;
+  text-align: center;
+  margin-top: -5px;
+}
+
+.infos {
+  display: flex;
+  flex-direction: column;
+}
+
+.temp {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  justify-content: center;
+}
+
+.tempImg img {
+  border-radius: 50%;
+  background-color: rgba(var(--mobo-beige));
+  padding: 10px;
+}
+
+.tempInfos {
+  display: flex;
+  flex-direction: column;
+  padding: 0;
+  align-items: center;
+}
+
+.tempValue {
+  font-size: 2rem;
+  font-weight: 700;
+  margin-top: -10px;
+}
+
+.tempDescription {
+  text-transform: capitalize;
+  font-size: 1rem;
+  color: rgb(var(--mobo-beige));
+  margin-top: -35px;
+}
+
+.otherInfos {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+
+.info {
+  background-color: rgb(var(--mobo-beige));
+  color: rgb(var(--mobo-red));
+  border-radius: 12px;
+  padding: 10px;
+  display: flex;
+  align-items: center;
+  height: fit-content;
+  gap: 10px;
+}
+
+.icon {
+  font-size: 1.2rem;
+}
+
+.weatherTitle {
+  font-size: 0.7rem;
+  font-weight: 600;
+  margin: 0;
+}
+
+.txtWeather {
+  font-size: 0.7rem;
+  font-weight: 700;
+  margin: 0;
+}
+
+/* Responsividade */
+@media (max-width: 400px) {
+  .weatherBox {
+    width: 100%;
+    padding: 15px;
+  }
+
+  .tempValue {
+    font-size: 2rem;
+  }
+
+  .otherInfos {
+    grid-template-columns: 1fr;
+  }
+}

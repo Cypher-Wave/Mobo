@@ -18,7 +18,7 @@
 }
 
 /* Logo dentro da navbar */
-.logo-NavbarHome {
+.logoNavbar {
   position: relative;
   width: 40px;
   height: 40px;
@@ -26,7 +26,7 @@
   transition: transform 0.25s ease;
 }
 
-.logo-NavbarHome:hover {
+.logoNavbar:hover {
   transform: scale(1.08);
 }
 

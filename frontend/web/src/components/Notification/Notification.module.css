@@ -1,22 +1,23 @@
 .notification {
   position: relative;
+  z-index: 1000;
 }
 
-.notification-container {
+.notificationContainer {
   position: relative;
   cursor: pointer;
   transition: transform 0.2s ease;
 }
 
-.notification-container:hover {
+.notificationContainer:hover {
   transform: scale(1.05);
 }
 
-.notification-icon {
+.notificationIcon {
   color: rgb(var(--mobo-red));
 }
 
-.notification-badge {
+.notificationBadge {
   position: absolute;
   top: 0;
   right: 0;
@@ -33,7 +34,7 @@
   justify-content: center;
 }
 
-.notification-dropbox {
+.notificationDropbox {
   position: absolute;
   top: 45px;
   right: 0;
@@ -44,14 +45,14 @@
   width: 300px;
   padding: 1rem;
   z-index: 10;
-  font-family: "Poppins", sans-serif;
+  font-family: var(--font-primary);
 }
 
-.notification-dropbox h3 {
+.dropboxTitle {
   margin-bottom: 1rem;
 }
 
-.notification-item {
+.notificationItem {
   background: rgb(var(--mobo-beige));
   border-radius: 8px;
   padding: 0.8rem;
@@ -59,11 +60,11 @@
   font-size: 0.8rem;
 }
 
-.notification-item.alert {
+.notificationItem.alert {
   border-left: 4px solid rgb(var(--mobo-red));
 }
 
-.notification-buttons {
+.notificationButtons {
     display: flex;
     flex-direction: row;
     gap: 0.5rem;

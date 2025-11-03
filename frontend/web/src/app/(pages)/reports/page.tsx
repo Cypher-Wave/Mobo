@@ -1,7 +1,6 @@
 "use client";
 
-import React from "react";
-import report from "./Reports.module.css";
+import styles from "./Reports.module.css";
 
 interface Harvest {
   _id: string;
@@ -24,18 +23,16 @@ interface PagesLayoutProps {
   onDelete?: (event: React.FormEvent) => void;
 }
 
-const Reports: React.FC<PagesLayoutProps> = ({
+const Reports = ({
   harvests = [],
   currentPage = 1,
   totalPages = 1,
   itemsPerPage = 10,
-}) => {
+}: PagesLayoutProps) => {
   return (
     <>
-      <h1>Relatórios</h1>
-
       {/* Botões */}
-      <div className={report.buttonContainer}>
+      <div className={styles.buttonContainer}>
         <button className="btn btn-primary">Criar Registro</button>
         <button className="btn btn-primary" type="submit">
           Excluir Registro
@@ -43,50 +40,48 @@ const Reports: React.FC<PagesLayoutProps> = ({
       </div>
 
       {/* Tabela */}
-      <div className={report.table}>
-        <div className={report.userList}>
+      <div className={styles.table}>
+        <div className={styles.userList}>
           {/* Cabeçalho */}
-          <div className={report.tableHeader}>
-            <div className={report.tableCell}>SELECIONAR</div>
-            <div className={report.tableCell}>ÍNDICE</div>
-            <div className={report.tableCell}>DATA COLHEITA</div>
-            <div className={report.tableCell}>HORA INÍCIO</div>
-            <div className={report.tableCell}>HORA TÉRMINO</div>
-            <div className={report.tableCell}>DURAÇÃO</div>
-            <div className={report.tableCell}>QUANTIDADE COLHIDA</div>
-            <div className={report.tableCell}>PLANTAÇÃO</div>
-            <div className={report.tableCell}>QUALIDADE</div>
+          <div className={styles.tableHeader}>
+            <div className={styles.tableCell}>SELECIONAR</div>
+            <div className={styles.tableCell}>ÍNDICE</div>
+            <div className={styles.tableCell}>DATA COLHEITA</div>
+            <div className={styles.tableCell}>HORA INÍCIO</div>
+            <div className={styles.tableCell}>HORA TÉRMINO</div>
+            <div className={styles.tableCell}>DURAÇÃO</div>
+            <div className={styles.tableCell}>QUANTIDADE COLHIDA</div>
+            <div className={styles.tableCell}>PLANTAÇÃO</div>
+            <div className={styles.tableCell}>QUALIDADE</div>
           </div>
 
           {/* Linha mockada */}
-          <div className={report.tableRow}>
-            <div className={report.tableCell}>
+          <div className={styles.tableRow}>
+            <div className={styles.tableCell}>
               <input
                 type="checkbox"
-                className={report.selectRecord}
+                className={styles.selectRecord}
                 name="selected_id"
               />
             </div>
-            <div className={report.tableCell}>1</div>
-            <div className={report.tableCell}>27/10/2025</div>
-            <div className={report.tableCell}>10:00</div>
-            <div className={report.tableCell}>12:00</div>
-            <div className={report.tableCell}>2:00</div>
-            <div className={report.tableCell}>500kg</div>
-            <div className={report.tableCell}>Área 1</div>
-            <div className={report.tableCell}>9/10</div>
+            <div className={styles.tableCell}>1</div>
+            <div className={styles.tableCell}>27/10/2025</div>
+            <div className={styles.tableCell}>10:00</div>
+            <div className={styles.tableCell}>12:00</div>
+            <div className={styles.tableCell}>2:00</div>
+            <div className={styles.tableCell}>500kg</div>
+            <div className={styles.tableCell}>Área 1</div>
+            <div className={styles.tableCell}>9/10</div>
           </div>
         </div>
 
         {/* Paginação */}
-        <div className={report.pagination}>
+        <div className={styles.pagination}>
           {Array.from({ length: totalPages }, (_, i) => i + 1).map((page) => (
             <a
               key={page}
               href={`?page=${page}`}
-              className={
-                page === currentPage ? report.active : report.pageLink
-              }
+              className={page === currentPage ? styles.active : styles.pageLink}
             >
               {page}
             </a>
