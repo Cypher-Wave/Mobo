@@ -1,16 +1,48 @@
 "use client";
 
+import { useState } from "react";
+import axios from "axios";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import FirstColumn from "@/components/FirstColumn/FirstColumn";
+import api from "@/services/api";
 import styles from "../Auth.module.css";
 
 const Login = () => {
   const router = useRouter();
 
-  const handleLogin = (event: React.FormEvent) => {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
+  const [loading, setLoading] = useState(false);
+
+  const handleLogin = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    router.push("/home");
+    setError("");
+    setLoading(true);
+
+    try {
+      // ✅ Realiza o login — o cookie HttpOnly será setado automaticamente
+      const response = await api.post("/auth/login", {
+        userEmail: email,
+        userPassword: password,
+      });
+
+      if (response.data.success) {
+        router.push("/home"); // ✅ redireciona
+      }
+    } catch (error: unknown) {
+      if (axios.isAxiosError(error)) {
+        setError(
+          error.response?.data?.message ||
+            "Erro ao fazer login. Tente novamente."
+        );
+      } else {
+        setError("Erro inesperado. Tente novamente.");
+      }
+    } finally {
+      setLoading(false);
+    }
   };
 
   const infos = {
@@ -44,7 +76,13 @@ const Login = () => {
         <form className={styles.form} onSubmit={handleLogin}>
           <label className={styles.labelInput} htmlFor="userEmail">
             <i className="far fa-envelope iconModify"></i>
-            <input type="email" name="userEmail" placeholder="Email" required />
+            <input
+              type="email"
+              value={email}
+              onChange={(event) => setEmail(event.target.value)}
+              placeholder="Email"
+              required
+            />
           </label>
 
           <label className={styles.labelInput} htmlFor="userPassword">
@@ -52,13 +90,17 @@ const Login = () => {
             <input
               type="password"
               name="userPassword"
+              value={password}
+              onChange={(event) => setPassword(event.target.value)}
               placeholder="Senha"
               required
             />
           </label>
 
-          <button className="btn btn-primary" type="submit">
-            Entrar
+          {error && <p className={styles.error}>{error}</p>}
+
+          <button className="btn btn-primary" type="submit" disabled={loading}>
+            {loading ? "Entrando..." : "Entrar"}
           </button>
 
           <a className={styles.password} href="#">
