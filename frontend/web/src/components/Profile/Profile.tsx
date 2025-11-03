@@ -7,6 +7,8 @@ import styles from "./Profile.module.css";
 
 const Profile = () => {
   const router = useRouter();
+  const baseURL = api.defaults.baseURL?.replace("/api", "");
+
   const [user, setUser] = useState<IUser>();
   const [loading, setLoading] = useState(true);
   const [isOpen, setIsOpen] = useState(false);
@@ -73,14 +75,14 @@ const Profile = () => {
         className={`${styles.profileImg} ${styles.profileClick}`}
         onClick={toggleMenu}
       >
-        <Image src="/images/icons/profile.png" alt="Profile" fill />
+        <Image src={user.userImage ? `${baseURL}/uploads/users/${user.userImage}` : "/images/icons/profile.png"} alt="Profile" fill />
       </div>
 
       {isOpen && (
         <div className={styles.dropdownMenu}>
           <div ref={containerRef} className={styles.profileInformation}>
             <div className={styles.profileImg}>
-              <Image src="/images/icons/profile.png" alt="Profile" fill />
+              <Image src={user.userImage ? `${baseURL}/uploads/users/${user.userImage}` : "/images/icons/profile.png"} alt="Profile" fill />
             </div>
 
             <div className={styles.display}>
