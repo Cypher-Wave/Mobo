@@ -165,7 +165,7 @@ class UserService {
       const { userEmail, userPassword } = data;
 
       const user = await User.findOne({
-        where: { userEmail: userEmail.toLowerCase().trim() },
+        userEmail: userEmail.toLowerCase().trim(),
       });
       if (!user) return { success: false, message: "Usuário não encontrado." };
 

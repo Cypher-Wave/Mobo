@@ -1,11 +1,6 @@
 import Image from "next/image";
-import { IUser } from "@/types/User";
 import Profile from "@/components/Profile/Profile";
 import styles from "./NavbarHome.module.css";
-
-interface NavbarProps {
-  user: IUser;
-}
 
 const NavbarHome = () => {
   return (

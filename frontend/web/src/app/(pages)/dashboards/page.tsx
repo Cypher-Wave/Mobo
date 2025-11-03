@@ -1,42 +1,71 @@
 "use client";
 
-import { qualityData, weeklyHarvestData, growthData, totalHarvestData } from "./libraries/DashboardService";
+import { useState, useEffect } from "react";
+import {
+  qualityData,
+  weeklyHarvestData,
+  growthData,
+  totalHarvestData,
+} from "./libraries/DashboardService";
 import Chart from "@/components/Chart/Chart";
+import { IHarvest } from "@/types/Harvest";
+import api from "@/services/api";
 import styles from "./Dashboards.module.css";
 
-interface Harvest {
-  _id: string;
-  harvestDate: string;
-  harvestStart: string;
-  harvestEnd: string;
-  harvestDuration: string;
-  harvestedQuantity: number;
-  planting: { plantingName: string };
-  quality: number;
-}
+const Dashboards = () => {
+  const [harvests, setHarvests] = useState<IHarvest[]>([]);
+  const [loading, setLoading] = useState(true);
 
-interface DashboardsProps {
-  harvests?: Harvest[];
-}
+  useEffect(() => {
+    const fetchHarvests = async () => {
+      try {
+        const res = await api.get("/harvests");
+        setHarvests(res.data.harvests);
+      } catch (error) {
+        console.error("Erro ao buscar harvests:", error);
+      } finally {
+        setLoading(false);
+      }
+    };
 
-const Dashboards = ({ harvests = [] }: DashboardsProps) => {
+    fetchHarvests();
+  }, []);
+
+  if (loading) return <div>Carregando dados...</div>;
+
   return (
     <>
       <div className={styles.graphics}>
         <div className={styles.dash} style={{ width: "100%", height: "300px" }}>
-          <Chart type="bar" data={qualityData} title="Qualidade de Colheita" />
+          <Chart
+            type="bar"
+            data={qualityData(harvests)}
+            title="Qualidade de Colheita"
+          />
         </div>
 
         <div className={styles.dash} style={{ width: "100%", height: "300px" }}>
-          <Chart type="line" data={weeklyHarvestData} title="Colheita da Semana" />
+          <Chart
+            type="line"
+            data={weeklyHarvestData(harvests)}
+            title="Colheita da Semana"
+          />
         </div>
 
         <div className={styles.dash} style={{ width: "100%", height: "300px" }}>
-          <Chart type="line" data={growthData} title="Tendência Crescimento" />
+          <Chart
+            type="line"
+            data={growthData(harvests)}
+            title="Tendência Crescimento"
+          />
         </div>
 
         <div className={styles.dash} style={{ width: "100%", height: "300px" }}>
-          <Chart type="pie" data={totalHarvestData} title="Total Colhido" />
+          <Chart
+            type="pie"
+            data={totalHarvestData(harvests)}
+            title="Total Colhido"
+          />
         </div>
       </div>
     </>

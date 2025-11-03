@@ -8,9 +8,9 @@ const router = Router();
 router.use(authMiddleware); // Todas as rotas abaixo precisam de token
 
 router.get("/", UserController.getAllUsers);
-// Não possui o create pois está no AuthRouters
-router.put("/:id", validateObjectId, UserController.updateUser);
-router.delete("/:id", validateObjectId, UserController.deleteUser);
 router.get("/me", UserController.getUser);
+// Não possui o create pois está no AuthRouters
+router.put("/", UserController.updateUser);
+router.delete("/:id", validateObjectId, UserController.deleteUser);
 
 export default router;

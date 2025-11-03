@@ -26,7 +26,7 @@ import UserRoutes from "./routes/UserRoutes";
 // Configurações do Express
 app.use(
   cors({
-    origin: "localhost",
+    origin: "http://localhost:3000",
     credentials: true,
     allowedHeaders: "content-type",
     methods: ["GET", "POST", "PUT", "DELETE", "HEAD"],
