@@ -38,7 +38,7 @@ const Notification = () => {
               <div className={styles.notificationButtons}>
                 <button
                   className="btn-item btn-primary"
-                  onClick={() => router.push("/reports")}
+                  onClick={() => router.push("/alerts")}
                 >
                   Ver Alerta
                 </button>
@@ -53,7 +53,7 @@ const Notification = () => {
               <div className={styles.notificationButtons}>
                 <button
                   className="btn-item btn-primary"
-                  onClick={() => router.push("/reports")}
+                  onClick={() => router.push("/alerts")}
                 >
                   Ver Alerta
                 </button>
@@ -68,7 +68,7 @@ const Notification = () => {
               <div className={styles.notificationButtons}>
                 <button
                   className="btn-item btn-primary"
-                  onClick={() => router.push("/reports")}
+                  onClick={() => router.push("/alerts")}
                 >
                   Ver Alerta
                 </button>
