@@ -1,31 +1,38 @@
 "use client";
 
+import { useState, useEffect } from "react";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
+import { IUser } from "@/types/User";
 import api from "@/services/api";
 import styles from "./Profile.module.css";
 
-interface User {
-  userImage?: string;
-  userName: string;
-  userEmail: string;
-  userRole: string;
-}
-
-interface HarvestImage {
-  imageName: string;
-  createdAt?: string | Date;
-}
-
-interface ProfileProps {
-  user: User;
-  images: HarvestImage[];
-}
-
-const Profile = ({ user, images }: ProfileProps) => {
+const Profile = () => {
   const router = useRouter();
   const baseURL = api.defaults.baseURL?.replace("/api", "");
+
+  const [user, setUser] = useState<IUser>();
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const fetchUser = async () => {
+      try {
+        const res = await api.get("/user/me");
+        setUser(res.data.user);
+      } catch (error) {
+        router.replace("/auth/login");
+        return;
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchUser();
+  }, [router]);
+
+  if (loading) return null;
+  if (!user) return null;
 
   return (
     <>
@@ -38,9 +45,7 @@ const Profile = ({ user, images }: ProfileProps) => {
           Voltar para a Câmera
         </button>
 
-        <button className="btn btn-primary">
-          Carregar Foto
-        </button>
+        <button className="btn btn-primary">Carregar Foto</button>
       </div>
 
       {/* Card do Usuário */}
@@ -48,23 +53,19 @@ const Profile = ({ user, images }: ProfileProps) => {
         <div className={styles.informationsCard}>
           <div className={styles.profileCard}>
             <Image
-              src="/images/icons/user_profile.png"
+              src={
+                user.userImage
+                  ? `${baseURL}/uploads/users/${user.userImage}`
+                  : "/images/icons/user_profile.png"
+              }
               alt="Foto de Perfil"
               fill
             />
           </div>
 
-          <h2 className={styles.profileTitle}>
-            {/* {user.userName} */}Pedro Henrique Venâncio
-          </h2>
-
-          <p className={styles.profileEmail}>
-            {/* {user.userEmail} */}pedro@email.com
-          </p>
-
-          <p className={styles.profileRole}>
-            {/* {user.userRole} */}Agricultor Familiar
-          </p>
+          <h2 className={styles.profileTitle}>{user.userName}</h2>
+          <p className={styles.profileEmail}>{user.userEmail}</p>
+          <p className={styles.profileRole}>{user.userRole}</p>
 
           <button className="btn btn-primary">Editar Perfil</button>
 
@@ -76,7 +77,6 @@ const Profile = ({ user, images }: ProfileProps) => {
 
         {/* Galeria */}
         <div className={styles.gallery} id="gallery">
-
           {/* Exemplo mockado */}
           {[1].map((i) => (
             <div className={styles.item} key={i}>
@@ -90,7 +90,6 @@ const Profile = ({ user, images }: ProfileProps) => {
               <div className={styles.description}>Dia 27/10/2025</div>
             </div>
           ))}
-
         </div>
       </div>
     </>
