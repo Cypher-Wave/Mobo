@@ -1,5 +1,8 @@
 "use client";
 
+import { useState, useEffect } from "react";
+import { IHarvest } from "@/types/Harvest";
+import api from "@/services/api";
 import styles from "./Reports.module.css";
 
 interface Harvest {
@@ -24,11 +27,30 @@ interface PagesLayoutProps {
 }
 
 const Reports = ({
-  harvests = [],
   currentPage = 1,
   totalPages = 1,
   itemsPerPage = 10,
 }: PagesLayoutProps) => {
+  const [harvests, setHarvests] = useState<IHarvest[]>([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const fetchHarvests = async () => {
+      try {
+        const res = await api.get("/harvest");
+        setHarvests(res.data.harvests);
+      } catch (error) {
+        console.error("Erro ao buscar harvests:", error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchHarvests();
+  }, []);
+
+  if (loading) return <div>Carregando dados...</div>;
+
   return (
     <>
       {/* Botões */}
@@ -55,24 +77,26 @@ const Reports = ({
             <div className={styles.tableCell}>QUALIDADE</div>
           </div>
 
-          {/* Linha mockada */}
-          <div className={styles.tableRow}>
+          {harvests.map((harvest, index) => (
+          <div className={styles.tableRow} key={harvest._id}>
             <div className={styles.tableCell}>
               <input
                 type="checkbox"
                 className={styles.selectRecord}
                 name="selected_id"
+                value={harvest._id}
               />
             </div>
-            <div className={styles.tableCell}>1</div>
-            <div className={styles.tableCell}>27/10/2025</div>
-            <div className={styles.tableCell}>10:00</div>
-            <div className={styles.tableCell}>12:00</div>
-            <div className={styles.tableCell}>2:00</div>
-            <div className={styles.tableCell}>500kg</div>
-            <div className={styles.tableCell}>Área 1</div>
-            <div className={styles.tableCell}>9/10</div>
+            <div className={styles.tableCell}>{index + 1}</div>
+            <div className={styles.tableCell}>{new Date(harvest.harvestDate).toLocaleDateString("pt-BR")}</div>
+            <div className={styles.tableCell}>{harvest.harvestStart}</div>
+            <div className={styles.tableCell}>{harvest.harvestEnd}</div>
+            <div className={styles.tableCell}>{harvest.harvestDuration}</div>
+            <div className={styles.tableCell}>{harvest.harvestedQuantity}kg</div>
+            <div className={styles.tableCell}>{harvest.planting?.plantingName || "—"}</div>
+            <div className={styles.tableCell}>{harvest.quality}/10</div>
           </div>
+          ))}
         </div>
 
         {/* Paginação */}

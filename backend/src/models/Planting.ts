@@ -10,10 +10,10 @@ interface ILocation {
 
 // Interface principal da plantação
 export interface IPlanting extends Document {
-  plantingName?: string;
+  plantingName: string;
   plantingDate?: Date;
-  plantedArea?: number;
-  location?: ILocation;
+  plantedArea: number;
+  location: ILocation;
   user?: IUser["_id"];
   company?: ICompany["_id"];
   createdAt: Date;
