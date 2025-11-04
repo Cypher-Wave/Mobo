@@ -54,7 +54,7 @@ class HarvestService {
       userSession.userRole === "family_farmer"
         ? { user: userSession.id }
         : { company: userSession.company! };
-    return await paginate(Harvest, filter, page, limit, { harvestDate: -1 });
+    return await paginate(Harvest, filter, page, limit, { harvestDate: -1 }, ["planting"]);
   }
 
   // Criar colheita

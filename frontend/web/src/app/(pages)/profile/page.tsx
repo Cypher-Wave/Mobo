@@ -4,7 +4,7 @@ import { useState, useEffect } from "react";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
-import { IUser } from "@/types/User";
+import { IUser, IUserRole } from "@/types/User";
 import api from "@/services/api";
 import styles from "./Profile.module.css";
 
@@ -30,6 +30,12 @@ const Profile = () => {
 
     fetchUser();
   }, [router]);
+
+  const roleMap: Record<IUserRole, string> = {
+    family_farmer: "Agricultor Familiar",
+    company_admin: "Administrador",
+    company_worker: "Funcionário da Empresa",
+  };
 
   if (loading) return null;
   if (!user) return null;
@@ -65,7 +71,9 @@ const Profile = () => {
 
           <h2 className={styles.profileTitle}>{user.userName}</h2>
           <p className={styles.profileEmail}>{user.userEmail}</p>
-          <p className={styles.profileRole}>{user.userRole}</p>
+          <p className={styles.profileRole}>
+            {roleMap[user.userRole] ?? user.userRole}
+          </p>
 
           <button className="btn btn-primary">Editar Perfil</button>
 
@@ -78,16 +86,16 @@ const Profile = () => {
         {/* Galeria */}
         <div className={styles.gallery} id="gallery">
           {/* Exemplo mockado */}
-          {[1].map((i) => (
+          {[1, 2, 3, 4, 5, 6, 7, 8].map((i) => (
             <div className={styles.item} key={i}>
               <div className={styles.photo}>
                 <Image
-                  src={`${baseURL}/uploads/harvests/fotoLichia1.jpg`}
+                  src={`${baseURL}/uploads/harvests/fotoLichia${i}.jpg`}
                   alt=""
                   fill
                 />
               </div>
-              <div className={styles.description}>Dia 27/10/2025</div>
+              <div className={styles.description}>Dia {i + 21}/10/2025</div>
             </div>
           ))}
         </div>

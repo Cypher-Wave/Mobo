@@ -1,4 +1,4 @@
-import { Model } from "mongoose";
+import { Model, PopulateOptions } from "mongoose";
 
 export interface PaginateResult<T> {
   results: T[];
@@ -13,10 +13,25 @@ export async function paginate<T>(
   filter: object = {},
   page: number = 1,
   limit: number = 10,
-  sort: Record<string, 1 | -1> = {}
+  sort: Record<string, 1 | -1> = {},
+  populate: (string | PopulateOptions)[] = []
 ): Promise<PaginateResult<T>> {
   const total = await model.countDocuments(filter);
-  const results = await model.find(filter).sort(sort).skip((page - 1) * limit).limit(limit);
+
+  let query = model
+    .find(filter)
+    .sort(sort)
+    .skip((page - 1) * limit)
+    .limit(limit);
+
+  if (populate.length > 0) {
+    populate.forEach((p) => {
+      query = query.populate([p]);
+    });
+  }
+
+  const results = await query;
+
   return {
     results,
     total,

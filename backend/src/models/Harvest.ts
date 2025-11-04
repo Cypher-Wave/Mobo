@@ -7,11 +7,11 @@ import { ICompany } from "./Company";
 export interface IHarvest extends Document {
   harvestedQuantity: number;
   quality: number;
-  harvestDate?: Date;
-  harvestStart?: string;
-  harvestEnd?: string;
-  harvestDuration?: string;
-  planting?: IPlanting["_id"];
+  harvestDate: Date;
+  harvestStart: string;
+  harvestEnd: string;
+  harvestDuration: string;
+  planting: IPlanting["_id"];
   user?: IUser["_id"];
   company?: ICompany["_id"];
   createdAt: Date;
