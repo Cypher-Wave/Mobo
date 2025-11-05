@@ -1,52 +1,72 @@
 import { IHarvest } from "@/types/Harvest";
 import { IPlanting } from "@/types/Planting";
 
+// Cores para gráficos
+const LINE_COLORS = [
+  "rgb(97, 116, 61)",
+  "rgb(60, 76, 39)",
+  "rgb(144, 171, 96)",
+  "rgb(34, 44, 21)",
+  "rgb(203, 232, 144)",
+];
+
+const BAR_COLORS = [
+  "rgb(174, 88, 119)",
+  "rgb(241, 43, 115)",
+  "rgb(183, 10, 73)",
+  "rgb(131, 5, 51)",
+  "rgb(92, 6, 37)",
+];
+
+// Obtém nome do talhão, seja string ou objeto
 function getPlantingName(planting: string | IPlanting | undefined): string {
   if (!planting) return "Desconhecido";
   if (typeof planting === "string") return planting;
   return planting.plantingName ?? "Sem Nome";
 }
 
+// Analisa uma data (string ou Date) e retorna um Date local à meia-noite daquele dia
 function parseDateAsLocalDay(dateLike: string | Date | undefined): Date | null {
   if (!dateLike) return null;
   const s = typeof dateLike === "string" ? dateLike : dateLike.toISOString();
-  // tenta extrair YYYY-MM-DD (se vier com timezone, por exemplo "2024-11-04T00:00:00.000+00:00")
   const m = s.match(/^(\d{4}-\d{2}-\d{2})/);
   if (!m) {
-    // fallback: tentar criar Date normal
+    // Tenta criar Date diretamente (pode vir como ISO completo)
     const d = new Date(s);
     return isNaN(d.getTime()) ? null : d;
   }
   const [year, month, day] = m[1].split("-").map(Number);
-  // cria Date no horário local à meia-noite daquele dia
   return new Date(year, month - 1, day);
 }
 
+// Normaliza uma data para date-only local
 function normalizeLocalDate(dateLike: Date): Date {
   const d = parseDateAsLocalDay(dateLike);
   return d ?? null!;
 }
 
-/** Retorna start of week baseado em weekStartDay (0=Dom, 1=Seg, ... 6=Sáb) */
+// Obtém o início da semana para uma data, considerando o dia de início da semana
 function getWeekStart(dateLike: Date, weekStartDay = 0): Date {
   const d = new Date(
     dateLike.getFullYear(),
     dateLike.getMonth(),
     dateLike.getDate()
   );
-  const day = d.getDay(); // 0..6
+  const day = d.getDay();
   // quantos dias voltar até atingir weekStartDay
   const diff = (day - weekStartDay + 7) % 7;
   d.setDate(d.getDate() - diff);
   return new Date(d.getFullYear(), d.getMonth(), d.getDate());
 }
 
+// Formata data como dd/mm
 function formatShort(d: Date): string {
   const day = d.getDate().toString().padStart(2, "0");
   const month = (d.getMonth() + 1).toString().padStart(2, "0");
   return `${day}/${month}`;
 }
 
+// Gráfico de qualidade média por talhão nos últimos 30 dias
 export function qualityData(harvests: IHarvest[]) {
   // ✅ 1. Filtrar apenas os últimos 30 dias
   const now = new Date();
@@ -60,14 +80,12 @@ export function qualityData(harvests: IHarvest[]) {
 
   // ✅ 2. Agrupar por talhão e calcular média da qualidade
   const groups: Record<string, { totalQuality: number; count: number }> = {};
-
   filtered.forEach((h) => {
     const plantingName = getPlantingName(h.planting);
 
     if (!groups[plantingName]) {
       groups[plantingName] = { totalQuality: 0, count: 0 };
     }
-
     groups[plantingName].totalQuality += h.quality;
     groups[plantingName].count += 1;
   });
@@ -84,19 +102,14 @@ export function qualityData(harvests: IHarvest[]) {
       {
         label: "Média de Qualidade por Talhão (Últimos 30 dias)",
         data,
-        backgroundColor: [
-          "rgb(174, 88, 119)",
-          "rgb(241, 43, 115)",
-          "rgb(183, 10, 73)",
-          "rgb(131, 5, 51)",
-          "rgb(92, 6, 37)",
-        ],
+        backgroundColor: BAR_COLORS,
         fill: true,
       },
     ],
   };
 }
 
+// Gráfico de colheitas nos últimos 7 dias, por talhão
 export function weeklyHarvestData(harvests: IHarvest[]) {
   const today = new Date();
   const todayLocal = new Date(
@@ -107,7 +120,6 @@ export function weeklyHarvestData(harvests: IHarvest[]) {
 
   const startLocal = new Date(todayLocal);
   startLocal.setDate(startLocal.getDate() - 6);
-
   const week = ["Dom", "Seg", "Ter", "Qua", "Qui", "Sex", "Sáb"];
 
   // Labels rotacionadas (hoje +1)
@@ -123,11 +135,8 @@ export function weeklyHarvestData(harvests: IHarvest[]) {
     ...new Set(harvests.map((h) => getPlantingName(h.planting))),
   ];
 
-  const datasets = plantings.map((plantingName) => {
-    // Array de 7 posições para esse talhão
+  const datasets = plantings.map((plantingName, index) => {
     const data = new Array<number>(7).fill(0);
-
-    // Filtrar colheitas desse talhão
     const filtered = harvests.filter(
       (h) => getPlantingName(h.planting) === plantingName
     );
@@ -135,34 +144,22 @@ export function weeklyHarvestData(harvests: IHarvest[]) {
     filtered.forEach((h) => {
       const d = parseDateAsLocalDay(h.harvestDate);
       if (!d) return;
-
       if (d < startLocal || d > todayLocal) return;
 
       const weekday = d.getDay();
       const pos = (weekday - startWeekday + 7) % 7;
-
       data[pos] += Number(h.harvestedQuantity || 0);
     });
+
+    const color = LINE_COLORS[index % LINE_COLORS.length];
 
     return {
       label: plantingName,
       data,
-      borderColor: [
-        "rgb(97, 116, 61)",
-        "rgb(60, 76, 39)",
-        "rgb(144, 171, 96)",
-        "rgb(34, 44, 21)",
-        "rgb(203, 232, 144)",
-      ],
-      backgroundColor: [
-        "rgb(97, 116, 61)",
-        "rgb(60, 76, 39)",
-        "rgb(144, 171, 96)",
-        "rgb(34, 44, 21)",
-        "rgb(203, 232, 144)",
-      ],
+      borderColor: color,
+      backgroundColor: color,
       tension: 0.3,
-      fill: true,
+      fill: false, // recomendado para linha
     };
   });
 
@@ -172,11 +169,11 @@ export function weeklyHarvestData(harvests: IHarvest[]) {
   };
 }
 
+// Gráfico de crescimento semanal nos últimos 4 semanas, por talhão
 export function growthData(
   harvests: IHarvest[],
-  weekStartDay: number = 0 // altere para 1 se quiser semanas seg–dom
+  weekStartDay: number = 0
 ) {
-  // safe guard
   if (!harvests || harvests.length === 0) {
     return { labels: [], datasets: [] };
   }
@@ -233,32 +230,22 @@ export function growthData(
         .filter(
           (h) =>
             getPlantingName(h.planting) === name &&
-            h.__day.getTime() >= week.start.getTime() &&
-            h.__day.getTime() <= week.end.getTime()
+            h.__day >= week.start &&
+            h.__day <= week.end
         )
         .reduce((acc, h) => acc + Number(h.harvestedQuantity || 0), 0);
       return sum;
     });
 
+    const color = LINE_COLORS[idx % LINE_COLORS.length];
+
     return {
       label: name,
       data,
-      backgroundColor: [
-        "rgb(97, 116, 61)",
-        "rgb(60, 76, 39)",
-        "rgb(144, 171, 96)",
-        "rgb(34, 44, 21)",
-        "rgb(203, 232, 144)",
-      ],
-      borderColor: [
-        "rgb(97, 116, 61)",
-        "rgb(60, 76, 39)",
-        "rgb(144, 171, 96)",
-        "rgb(34, 44, 21)",
-        "rgb(203, 232, 144)",
-      ],
-      fill: false,
+      borderColor: color,
+      backgroundColor: color,
       tension: 0.3,
+      fill: false,
     };
   });
 
@@ -268,6 +255,7 @@ export function growthData(
   };
 }
 
+// Gráfico de total colhido por talhão
 export function totalHarvestData(harvests: IHarvest[]) {
   const labels = [...new Set(harvests.map((h) => getPlantingName(h.planting)))];
 
@@ -282,13 +270,7 @@ export function totalHarvestData(harvests: IHarvest[]) {
     datasets: [
       {
         data,
-        backgroundColor: [
-          "rgb(174, 88, 119)",
-          "rgb(241, 43, 115)",
-          "rgb(183, 10, 73)",
-          "rgb(131, 5, 51)",
-          "rgb(92, 6, 37)",
-        ],
+        backgroundColor: BAR_COLORS,
         borderColor: ["rgb(236, 226, 214)"],
         borderWidth: 2,
       },
