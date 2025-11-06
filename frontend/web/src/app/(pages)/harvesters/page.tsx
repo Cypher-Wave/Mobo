@@ -2,10 +2,12 @@
 
 import Image from "next/image";
 import { useRouter } from "next/navigation";
+import { useCamera } from "@/hooks/useCamera";
 import styles from "./Harvester.module.css";
 
 const Harvester = () => {
   const router = useRouter();
+  useCamera();
 
   return (
     <>
