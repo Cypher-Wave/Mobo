@@ -84,6 +84,10 @@
   height: 6rem;
 }
 
+.authLogo {
+  object-fit: contain;
+  filter: drop-shadow(0 0 20px rgba(var(--mobo-white), 0.9));
+} 
 
 /* Título do formulário */
 .titleSecond {
