@@ -6,12 +6,15 @@ import { validateObjectId } from "../middlewares/validateObjectId";
 const router = Router();
 
 router.use(authMiddleware); // Todas as rotas abaixo precisam de token
-router.use("/:id", validateObjectId); // Todas as rotas com ID passam pela validação do ObjectId
 
+router.get("/paginated", HarvestController.getPaginatedHarvests);
 router.get("/", HarvestController.getAllHarvests);
 router.post("/", HarvestController.createHarvest);
+router.delete("/", HarvestController.deleteManyHarvests);
+
+router.use("/:id", validateObjectId); // Todas as rotas com ID passam pela validação do ObjectId
+
 router.put("/:id", HarvestController.updateHarvest);
-router.delete("/:id", HarvestController.deleteHarvest);
 router.get("/:id", HarvestController.getOneHarvest);
 
 export default router;

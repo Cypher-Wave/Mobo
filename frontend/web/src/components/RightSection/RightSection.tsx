@@ -7,10 +7,7 @@ interface RightSectionProps {
   showNotification?: boolean;
 }
 
-const RightSection = ({
-  showProfile = true,
-  showNotification = true,
-}: RightSectionProps) => {
+const RightSection = () => {
   return (
     <div className={styles.rightSection}>
       <div className={styles.darkMode}>
@@ -18,8 +15,8 @@ const RightSection = ({
         <span className="material-icons-sharp"></span>
       </div>
 
-      {showProfile && <Profile />}
-      {showNotification && <Notification />}
+      <Profile />
+      <Notification />
     </div>
   );
 };

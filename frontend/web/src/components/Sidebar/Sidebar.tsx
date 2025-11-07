@@ -7,11 +7,7 @@ const Sidebar = () => {
     <aside className={styles.sidebarContainer}>
       <div className={styles.toggle}>
         <div className={styles.logo}>
-          <Image
-            src="/images/mbBege.png"
-            alt="Mobo logo"
-            fill
-          />
+          <Image src="/images/mbBege.png" alt="Mobo logo" fill />
         </div>
       </div>
 
@@ -41,7 +37,7 @@ const Sidebar = () => {
           <span>Perfil</span>
         </Link>
 
-        <Link className={styles.land} href="/land">
+        <Link className={styles.land} href="#">
           <Image
             className={styles.iconLand}
             src="/images/icons/adicionar.png"
@@ -50,16 +46,6 @@ const Sidebar = () => {
             height={20}
           />
           Terreno
-        </Link>
-
-        <Link className={styles.logout} href="/logout">
-          <Image
-            src="/images/icons/botao-de-logout.png"
-            alt="Logout"
-            width={20}
-            height={20}
-          />
-          Logout
         </Link>
       </nav>
     </aside>

@@ -38,7 +38,7 @@ class HarvestService {
       userSession.userRole === "family_farmer"
         ? { user: userSession.id }
         : { company: userSession.company! };
-    return await Harvest.find(filter);
+    return await Harvest.find(filter).populate("planting");
   }
 
   // Listar todas as colheitas Paginadas
@@ -81,15 +81,6 @@ class HarvestService {
     checkOwnership(userSession, ownedFields(harvest));
     this.checkHarvestIntegrity(data);
     return await Harvest.findByIdAndUpdate(id, data, { new: true });
-  }
-
-  // Deletar uma colheita
-  async delete(id: string, userSession: IUserPayload): Promise<void> {
-    const harvest = await Harvest.findById(id);
-    if (!harvest) throw new Error("Colheita não encontrada");
-
-    checkOwnership(userSession, ownedFields(harvest));
-    await Harvest.findByIdAndDelete(id);
   }
 
   // Deletar várias colheitas
