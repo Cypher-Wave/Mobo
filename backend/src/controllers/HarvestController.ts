@@ -9,10 +9,6 @@ class HarvestController {
   // Listar todas as colheitas
   getAllHarvests = asyncHandler(async (req: AuthRequest, res: Response) => {
     // Pega página e limite da query string (default: page 1, limit 10)
-    const page = parseInt(req.query.page as string) || 1;
-    const limit = parseInt(req.query.limit as string) || 10;
-
-    // user vem do middleware JWT
     const user = req.user!;
     if (!user) {
       return res
@@ -20,28 +16,63 @@ class HarvestController {
         .json({ success: false, message: "Token inválido ou ausente." });
     }
 
-    // Chama o service paginado
-    const paginatedResult = await HarvestService.getPaginated(
-      user,
-      page,
-      limit
-    );
+    const harvests = await HarvestService.getAll(user);
 
-    if (!paginatedResult || paginatedResult.results.length === 0) {
-      return res.status(404).json({
-        success: false,
+    if (!harvests) {
+      return res.status(200).json({
+        success: true,
         message: "Nenhuma colheita encontrada.",
       });
     }
 
     return res.status(200).json({
       success: true,
-      harvests: paginatedResult.results,
-      totalPages: paginatedResult.totalPages,
-      totalCount: paginatedResult.total,
-      currentPage: paginatedResult.currentPage,
+      harvests,
     });
   });
+
+  // Listar as colheitas Paginadas
+  getPaginatedHarvests = asyncHandler(
+    async (req: AuthRequest, res: Response) => {
+      // Pega página e limite da query string (default: page 1, limit 10)
+      const page = parseInt(req.query.page as string) || 1;
+      const limit = parseInt(req.query.limit as string) || 10;
+
+      // user vem do middleware JWT
+      const user = req.user!;
+      if (!user) {
+        return res
+          .status(401)
+          .json({ success: false, message: "Token inválido ou ausente." });
+      }
+
+      // Chama o service paginado
+      const paginatedResult = await HarvestService.getPaginated(
+        user,
+        page,
+        limit
+      );
+
+      if (!paginatedResult || paginatedResult.results.length === 0) {
+        return res.status(200).json({
+          success: true,
+          message: "Nenhuma colheita nesta página.",
+          harvests: [],
+          totalPages: paginatedResult.totalPages,
+          totalCount: paginatedResult.total,
+          currentPage: paginatedResult.currentPage,
+        });
+      }
+
+      return res.status(200).json({
+        success: true,
+        harvests: paginatedResult.results,
+        totalPages: paginatedResult.totalPages,
+        totalCount: paginatedResult.total,
+        currentPage: paginatedResult.currentPage,
+      });
+    }
+  );
 
   // Criar colheita
   createHarvest = asyncHandler(async (req: AuthRequest, res: Response) => {
@@ -103,19 +134,29 @@ class HarvestController {
   });
 
   // Deletar colheita
-  deleteHarvest = asyncHandler(async (req: AuthRequest, res: Response) => {
+  deleteManyHarvests = asyncHandler(async (req: AuthRequest, res: Response) => {
     const user = req.user!;
-    if (!user)
-      return res
-        .status(401)
-        .json({ success: false, message: "Token inválido ou ausente." });
+    if (!user) {
+      return res.status(401).json({
+        success: false,
+        message: "Token inválido ou ausente.",
+      });
+    }
 
-    const { id } = req.params;
+    const { ids } = req.body;
 
-    await HarvestService.delete(id, user);
+    if (!ids || (Array.isArray(ids) && ids.length === 0)) {
+      return res.status(400).json({
+        success: false,
+        message: "Nenhum ID foi informado para exclusão.",
+      });
+    }
+
+    await HarvestService.deleteMany(user, ids);
+
     return res.status(200).json({
       success: true,
-      message: "Colheita deletada com sucesso.",
+      message: "Colheitas deletadas com sucesso.",
     });
   });
 

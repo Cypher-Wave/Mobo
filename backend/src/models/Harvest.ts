@@ -8,7 +8,7 @@ export interface IHarvest extends Document {
   harvestedQuantity: number;
   quality: number;
   harvestDate: Date;
-  harvestStart: string;
+  harvestStart: string; 
   harvestEnd: string;
   harvestDuration: string;
   planting: IPlanting["_id"];

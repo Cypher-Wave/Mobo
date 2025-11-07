@@ -1,43 +1,59 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import { useSearchParams } from "next/navigation";
 import { IHarvest } from "@/types/Harvest";
 import api from "@/services/api";
 import styles from "./Reports.module.css";
 
-interface Harvest {
-  _id: string;
-  harvestDate: string;
-  harvestStart: string;
-  harvestEnd: string;
-  harvestDuration: string;
-  harvestedQuantity: number;
-  planting: { plantingName: string };
-  quality: number;
-}
+const Reports = () => {
+  const searchParams = useSearchParams();
 
-interface PagesLayoutProps {
-  children?: React.ReactNode;
-  harvests?: Harvest[];
-  currentPage?: number;
-  totalPages?: number;
-  itemsPerPage?: number;
-  onCreate?: (event: React.FormEvent) => void;
-  onDelete?: (event: React.FormEvent) => void;
-}
+  const page = Number(searchParams.get("page")) || 1;
 
-const Reports = ({
-  currentPage = 1,
-  totalPages = 1,
-  itemsPerPage = 10,
-}: PagesLayoutProps) => {
   const [harvests, setHarvests] = useState<IHarvest[]>([]);
+  const [currentPage, setCurrentPage] = useState<number>(1);
+  const [totalPages, setTotalPages] = useState<number>(1);
+  const [selectedIds, setSelectedIds] = useState<string[]>([]);
+
   const [loading, setLoading] = useState(true);
+
+  const handleSelect = (id: string, checked: boolean) => {
+    setSelectedIds((prev) =>
+      checked ? [...prev, id] : prev.filter((item) => item !== id)
+    );
+  };
+
+  const handleDelete = async () => {
+    if (selectedIds.length === 0) {
+      alert("Selecione pelo menos um registro para excluir.");
+      return;
+    }
+
+    if (!confirm("Deseja realmente excluir os registros selecionados?")) return;
+
+    try {
+      await api.delete("/harvest", {
+        data: { ids: selectedIds },
+      });
+
+      // Atualiza a lista após excluir
+      setHarvests((prev) => prev.filter((h) => !selectedIds.includes(h._id)));
+      setSelectedIds([]);
+
+      alert("Registros excluídos com sucesso!");
+    } catch (error) {
+      console.error("Erro ao excluir registros:", error);
+      alert("Erro ao excluir registros.");
+    }
+  };
 
   useEffect(() => {
     const fetchHarvests = async () => {
       try {
-        const res = await api.get("/harvest");
+        const res = await api.get(`/harvest/paginated?page=${page}&limit=10`);
+        setCurrentPage(res.data.currentPage);
+        setTotalPages(res.data.totalPages);
         setHarvests(res.data.harvests);
       } catch (error) {
         console.error("Erro ao buscar harvests:", error);
@@ -47,7 +63,7 @@ const Reports = ({
     };
 
     fetchHarvests();
-  }, []);
+  }, [page]);
 
   if (loading) return <div>Carregando dados...</div>;
 
@@ -56,7 +72,7 @@ const Reports = ({
       {/* Botões */}
       <div className={styles.buttonContainer}>
         <button className="btn btn-primary">Criar Registro</button>
-        <button className="btn btn-primary" type="submit">
+        <button className="btn btn-primary" onClick={handleDelete}>
           Excluir Registro
         </button>
       </div>
@@ -78,36 +94,43 @@ const Reports = ({
           </div>
 
           {harvests.map((harvest, index) => (
-          <div className={styles.tableRow} key={harvest._id}>
-            <div className={styles.tableCell}>
-              <input
-                type="checkbox"
-                className={styles.selectRecord}
-                name="selected_id"
-                value={harvest._id}
-              />
+            <div className={styles.tableRow} key={harvest._id}>
+              <div className={styles.tableCell}>
+                <input
+                  type="checkbox"
+                  className={styles.selectRecord}
+                  name="selected_id"
+                  value={harvest._id}
+                  onChange={(e) => handleSelect(harvest._id, e.target.checked)}
+                />
+              </div>
+              <div className={styles.tableCell}>{index + 1}</div>
+              <div className={styles.tableCell}>
+                {new Date(harvest.harvestDate).toLocaleDateString("pt-BR")}
+              </div>
+              <div className={styles.tableCell}>{harvest.harvestStart}</div>
+              <div className={styles.tableCell}>{harvest.harvestEnd}</div>
+              <div className={styles.tableCell}>{harvest.harvestDuration}</div>
+              <div className={styles.tableCell}>
+                {harvest.harvestedQuantity}kg
+              </div>
+              <div className={styles.tableCell}>
+                {harvest.planting?.plantingName || "—"}
+              </div>
+              <div className={styles.tableCell}>{harvest.quality}/10</div>
             </div>
-            <div className={styles.tableCell}>{index + 1}</div>
-            <div className={styles.tableCell}>{new Date(harvest.harvestDate).toLocaleDateString("pt-BR")}</div>
-            <div className={styles.tableCell}>{harvest.harvestStart}</div>
-            <div className={styles.tableCell}>{harvest.harvestEnd}</div>
-            <div className={styles.tableCell}>{harvest.harvestDuration}</div>
-            <div className={styles.tableCell}>{harvest.harvestedQuantity}kg</div>
-            <div className={styles.tableCell}>{harvest.planting?.plantingName || "—"}</div>
-            <div className={styles.tableCell}>{harvest.quality}/10</div>
-          </div>
           ))}
         </div>
 
         {/* Paginação */}
         <div className={styles.pagination}>
-          {Array.from({ length: totalPages }, (_, i) => i + 1).map((page) => (
+          {Array.from({ length: totalPages }, (_, i) => i + 1).map((p) => (
             <a
-              key={page}
-              href={`?page=${page}`}
-              className={page === currentPage ? styles.active : styles.pageLink}
+              key={p}
+              href={`?page=${p}`}
+              className={p === currentPage ? styles.active : styles.pageLink}
             >
-              {page}
+              {p}
             </a>
           ))}
         </div>

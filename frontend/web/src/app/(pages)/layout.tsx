@@ -37,9 +37,6 @@ export default function PagesLayout({
   if (loading) return null;
   if (!user) return null;
 
-  const showProfile = !pathname.includes("/profile");
-  const showNotification = !pathname.includes("/alerts");
-
   const page = pathname.split("/").filter(Boolean).pop() || "home";
 
   const titleMap: Record<string, string> = {
@@ -66,10 +63,7 @@ export default function PagesLayout({
           {children}
         </main>
 
-        <RightSection
-          showProfile={showProfile}
-          showNotification={showNotification}
-        />
+        <RightSection />
       </div>
     </>
   );
