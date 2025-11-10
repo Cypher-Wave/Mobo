@@ -1,0 +1,71 @@
+.notification {
+  position: relative;
+  z-index: 1000;
+}
+
+.notificationContainer {
+  position: relative;
+  cursor: pointer;
+  transition: transform 0.2s ease;
+}
+
+.notificationContainer:hover {
+  transform: scale(1.05);
+}
+
+.notificationIcon {
+  color: rgb(var(--mobo-red));
+}
+
+.notificationBadge {
+  position: absolute;
+  top: 0;
+  right: 0;
+  background: rgb(var(--mobo-green));
+  color: rgb(var(--mobo-white));
+  border-radius: 50%;
+  font-family: var(--font-secondary);
+  font-size: 0.8rem;
+  font-weight: 600;
+  width: 20px;
+  height: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.notificationDropbox {
+  position: absolute;
+  top: 45px;
+  right: 0;
+  background: rgb(var(--mobo-white));
+  color: rgb(var(--mobo-red));
+  border-radius: 10px;
+  box-shadow: 0 2px 8px rgba(var(--mobo-black), 0.15);
+  width: 300px;
+  padding: 1rem;
+  z-index: 10;
+  font-family: var(--font-primary);
+}
+
+.dropboxTitle {
+  margin-bottom: 1rem;
+}
+
+.notificationItem {
+  background: rgb(var(--mobo-beige));
+  border-radius: 8px;
+  padding: 0.8rem;
+  margin-bottom: 0.5rem;
+  font-size: 0.8rem;
+}
+
+.notificationItem.alert {
+  border-left: 4px solid rgb(var(--mobo-red));
+}
+
+.notificationButtons {
+    display: flex;
+    flex-direction: row;
+    gap: 0.5rem;
+}
