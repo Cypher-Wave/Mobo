@@ -10,7 +10,7 @@ interface ISetting {
 // Interface principal do documento Sensor
 export interface ISensor {
   id: string;
-  sensorType: ("air_humidity" | "soil_humidity" | "temperature")[];
+  sensorType: "air_humidity" | "soil_humidity" | "temperature";
   sensorNumeration?: string;
   sensorAccuracy?: number;
   measuringRange?: string;

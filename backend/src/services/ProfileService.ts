@@ -9,6 +9,19 @@ interface UploadImageResult {
 
 // Serviço de Perfil
 class ProfileService {
+  // Buscar imagens do usuário
+  async getUserImages(userId: string) {
+    try {
+      const images = await HarvestImage.find({ user: userId })
+        .sort({ createdAt: -1 })
+        .lean();
+      return images;
+    } catch (error) {
+      console.error("Erro ao buscar imagens:", error);
+      return [];
+    }
+  }
+
   // Upload de imagem
   async uploadImage(
     userId: string,
@@ -21,19 +34,6 @@ class ProfileService {
     } catch (error) {
       console.error("Erro ao salvar imagem:", error);
       return { success: false, message: "Erro ao salvar imagem" };
-    }
-  }
-
-  // Buscar imagens do usuário
-  async getUserImages(userId: string) {
-    try {
-      const images = await HarvestImage.find({ user: userId })
-        .sort({ createdAt: -1 })
-        .lean();
-      return images;
-    } catch (error) {
-      console.error("Erro ao buscar imagens:", error);
-      return [];
     }
   }
 }

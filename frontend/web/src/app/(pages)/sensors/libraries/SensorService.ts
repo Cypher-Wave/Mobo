@@ -16,38 +16,56 @@ const colors2 = [
   "rgb(92, 6, 37)",
 ];
 
-export const temperature = (data: ISensorData[]) => ({
-  labels: data.map((s) => s.planting?.plantingName ?? "Sem nome"),
-  datasets: [
-    {
-      data: data.map((s) => s.temperature ?? 0), // ✅ Nunca undefined
-      backgroundColor: colors1,
-      borderColor: ["rgb(236, 226, 214)"],
-      borderWidth: 2,
-    },
-  ],
-});
+export const temperature = (data: ISensorData[]) => {
+  const filtered = data.filter(
+    (s) => s.sensor?.sensorType == "temperature" // ✅ só sensores de um tipo
+  );
 
-export const airHumidity = (data: ISensorData[]) => ({
-  labels: data.map((s) => s.planting?.plantingName ?? "Sem nome"),
-  datasets: [
-    {
-      data: data.map((s) => s.airHumidity ?? 0), // ✅ Nunca undefined
-      backgroundColor: colors2,
-      borderColor: ["rgb(236, 226, 214)"],
-      borderWidth: 2,
-    },
-  ],
-});
+  return {
+    labels: filtered.map((s) => s.planting?.plantingName ?? "Sem nome"),
+    datasets: [
+      {
+        data: filtered.map((s) => s.temperature ?? 0), // ✅ Nunca undefined
+        backgroundColor: colors2,
+        borderColor: ["rgb(236, 226, 214)"],
+        borderWidth: 2,
+      },
+    ],
+  };
+};
 
-export const soilHumidity = (data: ISensorData[]) => ({
-  labels: data.map((s) => s.planting?.plantingName ?? "Sem nome"),
-  datasets: [
-    {
-      data: data.map((s) => s.soilHumidity ?? 0), // ✅ Nunca undefined
-      backgroundColor: colors2,
-      borderColor: ["rgb(236, 226, 214)"],
-      borderWidth: 2,
-    },
-  ],
-});
+export const airHumidity = (data: ISensorData[]) => {
+  const filtered = data.filter(
+    (s) => s.sensor?.sensorType == "air_humidity" // ✅ só sensores de um tipo
+  );
+
+  return {
+    labels: filtered.map((s) => s.planting?.plantingName ?? "Sem nome"),
+    datasets: [
+      {
+        data: filtered.map((s) => s.airHumidity ?? 0),
+        backgroundColor: colors1,
+        borderColor: ["rgb(236, 226, 214)"],
+        borderWidth: 2,
+      },
+    ],
+  };
+};
+
+export const soilHumidity = (data: ISensorData[]) => {
+  const filtered = data.filter(
+    (s) => s.sensor?.sensorType == "soil_humidity" // ✅ só sensores de um tipo
+  );
+
+  return {
+    labels: filtered.map((s) => s.planting?.plantingName ?? "Sem nome"),
+    datasets: [
+      {
+        data: filtered.map((s) => s.soilHumidity ?? 0), // ✅ Nunca undefined
+        backgroundColor: colors1,
+        borderColor: ["rgb(236, 226, 214)"],
+        borderWidth: 2,
+      },
+    ],
+  };
+};

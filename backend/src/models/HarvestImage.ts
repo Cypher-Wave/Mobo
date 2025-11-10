@@ -1,9 +1,11 @@
 import mongoose, { Schema, Document, Model } from "mongoose";
 import { IUser } from "./User";
+import { ICompany } from "./Company";
 
 // Interface principal do documento HarvestImage
 export interface IHarvestImage extends Document {
-  user: IUser["_id"];
+  user?: IUser["_id"];
+  company?: ICompany["_id"];
   imageName: string;
   description?: string;
   createdAt: Date;
@@ -11,7 +13,8 @@ export interface IHarvestImage extends Document {
 
 // Schema principal do documento HarvestImage
 const HarvestImageSchema: Schema<IHarvestImage> = new Schema({
-  user: { type: mongoose.Schema.Types.ObjectId, ref: "User", required: true },
+  user: { type: mongoose.Schema.Types.ObjectId, ref: "User" },
+  company: { type: mongoose.Schema.Types.ObjectId, ref: "Company" },
   imageName: { type: String, required: true },
   description: { type: String },
   createdAt: { type: Date, default: Date.now },

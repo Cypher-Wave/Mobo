@@ -8,6 +8,7 @@ export interface SensorDataInput {
   soilHumidity: number;
   airHumidity: number;
   alerts?: ISensorData["alerts"];
+  planting: ISensorData["planting"];
   sensor: ISensorData["sensor"];
 }
 
@@ -15,11 +16,20 @@ export interface SensorDataInput {
 class SensorDataService {
   // Função para listar todas os dados de sensores
   async getAll(userSession: IUserPayload): Promise<ISensorData[]> {
-    const filter =
+    const match =
       userSession.userRole === "family_farmer"
         ? { user: userSession.id }
         : { company: userSession.company! };
-    return await SensorData.find(filter).populate("sensor");
+
+    const data = await SensorData.find()
+      .populate({
+        path: "sensor",
+        match,
+        select: "sensorType user company",
+      })
+      .populate("planting");
+
+    return data.filter((d) => d.sensor !== null);
   }
 
   // Função para cadastrar um dado de sensor
@@ -38,7 +48,9 @@ class SensorDataService {
     userSession: IUserPayload,
     data: SensorDataInput
   ): Promise<ISensorData | null> {
-    const sensorData = await SensorData.findById(id).populate("sensor");
+    const sensorData = await SensorData.findById(id)
+      .populate("sensor")
+      .populate("planting");
     if (!sensorData) throw new Error("Dado de sensor não encontrado");
 
     const sensor = sensorData.sensor as { user?: string; company?: string };
@@ -52,7 +64,9 @@ class SensorDataService {
 
   // Função para deletar um dado de sensor
   async delete(id: string, userSession: IUserPayload): Promise<void> {
-    const sensorData = await SensorData.findById(id).populate("sensor");
+    const sensorData = await SensorData.findById(id)
+      .populate("sensor")
+      .populate("planting");
     if (!sensorData) throw new Error("Dado de sensor não encontrado");
 
     const sensor = sensorData.sensor as { user?: string; company?: string };
@@ -69,7 +83,9 @@ class SensorDataService {
     id: string,
     userSession: IUserPayload
   ): Promise<ISensorData | null> {
-    const sensorData = await SensorData.findById(id).populate("sensor");
+    const sensorData = await SensorData.findById(id)
+      .populate("sensor")
+      .populate("planting");
     if (!sensorData) throw new Error("Dado de sensor não encontrado");
 
     const sensor = sensorData.sensor as { user?: string; company?: string };
