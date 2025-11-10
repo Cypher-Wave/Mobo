@@ -1,0 +1,205 @@
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background-color: rgb(var(--mobo-green));
+  font-family: var(--font-primary);
+}
+
+/* Caixa de conteúdo central */
+.content {
+  width: 80%;
+  max-width: 1300px;
+  height: 600px;
+  background-color: rgb(var(--mobo-white));
+  border-radius: 15px;
+  filter: drop-shadow(0 0 20px rgba(var(--mobo-black), 0.8));
+  display: flex;
+  overflow: hidden;
+}
+
+/* Coluna esquerda (mensagem + botão) */
+.firstColumn {
+  width: 40%;
+  background-color: rgb(var(--mobo-red)); /* vermelho mobo */
+  color: rgb(var(--mobo-white));
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 3rem;
+  text-align: center;
+}
+
+.title {
+  font-size: 2rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+}
+
+.titlePrimary {
+  color: rgb(var(--mobo-white));
+}
+
+.description {
+  font-size: 0.95rem;
+  margin-bottom: 0.3rem;
+}
+
+.secondColumn {
+  width: 60%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  color: rgb(var(--mobo-white));
+  padding: 2rem 3rem;
+}
+
+.backgroundLogin {
+  background: url("/images/agro_Login.jpeg") center/cover no-repeat;
+}
+
+.backgroundRegister {
+  background: url("/images/agro_Register.jpeg") center/cover no-repeat;
+}
+
+/* Fundo translúcido atrás do formulário */
+.secondContent {
+  position: relative;
+  background-color: rgba(var(--mobo-black), 0.4);
+  backdrop-filter: blur(3px);
+}
+
+/* Logo */
+.logoContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  margin-bottom: 1rem;
+  width: 11rem;
+  height: 6rem;
+}
+
+.authLogo {
+  object-fit: contain;
+  filter: drop-shadow(0 0 20px rgba(var(--mobo-white), 0.9));
+} 
+
+/* Título do formulário */
+.titleSecond {
+  font-size: 1.6rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+  color: rgb(var(--mobo-white));
+}
+
+/* Formulário */
+.form {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  max-width: 350px;
+}
+
+.labelInput {
+  position: relative;
+  display: flex;
+  align-items: center;
+  background-color: rgba(var(--mobo-white), 0.20);
+  box-shadow: 1px 5px 5px rgba(var(--mobo-red), 0.85);
+  border: 1px solid rgb(var(--mobo-red));
+  border-radius: 30px;
+  padding: 0.6rem 1rem;
+  margin-bottom: 1rem;
+  transition: all 0.3s ease;
+}
+
+.labelInput:hover {
+  background-color: rgba(var(--mobo-white), 0.20);
+}
+
+.labelInput input,
+.selectInput {
+  flex: 1;
+  background: transparent;
+  border: none;
+  outline: none;
+  color: rgb(var(--mobo-white));
+  font-size: 0.95rem;
+  margin-left: 0.6rem;
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+}
+
+.labelInput input::placeholder {
+  color: rgb(var(--mobo-white));
+}
+
+.selectInput {
+  padding-right: 2rem;
+  cursor: pointer;
+}
+
+.selectInput::-ms-expand {
+  display: none;
+}
+
+.selectInput option {
+  color: rgb(var(--mobo-black));
+  background: rgb(var(--mobo-beige));
+}
+.selectInput option:checked {
+  background: rgb(var(--mobo-red));
+  color: rgb(var(--mobo-white));
+}
+
+.selectIcon {
+  position: absolute;
+  right: 0.5rem;
+  color: rgb(var(--mobo-white));
+  font-size: 1.2rem;
+  pointer-events: none;
+}
+
+/* Ícones */
+.iconModify {
+  color: rgb(var(--mobo-white));
+}
+
+/* Link de senha */
+.password {
+  display: block;
+  margin-top: 1rem;
+  text-align: center;
+  color: rgb(var(--mobo-white));
+  font-size: 0.9rem;
+  text-decoration: none;
+  transition: color 0.3s;
+}
+
+.password:hover {
+  color: rgb(var(--mobo-light-red));
+}
+
+/* Responsividade */
+@media (max-width: 900px) {
+  .content {
+    flex-direction: column;
+    height: auto;
+  }
+
+  .firstColumn,
+  .secondColumn {
+    width: 100%;
+    border-radius: 0;
+  }
+
+  .secondColumn {
+    padding: 2rem;
+  }
+}

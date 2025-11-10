@@ -1,0 +1,52 @@
+/* Fundo geral */
+.intro {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  width: 100%;
+  background-color: rgb(var(--mobo-green));
+  overflow: hidden;
+}
+
+/* Contêiner da logo */
+.logoHeader {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  width: 12rem;
+  height: 12rem; 
+}
+
+/* Animação de crescimento da logo */
+.introLogo {
+  animation: grow 2s ease-in-out forwards;
+  object-fit: contain;
+  width: 100%;
+  height: 100%;
+}
+
+/* Keyframes da animação */
+@keyframes grow {
+  0% {
+    transform: scale(0.3);
+    opacity: 0;
+  }
+  50% {
+    transform: scale(1.1);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+/* Responsividade extra */
+@media (max-width: 768px) {
+  .logoHeader {
+    width: 8rem;
+    height: 8rem; 
+  }
+}
