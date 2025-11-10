@@ -8,13 +8,22 @@ import { IUser, IUserRole } from "@/types/User";
 import api from "@/services/api";
 import styles from "./Profile.module.css";
 
+interface IHarvestImage {
+  _id: string;
+  imageName: string;
+  createdAt?: string;
+  description?: string;
+}
+
 const Profile = () => {
   const router = useRouter();
   const baseURL = api.defaults.baseURL?.replace("/api", "");
 
   const [user, setUser] = useState<IUser>();
+  const [images, setImages] = useState<IHarvestImage[]>([]);
   const [loading, setLoading] = useState(true);
 
+  // Buscar dados do usuário
   useEffect(() => {
     const fetchUser = async () => {
       try {
@@ -30,6 +39,20 @@ const Profile = () => {
 
     fetchUser();
   }, [router]);
+
+   // Buscar imagens do usuário
+  useEffect(() => {
+    const fetchImage = async () => {
+      try {
+        const res = await api.get("/profile");
+        setImages(res.data.images || []);
+      } catch (error) {
+        console.error("Erro ao buscar imagens:", error);
+      }
+    };
+
+    fetchImage();
+  }, []);
 
   const roleMap: Record<IUserRole, string> = {
     family_farmer: "Agricultor Familiar",
@@ -84,20 +107,28 @@ const Profile = () => {
         </div>
 
         {/* Galeria */}
-        <div className={styles.gallery} id="gallery">
           {/* Exemplo mockado */}
-          {[1, 2, 3, 4, 5, 6, 7, 8].map((i) => (
-            <div className={styles.item} key={i}>
-              <div className={styles.photo}>
-                <Image
-                  src={`${baseURL}/uploads/harvests/fotoLichia${i}.jpg`}
-                  alt=""
-                  fill
-                />
+          <div className={styles.gallery} id="gallery">
+          {images.length === 0 ? (
+            <p>Nenhuma imagem enviada ainda.</p>
+          ) : (
+            images.map((img, i) => (
+              <div className={styles.item} key={i}>
+                <div className={styles.photo}>
+                  <Image
+                    src={`${baseURL}/uploads/harvests/${img.imageName}`}
+                    alt={img.description || "Imagem da colheita"}
+                    fill
+                  />
+                </div>
+                <div className={styles.description}>
+                  {img.createdAt
+                    ? new Date(img.createdAt).toLocaleDateString("pt-BR")
+                    : "Sem data"}
+                </div>
               </div>
-              <div className={styles.description}>Dia {i + 21}/10/2025</div>
-            </div>
-          ))}
+            ))
+          )}
         </div>
       </div>
     </>

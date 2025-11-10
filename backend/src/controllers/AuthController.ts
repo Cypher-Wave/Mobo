@@ -2,7 +2,6 @@ import { Request, Response } from "express";
 import dotenv from "dotenv";
 import UserService, { UserInput } from "../services/UserService";
 import asyncHandler from "../utils/asyncHandler";
-import { generateToken, IUserPayload } from "../utils/jwt";
 
 dotenv.config();
 

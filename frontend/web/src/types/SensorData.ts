@@ -15,7 +15,7 @@ export interface ISensorData {
   airHumidity?: number;
   alerts?: ISensorAlert[];
   planting: IPlanting;
-  sensor: ISensor["id"];
+  sensor: ISensor;
   createdAt: Date;
   updatedAt: Date;
 }
