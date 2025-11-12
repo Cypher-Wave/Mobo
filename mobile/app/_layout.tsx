@@ -13,17 +13,12 @@ export default function RootLayout() {
           drawerLabelStyle: { fontWeight: 'bold' },
         }}
       >
-<Drawer.Screen name="home" options={{ title: 'Home' }} />
+        <Drawer.Screen name="login" options={{ title: 'Login' }} />
+        <Drawer.Screen name="home" options={{ title: 'Home' }} />
         <Drawer.Screen name="dashboard" options={{ title: 'Dashboard' }} />
-        <Drawer.Screen
-          name="previsao-de-colheita"
-          options={{ title: 'Previsão de Colheita' }}
-        />
+        <Drawer.Screen name="previsao-de-colheita"options={{ title: 'Previsão de Colheita' }}/>
         <Drawer.Screen name="garra" options={{ title: 'Garra' }} />
-        <Drawer.Screen
-          name="curiosidades"
-          options={{ title: 'Curiosidades' }}
-        />
+        <Drawer.Screen name="curiosidades"options={{ title: 'Curiosidades' }}/>
         <Drawer.Screen name="relatorios" options={{ title: 'Relatórios' }} />
         <Drawer.Screen name="alertas" options={{ title: 'Alertas' }} />
         {}

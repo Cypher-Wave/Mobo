@@ -19,13 +19,13 @@ export default function CadastroScreen() {
 
   return (
     <ImageBackground
-      source={require('../assets/images/fundo.png')} // substitua pela imagem de fundo
+      source={require('../assets/images/Login.png')}
       style={styles.background}
     >
       <View style={styles.overlay}>
-        {/* Logo */}
+        {/* Logo com sombra */}
         <Image
-          source={require('../assets/images/logo-mobo.png')} // imagem da logo "Mobo"
+          source={require('../assets/images/logoMobo.png')}
           style={styles.logo}
           resizeMode="contain"
         />
@@ -70,8 +70,8 @@ export default function CadastroScreen() {
         </View>
 
         {/* Botão principal */}
-        <TouchableOpacity style={styles.button} onPress={() => router.push('/home')}>
-          <Text style={styles.buttonText}>CADASTRAR-SE</Text>
+        <TouchableOpacity style={styles.button} onPress={() => router.push('/terreno')}>
+          <Text style={styles.buttonText}>Entrar</Text>
         </TouchableOpacity>
 
         {/* Link */}
@@ -90,15 +90,25 @@ const styles = StyleSheet.create({
   },
   overlay: {
     flex: 1,
-    backgroundColor: 'rgba(0,0,0,0.25)',
     justifyContent: 'center',
     alignItems: 'center',
     paddingHorizontal: 30,
+
+    // 💚 Fundo mais escuro com "gradiente" verde simulado
+    backgroundColor: 'rgba(0, 34, 0, 0.4)', // base escura esverdeada
+    backgroundImage:
+      'linear-gradient(rgba(0, 62, 0, 0.68), rgba(0,0,0,0.7))', // degrade do verde para o preto
   },
   logo: {
     width: 240,
     height: 120,
     marginBottom: 20,
+    // 💡 Sombra da logo
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 4 },
+    shadowOpacity: 0.6,
+    shadowRadius: 6,
+    elevation: 8,
   },
   title: {
     color: '#fff',
@@ -109,11 +119,11 @@ const styles = StyleSheet.create({
   inputContainer: {
     flexDirection: 'row',
     alignItems: 'center',
-    backgroundColor: '#fff',
+    backgroundColor: 'rgba(255, 255, 255, 0.54)', // branco com 80% de opacidade
     borderWidth: 2,
     borderColor: '#b70a49',
     borderRadius: 30,
-    width: '100%',
+    width: '90%',
     paddingHorizontal: 15,
     marginBottom: 15,
     height: 50,
@@ -128,7 +138,7 @@ const styles = StyleSheet.create({
   },
   button: {
     backgroundColor: '#b70a49',
-    width: '100%',
+    width: '90%',
     paddingVertical: 14,
     borderRadius: 30,
     marginTop: 10,

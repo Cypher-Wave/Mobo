@@ -11,10 +11,68 @@ import {
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { Feather } from '@expo/vector-icons';
 import { useRouter } from 'expo-router';
+import AppLoading from 'expo-app-loading';
+import {
+  useFonts,
+  Livvic_400Regular,
+  Livvic_500Medium,
+  Livvic_700Bold,
+} from '@expo-google-fonts/livvic';
 
-export default function HomeScreen(): JSX.Element {
-  const [search, setSearch] = useState<string>('');
+export default function HomeScreen() {
+  const [search, setSearch] = useState('');
   const router = useRouter();
+
+  const [fontsLoaded] = useFonts({
+    Livvic_400Regular,
+    Livvic_500Medium,
+    Livvic_700Bold,
+  });
+
+  if (!fontsLoaded) {
+    return <AppLoading />;
+  }
+
+   // Curiosidades com rotas específicas
+  const curiosities = [
+    {
+      title: '5 curiosidades sobre a Lichia',
+      image: require('../assets/images/curiosidadesImg1.png'),
+      route: '/curiosidades',
+    },
+    {
+      title: 'Benefícios da Lichia',
+      image: require('../assets/images/curiosidadesImg2.png'),
+      route: '/curiosidades',
+    },
+    {
+      title: 'Como a Lichia é cultivada',
+      image: require('../assets/images/curiosidadesImg3.png'),
+      route: '/curiosidades',
+    },
+    {
+      title: 'Receitas com Lichia',
+      image: require('../assets/images/curiosidadesImg4.png'),
+      route: '/curiosidades',
+    },
+  ];
+
+  const actions = [
+    { icon: 'alert-triangle', text: 'Alertas', route: '/alertas' },
+    { icon: 'calendar', text: 'Previsão', route: '/previsao-de-colheita' },
+    { icon: 'activity', text: 'Sensores', route: '/sensores' },
+    { icon: 'award', text: 'Braço Mecânico', route: '/garra' },
+    { icon: 'book-open', text: 'Curiosidades', route: '/curiosidades' },
+    { icon: 'settings', text: 'Dashboard', route: '/dashboard' },
+  ];
+
+  const handleNavigation = (route: string) => {
+    try {
+      if (route) router.push(route as any);
+    } catch (error) {
+      console.log('Erro ao navegar:', error);
+    }
+  };
 
   return (
     <SafeAreaView style={styles.container}>
@@ -23,16 +81,14 @@ export default function HomeScreen(): JSX.Element {
         <View style={styles.header}>
           <View>
             <Text style={styles.welcomeText}>
-              Olá <Text style={styles.bold}>Usuário!</Text>
+              Olá, <Text style={styles.bold}>Usuário!</Text>
             </Text>
-            <Text style={styles.subtitle}>
-              Seja bem-vindo à Mobo, seu gestor de colheita :)
-            </Text>
+            <Text style={styles.subtitle}>Seja bem-vindo à Mobo 🌱</Text>
           </View>
 
-          <TouchableOpacity onPress={() => router.push('/perfil')}>
+          <TouchableOpacity onPress={() => handleNavigation('/perfil')}>
             <Image
-              source={require('../assets/images/avisos.png')}
+              source={require('../assets/images/perfilFoto.png')}
               style={styles.profileImage}
             />
           </TouchableOpacity>
@@ -47,207 +103,81 @@ export default function HomeScreen(): JSX.Element {
             placeholderTextColor="#b70a49"
             value={search}
             onChangeText={setSearch}
-            returnKeyType="search"
           />
         </View>
 
-        {/* Botões principais */}
-        <ScrollView
-          horizontal
-          showsHorizontalScrollIndicator={false}
-          contentContainerStyle={styles.mainButtonsContainer}
-        >
-          <TouchableOpacity
-            style={styles.buttonCard}
-            onPress={() => router.push('/alertas')}
-          >
-            <Image
-              source={require('../assets/images/iconaviso.png')}
-              style={styles.buttonImage}
-            />
-            <Text style={styles.buttonText}>Alertas</Text>
-          </TouchableOpacity>
+        {/* Card de Clima / Alertas */}
+        <Text style={styles.sectionTitle}>Alertas</Text>
 
-          <TouchableOpacity
-            style={styles.buttonCard}
-            onPress={() => router.push('/alertas')}
-          >
-            <Image
-              source={require('../assets/images/iconaviso.png')}
-              style={styles.buttonImage}
-            />
-            <Text style={styles.buttonText}>jjfjfj</Text>
-          </TouchableOpacity>
-
-          <TouchableOpacity
-            style={styles.buttonCard}
-            onPress={() => router.push('/alertas')}
-          >
-            <Image
-              source={require('../assets/images/iconaviso.png')}
-              style={styles.buttonImage}
-            />
-            <Text style={styles.buttonText}>lllllll</Text>
-          </TouchableOpacity>
-
-          <TouchableOpacity
-            style={styles.buttonCard}
-            onPress={() => router.push('/alertas')}
-          >
-            <Image
-              source={require('../assets/images/iconaviso.png')}
-              style={styles.buttonImage}
-            />
-            <Text style={styles.buttonText}>Aloolertas</Text>
-          </TouchableOpacity>
-
-          <TouchableOpacity
-            style={styles.buttonCard}
-            onPress={() => router.push('/previsao-de-colheita')}
-          >
-            <Image
-              source={require('../assets/images/iconaviso.png')}
-              style={styles.buttonImage}
-            />
-            <Text style={styles.buttonText}>Previsão{'\n'}Colheita</Text>
-          </TouchableOpacity>
-
-          <TouchableOpacity
-            style={styles.buttonCard}
-            onPress={() => router.push('/sensores')}
-          >
-            <Image
-              source={require('../assets/images/iconaviso.png')}
-              style={styles.buttonImage}
-            />
-            <Text style={styles.buttonText}>Sensores</Text>
-          </TouchableOpacity>
-        </ScrollView>
-
-        {/* Card de Clima */}
         <View style={styles.weatherCard}>
-          <View style={styles.weatherHeader}>
-            <View style={styles.weatherInfo}>
-              <Feather name="calendar" size={16} color="#fff" />
-              <Text style={styles.weatherHeaderText}>Ter. 20 de Maio</Text>
+          <View style={styles.weatherContent}>
+            <View style={styles.weatherTextContainer}>
+              <Text style={styles.weatherText}>Terça, 20 de Maio | 19:30</Text>
+              <Text style={styles.tempText}>29°C | Registro SP</Text>
             </View>
-            <View style={styles.weatherInfo}>
-              <Feather name="clock" size={16} color="#fff" />
-              <Text style={styles.weatherHeaderText}>19:30pm</Text>
-            </View>
-          </View>
-
-          <View style={styles.weatherBottom}>
-            <View style={[styles.weatherTempBox, { backgroundColor: '#ffb84a' }]}>
-              <Text style={styles.tempText}>29°</Text>
-              <View style={styles.divider} />
-              <Text style={styles.cityText}>Registro - SP</Text>
-            </View>
-
             <Image
-              source={require('../assets/images/avisos.png')}
-              style={styles.weatherIcon}
+              source={require('../assets/images/imgAlertas.png')}
+              style={styles.alertImage}
             />
           </View>
         </View>
 
-        {/* Seção Curiosidades */}
-        <Text style={styles.sectionTitle}>Curiosidades</Text>
-
+        {/* Ações principais */}
+        <Text style={styles.sectionTitle}>Ferramentas</Text>
         <ScrollView
           horizontal
           showsHorizontalScrollIndicator={false}
-          contentContainerStyle={styles.curiositiesContainer}
+          contentContainerStyle={styles.actionScroll}
         >
-          {/* Coluna 1 */}
-          <View style={styles.column}>
-            <View style={styles.curiosityCard}>
-              <Image
-                source={require('../assets/images/avisos.png')}
-                style={styles.curiosityImage}
-              />
-              <Text style={styles.curiosityTitle}>5 curiosidades sobre a Lichia</Text>
-              <View style={styles.cardFooter}>
-                <Feather name="heart" size={16} color="#fff" />
-                <Text style={styles.footerText}>Favoritos</Text>
-                <Feather name="eye" size={16} color="#fff" style={{ marginLeft: 16 }} />
-                <Text style={styles.footerText}>Visualizações</Text>
+          {actions.map((item, index) => (
+            <TouchableOpacity
+              key={item.route ?? index}
+              activeOpacity={0.8}
+              style={styles.actionButton}
+              onPress={() => handleNavigation(item.route)}
+            >
+              <View style={styles.iconTextContainer}>
+                <Feather
+                  name={item.icon as any}
+                  size={32}
+                  color="#b70a49"
+                  style={styles.iconShadow}
+                />
+                <Text style={styles.actionText}>{item.text}</Text>
               </View>
-            </View>
+            </TouchableOpacity>
+          ))}
+        </ScrollView>
 
-            <View style={styles.curiosityCard}>
-              <Image
-                source={require('../assets/images/avisos.png')}
-                style={styles.curiosityImage}
-              />
-              <Text style={styles.curiosityTitle}>Benefícios da Lichia para saúde</Text>
+        {/* Seção Curiosidades */}
+        <Text style={styles.sectionTitle}>Curiosidades</Text>
+        <ScrollView
+          horizontal
+          showsHorizontalScrollIndicator={false}
+          contentContainerStyle={styles.curiosityScroll}
+        >
+          {curiosities.map((item, index) => (
+            <View key={index} style={styles.curiosityCard}>
+              <Image source={item.image} style={styles.curiosityImage} />
+              <Text style={styles.curiosityTitle}>{item.title}</Text>
               <View style={styles.cardFooter}>
-                <Feather name="heart" size={16} color="#fff" />
+                <Feather
+                  name="heart"
+                  size={22}
+                  color="#3C4C27"
+                  style={{ marginTop: 10 }}
+                />
                 <Text style={styles.footerText}>Favoritos</Text>
-                <Feather name="eye" size={16} color="#fff" style={{ marginLeft: 16 }} />
+                <Feather
+                  name="eye"
+                  size={22}
+                  color="#3C4C27"
+                  style={{ marginLeft: 16, marginTop: 10 }}
+                />
                 <Text style={styles.footerText}>Visualizações</Text>
               </View>
             </View>
-
-            <View style={styles.curiosityCard}>
-              <Image
-                source={require('../assets/images/avisos.png')}
-                style={styles.curiosityImage}
-              />
-              <Text style={styles.curiosityTitle}>Como a lichia é cultivada</Text>
-              <View style={styles.cardFooter}>
-                <Feather name="heart" size={16} color="#fff" />
-                <Text style={styles.footerText}>Favoritos</Text>
-                <Feather name="eye" size={16} color="#fff" style={{ marginLeft: 16 }} />
-                <Text style={styles.footerText}>Visualizações</Text>
-              </View>
-            </View>
-          </View>
-
-          {/* Coluna 2 */}
-          <View style={styles.column}>
-            <View style={styles.curiosityCard}>
-              <Image
-                source={require('../assets/images/avisos.png')}
-                style={styles.curiosityImage}
-              />
-              <Text style={styles.curiosityTitle}>História da lichia no Brasil</Text>
-              <View style={styles.cardFooter}>
-                <Feather name="heart" size={16} color="#fff" />
-                <Text style={styles.footerText}>Favoritos</Text>
-                <Feather name="eye" size={16} color="#fff" style={{ marginLeft: 16 }} />
-                <Text style={styles.footerText}>Visualizações</Text>
-              </View>
-            </View>
-
-            <View style={styles.curiosityCard}>
-              <Image
-                source={require('../assets/images/avisos.png')}
-                style={styles.curiosityImage}
-              />
-              <Text style={styles.curiosityTitle}>Lichia e sustentabilidade</Text>
-              <View style={styles.cardFooter}>
-                <Feather name="heart" size={16} color="#fff" />
-                <Text style={styles.footerText}>Favoritos</Text>
-                <Feather name="eye" size={16} color="#fff" style={{ marginLeft: 16 }} />
-                <Text style={styles.footerText}>Visualizações</Text>
-              </View>
-            </View>
-
-            <View style={styles.curiosityCard}>
-              <Image
-                source={require('../assets/images/avisos.png')}
-                style={styles.curiosityImage}
-              />
-              <Text style={styles.curiosityTitle}>Como preparar receitas com lichia</Text>
-              <View style={styles.cardFooter}>
-                <Feather name="heart" size={16} color="#fff" />
-                <Text style={styles.footerText}>Favoritos</Text>
-                <Feather name="eye" size={16} color="#fff" style={{ marginLeft: 16 }} />
-                <Text style={styles.footerText}>Visualizações</Text>
-              </View>
-            </View>
-          </View>
+          ))}
         </ScrollView>
       </ScrollView>
     </SafeAreaView>
@@ -257,189 +187,193 @@ export default function HomeScreen(): JSX.Element {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#f2e5d5',
-    paddingHorizontal: 18,
-    paddingTop: 10,
+    backgroundColor: '#f5e9da',
+    paddingHorizontal: 20,
   },
   header: {
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
-    marginBottom: 15,
+    marginVertical: 15,
   },
   welcomeText: {
     fontSize: 22,
     color: '#3b3b3b',
+    fontFamily: 'Livvic_500Medium',
   },
   bold: {
-    fontWeight: 'bold',
+    fontFamily: 'Livvic_700Bold',
     color: '#b70a49',
   },
   subtitle: {
     fontSize: 14,
     color: '#5a5a5a',
+    fontFamily: 'Livvic_400Regular',
   },
   profileImage: {
-    width: 55,
-    height: 55,
-    borderRadius: 30,
+    width: 65,
+    height: 65,
+    borderRadius: 60,
     borderWidth: 2,
     borderColor: '#b70a49',
+    marginRight: 30,
+    marginTop: 10,
   },
   searchBar: {
     flexDirection: 'row',
     alignItems: 'center',
     backgroundColor: '#fff',
     borderColor: '#b70a49',
-    borderWidth: 2,
+    borderBottomWidth: 5,
+    borderWidth: 1.5,
     borderRadius: 25,
     paddingHorizontal: 15,
-    height: 48,
+    height: 45,
     shadowColor: '#000',
     shadowOpacity: 0.1,
     shadowRadius: 3,
     elevation: 4,
+    marginBottom: 25,
+    width: '90%',
+    marginLeft: 28,
+    marginTop: 10,
   },
   searchInput: {
     flex: 1,
     marginLeft: 10,
     color: '#3b3b3b',
-  },
-  mainButtonsContainer: {
-    flexDirection: 'row',
-    gap: 15,
-    paddingVertical: 10,
-    paddingHorizontal: 5,
-  },
-  buttonCard: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'center',
-    backgroundColor: '#fff',
-    borderRadius: 15,
-    width: 200,
-    height: 80,
-    borderWidth: 2,
-    borderColor: '#b70a49',
-    shadowColor: '#000',
-    shadowOpacity: 0.15,
-    shadowRadius: 5,
-    elevation: 5,
-    marginRight: 10,
-    paddingHorizontal: 10,
-  },
-  buttonImage: {
-    width: 40,
-    height: 40,
-    resizeMode: 'contain',
-    marginRight: 10,
-  },
-  buttonText: {
-    color: '#b70a49',
-    fontWeight: '600',
-    fontSize: 14,
-    textAlign: 'left',
-  },
-  sectionTitle: {
-    fontWeight: 'bold',
-    fontSize: 18,
-    color: '#3b3b3b',
-    marginTop: 25,
-    marginBottom: 10,
+    fontFamily: 'Livvic_400Regular',
   },
   weatherCard: {
     backgroundColor: '#b70a49',
-    borderRadius: 20,
-    padding: 16,
-    marginTop: 20,
+    borderRadius: 28,
+    padding: 18,
     shadowColor: '#000',
-    shadowOpacity: 0.15,
-    shadowRadius: 6,
-    elevation: 5,
+    shadowOpacity: 0.2,
+    shadowRadius: 5,
+    elevation: 6,
+    marginBottom: 35,
+    marginTop: 10,
+    width: '90%',
+    marginLeft: 30,
+    borderWidth: 3,
+    borderColor: '#72002A',
+    borderBottomWidth: 8,
   },
-  weatherHeader: {
+  weatherContent: {
     flexDirection: 'row',
     justifyContent: 'space-between',
-    marginBottom: 12,
-  },
-  weatherInfo: {
-    flexDirection: 'row',
     alignItems: 'center',
-    gap: 6,
   },
-  weatherHeaderText: {
+  weatherTextContainer: {
+    flex: 1,
+  },
+  weatherText: {
     color: '#fff',
-    fontSize: 14,
-    fontWeight: '500',
+    fontSize: 16,
+    fontFamily: 'Livvic_500Medium',
+    marginBottom: 18,
   },
-  weatherBottom: {
+tempText: {
+  color: '#fff',
+  fontSize: 22,
+  fontFamily: 'Livvic_700Bold',
+  backgroundColor: '#D59043',
+  borderRadius: 40,
+  paddingVertical: 18, // reduz a altura
+  paddingHorizontal: 65, // controla a largura do fundo
+  alignSelf: 'center', // centraliza o bloco
+  borderWidth: 3,
+  borderColor: '#5C1D00',
+  borderBottomWidth: 6,
+  textAlign: 'center',
+  minWidth: 360, // 🔹 define uma largura mínima menor
+},
+
+  alertImage: {
+  position: 'absolute',
+  width: 150,
+  height: 120,
+  resizeMode: 'contain',
+  top: '50%',
+  left: '50%',
+  transform: [{ translateX: 70 }, { translateY: -60 }], // centraliza
+  zIndex: 2, // fica por cima do texto
+},
+  sectionTitle: {
+    fontFamily: 'Livvic_700Bold',
+    fontSize: 18,
+    color: '#3b3b3b',
+    marginBottom: 10,
+  },
+  actionScroll: {
     flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
+    paddingBottom: 20,
   },
-  weatherTempBox: {
+  actionButton: {
+    width: 190,
+    height: 100,
+    backgroundColor: '#fff',
+    borderRadius: 15,
+    borderWidth: 2,
+    borderColor: '#b70a49',
+    borderBottomWidth: 5,
+    borderBottomColor: '#ff4f8b',
+    paddingVertical: 14,
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginRight: 12,
+    marginBottom: 15,
+    marginTop: 15,
+    shadowColor: '#000',
+    shadowOpacity: 0.1,
+    shadowRadius: 4,
+    elevation: 4,
+  },
+  iconTextContainer: {
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'center',
-    borderRadius: 30,
-    paddingVertical: 10,
-    paddingHorizontal: 20,
-    shadowColor: '#000',
-    shadowOpacity: 0.15,
-    shadowRadius: 4,
-    elevation: 3,
   },
-  tempText: {
-    color: '#fff',
-    fontSize: 28,
-    fontWeight: 'bold',
+  iconShadow: {
+    textShadowColor: 'rgba(183, 10, 73, 0.4)',
+    textShadowOffset: { width: 0, height: 2 },
+    textShadowRadius: 3,
     marginRight: 8,
   },
-  divider: {
-    width: 1.5,
-    height: 25,
-    backgroundColor: '#fff',
-    marginHorizontal: 8,
+  actionText: {
+    color: '#b70a49',
+    fontFamily: 'Livvic_700Bold',
+    fontSize: 18,
+    textAlign: 'center',
   },
-  cityText: {
-    color: '#fff',
-    fontSize: 16,
-    fontWeight: '500',
-  },
-  weatherIcon: {
-    width: 80,
-    height: 80,
-    resizeMode: 'contain',
-  },
-
-  // Curiosidades
-  curiositiesContainer: {
+  curiosityScroll: {
     flexDirection: 'row',
-    paddingHorizontal: 5,
-  },
-  column: {
-    flexDirection: 'column',
-    marginRight: 15,
+    paddingBottom: 25,
   },
   curiosityCard: {
-    backgroundColor: '#3b3b3b',
+    backgroundColor: '#61743D',
     borderRadius: 18,
-    width: 240,
-    marginBottom: 15,
+    width: 270,
+    height: 240,
+    marginRight: 15,
     padding: 10,
     shadowColor: '#000',
-    shadowOpacity: 0.15,
-    shadowRadius: 4,
+    shadowOpacity: 0.2,
+    shadowRadius: 5,
     elevation: 5,
+    marginTop: 10,
   },
   curiosityImage: {
     width: '100%',
-    height: 100,
+    height: 130,
     borderRadius: 12,
+    borderWidth: 4,
+    borderColor: '#fff',
   },
   curiosityTitle: {
     color: '#fff',
-    fontWeight: 'bold',
+    fontFamily: 'Livvic_700Bold',
     fontSize: 15,
     marginTop: 8,
   },
@@ -449,8 +383,10 @@ const styles = StyleSheet.create({
     marginTop: 6,
   },
   footerText: {
-    color: '#fff',
-    fontSize: 12,
+    color: '#3C4C27',
+    fontSize: 15,
     marginLeft: 5,
+    fontFamily: 'Livvic_500Medium',
+    marginTop: 10,
   },
 });
