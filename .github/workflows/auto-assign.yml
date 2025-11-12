@@ -64,7 +64,7 @@ jobs:
           numOfAssignee: 1
 
   assign-iot:
-    if: contains(github.event.issue.labels.*.name, 'iot') || contains(github.event.pull_request.labels.*.name, 'iot')
+    if: contains(github.event.issue.labels.*.name, 'IoT') || contains(github.event.pull_request.labels.*.name, 'IoT')
     runs-on: ubuntu-latest
     permissions:
       issues: write
