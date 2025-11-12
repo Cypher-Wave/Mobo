@@ -50,7 +50,7 @@ jobs:
           numOfAssignee: 1
 
   assign-documentation:
-    if: contains(github.event.issue.labels.*.name, 'documentacao') || contains(github.event.pull_request.labels.*.name, 'documentacao')
+    if: contains(github.event.issue.labels.*.name, 'documentation') || contains(github.event.pull_request.labels.*.name, 'documentation')
     runs-on: ubuntu-latest
     permissions:
       issues: write
