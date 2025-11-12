@@ -77,7 +77,11 @@ export default function CadastroTerreno() {
         />
 
         <TouchableOpacity style={styles.button}>
-          <Text style={styles.buttonText}>Cadastrar</Text>
+          <Text style={styles.buttonText}>Cadastrar-se</Text>
+        </TouchableOpacity>
+
+         <TouchableOpacity style={styles.button2}>
+          <Text style={styles.buttonText}>Já possuo cadastro </Text>
         </TouchableOpacity>
       </View>
     </ScrollView>
@@ -141,5 +145,15 @@ const styles = StyleSheet.create({
     color: '#3B3B3B',
     fontFamily: 'Livvic_700Bold',
     fontSize: 16,
+  },
+   button2: {
+  backgroundColor: 'transparent', // ✅ fundo invisível
+    borderRadius: 20,
+    marginTop: 25,
+    paddingVertical: 12,
+    paddingHorizontal: 50,
+    elevation: 4,
+    borderWidth:2,
+    borderColor: '#3C4C27',
   },
 });
