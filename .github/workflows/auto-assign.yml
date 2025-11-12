@@ -1,19 +1,78 @@
 name: Auto Assign
+
 on:
   issues:
     types: [opened]
   pull_request:
     types: [opened]
+
 jobs:
-  run:
+  assign-frontend:
+    if: contains(github.event.issue.labels.*.name, 'frontend') || contains(github.event.pull_request.labels.*.name, 'frontend')
     runs-on: ubuntu-latest
     permissions:
       issues: write
       pull-requests: write
     steps:
-    - name: 'Auto-assign issue'
-      uses: pozil/auto-assign-issue@v1
-      with:
+      - name: Assign to frontend dev
+        uses: pozil/auto-assign-issue@v1
+        with:
+          repo-token: ${{ secrets.GITHUB_TOKEN }}
+          assignees: babi-s4ntos
+          numOfAssignee: 1
+
+  assign-uiux:
+    if: contains(github.event.issue.labels.*.name, 'UI/UX') || contains(github.event.pull_request.labels.*.name, 'UI/UX')
+    runs-on: ubuntu-latest
+    permissions:
+      issues: write
+      pull-requests: write
+    steps:
+      - name: Assign to UI/UX designer
+        uses: pozil/auto-assign-issue@v1
+        with:
+          repo-token: ${{ secrets.GITHUB_TOKEN }}
+          assignees: babi-s4ntos
+          numOfAssignee: 1
+
+  assign-backend:
+    if: contains(github.event.issue.labels.*.name, 'backend') || contains(github.event.pull_request.labels.*.name, 'backend')
+    runs-on: ubuntu-latest
+    permissions:
+      issues: write
+      pull-requests: write
+    steps:
+      - name: Assign to backend (you)
+        uses: pozil/auto-assign-issue@v1
+        with:
           repo-token: ${{ secrets.GITHUB_TOKEN }}
           assignees: phvenancio
+          numOfAssignee: 1
+
+  assign-documentation:
+    if: contains(github.event.issue.labels.*.name, 'documentacao') || contains(github.event.pull_request.labels.*.name, 'documentacao')
+    runs-on: ubuntu-latest
+    permissions:
+      issues: write
+      pull-requests: write
+    steps:
+      - name: Assign to documentation person
+        uses: pozil/auto-assign-issue@v1
+        with:
+          repo-token: ${{ secrets.GITHUB_TOKEN }}
+          assignees: jk-ramos
+          numOfAssignee: 1
+
+  assign-iot:
+    if: contains(github.event.issue.labels.*.name, 'iot') || contains(github.event.pull_request.labels.*.name, 'iot')
+    runs-on: ubuntu-latest
+    permissions:
+      issues: write
+      pull-requests: write
+    steps:
+      - name: Assign to IoT person
+        uses: pozil/auto-assign-issue@v1
+        with:
+          repo-token: ${{ secrets.GITHUB_TOKEN }}
+          assignees: LucasLiSan
           numOfAssignee: 1
