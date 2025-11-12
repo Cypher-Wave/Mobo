@@ -1,0 +1,25 @@
+.container {
+  display: flex;
+  min-height: 100vh;
+  background: rgb(var(--mobo-beige));
+  overflow-x: hidden;
+  padding: 10px 25px;
+  position: relative;
+}
+
+/* ===== Conteúdo ===== */
+.main {
+  flex: 1;
+  /* top right bottom left  */
+  padding: 0.1rem 0 0 13rem;
+  margin: 0
+}
+
+.title {
+  font-size: 1.8rem;
+  font-family: var(--font-primary);
+  font-weight: bold;
+  color: rgb(var(--mobo-red));
+  margin-bottom: 1.5rem;
+}
+
