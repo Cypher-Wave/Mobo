@@ -1,7 +1,6 @@
 "use client";
 
 import Image from "next/image";
-import { useRouter } from "next/navigation";
 import NavbarHome from "@/components/NavbarHome/NavbarHome";
 import CardSection from "@/components/CardSection/CardSection";
 import Footer from "@/components/Footer/Footer";
@@ -9,8 +8,6 @@ import Footer from "@/components/Footer/Footer";
 import styles from "./Home.module.css";
 
 const Home = () => {
-  const router = useRouter();
-  
   const tools = [
     {
       title: "Configurações do Braço Mecânico",
