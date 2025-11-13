@@ -4,7 +4,9 @@ import { useEffect } from "react";
 
 export function useCamera() {
   useEffect(() => {
-    const videoElement = document.getElementById("video") as HTMLVideoElement | null;
+    const videoElement = document.getElementById(
+      "video"
+    ) as HTMLVideoElement | null;
     const takePhotoButton = document.getElementById("take-photo");
     const startRecordingButton = document.getElementById("start-recording");
     const stopRecordingButton = document.getElementById("stop-recording");
@@ -22,13 +24,21 @@ export function useCamera() {
           video: true,
           audio: true,
         });
-        
+
         if (!videoElement) return;
         videoElement.srcObject = stream;
         setupRecording(stream);
-      } catch (error) {
-        console.error("Erro ao acessar a câmera:", error);
-        alert("Não foi possível acessar a câmera.");
+      } catch (error: unknown) {
+        if (error instanceof Error) {
+          if (
+            error.name === "NotFoundError" ||
+            error.name === "OverconstrainedError"
+          ) {
+            return alert(
+              "Não foi possível acessar a câmera. Verifique as permissões ou o dispositivo."
+            );
+          }
+        }
       }
     }
 
