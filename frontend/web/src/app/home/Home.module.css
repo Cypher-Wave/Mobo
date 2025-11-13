@@ -1,0 +1,76 @@
+.homeMain {
+  width: 100%;
+  min-height: 100vh;
+  background: rgb(var(--mobo-beige));
+}
+
+/* ===== Banner e Logo ===== */
+.banner {
+  position: relative;
+  width: 100%;
+  height: 480px;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.imgBanner {
+  object-fit: cover; 
+  object-position: center;
+}
+
+.logoContainer {
+  position: absolute;
+  top: 140px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 280px;
+  height: 150px;
+}
+
+.logo {
+  object-fit: contain;
+  filter: drop-shadow(0 0 20px rgba(var(--mobo-white), 0.9));
+} 
+
+/* ===== Mascote ===== */
+.mascotFooter {
+  width: 350px;
+  height: 350px;
+  position: absolute;
+  bottom: -50vh;
+  right: -152px;
+  z-index: 100;
+  transform: translateY(-50%);
+  animation: hide-appears 10s infinite;
+}
+
+@keyframes hide-appears {
+  0% {
+    transform: translateY(-50%) translateX(60%);
+  }
+  50% {
+    transform: translateY(20%) translateX(0);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(-50%) translateX(90%);
+    opacity: 0;
+  }
+}
+
+/* ===== Responsividade ===== */
+@media (max-width: 768px) {
+  .mascotFooter {
+    display: none;
+  }
+}
+
+@media (max-width: 600px) {
+  .logoContainer {
+    width: 180px;
+    height: auto;
+    top: 100px;
+  }
+}

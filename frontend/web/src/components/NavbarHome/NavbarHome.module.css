@@ -1,0 +1,47 @@
+.navbarHome {
+  position: absolute;
+  top: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 92%;
+  height: 45px;
+  background: rgba(var(--mobo-white), 0.08);
+  border: 2px solid rgba(var(--mobo-white), 0.6);
+  border-radius: 50px;
+  backdrop-filter: blur(10px);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 2.5rem;
+  z-index: 50;
+  box-shadow: 0 4px 20px rgba(var(--mobo-black), 0.15);
+}
+
+/* Logo dentro da navbar */
+.logoNavbar {
+  position: relative;
+  width: 40px;
+  height: 40px;
+  cursor: pointer;
+  transition: transform 0.25s ease;
+}
+
+.logoNavbar:hover {
+  transform: scale(1.08);
+}
+
+/* Container dos ícones e perfil */
+.iconNav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+}
+
+@media (max-width: 600px) {
+  .navbarHome {
+    height: 40px;
+    padding: 0 1rem;
+    width: 95%;
+  }
+}

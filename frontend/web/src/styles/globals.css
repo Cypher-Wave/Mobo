@@ -1,0 +1,54 @@
+body {
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+}
+
+/* Ícones */
+.iconModify {
+  color: rgb(var(--mobo-white));
+}
+
+.btn {
+  margin-top: 2rem;
+  border: none;
+  border-radius: 20px;
+  padding: 0.8rem 1.8rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+/* Botão Vermelho */
+.btn-primary {
+  background-color: rgb(var(--mobo-red));
+  color: rgb(var(--mobo-beige));
+  font-weight: 600;
+  margin-top: 0.5rem;
+}
+
+.btn-primary:hover {
+  background-color: rgb(var(--mobo-dark-red));
+  transform: scale(1.03);
+}
+
+/* Botão Branco */
+.btn-secondary {
+  background-color: rgb(var(--mobo-white));
+  color: rgb(var(--mobo-red));
+}
+
+.btn-secondary:hover {
+  transform: scale(1.03);
+  background-color: rgb(var(--mobo-gray));
+}
+
+/* Botões Menores */
+.btn-item {
+  margin-top: 1rem;
+  border: none;
+  border-radius: 20px;
+  padding: 0.4rem 0.8rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
