@@ -35,6 +35,20 @@ jobs:
           assignees: babi-s4ntos
           numOfAssignee: 1
 
+  assign-devops:
+    if: contains(github.event.issue.labels.*.name, 'DevOps') || contains(github.event.pull_request.labels.*.name, 'DevOps')
+    runs-on: ubuntu-latest
+    permissions:
+      issues: write
+      pull-requests: write
+    steps:
+      - name: Assign to DevOps
+        uses: pozil/auto-assign-issue@v1
+        with:
+          repo-token: ${{ secrets.GITHUB_TOKEN }}
+          assignees: phvenancio
+          numOfAssignee: 1
+
   assign-backend:
     if: contains(github.event.issue.labels.*.name, 'backend') || contains(github.event.pull_request.labels.*.name, 'backend')
     runs-on: ubuntu-latest
@@ -42,7 +56,7 @@ jobs:
       issues: write
       pull-requests: write
     steps:
-      - name: Assign to backend (you)
+      - name: Assign to backend
         uses: pozil/auto-assign-issue@v1
         with:
           repo-token: ${{ secrets.GITHUB_TOKEN }}
