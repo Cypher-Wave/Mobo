@@ -1,0 +1,35 @@
+/* Coluna esquerda (mensagem + botão) */
+.firstColumn {
+  width: 40%;
+  background-color: rgb(var(--mobo-red)); /* vermelho mobo */
+  color: rgb(var(--mobo-white));
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 3rem;
+  text-align: center;
+}
+
+.title {
+  font-size: 2rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+}
+
+.titlePrimary {
+  color: rgb(var(--mobo-white));
+}
+
+.description {
+  font-size: 0.95rem;
+  margin-bottom: 0.3rem;
+}
+
+/* Responsividade */
+@media (max-width: 900px) {
+  .firstColumn {
+    width: 100%;
+    border-radius: 0;
+  }
+}
