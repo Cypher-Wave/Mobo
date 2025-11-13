@@ -37,7 +37,7 @@ export default function Curiosidades() {
       {/* Banner com botão de favoritos */}
       <View style={styles.bannerWrapper}>
         <Image
-          source={require('../assets/images/imgcuriosidades1.png')}
+          source={require('../assets/images/curiosidadesImg1.png')}
           style={styles.banner}
           resizeMode="cover"
         />

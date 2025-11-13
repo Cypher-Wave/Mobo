@@ -7,6 +7,9 @@ import {
   ScrollView,
   StyleSheet,
   Image,
+  ViewStyle,
+  TextStyle,
+  ImageStyle,
 } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { Feather } from '@expo/vector-icons';
@@ -29,11 +32,8 @@ export default function HomeScreen() {
     Livvic_700Bold,
   });
 
-  if (!fontsLoaded) {
-    return <AppLoading />;
-  }
+  if (!fontsLoaded) return <AppLoading />;
 
-   // Curiosidades com rotas específicas
   const curiosities = [
     {
       title: '5 curiosidades sobre a Lichia',
@@ -75,7 +75,7 @@ export default function HomeScreen() {
   };
 
   return (
-    <SafeAreaView style={styles.container}>
+    <SafeAreaView style={styles.container as ViewStyle}>
       <ScrollView showsVerticalScrollIndicator={false}>
         {/* Cabeçalho */}
         <View style={styles.header}>
@@ -122,7 +122,7 @@ export default function HomeScreen() {
           </View>
         </View>
 
-        {/* Ações principais */}
+        {/* Ferramentas */}
         <Text style={styles.sectionTitle}>Ferramentas</Text>
         <ScrollView
           horizontal
@@ -149,7 +149,7 @@ export default function HomeScreen() {
           ))}
         </ScrollView>
 
-        {/* Seção Curiosidades */}
+        {/* Curiosidades */}
         <Text style={styles.sectionTitle}>Curiosidades</Text>
         <ScrollView
           horizontal
@@ -184,7 +184,36 @@ export default function HomeScreen() {
   );
 }
 
-const styles = StyleSheet.create({
+type Styles = {
+  container: ViewStyle;
+  header: ViewStyle;
+  welcomeText: TextStyle;
+  bold: TextStyle;
+  subtitle: TextStyle;
+  profileImage: ImageStyle;
+  searchBar: ViewStyle;
+  searchInput: TextStyle;
+  weatherCard: ViewStyle;
+  weatherContent: ViewStyle;
+  weatherTextContainer: ViewStyle;
+  weatherText: TextStyle;
+  tempText: TextStyle;
+  alertImage: ImageStyle;
+  sectionTitle: TextStyle;
+  actionScroll: ViewStyle;
+  actionButton: ViewStyle;
+  iconTextContainer: ViewStyle;
+  iconShadow: TextStyle;
+  actionText: TextStyle;
+  curiosityScroll: ViewStyle;
+  curiosityCard: ViewStyle;
+  curiosityImage: ImageStyle;
+  curiosityTitle: TextStyle;
+  cardFooter: ViewStyle;
+  footerText: TextStyle;
+};
+
+const styles = StyleSheet.create<Styles>({
   container: {
     flex: 1,
     backgroundColor: '#f5e9da',
@@ -265,41 +294,38 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     alignItems: 'center',
   },
-  weatherTextContainer: {
-    flex: 1,
-  },
+  weatherTextContainer: { flex: 1 },
   weatherText: {
     color: '#fff',
     fontSize: 16,
     fontFamily: 'Livvic_500Medium',
     marginBottom: 18,
   },
-tempText: {
-  color: '#fff',
-  fontSize: 22,
-  fontFamily: 'Livvic_700Bold',
-  backgroundColor: '#D59043',
-  borderRadius: 40,
-  paddingVertical: 18, // reduz a altura
-  paddingHorizontal: 65, // controla a largura do fundo
-  alignSelf: 'center', // centraliza o bloco
-  borderWidth: 3,
-  borderColor: '#5C1D00',
-  borderBottomWidth: 6,
-  textAlign: 'center',
-  minWidth: 360, // 🔹 define uma largura mínima menor
-},
-
+  tempText: {
+    color: '#fff',
+    fontSize: 22,
+    fontFamily: 'Livvic_700Bold',
+    backgroundColor: '#D59043',
+    borderRadius: 40,
+    paddingVertical: 18,
+    paddingHorizontal: 65,
+    alignSelf: 'center',
+    borderWidth: 3,
+    borderColor: '#5C1D00',
+    borderBottomWidth: 6,
+    textAlign: 'center',
+    minWidth: 360,
+  },
   alertImage: {
-  position: 'absolute',
-  width: 150,
-  height: 120,
-  resizeMode: 'contain',
-  top: '50%',
-  left: '50%',
-  transform: [{ translateX: 70 }, { translateY: -60 }], // centraliza
-  zIndex: 2, // fica por cima do texto
-},
+    position: 'absolute',
+    width: 150,
+    height: 120,
+    resizeMode: 'contain',
+    top: '50%',
+    left: '50%',
+    transform: [{ translateX: 70 }, { translateY: -60 }],
+    zIndex: 2,
+  },
   sectionTitle: {
     fontFamily: 'Livvic_700Bold',
     fontSize: 18,
