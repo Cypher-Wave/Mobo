@@ -2,6 +2,7 @@
   "name": "api",
   "version": "1.0.0",
   "description": "API for controlling the lychee harvesting system",
+  "type": "module",
   "main": "src/index.ts",
   "scripts": {
     "dev": "nodemon src/index.ts",
