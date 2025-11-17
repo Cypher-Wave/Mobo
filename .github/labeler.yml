@@ -1,0 +1,14 @@
+backend:
+  - "backend/**"
+DevOps:
+  - ".github/workflows/**"
+  - "**/tests"
+frontend:
+  - "frontend/**"
+UI/UX:
+  - "frontend/web/src/components/**"
+  - "frontend/web/src/styles/**"
+  - "frontend/mobile/src/components/**"
+  - "frontend/mobile/src/styles/**"
+documentation:
+  - "docs/**"

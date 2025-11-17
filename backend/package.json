@@ -4,9 +4,11 @@
   "description": "API for controlling the lychee harvesting system",
   "main": "src/index.ts",
   "scripts": {
-    "dev": "ts-node-dev --respawn --transpile-only --ignore-watch node_modules src/index.ts",
+    "dev": "nodemon src/index.ts",
     "build": "tsc",
-    "start": "nodemon src/index.ts"
+    "start": "node dist/index.js",
+    "test": "vitest",
+    "test:coverage": "vitest --coverage"
   },
   "keywords": [
     "lychee",
@@ -38,10 +40,17 @@
     "@types/express": "^5.0.3",
     "@types/jsonwebtoken": "^9.0.10",
     "@types/multer": "^2.0.0",
-    "@types/node": "^24.7.2",
+    "@types/node": "^24.10.1",
+    "@types/supertest": "^6.0.3",
+    "@vitest/coverage-v8": "^4.0.10",
     "eslint": "^9.37.0",
+    "mockingoose": "^2.16.2",
+    "mongodb-memory-server": "^10.3.0",
     "nodemon": "^3.1.10",
+    "supertest": "^7.1.4",
     "ts-node": "^10.9.2",
-    "typescript": "^5.9.3"
+    "tsconfig-paths": "^4.2.0",
+    "typescript": "^5.9.3",
+    "vitest": "^4.0.10"
   }
 }
