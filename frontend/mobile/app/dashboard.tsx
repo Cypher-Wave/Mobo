@@ -3,8 +3,8 @@ import { View, Text, Dimensions, ScrollView, StyleSheet } from 'react-native';
 import { PieChart } from 'react-native-chart-kit';
 
 const screenWidth = Dimensions.get('window').width;
-const squareWidth = screenWidth - 32; // margem lateral
-const squareHeight = 250;
+const squareWidth = screenWidth - 130; // margem lateral
+const squareHeight = 300;
 
 export default function Dashboard() {
   // Gráfico 1: Qualidade de Colheita (cores #879C5F #B4C297 #61743D #3C4C27)
@@ -120,14 +120,15 @@ const styles = StyleSheet.create({
     fontSize: 26,
     fontWeight: 'bold',
     color: '#b70a49',
-    marginBottom: 16,
-    alignSelf: 'center',
+    marginBottom: 30,
+    marginTop: 10,
+    alignSelf: 'flex-start',
   },
   square: {
-    width: squareWidth,
-    height: squareHeight + 40,
+    width: '95%',
+    height:  400,
     backgroundColor: '#fff',
-    borderRadius: 12,
+    borderRadius: 22,
     paddingTop: 12,
     paddingHorizontal: 12,
     marginBottom: 20,
@@ -137,12 +138,17 @@ const styles = StyleSheet.create({
     shadowRadius: 6,
     elevation: 4,
     alignItems: 'center',
+    borderWidth: 5,
+    borderColor: '#b70a49',
+    marginLeft: 15,
   },
   chartTitle: {
-    fontSize: 18,
+    fontSize: 28,
     fontWeight: 'bold',
     color: '#444',
     marginBottom: 10,
     textAlign: 'center',
+    marginTop: 10,
+
   },
 });
