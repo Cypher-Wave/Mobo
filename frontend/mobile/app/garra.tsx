@@ -1,90 +1,106 @@
 import React, { useState } from 'react';
-import { StyleSheet, View, Text, TouchableOpacity, Image } from 'react-native';
+import { View, Text, TouchableOpacity, StyleSheet, Image } from 'react-native';
+import Slider from '@react-native-community/slider';
 import { Ionicons, FontAwesome5 } from '@expo/vector-icons';
 
 export default function Garra() {
   const [started, setStarted] = useState(false);
-  const [isOn, setIsOn] = useState(true);
-
-  const toggleStartStop = () => setStarted(!started);
-  const handleDirection = (dir: string) => alert(`Direção: ${dir}`);
 
   return (
     <View style={styles.container}>
+      
       {/* Título */}
-      <Text style={styles.title}>Câmera</Text>
+      <Text style={styles.title}>Configurações do Braço Mecânico</Text>
 
-      {/* Visor da câmera */}
-      <View style={styles.cameraView}>
+      {/* Card do braço mecânico */}
+      <View style={styles.cardArm}>
         <Image
-          source={require('../assets/images/imgcamera.png')}
-          style={styles.cameraImage}
-          resizeMode="cover"
+          source={require('../assets/images/imgGarra.png')}
+          style={styles.armImage}
+          resizeMode="contain"
         />
-      </View>
 
-      {/* Controle remoto circular */}
-      <View style={styles.controlWrapper}>
-        {/* Direcional cima */}
-        <TouchableOpacity style={[styles.dirBtn, { top: 25 }]} onPress={() => handleDirection('Cima')}>
-          <Text style={styles.arrow}>▲</Text>
-        </TouchableOpacity>
-
-        {/* Direcional esquerda */}
-        <TouchableOpacity style={[styles.dirBtn, { left: 25 }]} onPress={() => handleDirection('Esquerda')}>
-          <Text style={styles.arrow}>◀</Text>
-        </TouchableOpacity>
-
-        {/* Botão Start/Stop */}
-        <TouchableOpacity style={styles.startButton} onPress={toggleStartStop}>
-          <Text style={styles.startText}>{started ? 'STOP' : 'START'}</Text>
-        </TouchableOpacity>
-
-        {/* Direcional direita */}
-        <TouchableOpacity style={[styles.dirBtn, { right: 25 }]} onPress={() => handleDirection('Direita')}>
-          <Text style={styles.arrow}>▶</Text>
-        </TouchableOpacity>
-
-        {/* Direcional baixo */}
-        <TouchableOpacity style={[styles.dirBtn, { bottom: 25 }]} onPress={() => handleDirection('Baixo')}>
-          <Text style={styles.arrow}>▼</Text>
-        </TouchableOpacity>
-
-        {/* Zoom + */}
-        <TouchableOpacity style={[styles.zoomBtn, { left: -70 }]} onPress={() => alert('Zoom +')}>
-          <Text style={styles.zoomText}>+</Text>
-        </TouchableOpacity>
-
-        {/* Zoom - */}
-        <TouchableOpacity style={[styles.zoomBtn, { right: -70 }]} onPress={() => alert('Zoom -')}>
-          <Text style={styles.zoomText}>-</Text>
-        </TouchableOpacity>
-      </View>
-
-      {/* Barra inferior */}
-      <View style={styles.bottomMenu}>
-        {/* Ícone câmera */}
-        <View style={styles.menuItem}>
-          <Ionicons name="camera" size={28} color="#B70A49" />
-          <Text style={styles.menuText}>Câmera</Text>
+        {/* Câmera */}
+        <View style={styles.iconCamera}>
+          <Ionicons name="camera" size={28} color="#144714" />
+          <Text style={styles.iconText}>Camera</Text>
         </View>
 
-        {/* Toggle On/Off */}
-        <TouchableOpacity style={styles.toggleWrapper} onPress={() => setIsOn(!isOn)}>
-          <View style={[styles.toggle, isOn && styles.toggleOn]}>
-            <View style={[styles.toggleCircle, isOn && styles.toggleCircleOn]} />
-          </View>
-          <Text style={[styles.toggleText, { color: isOn ? '#B70A49' : '#666' }]}>
-            {isOn ? 'On' : 'Off'}
-          </Text>
-        </TouchableOpacity>
-
-        {/* Ícone sensores */}
-        <View style={styles.menuItem}>
-          <FontAwesome5 name="map-marker-alt" size={28} color="green" />
-          <Text style={styles.menuText}>Sensores</Text>
+        {/* Sensores abaixo da câmera */}
+        <View style={styles.iconSensorBelowCamera}>
+          <FontAwesome5 name="map-marker-alt" size={28} color="#144714" />
+          <Text style={styles.iconText}>Sensores</Text>
         </View>
       </View>
+
+      {/* Controle circular */}
+      <View style={styles.controlContainer}>
+        <View style={styles.directionWrapper}>
+
+          {/* CIMA */}
+          <TouchableOpacity style={[styles.dirBtn, { top: 15 }]}>
+            <Text style={styles.arrow}>▲</Text>
+          </TouchableOpacity>
+
+          {/* ESQUERDA */}
+          <TouchableOpacity style={[styles.dirBtn, { left: 15 }]}>
+            <Text style={styles.arrow}>◀</Text>
+          </TouchableOpacity>
+
+          {/* DIREITA */}
+          <TouchableOpacity style={[styles.dirBtn, { right: 15 }]}>
+            <Text style={styles.arrow}>▶</Text>
+          </TouchableOpacity>
+
+          {/* BAIXO */}
+          <TouchableOpacity style={[styles.dirBtn, { bottom: 15 }]}>
+            <Text style={styles.arrow}>▼</Text>
+          </TouchableOpacity>
+
+          {/* Botão Start */}
+          <TouchableOpacity
+            style={styles.startButton}
+            onPress={() => setStarted(!started)}
+          >
+            <Text style={styles.startText}>{started ? "Stop" : "Start"}</Text>
+          </TouchableOpacity>
+        </View>
+
+        <Text style={styles.controlTitle}>Controle de direção</Text>
+      </View>
+
+      {/* Controle de movimentação inferior */}
+      <View style={styles.motionWrapper}>
+
+        <TouchableOpacity style={styles.btnRound}>
+          <Text style={styles.arrowBig}>◀</Text>
+        </TouchableOpacity>
+
+        <View style={styles.sliderWrapper}>
+          <Ionicons name="aperture" size={22} color="#fff" style={{ marginRight: 4 }} />
+
+          <Slider
+            style={{ width: 150, height: 40 }}
+            minimumValue={0}
+            maximumValue={100}
+            minimumTrackTintColor="#fff"
+            maximumTrackTintColor="#fff"
+            thumbTintColor="#fff"
+          />
+        </View>
+
+        <TouchableOpacity style={styles.btnRound}>
+          <Text style={styles.arrowBig}>▶</Text>
+        </TouchableOpacity>
+      </View>
+
+      {/* Botões verticais */}
+      <View style={styles.verticalButtons}>
+        <TouchableOpacity style={styles.btnVertical}><Text style={styles.arrowBig}>▲</Text></TouchableOpacity>
+        <TouchableOpacity style={styles.btnVertical}><Text style={styles.arrowBig}>▼</Text></TouchableOpacity>
+      </View>
+
+      <Text style={styles.motionTitle}>Controle de movimentação</Text>
     </View>
   );
 }
@@ -92,127 +108,256 @@ export default function Garra() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#F0E5D8',
-    alignItems: 'center',
-    paddingTop: 20,
+    backgroundColor: '#ECE2D6',
+    paddingHorizontal: 20,
+    paddingTop: 40,
   },
+
   title: {
-    fontSize: 20,
-    fontWeight: 'bold',
     color: '#B70A49',
-    marginBottom: 10,
+    fontSize: 22,
+    fontWeight: 'bold',
+    textAlign: 'center',
+    marginBottom: 20,
+    marginRight: 150,
   },
-  cameraView: {
-    width: '90%',
-    height: 300, // Aumentado
-    borderRadius: 12,
+
+  /* CARD */
+  cardArm: {
+    backgroundColor: '#ffff',
+    borderRadius: 20,
     overflow: 'hidden',
-    marginBottom: 80,
-    backgroundColor: '#ccc',
-  },
-  cameraImage: {
-    width: '100%',
-    height: '100%',
-  },
-  controlWrapper: {
-    width: 320, // Aumentado
-    height: 320, // Aumentado
-    borderRadius: 160,
-    backgroundColor: '#F9F4ED',
-    borderWidth: 4,
-    borderColor: '#B70A49',
-    alignItems: 'center',
-    justifyContent: 'center',
-    marginBottom: 100,
+    width: '90%',
+    height: 300,
     position: 'relative',
+    marginLeft: 30,
+    borderWidth: 8,
+    borderColor: '#B70A49',
   },
-  startButton: {
-    width: 150, // Aumentado
-    height: 150, // Aumentado
-    borderRadius: 75,
-    backgroundColor: '#B70A49',
-    justifyContent: 'center',
+
+  armImage: {
+    width: '90%',
+    height: '90%',
+  },
+
+  iconCamera: {
+    position: 'absolute',
+    top: 15,
+    right: 20,
+    backgroundColor: '#fff',
+    paddingVertical: 6,
+    paddingHorizontal: 10,
+    borderRadius: 12,
+    flexDirection: 'row',
     alignItems: 'center',
+
+    // sombra
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 3 },
+    shadowOpacity: 0.2,
+    shadowRadius: 3,
+    elevation: 4,
   },
-  startText: {
-    color: '#fff',
-    fontSize: 20,
+
+  iconSensorBelowCamera: {
+    position: 'absolute',
+    top: 65,
+    right: 14,
+    backgroundColor: '#fff',
+    paddingVertical: 6,
+    paddingHorizontal: 10,
+    borderRadius: 12,
+    flexDirection: 'row',
+    alignItems: 'center',
+
+    // sombra
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 3 },
+    shadowOpacity: 0.2,
+    shadowRadius: 3,
+    elevation: 4,
+  },
+
+  iconText: {
+    marginLeft: 5,
+    fontSize: 14,
+    color: '#144714',
     fontWeight: 'bold',
   },
+
+  /* CONTROLE DIREÇÃO */
+  controlContainer: {
+    marginTop: 35,
+    alignItems: 'center',
+  },
+
+  directionWrapper: {
+    width: 200,
+    height: 200,
+    borderRadius: 100,
+    borderColor: '#3C4C27',
+    borderWidth: 7,
+    backgroundColor: '#fff',
+    justifyContent: 'center',
+    alignItems: 'center',
+    position: 'relative',
+
+    // sombra leve do círculo
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 4 },
+    shadowOpacity: 0.1,
+    shadowRadius: 6,
+    elevation: 6,
+  },
+
   dirBtn: {
     position: 'absolute',
-    width: 50,
-    height: 50,
-    justifyContent: 'center',
-    alignItems: 'center',
-    borderWidth: 0,
-    backgroundColor: 'transparent',
-  },
-  arrow: {
-    fontSize: 24,
-    color: '#B70A49',
-    fontWeight: 'bold',
-  },
-  zoomBtn: {
-    position: 'absolute',
-    top: '40%',
-    width: 50,
-    height: 80,
-    borderRadius: 8,
-    backgroundColor: '#B70A49',
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  zoomText: {
-    color: '#fff',
-    fontSize: 28,
-    fontWeight: 'bold',
-  },
-  bottomMenu: {
-    flexDirection: 'row',
-    justifyContent: 'space-around',
-    alignItems: 'center',
-    width: '100%',
-    paddingHorizontal: 30,
-    marginTop: 10,
-  },
-  menuItem: {
-    alignItems: 'center',
-  },
-  menuText: {
-    marginTop: 4,
-    fontSize: 14,
-    fontWeight: 'bold',
-  },
-  toggleWrapper: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    gap: 12,
-    marginTop: 20,
-  },
-  toggle: {
-    width: 50,
-    height: 28,
-    borderRadius: 14,
-    backgroundColor: '#ccc',
-    justifyContent: 'center',
-    padding: 2,
-  },
-  toggleOn: {
-    backgroundColor: '#B70A49',
-  },
-  toggleCircle: {
-    width: 24,
-    height: 24,
-    borderRadius: 12,
+    width: 35,
+    height: 35,
+    borderRadius: 22.5,
+    borderWidth: 1,
+    borderColor: '#fff',
     backgroundColor: '#fff',
-    transform: [{ translateX: 0 }],
+    justifyContent: 'center',
+    alignItems: 'center',
+
+    // sombra
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.25,
+    shadowRadius: 3,
+    elevation: 5,
   },
-  toggleCircleOn: {
-    transform: [{ translateX: 22 }],
-  },
-  toggleText: {
-    fontSize: 16,
+
+  arrow: {
+    fontSize: 22,
+    color: '#3C4C27',
     fontWeight: 'bold',
+  },
+
+  startButton: {
+    width: 80,
+    height: 80,
+    borderRadius: 40,
+    backgroundColor: '#61743D',
+    justifyContent: 'center',
+    alignItems: 'center',
+
+    // sombra
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 4 },
+    shadowOpacity: 0.3,
+    shadowRadius: 4,
+    elevation: 6,
+  },
+
+  startText: {
+    color: '#fff',
+    fontSize: 18,
+    fontWeight: 'bold',
+  },
+
+  controlTitle: {
+    marginTop: 15,
+    marginBottom: 52,
+    color: '#fff',
+    fontSize: 18,
+    fontWeight: 'bold',
+    backgroundColor: '#61743D',
+    width: 200,
+    height: 32,
+    textAlign: 'center',
+    textAlignVertical: 'center',
+    borderRadius: 20,
+    borderWidth: 2,
+    borderColor: '#3C4C27',
+    alignSelf: 'center',
+  },
+
+  /* CONTROLE MOVIMENTAÇÃO */
+  motionWrapper: {
+    marginTop: 50,
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+
+  btnRound: {
+    backgroundColor: '#B70A49',
+    width: 55,
+    height: 55,
+    borderRadius: 27.5,
+    justifyContent: 'center',
+    alignItems: 'center',
+
+    // sombra
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 4 },
+    shadowOpacity: 0.28,
+    shadowRadius: 4,
+    elevation: 6,
+  },
+
+  arrowBig: {
+    fontSize: 30,
+    color: '#fff',
+  },
+
+  sliderWrapper: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    backgroundColor: '#B70A49',
+    paddingHorizontal: 10,
+    paddingVertical: 16,
+    borderRadius: 20,
+    marginHorizontal: 15,
+    width: 220,
+    height: 55,
+
+    // sombra
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 4 },
+    shadowOpacity: 0.25,
+    shadowRadius: 4,
+    elevation: 6,
+  },
+
+  verticalButtons: {
+    flexDirection: 'column',
+    alignItems: 'center',
+    marginBottom: 5,
+    marginTop: -134,
+    gap: 70,
+  },
+
+  btnVertical: {
+    backgroundColor: '#B70A49',
+    width: 55,
+    height: 55,
+    borderRadius: 27.5,
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginVertical: 8,
+
+    // sombra
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 4 },
+    shadowOpacity: 0.28,
+    shadowRadius: 4,
+    elevation: 6,
+  },
+
+  motionTitle: {
+    textAlign: 'center',
+    marginTop: 10,
+    color: '#fff',
+    fontSize: 18,
+    fontWeight: 'bold',
+    backgroundColor: '#B70A49',
+    width: 248,
+    height: 42,
+    borderRadius: 20,
+    textAlignVertical: 'center',
+    alignSelf: 'center',
   },
 });
