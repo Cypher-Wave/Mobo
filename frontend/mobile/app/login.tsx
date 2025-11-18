@@ -75,8 +75,8 @@ export default function CadastroScreen() {
         </TouchableOpacity>
 
         {/* Link */}
-        <TouchableOpacity onPress={() => router.push('/login')}>
-          <Text style={styles.linkText}>Já possuo uma conta!</Text>
+        <TouchableOpacity onPress={() => router.push('/cadastro')}>
+          <Text style={styles.linkText}>Realizar Cadastro!</Text>
         </TouchableOpacity>
       </View>
     </ImageBackground>

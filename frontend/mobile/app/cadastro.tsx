@@ -135,7 +135,7 @@ export default function CadastroScreen() {
         {/* Botão principal */}
         <TouchableOpacity
           style={styles.button}
-          onPress={() => router.push('/home')}
+          onPress={() => router.push('/terreno')}
         >
           <Text style={styles.buttonText}>CADASTRAR-SE</Text>
         </TouchableOpacity>

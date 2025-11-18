@@ -5,7 +5,6 @@ import {
   TextInput,
   TouchableOpacity,
   StyleSheet,
-  ScrollView,
 } from 'react-native';
 import {
   useFonts,
@@ -13,8 +12,10 @@ import {
   Livvic_600SemiBold,
   Livvic_700Bold,
 } from '@expo-google-fonts/livvic';
+import { useNavigation } from '@react-navigation/native'; // ⬅ import necessário
 
 export default function CadastroTerreno() {
+  const navigation = useNavigation(); // ⬅ hook do navigation
   const [fontsLoaded] = useFonts({
     Livvic_400Regular,
     Livvic_600SemiBold,
@@ -24,7 +25,7 @@ export default function CadastroTerreno() {
   if (!fontsLoaded) return null;
 
   return (
-    <ScrollView contentContainerStyle={styles.container}>
+    <View style={styles.container}>
       <Text style={styles.title}>Cadastro de Terreno</Text>
 
       <View style={styles.formContainer}>
@@ -56,9 +57,7 @@ export default function CadastroTerreno() {
           placeholderTextColor="#F5E9DC"
         />
 
-        <Text style={[styles.sectionTitle, { marginTop: 30 }]}>
-          Dados do Terreno:
-        </Text>
+        <Text style={styles.sectionTitle}>Dados do Terreno:</Text>
 
         <TextInput
           style={styles.input}
@@ -76,84 +75,98 @@ export default function CadastroTerreno() {
           placeholderTextColor="#F5E9DC"
         />
 
-        <TouchableOpacity style={styles.button}>
-          <Text style={styles.buttonText}>Cadastrar-se</Text>
+        <TouchableOpacity
+          style={styles.button}
+        >
+          <Text style={styles.buttonText}>Cadastrar Terreno</Text>
         </TouchableOpacity>
 
-         <TouchableOpacity style={styles.button2}>
-          <Text style={styles.buttonText}>Já possuo cadastro </Text>
+    
+        <TouchableOpacity style={styles.button2}>
+          <Text style={styles.buttonText2}>Já possuo cadastro</Text>
         </TouchableOpacity>
       </View>
-    </ScrollView>
+    </View>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
-    flexGrow: 1,
+    flex: 1,
     backgroundColor: '#F5E9DC',
     alignItems: 'center',
-    paddingVertical: 30,
+    justifyContent: 'space-between',
+    paddingTop: 40,
+    paddingBottom: 0,
   },
+
   title: {
     fontSize: 24,
     color: '#A9003F',
     fontFamily: 'Livvic_700Bold',
-    marginBottom: 62,
-    marginTop: 13,
   },
+
   formContainer: {
     backgroundColor: '#617D3D',
-    width: '90%',
-    borderTopLeftRadius: 60,
-    borderTopRightRadius: 60,
-    paddingVertical: 30,
+    width: '95%',
+    minHeight: '85%',
+    borderTopLeftRadius: 45,
+    borderTopRightRadius: 45,
+    paddingVertical: 20,
     paddingHorizontal: 20,
     alignItems: 'center',
   },
+
   sectionTitle: {
     color: '#F5E9DC',
     fontSize: 18,
     fontFamily: 'Livvic_700Bold',
-    marginBottom: 65,
+    marginBottom: 20,
+    marginTop: 10,
   },
+
   input: {
     width: '100%',
     backgroundColor: '#748F53',
     borderRadius: 15,
-    paddingVertical: 14,
-    marginBottom: 15,
+    paddingVertical: 12,
+    marginBottom: 12,
     color: '#fff',
     fontSize: 14,
     fontFamily: 'Livvic_600SemiBold',
     textAlign: 'center',
-    shadowColor: '#000',
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.3,
-    shadowRadius: 3,
-    elevation: 4,
+    elevation: 3,
   },
+
   button: {
     backgroundColor: '#F5E9DC',
     borderRadius: 20,
-    marginTop: 25,
+    marginTop: 80,
     paddingVertical: 12,
-    paddingHorizontal: 50,
+    paddingHorizontal: 40,
     elevation: 4,
   },
+
   buttonText: {
     color: '#3B3B3B',
     fontFamily: 'Livvic_700Bold',
     fontSize: 16,
   },
-   button2: {
-  backgroundColor: 'transparent', // ✅ fundo invisível
+
+  button2: {
+    backgroundColor: '#617D3D',
     borderRadius: 20,
     marginTop: 25,
     paddingVertical: 12,
-    paddingHorizontal: 50,
+    paddingHorizontal: 40,
     elevation: 4,
-    borderWidth:2,
-    borderColor: '#3C4C27',
+    borderWidth: 2,
+    borderColor: '#F5E9DC',
+  },
+
+  buttonText2: {
+    color: '#F5E9DC',
+    fontFamily: 'Livvic_700Bold',
+    fontSize: 16,
   },
 });
