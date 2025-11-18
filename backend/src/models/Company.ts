@@ -17,8 +17,8 @@ interface ICompanyAddress {
 export interface ICompany extends Document {
   companyCNPJ: string;
   ownerName: string;
-  companyName?: string;
-  subscriptionPlan: ISubscriptionPlan;
+  companyName: string;
+  subscriptionPlan?: ISubscriptionPlan;
   companyAddress?: ICompanyAddress;
   createdAt: Date;
   updatedAt: Date;
@@ -32,8 +32,8 @@ const SubscriptionPlanSchema: Schema<ISubscriptionPlan> = new Schema({
 
 // Schema para o endereço da empresa
 const CompanyAddressSchema: Schema<ICompanyAddress> = new Schema({
-  state: { type: String, required: true },
-  city: { type: String, required: true },
+  state: { type: String, },
+  city: { type: String, },
   zipCode: { type: String },
 });
 
