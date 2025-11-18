@@ -1,225 +1,212 @@
-import React, { useState } from 'react';
+import React, { useState } from "react";
 import {
   StyleSheet,
   View,
   Text,
   TouchableOpacity,
-  Alert,
-  TextInput,
-} from 'react-native';
-import { CalendarList } from 'react-native-calendars';
-import type { DateObject, MarkedDates } from 'react-native-calendars/src/types';
-
-interface Period {
-  start: string;
-  end: string;
-  note?: string;
-}
+  FlatList,
+  Animated,
+} from "react-native";
+import { Calendar } from "react-native-calendars";
+import { Ionicons } from "@expo/vector-icons";
 
 export default function PrevisaoColheita() {
-  const [periods, setPeriods] = useState<Period[]>([]);
-  const [selecting, setSelecting] = useState<'start' | 'end'>('start');
-  const [currentStart, setCurrentStart] = useState<string | null>(null);
-  const [note, setNote] = useState('');
+  const [selectedDate, setSelectedDate] = useState<string>("");
+  const [viewMode, setViewMode] = useState<"Dia" | "Semana" | "Mês" | "Ano">("Mês");
 
-  const onDayPress = (day: DateObject) => {
-    const dateStr = day.dateString;
-
-    if (selecting === 'start') {
-      setCurrentStart(dateStr);
-      setSelecting('end');
-    } else {
-      if (!currentStart) {
-        setSelecting('start');
-        return;
-      }
-
-      const start = new Date(currentStart);
-      const end = new Date(dateStr);
-
-      if (end < start) {
-        Alert.alert('Erro', 'A data de término não pode ser antes da data de início.');
-        return;
-      }
-
-      const newPeriod: Period = {
-        start: currentStart,
-        end: dateStr,
-        note: note.trim(),
-      };
-
-      setPeriods([...periods, newPeriod]);
-      setNote('');
-      setCurrentStart(null);
-      setSelecting('start');
-    }
-  };
-
-  const getMarkedDates = (): MarkedDates => {
-    const marks: MarkedDates = {};
-
-    periods.forEach((p) => {
-      const start = new Date(p.start);
-      const end = new Date(p.end);
-
-      for (let d = new Date(start); d <= end; d.setDate(d.getDate() + 1)) {
-        const ds = d.toISOString().split('T')[0];
-        const isStart = ds === p.start;
-        const isEnd = ds === p.end;
-
-        marks[ds] = {
-          color: '#b70a49',
-          textColor: '#fff',
-          startingDay: isStart,
-          endingDay: isEnd,
-        };
-      }
-    });
-
-    return marks;
-  };
+  const events = [
+    { id: "1", title: "Primeira colheita", time: "08:30 - 09:40" },
+    { id: "2", title: "Revisão sensores", time: "10:00 - 10:30" },
+    { id: "3", title: "Análise de qualidade", time: "11:15 - 12:00" },
+  ];
 
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Previsão de Colheita</Text>
+      {/* 🌿 Título */}
+      <Text style={styles.header}>Previsão de Colheita</Text>
 
-      <CalendarList
-        horizontal
-        pagingEnabled
-        calendarWidth={350}
-        onDayPress={onDayPress}
-        pastScrollRange={12}
-        futureScrollRange={12}
-        markingType="period"
-        markedDates={getMarkedDates()}
-        theme={{
-          todayTextColor: '#b70a49',
-          selectedDayBackgroundColor: '#b70a49',
-          selectedDayTextColor: '#fff',
-          arrowColor: '#b70a49',
-        }}
-        style={styles.calendar}
-      />
-
-      <View style={styles.info}>
-        {selecting === 'end' && currentStart ? (
-          <Text style={styles.infoText}>
-            Escolha a data final para iniciar em <Text style={{ fontWeight: 'bold' }}>{currentStart}</Text>
-          </Text>
-        ) : (
-          <Text style={styles.infoText}>Toque uma data para iniciar um novo período</Text>
-        )}
+      {/* 🗓️ Filtros de visualização */}
+      <View style={styles.filterRow}>
+        {["Dia", "Semana", "Mês", "Ano"].map((mode) => (
+          <TouchableOpacity
+            key={mode}
+            style={[
+              styles.filterButton,
+              viewMode === mode && styles.filterButtonActive,
+            ]}
+            onPress={() => setViewMode(mode as any)}
+            activeOpacity={0.8}
+          >
+            <Text
+              style={[
+                styles.filterText,
+                viewMode === mode && styles.filterTextActive,
+              ]}
+            >
+              {mode}
+            </Text>
+          </TouchableOpacity>
+        ))}
       </View>
 
-      {/* Campo para notas */}
-      <TextInput
-        style={styles.noteInput}
-        placeholder="Adicionar observações (ex: tipo da colheita, clima...)"
-        placeholderTextColor="#888"
-        value={note}
-        onChangeText={setNote}
-        multiline
-      />
+      {/* 📆 Calendário */}
+      <View style={styles.calendarContainer}>
+        <Calendar
+          onDayPress={(day) => setSelectedDate(day.dateString)}
+          markedDates={{
+            [selectedDate]: {
+              selected: true,
+              selectedColor: "#A9003F",
+              selectedTextColor: "#fff",
+            },
+          }}
+          theme={{
+            todayTextColor: "#A9003F",
+            arrowColor: "#A9003F",
+          }}
+          style={styles.calendar}
+        />
+      </View>
 
-      <TouchableOpacity
-        style={styles.clearButton}
-        onPress={() => {
-          setPeriods([]);
-          setCurrentStart(null);
-          setNote('');
-          setSelecting('start');
-        }}
-      >
-        <Text style={styles.clearText}>Limpar Períodos</Text>
-      </TouchableOpacity>
-
-      {/* Lista de notas salvas */}
-      {periods.length > 0 && (
-        <View style={styles.notesList}>
-          <Text style={styles.notesTitle}>Períodos Salvos:</Text>
-          {periods.map((p, i) => (
-            <View key={i} style={styles.noteItem}>
-              <Text style={styles.noteText}>
-                📅 {p.start} → {p.end}
-              </Text>
-              {p.note ? <Text style={styles.noteContent}>📝 {p.note}</Text> : null}
+      {/* 📋 Eventos */}
+      <View style={styles.eventSection}>
+        <Text style={styles.eventTitle}>Próximos Eventos</Text>
+        <FlatList
+          data={events}
+          keyExtractor={(item) => item.id}
+          renderItem={({ item }) => (
+            <View style={styles.eventCard}>
+              <View style={styles.eventIcon}>
+                <Ionicons name="leaf-outline" size={24} color="#fff" />
+              </View>
+              <View style={{ flex: 1 }}>
+                <Text style={styles.eventText}>{item.title}</Text>
+                <Text style={styles.eventTime}>{item.time}</Text>
+              </View>
             </View>
-          ))}
-        </View>
-      )}
+          )}
+        />
+      </View>
+
+      {/* ➕ Botão de adicionar evento */}
+      <TouchableOpacity style={styles.addButton} activeOpacity={0.8}>
+        <Ionicons name="add" size={32} color="#fff" />
+      </TouchableOpacity>
     </View>
   );
 }
 
+// 🎨 Estilos aprimorados
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#ece2d6',
-    padding: 16,
+    backgroundColor: "#FFF6F8",
+    paddingTop: 50,
   },
-  title: {
-    fontSize: 22,
-    fontWeight: 'bold',
-    color: '#b70a49',
-    marginBottom: 12,
-    textAlign: 'center',
+  header: {
+    fontSize: 26,
+    fontWeight: "bold",
+    color: "#A9003F",
+    textAlign: "center",
+    marginBottom: 15,
+  },
+  filterRow: {
+    flexDirection: "row",
+    justifyContent: "space-around",
+    marginVertical: 10,
+  },
+  filterButton: {
+    backgroundColor: "#E8C8D3",
+    paddingHorizontal: 18,
+    paddingVertical: 8,
+    borderRadius: 20,
+  },
+  filterButtonActive: {
+    backgroundColor: "#A9003F",
+    shadowColor: "#000",
+    shadowOffset: { width: 0, height: 3 },
+    shadowOpacity: 0.25,
+    shadowRadius: 4,
+    elevation: 5,
+  },
+  filterText: {
+    color: "#A9003F",
+    fontWeight: "600",
+  },
+  filterTextActive: {
+    color: "#fff",
+    fontWeight: "bold",
+  },
+  calendarContainer: {
+    backgroundColor: "#fff",
+    borderRadius: 16,
+    marginHorizontal: 16,
+    marginVertical: 10,
+    shadowColor: "#000",
+    shadowOffset: { width: 0, height: 3 },
+    shadowOpacity: 0.1,
+    shadowRadius: 4,
+    elevation: 3,
   },
   calendar: {
     borderRadius: 12,
+  },
+  eventSection: {
+    flex: 1,
+    marginTop: 16,
+    paddingHorizontal: 16,
+  },
+  eventTitle: {
+    fontSize: 20,
+    fontWeight: "bold",
+    color: "#A9003F",
+    marginBottom: 12,
+  },
+  eventCard: {
+    flexDirection: "row",
+    alignItems: "center",
+    backgroundColor: "#A9003F",
+    borderRadius: 14,
+    padding: 14,
     marginBottom: 10,
+    shadowColor: "#000",
+    shadowOffset: { width: 0, height: 3 },
+    shadowOpacity: 0.25,
+    shadowRadius: 4,
+    elevation: 4,
   },
-  info: {
-    marginTop: 8,
-    alignItems: 'center',
+  eventIcon: {
+    width: 40,
+    height: 40,
+    borderRadius: 20,
+    backgroundColor: "#8B0035",
+    alignItems: "center",
+    justifyContent: "center",
+    marginRight: 10,
   },
-  infoText: {
-    fontSize: 16,
-    color: '#444',
+  eventText: {
+    color: "#fff",
+    fontSize: 17,
+    fontWeight: "600",
   },
-  noteInput: {
-    marginTop: 16,
-    backgroundColor: '#fff',
-    borderColor: '#b70a49',
-    borderWidth: 1,
-    borderRadius: 8,
-    padding: 12,
+  eventTime: {
+    color: "#FFD7E0",
     fontSize: 14,
-    color: '#333',
-    minHeight: 60,
+    marginTop: 2,
   },
-  clearButton: {
-    marginTop: 16,
-    backgroundColor: '#b70a49',
-    paddingVertical: 12,
-    borderRadius: 8,
-    alignItems: 'center',
-  },
-  clearText: {
-    color: '#fff',
-    fontSize: 16,
-    fontWeight: 'bold',
-  },
-  notesList: {
-    marginTop: 20,
-  },
-  notesTitle: {
-    fontSize: 18,
-    fontWeight: 'bold',
-    color: '#b70a49',
-    marginBottom: 8,
-  },
-  noteItem: {
-    backgroundColor: '#f3e8dd',
-    padding: 10,
-    borderRadius: 8,
-    marginBottom: 8,
-  },
-  noteText: {
-    fontSize: 14,
-    fontWeight: 'bold',
-  },
-  noteContent: {
-    fontSize: 14,
-    marginTop: 4,
+  addButton: {
+    backgroundColor: "#A9003F",
+    width: 60,
+    height: 60,
+    borderRadius: 30,
+    justifyContent: "center",
+    alignItems: "center",
+    alignSelf: "center",
+    marginVertical: 20,
+    shadowColor: "#000",
+    shadowOffset: { width: 0, height: 4 },
+    shadowOpacity: 0.3,
+    shadowRadius: 5,
+    elevation: 6,
   },
 });
