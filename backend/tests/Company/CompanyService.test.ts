@@ -13,11 +13,6 @@ import CompanyService from "../../src/services/CompanyService";
 
 import { connectDB, closeDB, clearDB } from "../setup";
 
-// Mock do JWT com Vitest
-vi.mock("../../src/utils/jwt", () => ({
-  generateToken: vi.fn(() => "fake-token"),
-}));
-
 beforeAll(async () => {
   await connectDB();
 }, 30000);

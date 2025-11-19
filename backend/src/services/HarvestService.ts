@@ -16,6 +16,8 @@ export interface HarvestInput {
   harvestEnd: Date;
   harvestDuration: number;
   planting: string;
+  user?: string;
+  company?: string;
 }
 
 // Serviço de Colheita
