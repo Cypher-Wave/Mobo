@@ -6,8 +6,9 @@
 ![License](https://img.shields.io/badge/license-MIT-green)
 ![Node.js](https://img.shields.io/badge/Node.js-backend-339933?logo=node.js)
 ![TypeScript](https://img.shields.io/badge/TypeScript-linguagem-3178C6?logo=typescript)
-![React](https://img.shields.io/badge/React-frontend-61DAFB?logo=react)
+![Next.js](https://img.shields.io/badge/Next.js-web-000000?logo=nextdotjs)
 ![React Native](https://img.shields.io/badge/React%20Native-mobile-61DAFB?logo=react)
+![Expo](https://img.shields.io/badge/Expo-mobile-000020?logo=expo)
 ![Arduino](https://img.shields.io/badge/Arduino-hardware-00979D?logo=arduino)
 ![MongoDB](https://img.shields.io/badge/MongoDB-Atlas-47A248?logo=mongodb)
 ![AWS](https://img.shields.io/badge/AWS-hospedagem-FF9900?logo=amazonaws)
@@ -49,17 +50,23 @@ O projeto se alinha aos seguintes **Objetivos de Desenvolvimento Sustentável (O
 ## 🛠️ Tecnologias Utilizadas
 
 ### Backend
-- [Node.js](https://nodejs.org/) — plataforma de execução JavaScript
-- [TypeScript](https://www.typescriptlang.org/) — tipagem estática no backend
+- [Node.js](https://nodejs.org/) + [TypeScript](https://www.typescriptlang.org/) — plataforma e tipagem estática
 - [Express](https://expressjs.com/) — framework para APIs RESTful
 - [Mongoose](https://mongoosejs.com/) — ODM para MongoDB
 - [MongoDB Atlas](https://www.mongodb.com/atlas) — banco de dados NoSQL na nuvem
 - [AWS](https://aws.amazon.com/) — hospedagem e infraestrutura
 
-### Frontend
-- [React](https://react.dev/) — biblioteca para interfaces web
-- [React Native](https://reactnative.dev/) + [TypeScript](https://www.typescriptlang.org/) — framework para o aplicativo mobile
+
+### Frontend Web
+- [Next.js](https://nextjs.org/) + [TypeScript](https://www.typescriptlang.org/) — framework React para a interface web (SSR/SSG)
+
+### Frontend Mobile
+- [React Native](https://reactnative.dev/) + [Expo](https://expo.dev/) + [TypeScript](https://www.typescriptlang.org/) — aplicativo mobile multiplataforma (iOS e Android)
+
+### Design
 - [Figma](https://figma.com/) — prototipação e design de interfaces
+
+
 
 ### Inteligência Artificial (não implementado)
 - **Redes Neurais Convolucionais (CNN)** — classificação do estágio de maturação da lichia
@@ -79,8 +86,7 @@ O projeto se alinha aos seguintes **Objetivos de Desenvolvimento Sustentável (O
 
 ### Ferramentas & Metodologia
 - **Scrum** — metodologia ágil com Sprints iterativos
-- [LucidChart](https://www.lucidchart.com/) — diagramas UML, fluxogramas e modelagem
-- [XAMPP](https://www.apachefriends.org/) / [HeidiSQL](https://www.heidisql.com/) — ambiente local de banco de dados
+- [LucidChart](https://www.lucidchart.com/) — diagramas UML e fluxogramas
 - [BrModelo](https://www.brmodeloweb.com/) — modelagem conceitual e lógica do banco de dados
 
 ---
@@ -106,6 +112,177 @@ O projeto se alinha aos seguintes **Objetivos de Desenvolvimento Sustentável (O
 
 ---
 
+## 📁 Estrutura do Projeto
+
+```
+Mobo/
+├── .github/
+│   └── workflows/            # CI/CD e auto-assign de issues
+├── backend/
+│   ├── src/                  # Código-fonte da API
+│   ├── uploads/              # Arquivos de upload
+│   ├── .env.exemplo          # Exemplo de variáveis de ambiente
+│   ├── package.json
+│   └── tsconfig.json
+├── front-end/
+│   ├── mobile/               # Aplicativo React Native + Expo
+│   │   ├── app/              # Telas do aplicativo (.tsx)
+│   │   │   ├── _layout.tsx
+│   │   │   ├── alertas.tsx
+│   │   │   ├── cadastro.tsx
+│   │   │   ├── cadastroTerreno.tsx
+│   │   │   ├── curiosidades.tsx
+│   │   │   ├── dashboard.tsx
+│   │   │   ├── garra.tsx
+│   │   │   ├── home.tsx
+│   │   │   ├── login.tsx
+│   │   │   ├── perfil.tsx
+│   │   │   ├── previsao-de-colheita.tsx
+│   │   │   └── sensores.tsx
+│   │   ├── assets/images/
+│   │   ├── app.json
+│   │   ├── package.json
+│   │   └── tsconfig.json
+│   └── web/                  # Aplicação Next.js
+│       ├── public/
+│       ├── src/
+│       ├── next.config.ts
+│       ├── package.json
+│       └── tsconfig.json
+├── .gitignore
+└── README.md
+```
+
+---
+
+## 🚀 Como Rodar Localmente
+
+### Pré-requisitos
+
+- [Node.js](https://nodejs.org/) v18+
+- [npm](https://www.npmjs.com/) ou [yarn](https://yarnpkg.com/)
+- Conta no [MongoDB Atlas](https://www.mongodb.com/atlas)
+- [Expo Go](https://expo.dev/go) instalado no celular (para o mobile)
+
+### 1. Clonar o Repositório
+
+```bash
+git clone https://github.com/Cypher-Wave/Mobo.git
+cd Mobo
+```
+
+### 2. Backend (Node.js + TypeScript)
+
+```bash
+cd backend
+
+# Instalar dependências
+npm install
+
+# Configurar variáveis de ambiente
+cp .env.exemplo .env
+# Edite o .env com suas credenciais (veja o modelo abaixo)
+```
+
+O arquivo `.env` deve conter:
+
+```env
+MONGODB_URI=sua_string_de_conexao_mongodb
+PORT=3001
+JWT_SECRET=sua_chave_secreta
+```
+
+```bash
+# Rodar em modo desenvolvimento
+npm run dev
+```
+
+A API ficará disponível em `http://localhost:3001`.
+
+### 3. Frontend Web (Next.js)
+
+```bash
+cd front-end/web
+
+# Instalar dependências
+npm install
+
+# Rodar em modo desenvolvimento
+npm run dev
+```
+
+Acesse [http://localhost:3000](http://localhost:3000) no navegador.
+
+> 💡 O Next.js sobe na porta **3000** e o backend na **3001** por padrão. Certifique-se de que ambas estejam livres.
+
+### 4. Mobile (React Native + Expo)
+
+```bash
+cd front-end/mobile
+
+# Instalar dependências
+npm install
+
+# Rodar com Expo
+npx expo start
+```
+
+Escaneie o QR Code com o aplicativo **Expo Go** no celular, ou pressione:
+- `a` — abre no emulador Android
+- `i` — abre no simulador iOS
+- `w` — abre no navegador
+
+---
+
+## 🧪 Instruções de Testes
+
+### Backend
+
+```bash
+cd backend
+
+# Rodar todos os testes
+npm test
+
+# Rodar testes com cobertura
+npm run test:coverage
+```
+
+### Frontend Web
+
+```bash
+cd front-end/web
+
+# Rodar testes unitários
+npm test
+```
+
+### Mobile
+
+```bash
+cd front-end/mobile
+
+# Rodar testes
+npm test
+```
+
+> ⚠️ Os testes de sistema completo (integração IoT + braço mecânico + IA) estão em desenvolvimento e serão implementados nas próximas sprints.
+
+---
+
+## 🔗 Links Importantes
+
+| Recurso | Link |
+|---------|------|
+| 📖 Documentação da API (Swagger) | `Em breve` |
+| 🌐 Deploy — Frontend Web | `Em breve` |
+| 📱 Deploy — Mobile (Expo) | `Em breve` |
+| 🎨 Protótipo Figma | `Em breve` |
+
+> 🔔 Os links de Swagger e Deploy serão adicionados assim que disponibilizados. Acompanhe as [issues](https://github.com/Cypher-Wave/Mobo/issues) do projeto para atualizações.
+
+---
+
 ## 👥 Equipe
 
 | Nome | Função | GitHub |
@@ -115,85 +292,6 @@ O projeto se alinha aos seguintes **Objetivos de Desenvolvimento Sustentável (O
 | Lucas de Lima Santana | IoT | [@LucasLiSan](https://github.com/LucasLiSan) |
 | Pedro Henrique Venâncio | Backend & DevOps | [@phvenancio](https://github.com/phvenancio) |
 | Tiago Rodrigues | Mobile | [@tiagorodrigues9](https://github.com/tiagorodrigues9) |
-
----
-
-## 🚀 Como Executar o Projeto
-
-### Pré-requisitos
-
-- [Node.js](https://nodejs.org/) v18+
-- [npm](https://www.npmjs.com/) ou [yarn](https://yarnpkg.com/)
-- Conta no [MongoDB Atlas](https://www.mongodb.com/atlas)
-- Variáveis de ambiente configuradas (`.env`)
-
-### Instalação
-
-```bash
-# Clone o repositório
-git clone https://github.com/<seu-usuario>/PI-MOBO.git
-cd PI-MOBO
-
-# Instale as dependências do backend
-cd backend
-npm install
-
-# Instale as dependências do frontend
-cd ../frontend
-npm install
-```
-
-### Configuração do Ambiente
-
-Crie um arquivo `.env` na raiz do backend com as seguintes variáveis:
-
-```env
-MONGODB_URI=sua_string_de_conexao_mongodb
-PORT=3000
-JWT_SECRET=sua_chave_secreta
-AWS_REGION=sua_regiao
-```
-
-### Executando
-
-```bash
-# Backend
-cd backend
-npm run dev
-
-# Frontend (em outro terminal)
-cd frontend
-npm start
-```
-
----
-
-## 📁 Estrutura do Projeto
-
-```
-PI-MOBO/
-├── backend/
-│   ├── src/
-│   │   ├── controllers/
-│   │   ├── models/
-│   │   ├── routes/
-│   │   └── services/
-│   └── package.json
-├── frontend/
-│   ├── src/
-│   │   ├── components/
-│   │   ├── pages/
-│   │   └── styles/
-│   └── package.json
-├── mobile/
-│   └── src/
-├── docs/
-│   └── diagramas/
-├── .github/
-│   └── workflows/
-├── .gitignore
-└── README.md
-```
 
 ---
 
@@ -219,12 +317,12 @@ PI-MOBO/
 
 ## 🔭 Trabalhos Futuros
 
-- Treinar modelo CNN para classificação de maturação com acurácia ≥ 85%, usando imagens capturadas em diferentes horários e condições climáticas
+- Treinar modelo CNN para classificação de maturação com acurácia ≥ 85%
 - Investigar arquiteturas avançadas como **YOLO v8** e **EfficientNet** para detecção em tempo real
 - Integrar completamente os módulos de visão computacional, IoT e robótica
-- Realizar testes extensivos em pomares reais do Vale do Ribeira com avaliação quantitativa da taxa de colheita e integridade dos frutos
-- Desenvolver versão economicamente acessível para pequenos e médios produtores, via parcerias com cooperativas agrícolas e instituições de fomento
-- Adaptar a tecnologia para outras frutas tropicais delicadas.
+- Realizar testes extensivos em pomares reais do Vale do Ribeira
+- Desenvolver versão acessível via parcerias com cooperativas agrícolas
+- Adaptar a tecnologia para outras frutas tropicais 
 
 ---
 
