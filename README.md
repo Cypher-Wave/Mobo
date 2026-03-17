@@ -287,11 +287,10 @@ npm test
 
 | Nome | Função | GitHub |
 |------|--------|--------|
-| Bárbara Vitória Ferreira dos Santos | Frontend & UI/UX | [@babi-s4ntos](https://github.com/babi-s4ntos) |
-| Jaquelaine Aparecida de Ramos | Documentação | [@jk-ramos](https://github.com/jk-ramos) |
-| Lucas de Lima Santana | IoT | [@LucasLiSan](https://github.com/LucasLiSan) |
-| Pedro Henrique Venâncio | Backend & DevOps | [@phvenancio](https://github.com/phvenancio) |
-| Tiago Rodrigues | Mobile | [@tiagorodrigues9](https://github.com/tiagorodrigues9) |
+| Bárbara Vitória Ferreira dos Santos | Frontend & UI/UX e Mobile | [@babi-s4ntos](https://github.com/babi-s4ntos) |
+| Jaquelaine Aparecida de Ramos | Documentação/IA | [@jk-ramos](https://github.com/jk-ramos) |
+| Lucas de Lima Santana | IoT/IA | [@LucasLiSan](https://github.com/LucasLiSan) |
+| Pedro Henrique Venâncio | Backend & DevOps/Mobile | [@phvenancio](https://github.com/phvenancio) |
 
 ---
 
