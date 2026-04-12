@@ -1,4 +1,4 @@
-# 🍈 Projeto Mobo
+# 🍒🤖 Projeto Mobo
 
 > Automatização de colheita de safra de lichia através de um braço mecânico utilizando tecnologias de IoT e Inteligência Artificial.
 
