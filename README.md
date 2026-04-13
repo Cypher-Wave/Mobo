@@ -43,7 +43,7 @@ O projeto se alinha aos seguintes **Objetivos de Desenvolvimento Sustentável (O
 - 📝 **Relatórios Gerenciais** — geração e exportação de relatórios por período, campo e qualidade
 - 🗺️ **Mapa de Sensores** — localização geográfica dos sensores e braços mecânicos
 - 👤 **Gestão de Usuários** — perfis de Administrador e Agricultor com permissões distintas
-- 📱 **Aplicativo Mobile** — versão mobile com todas as funcionalidades principais e controle da garra mecânica.
+- 📱 **Aplicativo Mobile** — versão mobile com todas as funcionalidades principais e controle da garra mecânica
 
 ---
 
@@ -54,21 +54,19 @@ O projeto se alinha aos seguintes **Objetivos de Desenvolvimento Sustentável (O
 - [Express](https://expressjs.com/) — framework para APIs RESTful
 - [Mongoose](https://mongoosejs.com/) — ODM para MongoDB
 - [MongoDB Atlas](https://www.mongodb.com/atlas) — banco de dados NoSQL na nuvem
+- [JWT](https://jwt.io/) — autenticação via tokens
 - [AWS](https://aws.amazon.com/) — hospedagem e infraestrutura
 
-
 ### Frontend Web
-- [Next.js](https://nextjs.org/) + [TypeScript](https://www.typescriptlang.org/) — framework React para a interface web (SSR/SSG)
+- [Next.js](https://nextjs.org/) + [TypeScript](https://www.typescriptlang.org/) — framework React com SSR/SSG
 
 ### Frontend Mobile
-- [React Native](https://reactnative.dev/) + [Expo](https://expo.dev/) + [TypeScript](https://www.typescriptlang.org/) — aplicativo mobile multiplataforma (iOS e Android)
+- [React Native](https://reactnative.dev/) + [Expo](https://expo.dev/) + [TypeScript](https://www.typescriptlang.org/) — app multiplataforma (iOS e Android)
 
 ### Design
 - [Figma](https://figma.com/) — prototipação e design de interfaces
 
-
-
-### Inteligência Artificial (não implementado)
+### Inteligência Artificial *(não implementado)*
 - **Redes Neurais Convolucionais (CNN)** — classificação do estágio de maturação da lichia
 - **Transfer Learning** — arquitetura pré-treinada com ajuste fino para a tarefa específica
 - **Data Augmentation** — técnica para aumentar a robustez do modelo em variações de iluminação e ângulo
@@ -78,7 +76,7 @@ O projeto se alinha aos seguintes **Objetivos de Desenvolvimento Sustentável (O
 - [Arduino](https://www.arduino.cc/) — controle e movimentação do braço mecânico
 - **Impressora 3D** — fabricação do protótipo físico do braço com pinça automatizada
 - **Servomotores** — movimentação dos eixos com precisão para aproximação e posicionamento
-- **Sensores IoT** — temperatura, umidade do solo e umidade do ar (não implementado)
+- **Sensores IoT** — temperatura, umidade do solo e umidade do ar *(não implementado)*
 
 ### Banco de Dados
 - **MongoDB Atlas** — armazenamento principal (dados de IoT, colheitas, usuários)
@@ -121,10 +119,10 @@ Mobo/
 ├── backend/
 │   ├── src/                  # Código-fonte da API
 │   ├── uploads/              # Arquivos de upload
-│   ├── .env.exemplo          # Exemplo de variáveis de ambiente
+│   ├── .env.example          # Exemplo de variáveis de ambiente
 │   ├── package.json
 │   └── tsconfig.json
-├── front-end/
+├── frontend/
 │   ├── mobile/               # Aplicativo React Native + Expo
 │   │   ├── app/              # Telas do aplicativo (.tsx)
 │   │   │   ├── _layout.tsx
@@ -153,16 +151,20 @@ Mobo/
 └── README.md
 ```
 
+> ⚠️ **Atenção:** A estrutura atual usa `frontend/` (sem hífen). Documentações antigas podem referenciar `front-end/` — desconsidere esses caminhos.
+
 ---
 
 ## 🚀 Como Rodar Localmente
 
 ### Pré-requisitos
 
-- [Node.js](https://nodejs.org/) v18+
-- [npm](https://www.npmjs.com/) ou [yarn](https://yarnpkg.com/)
-- Conta no [MongoDB Atlas](https://www.mongodb.com/atlas)
-- [Expo Go](https://expo.dev/go) instalado no celular (para o mobile)
+Antes de começar, instale:
+
+- [Node.js](https://nodejs.org/) v20 LTS (recomendado)
+- [Git](https://git-scm.com/)
+- [MongoDB](https://www.mongodb.com/) local **ou** conta no [MongoDB Atlas](https://www.mongodb.com/atlas)
+- [Expo Go](https://expo.dev/go) no celular (para testar o app mobile)
 
 ### 1. Clonar o Repositório
 
@@ -171,102 +173,164 @@ git clone https://github.com/Cypher-Wave/Mobo.git
 cd Mobo
 ```
 
+---
+
 ### 2. Backend (Node.js + TypeScript)
 
 ```bash
 cd backend
-
-# Instalar dependências
 npm install
-
-# Configurar variáveis de ambiente
-cp .env.exemplo .env
-# Edite o .env com suas credenciais (veja o modelo abaixo)
 ```
 
-O arquivo `.env` deve conter:
+#### Configurar variáveis de ambiente
 
+Na pasta `backend`, crie um arquivo `.env` baseado no `.env.example` disponível no repositório.
+
+**Usando MongoDB local:**
 ```env
-MONGODB_URI=sua_string_de_conexao_mongodb
-PORT=3001
-JWT_SECRET=sua_chave_secreta
+PORT=5000
+DB_NAME=mobo
+USE_LOCAL_DB=true
+JWT_SECRET=minha_chave_super_secreta_123
+NODE_ENV=development
 ```
+
+A aplicação tentará conectar em `mongodb://127.0.0.1:27017/mobo`.
+
+**Usando MongoDB Atlas:**
+```env
+PORT=5000
+DB_USER=seu_usuario
+DB_PASSWORD=sua_senha
+DB_NAME=mobo
+USE_LOCAL_DB=false
+JWT_SECRET=minha_chave_super_secreta_123
+NODE_ENV=development
+```
+
+#### Rodar o backend
 
 ```bash
-# Rodar em modo desenvolvimento
 npm run dev
 ```
 
-A API ficará disponível em `http://localhost:3001`.
+A API ficará disponível em `http://localhost:5000`.
+
+---
 
 ### 3. Frontend Web (Next.js)
 
+Em outro terminal:
+
 ```bash
-cd front-end/web
-
-# Instalar dependências
+cd frontend/web
 npm install
-
-# Rodar em modo desenvolvimento
 npm run dev
 ```
 
 Acesse [http://localhost:3000](http://localhost:3000) no navegador.
 
-> 💡 O Next.js sobe na porta **3000** e o backend na **3001** por padrão. Certifique-se de que ambas estejam livres.
-
-### 4. Mobile (React Native + Expo)
-
-```bash
-cd front-end/mobile
-
-# Instalar dependências
-npm install
-
-# Rodar com Expo
-npx expo start
-```
-
-Escaneie o QR Code com o aplicativo **Expo Go** no celular, ou pressione:
-- `a` — abre no emulador Android
-- `i` — abre no simulador iOS
-- `w` — abre no navegador
+> 💡 O frontend web está configurado para consumir a API em `http://localhost:5000/api`. Caso altere a porta do backend, ajuste também a URL da API no frontend web.
 
 ---
 
-## 🧪 Instruções de Testes
+### 4. Frontend Mobile (React Native + Expo)
+
+Em outro terminal:
+
+```bash
+cd frontend/mobile
+npm install
+npx expo start
+```
+
+Após iniciar, você pode:
+
+- Escanear o QR Code com o aplicativo **Expo Go** no celular
+- Pressionar `a` para abrir no emulador Android
+- Pressionar `i` para abrir no simulador iOS
+- Pressionar `w` para abrir no navegador
+
+---
+
+### Ordem recomendada de execução
+
+Suba os serviços nesta ordem para facilitar a validação de cada camada:
+
+1. **Backend**
+2. **Frontend Web**
+3. **Frontend Mobile**
+
+---
+
+## 🧪 Testes
 
 ### Backend
 
 ```bash
 cd backend
-
-# Rodar todos os testes
 npm test
-
-# Rodar testes com cobertura
-npm run test:coverage
+npm run test:coverage   # com cobertura
 ```
 
 ### Frontend Web
 
 ```bash
-cd front-end/web
-
-# Rodar testes unitários
+cd frontend/web
 npm test
 ```
 
-### Mobile
+### Frontend Mobile
 
 ```bash
-cd front-end/mobile
-
-# Rodar testes
+cd frontend/mobile
 npm test
 ```
 
 > ⚠️ Os testes de sistema completo (integração IoT + braço mecânico + IA) estão em desenvolvimento e serão implementados nas próximas sprints.
+
+---
+
+## 🌿 Fluxo de Desenvolvimento com Git
+
+```bash
+# Criar uma branch
+git checkout -b feat/minha-feature
+
+# Ver alterações
+git status
+
+# Adicionar arquivos
+git add .
+
+# Criar commit
+git commit -m "feat: descrição da alteração"
+
+# Enviar para o GitHub
+git push -u origin feat/minha-feature
+```
+
+Após o envio, abra uma **Pull Request** no repositório.
+
+---
+
+## ⚠️ Problemas Comuns
+
+### Erro de conexão com MongoDB
+
+Verifique se:
+- O arquivo `.env` foi criado corretamente
+- `USE_LOCAL_DB` está configurado de acordo com o ambiente
+- O MongoDB local está rodando (se usar banco local)
+- As credenciais do Atlas estão corretas (se usar nuvem)
+
+### Porta ocupada
+
+Se a porta `5000` estiver em uso, a aplicação pode falhar ao iniciar. Libere a porta ou ajuste no `.env`, lembrando de atualizar também a URL da API no frontend web.
+
+### Erro de CORS
+
+O backend está configurado para aceitar requisições do frontend rodando em `http://localhost:3000`. Ao rodar em outro endereço, pode ser necessário ajustar a configuração de CORS no backend.
 
 ---
 
@@ -279,7 +343,7 @@ npm test
 | 📱 Deploy — Mobile (Expo) | `Em breve` |
 | 🎨 Protótipo Figma | `Em breve` |
 
-> 🔔 Os links de Swagger e Deploy serão adicionados assim que disponibilizados. Acompanhe as [issues](https://github.com/Cypher-Wave/Mobo/issues) do projeto para atualizações.
+> 🔔 Acompanhe as [issues](https://github.com/Cypher-Wave/Mobo/issues) do projeto para atualizações.
 
 ---
 
@@ -288,9 +352,9 @@ npm test
 | Nome | Função | GitHub |
 |------|--------|--------|
 | Bárbara Vitória Ferreira dos Santos | Frontend & UI/UX e Mobile | [@babi-s4ntos](https://github.com/babi-s4ntos) |
-| Jaquelaine Aparecida de Ramos | Documentação/IA | [@jk-ramos](https://github.com/jk-ramos) |
-| Lucas de Lima Santana | IoT/IA | [@LucasLiSan](https://github.com/LucasLiSan) |
-| Pedro Henrique Venâncio | Backend & DevOps/Mobile | [@phvenancio](https://github.com/phvenancio) |
+| Jaquelaine Aparecida de Ramos | Documentação / IA | [@jk-ramos](https://github.com/jk-ramos) |
+| Lucas de Lima Santana | IoT / IA | [@LucasLiSan](https://github.com/LucasLiSan) |
+| Pedro Henrique Venâncio | Backend & DevOps / Mobile | [@phvenancio](https://github.com/phvenancio) |
 
 ---
 
@@ -321,7 +385,7 @@ npm test
 - Integrar completamente os módulos de visão computacional, IoT e robótica
 - Realizar testes extensivos em pomares reais do Vale do Ribeira
 - Desenvolver versão acessível via parcerias com cooperativas agrícolas
-- Adaptar a tecnologia para outras frutas tropicais 
+- Adaptar a tecnologia para outras frutas tropicais
 
 ---
 
@@ -333,8 +397,8 @@ Este projeto está sob a licença MIT. Consulte o arquivo [LICENSE](LICENSE) par
 
 ## 🎓 Instituição
 
-Desenvolvido na **Faculdade de Tecnologia (FATEC) — Campus Registro**  
-Curso: Desenvolvimento de Software Multiplataforma  
+Desenvolvido na **Faculdade de Tecnologia (FATEC) — Campus Registro**
+Curso: Desenvolvimento de Software Multiplataforma
 Ministério da Educação — 2026
 
 ---
