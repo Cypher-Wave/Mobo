@@ -24,11 +24,11 @@ export const connectDB = async (): Promise<void> => {
       // Conexão com MongoDB Atlas (casa)
       if (!DB_USER || !DB_PASSWORD) {
         console.error(
-          "❌ Variáveis de ambiente DB_USER ou DB_PASSWORD não configuradas para Atlas"
+          "❌ Variáveis de ambiente DB_USER ou DB_PASSWORD não configuradas para Atlas",
         );
         process.exit(1);
       }
-      uri = `mongodb+srv://${DB_USER}:${DB_PASSWORD}@mobo.eswkbcg.mongodb.net/${DB_NAME}?retryWrites=true&w=majority&appName=mobo`;
+      uri = `mongodb://${DB_USER}:${DB_PASSWORD}@ac-ub01sjm-shard-00-00.eswkbcg.mongodb.net:27017,ac-ub01sjm-shard-00-01.eswkbcg.mongodb.net:27017,ac-ub01sjm-shard-00-02.eswkbcg.mongodb.net:27017/?ssl=true&replicaSet=atlas-vkj47j-shard-0&authSource=admin&appName=${DB_NAME}`;
       console.log("🌐 Conectando ao MongoDB Atlas...");
     }
 
