@@ -1,0 +1,28 @@
+[{
+  "_id": {
+    "$oid": "690a3dbf5e6483e5a696b1a2"
+  },
+  "plantingName": "Talhão A",
+  "plantedArea": 2,
+  "location": {
+    "longitude": -47.846708,
+    "latitude": -24.496174
+  },
+  "user": {
+    "$oid": "68f9b1db9a6e1861498e2655"
+  }
+},
+{
+  "_id": {
+    "$oid": "690a62eee5eefbd216177b53"
+  },
+  "plantedArea": 2,
+  "location": {
+    "longitude": -46.846708,
+    "latitude": -23.496174
+  },
+  "user": {
+    "$oid": "68f9b1db9a6e1861498e2655"
+  },
+  "plantingName": "Talhão B"
+}]
