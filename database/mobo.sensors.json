@@ -1,0 +1,108 @@
+[{
+  "_id": {
+    "$oid": "690d065a3734d9d73efc8f88"
+  },
+  "sensorType": "air_humidity",
+  "sensorNumeration": "A573JRT453",
+  "sensorAccuracy": 98.87,
+  "measuringRange": "1km",
+  "setting": {
+    "airHumidityLimit": 60
+  },
+  "user": {
+    "$oid": "68f9b1db9a6e1861498e2655"
+  }
+},
+{
+  "_id": {
+    "$oid": "690d086d3734d9d73efc8f8a"
+  },
+  "sensorType": "soil_humidity",
+  "sensorNumeration": "DGH5634HGR",
+  "sensorAccuracy": 99.5,
+  "measuringRange": "1km",
+  "setting": {
+    "soilHumidityLimit": 30
+  },
+  "user": {
+    "$oid": "68f9b1db9a6e1861498e2655"
+  }
+},
+{
+  "_id": {
+    "$oid": "690d09253734d9d73efc8f8c"
+  },
+  "sensorType": "temperature",
+  "sensorNumeration": "JFB35246BF",
+  "sensorAccuracy": 99.57,
+  "measuringRange": "1km",
+  "setting": {
+    "temperatureLimit": 35
+  },
+  "user": {
+    "$oid": "68f9b1db9a6e1861498e2655"
+  }
+},
+{
+  "_id": {
+    "$oid": "691e17497243bda70f3bba65"
+  },
+  "sensorType": "temperature",
+  "sensorNumeration": "TEMP-001",
+  "sensorAccuracy": 0.5,
+  "measuringRange": "-10°C a 50°C",
+  "setting": {
+    "temperatureLimit": 35
+  },
+  "user": {
+    "$oid": "68f9b1db9a6e1861498e2655"
+  },
+  "createdAt": {
+    "$date": "2025-11-15T06:00:00.000Z"
+  },
+  "updatedAt": {
+    "$date": "2025-11-15T06:00:00.000Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "691e17497243bda70f3bba66"
+  },
+  "sensorType": "soil_humidity",
+  "sensorNumeration": "SOIL-003",
+  "sensorAccuracy": 1,
+  "measuringRange": "0% a 100%",
+  "setting": {
+    "soilHumidityLimit": 60
+  },
+  "user": {
+    "$oid": "68f9b1db9a6e1861498e2655"
+  },
+  "createdAt": {
+    "$date": "2025-11-10T06:00:00.000Z"
+  },
+  "updatedAt": {
+    "$date": "2025-11-10T06:00:00.000Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "691e17497243bda70f3bba67"
+  },
+  "sensorType": "air_humidity",
+  "sensorNumeration": "AIR-002",
+  "sensorAccuracy": 0.8,
+  "measuringRange": "10% a 95%",
+  "setting": {
+    "airHumidityLimit": 70
+  },
+  "user": {
+    "$oid": "68f9b1db9a6e1861498e2655"
+  },
+  "createdAt": {
+    "$date": "2025-10-28T06:00:00.000Z"
+  },
+  "updatedAt": {
+    "$date": "2025-10-28T06:00:00.000Z"
+  }
+}]

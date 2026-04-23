@@ -1,0 +1,102 @@
+[{
+  "_id": {
+    "$oid": "69126c16b0de9be72f5d715a"
+  },
+  "imageName": "fotoLichia1.jpg",
+  "description": "Cachos de Lichia",
+  "createdAt": {
+    "$date": "2025-11-19T03:00:00.000Z"
+  },
+  "user": {
+    "$oid": "68f9b1db9a6e1861498e2655"
+  }
+},
+{
+  "_id": {
+    "$oid": "69126c4db0de9be72f5d715c"
+  },
+  "imageName": "fotoLichia2.jpg",
+  "description": "Lichia do Talhão A",
+  "createdAt": {
+    "$date": "2025-11-18T03:00:00.000Z"
+  },
+  "user": {
+    "$oid": "68f9b1db9a6e1861498e2655"
+  }
+},
+{
+  "_id": {
+    "$oid": "691e19c42d5b416ad9eba79e"
+  },
+  "imageName": "fotoLichia3.jpg",
+  "description": "Dentro da Lichia",
+  "user": {
+    "$oid": "68f9b1db9a6e1861498e2655"
+  },
+  "createdAt": {
+    "$date": "2025-11-17T03:00:00.000Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "691e19eb2d5b416ad9eba7a0"
+  },
+  "imageName": "fotoLichia4.jpg",
+  "description": "Rendimento da Colheita",
+  "user": {
+    "$oid": "68f9b1db9a6e1861498e2655"
+  },
+  "createdAt": {
+    "$date": "2025-11-16T03:00:00.000Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "691e1a122d5b416ad9eba7a2"
+  },
+  "imageName": "fotoLichia9.jpg",
+  "description": "Cestinho 😊",
+  "user": {
+    "$oid": "68f9b1db9a6e1861498e2655"
+  },
+  "createdAt": {
+    "$date": "2025-11-15T03:00:00.000Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "691e1b4f2d5b416ad9eba7a4"
+  },
+  "imageName": "fotoLichia6.jpg",
+  "description": "Hmmm 🤤",
+  "user": {
+    "$oid": "68f9b1db9a6e1861498e2655"
+  },
+  "createdAt": {
+    "$date": "2025-11-14T03:00:00.000Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "691e1b6e2d5b416ad9eba7a6"
+  },
+  "imageName": "fotoLichia7.jpg",
+  "user": {
+    "$oid": "68f9b1db9a6e1861498e2655"
+  },
+  "createdAt": {
+    "$date": "2025-11-13T03:00:00.000Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "691e1b892d5b416ad9eba7a8"
+  },
+  "imageName": "fotoLichia8.jpg",
+  "user": {
+    "$oid": "68f9b1db9a6e1861498e2655"
+  },
+  "createdAt": {
+    "$date": "2025-11-13T03:00:00.000Z"
+  }
+}]

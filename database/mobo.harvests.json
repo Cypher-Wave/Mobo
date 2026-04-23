@@ -1,0 +1,228 @@
+[{
+  "_id": {
+    "$oid": "691e15f80a295d36990e8be3"
+  },
+  "harvestedQuantity": 12,
+  "quality": 78,
+  "harvestDate": {
+    "$date": "2025-11-19T06:00:00.000Z"
+  },
+  "harvestStart": "08:10",
+  "harvestEnd": "08:40",
+  "harvestDuration": "30m",
+  "planting": {
+    "$oid": "690a3dbf5e6483e5a696b1a2"
+  },
+  "user": {
+    "$oid": "68f9b1db9a6e1861498e2655"
+  }
+},
+{
+  "_id": {
+    "$oid": "691e15f80a295d36990e8be4"
+  },
+  "harvestedQuantity": 10,
+  "quality": 82,
+  "harvestDate": {
+    "$date": "2025-11-18T06:00:00.000Z"
+  },
+  "harvestStart": "09:00",
+  "harvestEnd": "09:33",
+  "harvestDuration": "33m",
+  "planting": {
+    "$oid": "690a3dbf5e6483e5a696b1a2"
+  },
+  "user": {
+    "$oid": "68f9b1db9a6e1861498e2655"
+  }
+},
+{
+  "_id": {
+    "$oid": "691e15f80a295d36990e8be5"
+  },
+  "harvestedQuantity": 14,
+  "quality": 80,
+  "harvestDate": {
+    "$date": "2025-11-16T06:00:00.000Z"
+  },
+  "harvestStart": "07:55",
+  "harvestEnd": "08:20",
+  "harvestDuration": "25m",
+  "planting": {
+    "$oid": "690a3dbf5e6483e5a696b1a2"
+  },
+  "user": {
+    "$oid": "68f9b1db9a6e1861498e2655"
+  }
+},
+{
+  "_id": {
+    "$oid": "691e15f80a295d36990e8be6"
+  },
+  "harvestedQuantity": 7,
+  "quality": 75,
+  "harvestDate": {
+    "$date": "2025-11-10T06:00:00.000Z"
+  },
+  "harvestStart": "10:00",
+  "harvestEnd": "10:22",
+  "harvestDuration": "22m",
+  "planting": {
+    "$oid": "690a3dbf5e6483e5a696b1a2"
+  },
+  "user": {
+    "$oid": "68f9b1db9a6e1861498e2655"
+  }
+},
+{
+  "_id": {
+    "$oid": "691e15f80a295d36990e8be7"
+  },
+  "harvestedQuantity": 20,
+  "quality": 88,
+  "harvestDate": {
+    "$date": "2025-11-02T06:00:00.000Z"
+  },
+  "harvestStart": "08:33",
+  "harvestEnd": "09:10",
+  "harvestDuration": "37m",
+  "planting": {
+    "$oid": "690a3dbf5e6483e5a696b1a2"
+  },
+  "user": {
+    "$oid": "68f9b1db9a6e1861498e2655"
+  }
+},
+{
+  "_id": {
+    "$oid": "691e15f80a295d36990e8be8"
+  },
+  "harvestedQuantity": 16,
+  "quality": 90,
+  "harvestDate": {
+    "$date": "2025-10-27T06:00:00.000Z"
+  },
+  "harvestStart": "09:11",
+  "harvestEnd": "09:41",
+  "harvestDuration": "30m",
+  "planting": {
+    "$oid": "690a3dbf5e6483e5a696b1a2"
+  },
+  "user": {
+    "$oid": "68f9b1db9a6e1861498e2655"
+  }
+},
+{
+  "_id": {
+    "$oid": "691e15f80a295d36990e8be9"
+  },
+  "harvestedQuantity": 18,
+  "quality": 92,
+  "harvestDate": {
+    "$date": "2025-11-19T06:00:00.000Z"
+  },
+  "harvestStart": "09:20",
+  "harvestEnd": "09:55",
+  "harvestDuration": "35m",
+  "planting": {
+    "$oid": "690a62eee5eefbd216177b53"
+  },
+  "user": {
+    "$oid": "68f9b1db9a6e1861498e2655"
+  }
+},
+{
+  "_id": {
+    "$oid": "691e15f80a295d36990e8bea"
+  },
+  "harvestedQuantity": 11,
+  "quality": 85,
+  "harvestDate": {
+    "$date": "2025-11-17T06:00:00.000Z"
+  },
+  "harvestStart": "10:00",
+  "harvestEnd": "10:30",
+  "harvestDuration": "30m",
+  "planting": {
+    "$oid": "690a62eee5eefbd216177b53"
+  },
+  "user": {
+    "$oid": "68f9b1db9a6e1861498e2655"
+  }
+},
+{
+  "_id": {
+    "$oid": "691e15f80a295d36990e8beb"
+  },
+  "harvestedQuantity": 13,
+  "quality": 88,
+  "harvestDate": {
+    "$date": "2025-11-14T06:00:00.000Z"
+  },
+  "harvestStart": "07:40",
+  "harvestEnd": "08:05",
+  "harvestDuration": "25m",
+  "planting": {
+    "$oid": "690a62eee5eefbd216177b53"
+  },
+  "user": {
+    "$oid": "68f9b1db9a6e1861498e2655"
+  }
+},
+{
+  "_id": {
+    "$oid": "691e15f80a295d36990e8bec"
+  },
+  "harvestedQuantity": 9,
+  "quality": 82,
+  "harvestDate": {
+    "$date": "2025-11-08T06:00:00.000Z"
+  },
+  "harvestStart": "08:55",
+  "harvestEnd": "09:15",
+  "harvestDuration": "20m",
+  "planting": {
+    "$oid": "690a62eee5eefbd216177b53"
+  },
+  "user": {
+    "$oid": "68f9b1db9a6e1861498e2655"
+  }
+},
+{
+  "_id": {
+    "$oid": "691e15f80a295d36990e8bed"
+  },
+  "harvestedQuantity": 22,
+  "quality": 95,
+  "harvestDate": {
+    "$date": "2025-10-30T06:00:00.000Z"
+  },
+  "harvestStart": "09:10",
+  "harvestEnd": "09:45",
+  "harvestDuration": "35m",
+  "planting": {
+    "$oid": "690a62eee5eefbd216177b53"
+  },
+  "user": {
+    "$oid": "68f9b1db9a6e1861498e2655"
+  }
+},
+{
+  "_id": {
+    "$oid": "691e15f80a295d36990e8bee"
+  },
+  "harvestedQuantity": 19,
+  "quality": 90,
+  "harvestDate": {
+    "$date": "2025-10-26T06:00:00.000Z"
+  },
+  "harvestStart": "08:25",
+  "harvestEnd": "08:55",
+  "harvestDuration": "30m",
+  "planting": {
+    "$oid": "690a62eee5eefbd216177b53"
+  },
+  "user": {
+    "$oid": "68f9b1db9a6e1861498e2655"
+  }
+}]

@@ -1,0 +1,24 @@
+[{
+  "_id": {
+    "$oid": "68f9b1db9a6e1861498e2655"
+  },
+  "userName": "Giovana Oliveira",
+  "userEmail": "giovana@email.com",
+  "userPassword": "$2b$10$KZ4yruYGQfTeFvskYmh1VuiDlAPuyIjucApTR3NS8u8lhB8Ru.ANW",
+  "userRole": "family_farmer",
+  "farmerDetails": {
+    "cpf": "123.456.789-10",
+    "dap": "1234567890",
+    "_id": {
+      "$oid": "68f9b1db9a6e1861498e2656"
+    }
+  },
+  "createdAt": {
+    "$date": "2025-10-23T04:40:59.111Z"
+  },
+  "updatedAt": {
+    "$date": "2025-10-23T04:40:59.111Z"
+  },
+  "__v": 0,
+  "userImage": "Agronomia.jpeg"
+}]

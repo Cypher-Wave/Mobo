@@ -1,0 +1,144 @@
+[{
+  "_id": {
+    "$oid": "691e18b0632331fa1d666ce9"
+  },
+  "airHumidity": 68,
+  "planting": {
+    "$oid": "690a3dbf5e6483e5a696b1a2"
+  },
+  "sensor": {
+    "$oid": "690d065a3734d9d73efc8f88"
+  },
+  "alerts": [],
+  "createdAt": {
+    "$date": "2025-11-19T06:00:00.000Z"
+  },
+  "updatedAt": {
+    "$date": "2025-11-19T06:00:00.000Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "691e18b0632331fa1d666cea"
+  },
+  "airHumidity": 75,
+  "planting": {
+    "$oid": "690a62eee5eefbd216177b53"
+  },
+  "sensor": {
+    "$oid": "691e17497243bda70f3bba67"
+  },
+  "alerts": [
+    {
+      "type": "high_humidity",
+      "value": 75,
+      "threshold": 70,
+      "timestamp": {
+        "$date": "2025-11-12T06:00:00.000Z"
+      },
+      "isActive": true
+    }
+  ],
+  "createdAt": {
+    "$date": "2025-11-12T06:00:00.000Z"
+  },
+  "updatedAt": {
+    "$date": "2025-11-12T06:00:00.000Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "691e18b0632331fa1d666ceb"
+  },
+  "soilHumidity": 40,
+  "planting": {
+    "$oid": "690a3dbf5e6483e5a696b1a2"
+  },
+  "sensor": {
+    "$oid": "690d086d3734d9d73efc8f8a"
+  },
+  "alerts": [],
+  "createdAt": {
+    "$date": "2025-11-18T06:00:00.000Z"
+  },
+  "updatedAt": {
+    "$date": "2025-11-18T06:00:00.000Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "691e18b0632331fa1d666cec"
+  },
+  "soilHumidity": 25,
+  "planting": {
+    "$oid": "690a62eee5eefbd216177b53"
+  },
+  "sensor": {
+    "$oid": "691e17497243bda70f3bba66"
+  },
+  "alerts": [
+    {
+      "type": "low_humidity",
+      "value": 25,
+      "threshold": 35,
+      "timestamp": {
+        "$date": "2025-11-08T06:00:00.000Z"
+      },
+      "isActive": true
+    }
+  ],
+  "createdAt": {
+    "$date": "2025-11-08T06:00:00.000Z"
+  },
+  "updatedAt": {
+    "$date": "2025-11-08T06:00:00.000Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "691e18b0632331fa1d666ced"
+  },
+  "temperature": 36.2,
+  "planting": {
+    "$oid": "690a3dbf5e6483e5a696b1a2"
+  },
+  "sensor": {
+    "$oid": "690d09253734d9d73efc8f8c"
+  },
+  "alerts": [
+    {
+      "type": "high_temp",
+      "value": 36.2,
+      "threshold": 35,
+      "timestamp": {
+        "$date": "2025-11-14T06:00:00.000Z"
+      },
+      "isActive": true
+    }
+  ],
+  "createdAt": {
+    "$date": "2025-11-14T06:00:00.000Z"
+  },
+  "updatedAt": {
+    "$date": "2025-11-14T06:00:00.000Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "691e18b0632331fa1d666cee"
+  },
+  "temperature": 24.3,
+  "planting": {
+    "$oid": "690a62eee5eefbd216177b53"
+  },
+  "sensor": {
+    "$oid": "691e17497243bda70f3bba65"
+  },
+  "alerts": [],
+  "createdAt": {
+    "$date": "2025-11-18T06:00:00.000Z"
+  },
+  "updatedAt": {
+    "$date": "2025-11-18T06:00:00.000Z"
+  }
+}]
