@@ -15,6 +15,7 @@
 
     /* ====== Node + Paths ====== */
     "moduleResolution": "node",
+    "types": ["node"],
     "baseUrl": "./src",                   // Caminho base para imports relativos
     "paths": {
       "@config/*": ["config/*"],
