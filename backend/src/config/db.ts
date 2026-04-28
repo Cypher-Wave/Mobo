@@ -17,11 +17,11 @@ export const connectDB = async (): Promise<void> => {
     let uri: string;
 
     if (USE_LOCAL_DB === "true") {
-      // Conexão com MongoDB local (Fatec)
+      // Conexão com MongoDB local
       uri = `mongodb://127.0.0.1:27017/${DB_NAME}`;
       console.log("🌐 Conectando ao MongoDB local...");
     } else {
-      // Conexão com MongoDB Atlas (casa)
+      // Conexão com MongoDB Atlas
       if (!DB_USER || !DB_PASSWORD) {
         console.error(
           "❌ Variáveis de ambiente DB_USER ou DB_PASSWORD não configuradas para Atlas",
