@@ -5,31 +5,75 @@ const api = axios.create({
   headers: {
     "Content-Type": "application/json",
   },
-  withCredentials: true, // importante para cookies HTTP-only
-  timeout: 10000,
+  withCredentials: true,
+  timeout: 15000,
 });
 
-// ✅ NÃO adiciona Authorization — o cookie já é enviado automaticamente
+
+// 🔵 REQUEST
 api.interceptors.request.use(
-  (config) => config,
-  (error) => Promise.reject(error)
+  (config) => {
+    console.log("➡️ Request:", config.method?.toUpperCase(), config.url);
+    return config;
+  },
+  (error) => {
+    console.error("❌ Erro antes da requisição:", error);
+    return Promise.reject(error);
+  }
 );
 
-// ✅ Trata 401 redirecionando para login
+
+// 🔴 RESPONSE
 api.interceptors.response.use(
-  (response) => response,
+  (response) => {
+    console.log("✅ Response:", response.status, response.config.url);
+    return response;
+  },
   async (error) => {
     const originalRequest = error.config;
 
-    if (error.response?.status === 401 && !originalRequest._retry) {
+    // Sem resposta → problema de rede ou backend dormindo
+    if (!error.response) {
+      console.error("🌐 Erro de rede ou servidor offline:", error.message);
+
+      // opcional: retry automático (1x)
+      if (!originalRequest._retry) {
+        originalRequest._retry = true;
+        console.log("🔁 Tentando novamente...");
+        return api(originalRequest);
+      }
+
+      return Promise.reject({
+        message: "Servidor indisponível. Tente novamente.",
+      });
+    }
+
+    const status = error.response.status;
+
+    // 401 → não autenticado
+    if (status === 401 && !originalRequest._retry) {
       originalRequest._retry = true;
+
+      console.warn("🔒 Não autenticado, redirecionando...");
+
       if (typeof window !== "undefined") {
         window.location.href = "/auth/login";
       }
     }
 
-    if (error.response?.status >= 500) {
-      console.error("Erro do servidor:", error.response?.data || error.message);
+    // 403 → sem permissão
+    if (status === 403) {
+      console.warn("⛔ Acesso negado");
+    }
+
+    // 404 → endpoint errado
+    if (status === 404) {
+      console.warn("❓ Endpoint não encontrado:", originalRequest.url);
+    }
+
+    // 500 → erro backend
+    if (status >= 500) {
+      console.error("🔥 Erro no servidor:", error.response.data);
     }
 
     return Promise.reject(error);
