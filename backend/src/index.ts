@@ -27,7 +27,7 @@ import UserRoutes from "./routes/UserRoutes";
 // Configurações do Express
 app.use(
   cors({
-    origin: "https://mobocw.vercel.app",
+    origin: ["https://mobocw.vercel.app", "http://localhost:3000"],
     credentials: true,
     allowedHeaders: "content-type",
     methods: ["GET", "POST", "PUT", "DELETE", "HEAD"],
