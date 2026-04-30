@@ -30,7 +30,8 @@ export const connectDB = async (): Promise<void> => {
       }
       const encodedPassword = encodeURIComponent(DB_PASSWORD);
 
-      uri = `mongodb://${DB_USER}:${encodedPassword}@mobo.eswkbcg.mongodb.net:27017/${DB_NAME}?ssl=true&authSource=admin&retryWrites=true&w=majority`;
+      
+      uri = `mongodb+srv://${DB_USER}:${DB_PASSWORD}@mobo.eswkbcg.mongodb.net/${DB_NAME}?retryWrites=true&w=majority&appName=mobo`;
       console.log("🌐 Conectando ao MongoDB Atlas...");
     }
 

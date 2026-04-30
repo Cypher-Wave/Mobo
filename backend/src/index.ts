@@ -7,6 +7,9 @@ import cookieParser from "cookie-parser";
 import { connectDB } from "./config/db";
 import { errorMiddleware } from "./middlewares/errorMiddleware";
 
+import dns from 'dns';
+dns.setServers(['8.8.8.8', '8.8.4.4']);
+
 // Configurando variáveis de ambiente e inicializando o Express
 dotenv.config();
 const app: Application = express();
