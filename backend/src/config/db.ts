@@ -28,7 +28,10 @@ export const connectDB = async (): Promise<void> => {
         );
         process.exit(1);
       }
-      uri = `mongodb://${DB_USER}:${DB_PASSWORD}@ac-ub01sjm-shard-00-00.eswkbcg.mongodb.net:27017,ac-ub01sjm-shard-00-01.eswkbcg.mongodb.net:27017,ac-ub01sjm-shard-00-02.eswkbcg.mongodb.net:27017/?ssl=true&replicaSet=atlas-vkj47j-shard-0&authSource=admin&appName=${DB_NAME}`;
+      const encodedPassword = encodeURIComponent(DB_PASSWORD);
+
+      
+      uri = `mongodb+srv://${DB_USER}:${DB_PASSWORD}@mobo.eswkbcg.mongodb.net/${DB_NAME}?retryWrites=true&w=majority&appName=mobo`;
       console.log("🌐 Conectando ao MongoDB Atlas...");
     }
 

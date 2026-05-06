@@ -3,6 +3,7 @@ import express, { Application, Request, Response } from "express";
 import dotenv from "dotenv";
 import cors from "cors";
 import path from "path";
+import dns from 'dns';
 import cookieParser from "cookie-parser";
 import { connectDB } from "./config/db";
 import { errorMiddleware } from "./middlewares/errorMiddleware";
@@ -10,6 +11,10 @@ import { errorMiddleware } from "./middlewares/errorMiddleware";
 // Configurando variáveis de ambiente e inicializando o Express
 dotenv.config();
 const app: Application = express();
+
+if (process.env.NODE_ENV === "development") {
+  dns.setServers(['8.8.8.8', '8.8.4.4']);
+}
 
 // Conectando ao banco de dados
 connectDB();
@@ -24,15 +29,30 @@ import SensorDataRoutes from "./routes/SensorDataRoutes";
 import SensorRoutes from "./routes/SensorRoutes";
 import UserRoutes from "./routes/UserRoutes";
 
+const allowedOrigins = [
+  "https://mobocw.vercel.app",
+  "http://localhost:3000",
+];
+
 // Configurações do Express
 app.use(
   cors({
-    origin: ["https://mobocw.vercel.app", "http://localhost:3000"],
+    origin: (origin, callback) => {
+      // permite requests sem origin (mobile, postman)
+      if (!origin) return callback(null, true);
+
+      if (allowedOrigins.includes(origin)) {
+        return callback(null, true);
+      }
+
+      return callback(new Error("Not allowed by CORS"));
+    },
     credentials: true,
     allowedHeaders: "content-type",
     methods: ["GET", "POST", "PUT", "DELETE", "HEAD"],
   }),
 );
+
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());

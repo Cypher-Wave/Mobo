@@ -5,6 +5,8 @@ import asyncHandler from "../utils/asyncHandler";
 
 dotenv.config();
 
+const isProd = process.env.NODE_ENV === "production";
+
 class AuthController {
   // Login
   login = asyncHandler(async (req: Request, res: Response) => {
@@ -29,15 +31,14 @@ class AuthController {
     }
 
     // Web: envia cookie HTTP-only
-    if (req.headers["user-agent"]?.includes("Mozilla")) {
-      res.cookie("token", token, {
-        httpOnly: true,
-        secure: process.env.NODE_ENV === "production",
-        sameSite: process.env.NODE_ENV === "production" ? "none" : "lax",
-        maxAge: 1000 * 60 * 60 * 24,
-        path: "/",
-      });
-    }
+    res.cookie("token", token, {
+      httpOnly: true,
+      secure: isProd,
+      sameSite: isProd ? "none" : "lax",
+      maxAge: 1000 * 60 * 60 * 24,
+      path: "/",
+    });
+  
     // Mobile / Web SPA: retorna token no JSON
     return res.status(200).json({
       success: true,
@@ -67,15 +68,14 @@ class AuthController {
     }
 
     // Web: envia cookie HTTP-only
-    if (req.headers["user-agent"]?.includes("Mozilla")) {
-      res.cookie("token", token, {
-        httpOnly: true,
-        secure: process.env.NODE_ENV === "production",
-        sameSite: process.env.NODE_ENV === "production" ? "none" : "lax",
-        maxAge: 1000 * 60 * 60 * 24,
-        path: "/",
-      });
-    }
+    res.cookie("token", token, {
+      httpOnly: true,
+      secure: isProd,
+      sameSite: isProd ? "none" : "lax",
+      maxAge: 1000 * 60 * 60 * 24,
+      path: "/",
+    });
+
     // Mobile / Web SPA: retorna token no JSON
     return res.status(200).json({
       success: true,
@@ -87,7 +87,13 @@ class AuthController {
 
   // Logout (sem sessão, apenas front precisa remover token)
   logout = asyncHandler(async (_req: Request, res: Response) => {
-    res.clearCookie("token");
+    res.clearCookie("token", {
+      httpOnly: true,
+      secure: isProd,
+      sameSite: isProd ? "none" : "lax",
+      path: "/",
+    });
+
     return res
       .status(200)
       .json({ success: true, message: "Logout efetuado com sucesso." });
