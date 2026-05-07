@@ -2,68 +2,80 @@ export const runtime = "nodejs";
 
 import { NextRequest, NextResponse } from "next/server";
 
-const BACKEND_URL = process.env.API_URL;
+const BACKEND_URL = process.env.API_URL!;
 
 type RouteParams = {
-  path: string[];
+  params: {
+    path: string[];
+  };
 };
 
 export async function GET(
   req: NextRequest,
-  { params }: { params: RouteParams }
+  context: RouteParams
 ) {
-  return handler(req, params);
+  return handler(req, context);
 }
 
 export async function POST(
   req: NextRequest,
-  { params }: { params: RouteParams }
+  context: RouteParams
 ) {
-  return handler(req, params);
+  return handler(req, context);
 }
 
 export async function PUT(
   req: NextRequest,
-  { params }: { params: RouteParams }
+  context: RouteParams
 ) {
-  return handler(req, params);
+  return handler(req, context);
 }
 
 export async function DELETE(
   req: NextRequest,
-  { params }: { params: RouteParams }
+  context: RouteParams
 ) {
-  return handler(req, params);
+  return handler(req, context);
 }
 
-async function handler(req: NextRequest, params: RouteParams) {
-  const path = params.path.join("/");
+async function handler(
+  req: NextRequest,
+  context: RouteParams
+) {
+  const path = context.params.path.join("/");
   const url = `${BACKEND_URL}/api/${path}`;
 
-  console.log("🔁 PROXY:", req.method, url);
+  console.log("🔁 Proxy:", req.method, url);
 
-  const body = req.method !== "GET" ? await req.text() : undefined;
+  const body =
+    req.method !== "GET"
+      ? await req.text()
+      : undefined;
 
-  const response = await fetch(url, {
+  const backendResponse = await fetch(url, {
     method: req.method,
     headers: {
       "Content-Type": "application/json",
       cookie: req.headers.get("cookie") || "",
-      origin: req.headers.get("origin") || "",
     },
     body,
-    credentials: "include",
   });
 
-  const res = new NextResponse(await response.text(), {
-    status: response.status,
+  const responseBody = await backendResponse.text();
+
+  const response = new NextResponse(responseBody, {
+    status: backendResponse.status,
   });
 
-  const setCookie = response.headers.get("set-cookie");
+  // 🔥 copia TODOS os headers importantes
+  backendResponse.headers.forEach((value, key) => {
+    if (
+      key.toLowerCase() === "set-cookie" ||
+      key.toLowerCase() === "content-type"
+    ) {
+      response.headers.append(key, value);
+    }
+  });
 
-  if (setCookie) {
-    res.headers.set("set-cookie", setCookie);
-  }
-
-  return res;
+  return response;
 }
