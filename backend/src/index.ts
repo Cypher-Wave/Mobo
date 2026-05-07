@@ -48,8 +48,8 @@ app.use(
       return callback(new Error("Not allowed by CORS"));
     },
     credentials: true,
-    allowedHeaders: "content-type",
-    methods: ["GET", "POST", "PUT", "DELETE", "HEAD"],
+    allowedHeaders: ["Content-Type", "Authorization"],
+    methods: ["GET", "POST", "PUT", "DELETE", "HEAD", "OPTIONS"],
   }),
 );
 
@@ -70,14 +70,21 @@ app.use("/api/sensordata", SensorDataRoutes);
 app.use("/api/sensor", SensorRoutes);
 app.use("/api/user", UserRoutes);
 
-// Rota inexistente
-app.use((_req: Request, res: Response) => {
-  res.status(404).json({ message: "Rota não encontrada" });
-});
-
 // Rota principal de teste
 app.get("/", (_req: Request, res: Response) => {
   res.status(200).json({ message: "API Lychee rodando ✅" });
+});
+
+app.get("/health", (_req: Request, res) => {
+  res.status(200).json({
+    success: true,
+    message: "API online",
+  });
+});
+
+// Rota inexistente
+app.use((_req: Request, res: Response) => {
+  res.status(404).json({ message: "Rota não encontrada" });
 });
 
 // Middleware global de tratamento de erros
@@ -86,5 +93,5 @@ app.use(errorMiddleware);
 // Inicialização do servidor
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {
-  console.log(`Servidor rodando em http://localhost:${PORT}`);
+  console.log(`Servidor rodando na porta ${PORT}`);
 });
