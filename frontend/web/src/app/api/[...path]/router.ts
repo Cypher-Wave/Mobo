@@ -2,7 +2,13 @@ export const runtime = "nodejs";
 
 import { NextRequest, NextResponse } from "next/server";
 
-const BACKEND_URL = process.env.API_URL!;
+const BACKEND_URL =
+  process.env.API_URL ||
+  process.env.NEXT_PUBLIC_API_URL;
+
+if (!BACKEND_URL) {
+  throw new Error("❌ API_URL não configurada");
+}
 
 type RouteParams = {
   params: {
@@ -48,7 +54,8 @@ async function handler(
   console.log("🔁 Proxy:", req.method, url);
 
   const body =
-    req.method !== "GET"
+    req.method !== "GET" &&
+    req.method !== "HEAD"
       ? await req.text()
       : undefined;
 
@@ -59,6 +66,7 @@ async function handler(
       cookie: req.headers.get("cookie") || "",
     },
     body,
+    cache: "no-store",
   });
 
   const responseBody = await backendResponse.text();
@@ -67,11 +75,13 @@ async function handler(
     status: backendResponse.status,
   });
 
-  // 🔥 copia TODOS os headers importantes
+  // 🔥 copia headers importantes
   backendResponse.headers.forEach((value, key) => {
+    const lowerKey = key.toLowerCase();
+
     if (
-      key.toLowerCase() === "set-cookie" ||
-      key.toLowerCase() === "content-type"
+      lowerKey === "set-cookie" ||
+      lowerKey === "content-type"
     ) {
       response.headers.append(key, value);
     }
