@@ -34,7 +34,7 @@ class AuthController {
     res.cookie("token", token, {
       httpOnly: true,
       secure: isProd,
-      sameSite: isProd ? "none" : "lax",
+      sameSite: "lax",
       maxAge: 1000 * 60 * 60 * 24,
       path: "/",
     });
@@ -71,7 +71,7 @@ class AuthController {
     res.cookie("token", token, {
       httpOnly: true,
       secure: isProd,
-      sameSite: isProd ? "none" : "lax",
+      sameSite: "lax",
       maxAge: 1000 * 60 * 60 * 24,
       path: "/",
     });
@@ -90,7 +90,7 @@ class AuthController {
     res.clearCookie("token", {
       httpOnly: true,
       secure: isProd,
-      sameSite: isProd ? "none" : "lax",
+      sameSite: "lax",
       path: "/",
     });
 
