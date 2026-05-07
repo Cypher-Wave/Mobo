@@ -63,5 +63,8 @@ async function handler(req: NextRequest, params: RouteParams) {
     res.headers.set("set-cookie", setCookie);
   }
 
+  console.log("🔁 URL:", url);
+console.log("🔁 STATUS:", response.status);
+
   return res;
 }
