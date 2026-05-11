@@ -15,19 +15,19 @@ const Sidebar = () => {
         <Link href="/home">
           <span>Home</span>
         </Link>
-        <Link href="/harvesters">
+        <Link href="/harvester">
           <span>Braço Mecânico</span>
         </Link>
-        <Link href="/dashboards">
+        <Link href="/dashboard">
           <span>Dashboard</span>
         </Link>
-        <Link href="/sensors">
+        <Link href="/sensor">
           <span>Sensores</span>
         </Link>
-        <Link href="/reports">
+        <Link href="/report">
           <span>Relatórios</span>
         </Link>
-        <Link href="/alerts">
+        <Link href="/alert">
           <span>Alertas</span>
         </Link>
         <Link href="/forecast">

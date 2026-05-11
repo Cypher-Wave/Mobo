@@ -14,14 +14,14 @@ const Home = () => {
       description:
         "A garra mecânica possui sensores, câmera que identifica frutos prontos para serem colhidos e controle de direção para precisão na colheita.",
       icon: "/images/icons/garraIcon.png",
-      link: "/harvesters",
+      link: "/harvester",
     },
     {
       title: "Sensores",
       description:
         "Os sensores monitoram a temperatura, a umidade do ar e a umidade do solo, garantindo um ambiente de cultivo nas condições ideais.",
       icon: "/images/icons/sensoresIcon.png",
-      link: "/sensors",
+      link: "/sensor",
     },
     {
       title: "Previsão de Colheita",
@@ -35,21 +35,21 @@ const Home = () => {
       description:
         "Os relatórios fornecem dados detalhados sobre o processo de colheita, permitindo o monitoramento contínuo para otimizar a qualidade e eficiência.",
       icon: "/images/icons/relatorioIcon.png",
-      link: "/reports",
+      link: "/report",
     },
     {
       title: "Dashboard",
       description:
         "A dashboard exibe gráficos, proporcionando uma visão clara e em tempo real dos dados do cultivo e da colheita.",
       icon: "/images/icons/dashboard.png",
-      link: "/dashboards",
+      link: "/dashboard",
     },
     {
       title: "Alertas",
       description:
         "Os alertas notificam sobre mudanças nas condições ideais de temperatura e umidade, permitindo ajustes rápidos.",
       icon: "/images/icons/aviso.png",
-      link: "/alerts",
+      link: "/alert",
     },
   ];
 
