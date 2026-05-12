@@ -39,7 +39,11 @@ class CompanyService {
 
   // BUSCAR EMPRESA POR CNPJ
   async getByCNPJ(cnpj: string): Promise<ICompany | null> {
-    return await Company.findOne({ companyCNPJ: cnpj });
+    const sanitizedCNPJ = String(cnpj).replace(/\D/g, "").trim();
+
+    return await Company.findOne({
+      companyCNPJ: sanitizedCNPJ,
+    });
   }
 }
 

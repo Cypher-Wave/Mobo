@@ -30,7 +30,7 @@ const storageUsers = new CloudinaryStorage({
     return {
       folder: "mobo/users",
       resource_type: "image",
-      public_id: `user-${Date.now()}-${Math.random().toString(36).substring(7)}`,
+      public_id: `user-${Date.now()}-${crypto.randomUUID()}`,
       allowed_formats: allowedFormats,
       transformation: [
         {

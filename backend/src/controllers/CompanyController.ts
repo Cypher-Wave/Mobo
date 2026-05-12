@@ -34,7 +34,18 @@ class CompanyController {
       });
     }
 
-    const existing = await CompanyService.getByCNPJ(companyData.companyCNPJ);
+    const normalizedCNPJ = String(companyData.companyCNPJ)
+      .replace(/\D/g, "")
+      .trim();
+
+    if (normalizedCNPJ.length !== 14) {
+      return res.status(400).json({
+        success: false,
+        message: "CNPJ inválido.",
+      });
+    }
+
+    const existing = await CompanyService.getByCNPJ(normalizedCNPJ);
     if (existing) {
       return res.status(400).json({
         success: false,
