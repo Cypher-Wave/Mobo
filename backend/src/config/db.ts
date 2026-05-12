@@ -5,13 +5,13 @@ dotenv.config();
 
 const { DB_USER, DB_PASSWORD, DB_NAME, USE_LOCAL_DB } = process.env;
 
-// Verifica se a variável do nome do banco está definida
+// VALIDAÇÃO DAS VARIÁVEIS DE AMBIENTE
 if (!DB_NAME) {
   console.error("❌ Variável de ambiente DB_NAME não configurada");
   process.exit(1);
 }
 
-// Função para conectar ao MongoDB
+// FUNÇÃO PARA CONECTAR AO BANCO DE DADOS
 export const connectDB = async (): Promise<void> => {
   try {
     let uri: string;
@@ -28,10 +28,10 @@ export const connectDB = async (): Promise<void> => {
         );
         process.exit(1);
       }
+      // Codificar a senha para evitar problemas com caracteres especiais
       const encodedPassword = encodeURIComponent(DB_PASSWORD);
 
-      
-      uri = `mongodb+srv://${DB_USER}:${DB_PASSWORD}@mobo.eswkbcg.mongodb.net/${DB_NAME}?retryWrites=true&w=majority&appName=mobo`;
+      uri = `mongodb+srv://${DB_USER}:${encodedPassword}@mobo.eswkbcg.mongodb.net/${DB_NAME}?retryWrites=true&w=majority&appName=mobo`;
       console.log("🌐 Conectando ao MongoDB Atlas...");
     }
 

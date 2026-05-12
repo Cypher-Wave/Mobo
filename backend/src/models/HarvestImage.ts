@@ -2,7 +2,7 @@ import mongoose, { Schema, Document, Model } from "mongoose";
 import { IUser } from "./User";
 import { ICompany } from "./Company";
 
-// Interface principal do documento HarvestImage
+// INTERFACE PARA O DOCUMENTO DE IMAGEM DE COLHEITA
 export interface IHarvestImage extends Document {
   user?: IUser["_id"];
   company?: ICompany["_id"];
@@ -11,7 +11,7 @@ export interface IHarvestImage extends Document {
   createdAt: Date;
 }
 
-// Schema principal do documento HarvestImage
+// SCHEMA PARA O DOCUMENTO DE IMAGEM DE COLHEITA
 const HarvestImageSchema: Schema<IHarvestImage> = new Schema({
   user: { type: mongoose.Schema.Types.ObjectId, ref: "User" },
   company: { type: mongoose.Schema.Types.ObjectId, ref: "Company" },
@@ -20,10 +20,10 @@ const HarvestImageSchema: Schema<IHarvestImage> = new Schema({
   createdAt: { type: Date, default: Date.now },
 });
 
-// Criando o modelo de imagens de colheita
+// CRIANDO O MODELO DE IMAGEM DE COLHEITA
 const HarvestImage: Model<IHarvestImage> = mongoose.model<IHarvestImage>(
   "HarvestImage",
-  HarvestImageSchema
+  HarvestImageSchema,
 );
 
 export default HarvestImage;

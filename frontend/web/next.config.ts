@@ -16,12 +16,6 @@ const nextConfig: NextConfig = {
     remotePatterns: [
       {
         protocol: "http",
-        hostname: "localhost",
-        port: "5000",
-        pathname: "/uploads/**", // permite imagens do backend
-      },
-      {
-        protocol: "http",
         hostname: "openweathermap.org",
         port: "",
         pathname: "/img/wn/**", // permite ícones de clima

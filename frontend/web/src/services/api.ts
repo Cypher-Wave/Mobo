@@ -2,9 +2,6 @@ import axios from "axios";
 
 const api = axios.create({
   baseURL: `/api`,
-  headers: {
-    "Content-Type": "application/json",
-  },
   withCredentials: true,
   timeout: 15000,
 });
@@ -14,6 +11,13 @@ const api = axios.create({
 api.interceptors.request.use(
   (config) => {
     console.log("➡️ Request:", config.method?.toUpperCase(), config.url);
+    
+    // Se for FormData, deixa o axios definir o Content-Type com boundary
+    if (config.data instanceof FormData) {
+      // Removendo o Content-Type para que o axios possa configurá-lo corretamente
+      delete config.headers["Content-Type"];
+    }
+
     return config;
   },
   (error) => {

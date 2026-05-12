@@ -3,16 +3,10 @@ import PlantingService, { PlantingInput } from "../services/PlantingService";
 import asyncHandler from "../utils/asyncHandler";
 import { AuthRequest } from "../middlewares/authMiddleware";
 
-// Controlador para operações de plantações
 class PlantingController {
-  // Listar todas as Plantações
+  // LISTAR PLANTAÇÕES
   getAllPlantings = asyncHandler(async (req: AuthRequest, res: Response) => {
     const user = req.user!;
-    if (!user) {
-      return res
-        .status(401)
-        .json({ success: false, message: "Token inválido ou ausente." });
-    }
 
     const plantings = await PlantingService.getAll(user);
     if (!plantings) {
@@ -24,14 +18,9 @@ class PlantingController {
     return res.status(200).json({ success: true, plantings });
   });
 
-  // Criar Plantação
+  // CRIAR PLANTAÇÃO
   createPlanting = asyncHandler(async (req: AuthRequest, res: Response) => {
     const user = req.user!;
-    if (!user) {
-      return res
-        .status(401)
-        .json({ success: false, message: "Token inválido ou ausente." });
-    }
 
     const plantingData: PlantingInput = req.body;
     const newPlanting = await PlantingService.create(user, plantingData);
@@ -49,13 +38,9 @@ class PlantingController {
     });
   });
 
-  // Atualizar Plantação
+  // ATUALIZAR PLANTAÇÃO
   updatePlanting = asyncHandler(async (req: AuthRequest, res: Response) => {
     const user = req.user!;
-    if (!user)
-      return res
-        .status(401)
-        .json({ success: false, message: "Token inválido ou ausente." });
 
     const { id } = req.params;
 
@@ -63,7 +48,7 @@ class PlantingController {
     const updatedPlanting = await PlantingService.update(
       id,
       user,
-      plantingData
+      plantingData,
     );
 
     if (!updatedPlanting) {
@@ -79,13 +64,9 @@ class PlantingController {
     });
   });
 
-  // Deletar Plantação
+  // DELETAR PLANTAÇÃO
   deletePlanting = asyncHandler(async (req: AuthRequest, res: Response) => {
     const user = req.user!;
-    if (!user)
-      return res
-        .status(401)
-        .json({ success: false, message: "Token inválido ou ausente." });
 
     const { id } = req.params;
 
@@ -96,13 +77,9 @@ class PlantingController {
     });
   });
 
-  // Buscar uma plantação específica
+  // BUSCAR PLANTAÇÃO ESPECÍFICA
   getOnePlanting = asyncHandler(async (req: AuthRequest, res: Response) => {
     const user = req.user!;
-    if (!user)
-      return res
-        .status(401)
-        .json({ success: false, message: "Token inválido ou ausente." });
 
     const { id } = req.params;
 

@@ -15,6 +15,18 @@ interface IHarvestImage {
   description?: string;
 }
 
+const getImageUrl = (imagePath?: string): string => {
+  if (!imagePath) return "/images/icons/user_profile.png";
+  
+  // Se já é URL completa (Cloudinary), retorna direto
+  if (imagePath.startsWith("http")) {
+    return imagePath;
+  }
+
+  // Retorna o caminho fornecido caso seja um caminho relativo
+  return imagePath;
+};
+
 const Profile = () => {
   const router = useRouter();
   const baseURL = api.defaults.baseURL?.replace("/api", "");
@@ -82,13 +94,10 @@ const Profile = () => {
         <div className={styles.informationsCard}>
           <div className={styles.profileCard}>
             <Image
-              src={
-                user.userImage
-                  ? `${baseURL}/uploads/users/${user.userImage}`
-                  : "/images/icons/user_profile.png"
-              }
+              src={getImageUrl(user.userImage)}
               alt="Foto de Perfil"
               fill
+              style={{ objectFit: "cover" }}
             />
           </div>
 
@@ -116,9 +125,10 @@ const Profile = () => {
               <div className={styles.item} key={i}>
                 <div className={styles.photo}>
                   <Image
-                    src={`${baseURL}/uploads/harvests/${img.imageName}`}
+                    src={getImageUrl(img.imageName)}
                     alt={img.description || "Imagem da colheita"}
                     fill
+                    style={{ objectFit: "cover" }}
                   />
                 </div>
                 <div className={styles.description}>

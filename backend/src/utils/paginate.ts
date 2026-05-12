@@ -7,14 +7,14 @@ export interface PaginateResult<T> {
   totalPages: number;
 }
 
-// Função para paginar dados
+// FUNÇÃO DE PAGINAÇÃO PARA MONGOOSE
 export async function paginate<T>(
   model: Model<T>,
   filter: object = {},
   page: number = 1,
   limit: number = 10,
   sort: Record<string, 1 | -1> = {},
-  populate: (string | PopulateOptions)[] = []
+  populate: (string | PopulateOptions)[] = [],
 ): Promise<PaginateResult<T>> {
   const total = await model.countDocuments(filter);
 

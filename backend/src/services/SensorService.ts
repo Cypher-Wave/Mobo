@@ -6,7 +6,7 @@ import {
   assignOwnership,
 } from "../utils/checkOwnership";
 
-// Interface para entrada dados sobre sensores
+// INTERFACE PARA ENTRADA DE DADOS DE SENSOR
 export interface SensorInput {
   sensorType: "air_humidity" | "soil_humidity" | "temperature";
   sensorNumeration: string;
@@ -15,9 +15,15 @@ export interface SensorInput {
   setting: ISensor["setting"];
 }
 
-// Serviço de Sensores
+// INTERFACE PARA RESULTADOS DE SENSOR
+interface SensorResult {
+  success?: boolean;
+  message?: string;
+  sensor?: ISensor;
+}
+
 class SensorService {
-  // Função para listar todas os sensores
+  // LISTA TODOS OS SENSORES (SEM PAGINAÇÃO)
   async getAll(userSession: IUserPayload): Promise<ISensor[]> {
     const filter =
       userSession.userRole === "family_farmer"
@@ -26,7 +32,7 @@ class SensorService {
     return await Sensor.find(filter);
   }
 
-  // Função para cadastrar um sensor
+  // CRIAR SENSOR
   async create(userSession: IUserPayload, data: SensorInput): Promise<ISensor> {
     const newSensor = new Sensor(data);
     assignOwnership(userSession, newSensor);
@@ -34,32 +40,40 @@ class SensorService {
     return newSensor;
   }
 
-  // Função para atualizar um sensor
+  // ATUALIZAR SENSOR
   async update(
     id: string,
     userSession: IUserPayload,
-    data: SensorInput
-  ): Promise<ISensor | null> {
+    data: SensorInput,
+  ): Promise<SensorResult> {
     const sensor = await Sensor.findById(id);
-    if (!sensor) throw new Error("Colheita não encontrada");
+    if (!sensor) return { success: false, message: "Sensor não encontrado" };
     checkOwnership(userSession, ownedFields(sensor));
-    return await Sensor.findByIdAndUpdate(id, data, { new: true });
+    const updatedSensor = await Sensor.findByIdAndUpdate(id, data, {
+      new: true,
+    });
+    return {
+      success: true,
+      message: "Sensor atualizado com sucesso",
+      sensor: updatedSensor!,
+    };
   }
 
-  // Função para deletar um sensor
-  async delete(id: string, userSession: IUserPayload): Promise<void> {
+  // DELETAR SENSOR
+  async delete(id: string, userSession: IUserPayload): Promise<SensorResult> {
     const sensor = await Sensor.findById(id);
-    if (!sensor) throw new Error("Colheita não encontrada");
+    if (!sensor) return { success: false, message: "Sensor não encontrado" };
     checkOwnership(userSession, ownedFields(sensor));
     await Sensor.findByIdAndDelete(id);
+    return { success: true, message: "Sensor deletado com sucesso" };
   }
 
-  // Função para listar um único sensor
-  async getOne(id: string, userSession: IUserPayload): Promise<ISensor | null> {
+  // BUSCAR SENSOR ESPECÍFICO
+  async getOne(id: string, userSession: IUserPayload): Promise<SensorResult> {
     const sensor = await Sensor.findById(id);
-    if (!sensor) throw new Error("Colheita não encontrada");
+    if (!sensor) return { success: false, message: "Sensor não encontrado" };
     checkOwnership(userSession, ownedFields(sensor));
-    return sensor;
+    return { success: true, sensor };
   }
 }
 

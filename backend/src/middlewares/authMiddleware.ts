@@ -6,11 +6,11 @@ export interface AuthRequest extends Request {
   user?: IUserPayload;
 }
 
-// Middleware de autenticação
+// MIDDLEWARE PARA VERIFICAR O TOKEN JWT
 export const authMiddleware = (
   req: AuthRequest,
   res: Response,
-  next: NextFunction
+  next: NextFunction,
 ) => {
   // 1️⃣ Tenta pegar o token do cookie
   let token = req.cookies?.token;
@@ -36,4 +36,16 @@ export const authMiddleware = (
   } catch (err) {
     return res.status(401).json({ success: false, message: "Não autorizado." });
   }
+};
+
+// MIDDLEWARE PARA GARANTIR QUE O USUÁRIO ESTÁ AUTENTICADO ANTES DE ACESSAR CERTAS ROTAS
+export const ensureUser = (
+  req: AuthRequest,
+  res: Response,
+  next: NextFunction,
+) => {
+  if (!req.user) {
+    return res.status(401).json({ success: false, message: "Token inválido." });
+  }
+  next();
 };

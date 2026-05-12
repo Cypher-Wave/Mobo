@@ -6,7 +6,7 @@ interface OwnedDocument {
   company?: Types.ObjectId | string;
 }
 
-// Padroniza dados recebidos para serem sempre ObjectId ou string
+// EXTRAI O ID DO USUÁRIO E DA EMPRESA DE UM DOCUMENTO PARA VERIFICAÇÃO DE PROPRIEDADE
 export function ownedFields(doc: { user?: any; company?: any }) {
   return {
     user: doc.user as Types.ObjectId | string,
@@ -14,9 +14,9 @@ export function ownedFields(doc: { user?: any; company?: any }) {
   };
 }
 
-// Adiciona user ou company a um novo documento baseado na role
+// ATRIBUI O ID DO USUÁRIO OU DA EMPRESA AO DOCUMENTO, DEPENDENDO DO TIPO DE USUÁRIO
 export function assignOwnership<
-  T extends { user?: unknown; company?: unknown }
+  T extends { user?: unknown; company?: unknown },
 >(userSession: IUserPayload, doc: T): void {
   if (userSession.userRole === "family_farmer") {
     doc.user = userSession.id as any;
@@ -25,10 +25,10 @@ export function assignOwnership<
   }
 }
 
-// Verifica se um usuário/empresa está tentando acessar um dado que não lhe pertence
+// VERIFICA SE O USUÁRIO TEM PERMISSÃO PARA ACESSAR O DOCUMENTO, COM BASE NO TIPO DE USUÁRIO E NA PROPRIEDADE DO DOCUMENTO
 export function checkOwnership<T extends OwnedDocument>(
   userSession: IUserPayload,
-  doc: T
+  doc: T,
 ): void {
   if (
     userSession.userRole === "family_farmer" &&

@@ -6,7 +6,7 @@ export interface IUserPayload {
   company?: string;
 }
 
-// Função para gerar token JWT
+// GERA UM TOKEN JWT COM O PAYLOAD DO USUÁRIO
 export const generateToken = (payload: IUserPayload) => {
   if (!process.env.JWT_SECRET) throw new Error("JWT_SECRET não definido");
 

@@ -1,13 +1,13 @@
 import mongoose, { Schema, Document, Model } from "mongoose";
 import { ICompany } from "./Company";
 
-// Interface para detalhes de agricultores familiares
+// INTERFACE PARA DETALHES DE AGRICULTORES FAMILIARES
 interface IFarmerDetails {
   cpf: string;
   dap: string;
 }
 
-// Interface principal do usuário
+// INTERFACE PRINCIPAL PARA USUÁRIOS
 export interface IUser extends Document {
   userImage?: string;
   userName: string;
@@ -22,7 +22,7 @@ export interface IUser extends Document {
   toJSON(): Partial<IUser>;
 }
 
-// Schema para detalhes de agricultores familiares
+// SCHEMA PARA DETALHES DE AGRICULTORES FAMILIARES
 const FarmerDetailsSchema: Schema<IFarmerDetails> = new Schema({
   cpf: {
     type: String,
@@ -40,14 +40,14 @@ const FarmerDetailsSchema: Schema<IFarmerDetails> = new Schema({
   },
 });
 
-// Schema principal do usuário
+// SCHEMA PRINCIPAL DO DOCUMENTO USUÁRIO
 const UserSchema: Schema<IUser> = new Schema(
   {
     userImage: { type: String },
     userName: { type: String, required: true },
     userEmail: { type: String, required: true, unique: true, trim: true },
     userPassword: { type: String, required: true },
-    userPhone: { type: String, trim: true},
+    userPhone: { type: String, trim: true },
     userRole: {
       type: String,
       enum: ["family_farmer", "company_admin", "company_worker"],
@@ -67,17 +67,17 @@ const UserSchema: Schema<IUser> = new Schema(
       },
     },
   },
-  { timestamps: true }
+  { timestamps: true },
 );
 
-// Método para remover a senha ao converter para JSON
+// MÉTODO PARA REMOVER A SENHA DO OBJETO JSON RETORNADO
 UserSchema.methods.toJSON = function () {
   const userObject = this.toObject();
   delete userObject.userPassword;
   return userObject;
 };
 
-// Criando o modelo do usuário
+// CRIANDO O MODELO DE USUÁRIO
 const User: Model<IUser> = mongoose.model<IUser>("User", UserSchema);
 
 export default User;

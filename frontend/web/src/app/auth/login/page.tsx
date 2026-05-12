@@ -78,6 +78,7 @@ const Login = () => {
             <i className="far fa-envelope iconModify"></i>
             <input
               type="email"
+              name="userEmail"
               value={email}
               onChange={(event) => setEmail(event.target.value)}
               placeholder="Email"
@@ -97,11 +98,11 @@ const Login = () => {
             />
           </label>
 
-          {error && <p className={styles.error}>{error}</p>}
-
           <button className="btn btn-primary" type="submit" disabled={loading}>
             {loading ? "Entrando..." : "Entrar"}
           </button>
+
+          {error && <p className={styles.error}>{error}</p>}
 
           <a className={styles.password} href="#">
             Esqueceu sua senha?

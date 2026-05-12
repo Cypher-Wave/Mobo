@@ -1,8 +1,7 @@
 import SensorData, { ISensorData, ISensorAlert } from "../models/SensorData";
 
-// Serviço para gerenciar alertas de sensores
 class AlertService {
-  // Verifica os alertas e atualiza o banco
+  // VERIFICA OS DADOS DOS SENSORES E GERA ALERTAS SE NECESSÁRIO
   async checkAlerts(): Promise<ISensorData[]> {
     const sensors = await SensorData.find();
     const updatedSensors: ISensorData[] = [];
@@ -66,7 +65,7 @@ class AlertService {
     return updatedSensors;
   }
 
-  // Retorna sensores com alertas ativos
+  // RETORNA OS SENSORES QUE TÊM ALERTAS ATIVOS
   async getSensorsWithAlerts(): Promise<ISensorData[]> {
     return SensorData.find({ "alerts.isActive": true });
   }

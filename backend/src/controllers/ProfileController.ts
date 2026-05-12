@@ -4,14 +4,9 @@ import ProfileService from "../services/ProfileService";
 import asyncHandler from "../utils/asyncHandler";
 
 class ProfileController {
-  // Pegar Imagens de Colheita que pertencem ao usuário logado
+  // BUSCAR IMAGENS DE COLHEITA DO USUÁRIO
   getUserImage = asyncHandler(async (req: AuthRequest, res: Response) => {
     const user = req.user!;
-    if (!user) {
-      return res
-        .status(401)
-        .json({ success: false, message: "Token inválido ou ausente." });
-    }
 
     const images = await ProfileService.getUserImages(user.id);
     if (!images) {
@@ -25,14 +20,9 @@ class ProfileController {
     return res.status(200).json({ success: true, images });
   });
 
-  // Guardar Imagens de Colheita do usuário
+  // ENVIAR IMAGEM DE PERFIL DO USUÁRIO
   uploadImage = asyncHandler(async (req: AuthRequest, res: Response) => {
     const user = req.user!;
-    if (!user) {
-      return res
-        .status(401)
-        .json({ success: false, message: "Token inválido ou ausente." });
-    }
 
     if (!req.file) {
       return res

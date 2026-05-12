@@ -1,19 +1,19 @@
 import mongoose, { Schema, Document, Model } from "mongoose";
 
-// Interface para o plano de assinatura
+// INTERFACES
 interface ISubscriptionPlan {
   maxUsers: number;
   isActive: boolean;
 }
 
-// Interface para o endereço da empresa
+// INTERFACE PARA O ENDEREÇO DA EMPRESA
 interface ICompanyAddress {
   state: string;
   city: string;
   zipCode?: string;
 }
 
-// Interface principal da empresa
+// INTERFACE PRINCIPAL DA EMPRESA
 export interface ICompany extends Document {
   companyCNPJ: string;
   ownerName: string;
@@ -24,20 +24,20 @@ export interface ICompany extends Document {
   updatedAt: Date;
 }
 
-// Schema para o plano de assinatura
+// SCHEMA PARA O PLANO DE ASSINATURA
 const SubscriptionPlanSchema: Schema<ISubscriptionPlan> = new Schema({
   maxUsers: { type: Number, default: 5 },
   isActive: { type: Boolean, default: true },
 });
 
-// Schema para o endereço da empresa
+// SCHEMA PARA O ENDEREÇO DA EMPRESA
 const CompanyAddressSchema: Schema<ICompanyAddress> = new Schema({
   state: { type: String, required: true },
   city: { type: String, required: true },
   zipCode: { type: String },
 });
 
-// Schema principal da empresa
+// SCHEMMA PRINCIPAL DA EMPRESA
 const CompanySchema: Schema<ICompany> = new Schema(
   {
     companyCNPJ: { type: String, required: true, unique: true },
@@ -46,10 +46,13 @@ const CompanySchema: Schema<ICompany> = new Schema(
     subscriptionPlan: { type: SubscriptionPlanSchema, default: {} },
     companyAddress: { type: CompanyAddressSchema, default: {} },
   },
-  { timestamps: true }
+  { timestamps: true },
 );
 
-// Criando o modelo da empresa
-const Company: Model<ICompany> = mongoose.model<ICompany>("Company", CompanySchema);
+// CRIANDO O MODELO DA EMPRESA
+const Company: Model<ICompany> = mongoose.model<ICompany>(
+  "Company",
+  CompanySchema,
+);
 
 export default Company;

@@ -2,14 +2,14 @@ import mongoose, { Schema, Document, Model } from "mongoose";
 import { IUser } from "./User";
 import { ICompany } from "./Company";
 
-// Interface para configurações do sensor
+// INTERFACE PARA CONFIGURAÇÕES DO SENSOR
 interface ISetting {
   temperatureLimit?: number;
   soilHumidityLimit?: number;
   airHumidityLimit?: number;
 }
 
-// Interface principal do documento Sensor
+// INTERFACE PRINCIPAL DO DOCUMENTO SENSOR
 export interface ISensor extends Document {
   sensorType: ("air_humidity" | "soil_humidity" | "temperature")[];
   sensorNumeration?: string;
@@ -22,7 +22,7 @@ export interface ISensor extends Document {
   updatedAt: Date;
 }
 
-// Schema para configurações do sensor
+// SCHEMA PARA CONFIGURAÇÕES DO SENSOR
 const SettingSchema: Schema<ISetting> = new Schema({
   temperatureLimit: {
     type: Number,
@@ -55,7 +55,7 @@ const SettingSchema: Schema<ISetting> = new Schema({
   },
 });
 
-// Schema principal do documento Sensor
+// SCHEMA PRINCIPAL DO SENSOR
 const SensorSchema: Schema<ISensor> = new Schema(
   {
     sensorType: {
@@ -70,10 +70,10 @@ const SensorSchema: Schema<ISensor> = new Schema(
     user: { type: mongoose.Schema.Types.ObjectId, ref: "User" },
     company: { type: mongoose.Schema.Types.ObjectId, ref: "Company" },
   },
-  { timestamps: true }
+  { timestamps: true },
 );
 
-// Criando o modelo de sensores
+// CRIAÇÃO DO MODELO DE SENSOR
 const Sensor: Model<ISensor> = mongoose.model<ISensor>("Sensor", SensorSchema);
 
 export default Sensor;

@@ -1,11 +1,11 @@
 import { Request, Response, NextFunction } from "express";
 import { ObjectId } from "mongodb";
 
-// Middleware para validar ObjectId
+// MIDDLEWARE PARA VALIDAR SE O ID FORNECIDO É UM ObjectId VÁLIDO
 export const validateObjectId = (
   req: Request,
   res: Response,
-  next: NextFunction
+  next: NextFunction,
 ) => {
   if (!ObjectId.isValid(req.params.id)) {
     return res.status(400).json({ success: false, message: "ID inválido." });

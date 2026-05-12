@@ -3,12 +3,12 @@ import { IPlanting } from "./Planting";
 import { IUser } from "./User";
 import { ICompany } from "./Company";
 
-// Interface principal do documento Harvest
+// INTERFACE PARA O DOCUMENTO DE COLHEITA
 export interface IHarvest extends Document {
   harvestedQuantity: number;
   quality: number;
   harvestDate: Date;
-  harvestStart: string; 
+  harvestStart: string;
   harvestEnd: string;
   harvestDuration: string;
   planting: IPlanting["_id"];
@@ -18,7 +18,7 @@ export interface IHarvest extends Document {
   updatedAt: Date;
 }
 
-// Schema principal do documento Harvest
+// SCHEMA PARA O DOCUMENTO DE COLHEITA
 const HarvestSchema: Schema<IHarvest> = new Schema(
   {
     harvestedQuantity: { type: Number },
@@ -31,10 +31,13 @@ const HarvestSchema: Schema<IHarvest> = new Schema(
     user: { type: mongoose.Schema.Types.ObjectId, ref: "User" },
     company: { type: mongoose.Schema.Types.ObjectId, ref: "Company" },
   },
-  { timestamps: true }
+  { timestamps: true },
 );
 
-// Criando o modelo da colheita
-const Harvest: Model<IHarvest> = mongoose.model<IHarvest>("Harvest", HarvestSchema);
+// CRIANDO O MODELO DE COLHEITA
+const Harvest: Model<IHarvest> = mongoose.model<IHarvest>(
+  "Harvest",
+  HarvestSchema,
+);
 
 export default Harvest;

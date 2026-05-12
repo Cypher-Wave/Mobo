@@ -2,7 +2,7 @@ import SensorData, { ISensorData } from "../models/SensorData";
 import { IUserPayload } from "../utils/jwt";
 import { checkOwnership } from "../utils/checkOwnership";
 
-// Interface para entrada de dados de sensores
+// INTERFACE PARA ENTRADA DE DADOS DE SENSOR
 export interface SensorDataInput {
   temperature: number;
   soilHumidity: number;
@@ -12,9 +12,14 @@ export interface SensorDataInput {
   sensor: ISensorData["sensor"];
 }
 
-// Serviço de Dados de Sensores
+interface SensorDataResult {
+  success?: boolean;
+  message?: string;
+  sensorData?: ISensorData;
+}
+
 class SensorDataService {
-  // Função para listar todas os dados de sensores
+  // LISTAR TODOS OS DADOS DE SENSOR (SEM PAGINAÇÃO)
   async getAll(userSession: IUserPayload): Promise<ISensorData[]> {
     const match =
       userSession.userRole === "family_farmer"
@@ -32,26 +37,27 @@ class SensorDataService {
     return data.filter((d) => d.sensor !== null);
   }
 
-  // Função para cadastrar um dado de sensor
+  // CRIAR DADO DE SENSOR
   async create(
     userSession: IUserPayload,
-    data: SensorDataInput
+    data: SensorDataInput,
   ): Promise<ISensorData> {
     const newSensorData = new SensorData(data);
     await newSensorData.save();
     return newSensorData;
   }
 
-  // Função para atualizar um dado de sensor
+  // FUNÇÃO PARA ATUALIZAR UM DADO DE SENSOR
   async update(
     id: string,
     userSession: IUserPayload,
-    data: SensorDataInput
-  ): Promise<ISensorData | null> {
+    data: SensorDataInput,
+  ): Promise<SensorDataResult> {
     const sensorData = await SensorData.findById(id)
       .populate("sensor")
       .populate("planting");
-    if (!sensorData) throw new Error("Dado de sensor não encontrado");
+    if (!sensorData)
+      return { success: false, message: "Dado de sensor não encontrado" };
 
     const sensor = sensorData.sensor as { user?: string; company?: string };
 
@@ -59,15 +65,22 @@ class SensorDataService {
       user: sensor?.user?.toString(),
       company: sensor?.company?.toString(),
     });
-    return await SensorData.findByIdAndUpdate(id, data, { new: true });
+    const updatedSensorData = await SensorData.findByIdAndUpdate(id, data, {
+      new: true,
+    });
+    return { success: true, sensorData: updatedSensorData! };
   }
 
-  // Função para deletar um dado de sensor
-  async delete(id: string, userSession: IUserPayload): Promise<void> {
+  // FUNÇÃO PARA DELETAR UM DADO DE SENSOR
+  async delete(
+    id: string,
+    userSession: IUserPayload,
+  ): Promise<SensorDataResult> {
     const sensorData = await SensorData.findById(id)
       .populate("sensor")
       .populate("planting");
-    if (!sensorData) throw new Error("Dado de sensor não encontrado");
+    if (!sensorData)
+      return { success: false, message: "Dado de sensor não encontrado" };
 
     const sensor = sensorData.sensor as { user?: string; company?: string };
 
@@ -76,17 +89,19 @@ class SensorDataService {
       company: sensor?.company?.toString(),
     });
     await SensorData.findByIdAndDelete(id);
+    return { success: true, message: "Dado de sensor deletado com sucesso." };
   }
 
-  // Função para listar um único dado de sensor
+  // BUSCAR UM DADO DE SENSOR ESPECÍFICO
   async getOne(
     id: string,
-    userSession: IUserPayload
-  ): Promise<ISensorData | null> {
+    userSession: IUserPayload,
+  ): Promise<SensorDataResult> {
     const sensorData = await SensorData.findById(id)
       .populate("sensor")
       .populate("planting");
-    if (!sensorData) throw new Error("Dado de sensor não encontrado");
+    if (!sensorData)
+      return { success: false, message: "Dado de sensor não encontrado" };
 
     const sensor = sensorData.sensor as { user?: string; company?: string };
 
@@ -94,7 +109,7 @@ class SensorDataService {
       user: sensor?.user?.toString(),
       company: sensor?.company?.toString(),
     });
-    return sensorData;
+    return { success: true, sensorData };
   }
 }
 

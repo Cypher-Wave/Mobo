@@ -3,16 +3,10 @@ import SensorService, { SensorInput } from "../services/SensorService";
 import asyncHandler from "../utils/asyncHandler";
 import { AuthRequest } from "../middlewares/authMiddleware";
 
-// Controlador para operações de sensores
 class SensorController {
-  // Listar todos os Sensores
+  // LISTAR TODOS OS SENSORES (SEM PAGINAÇÃO)
   getAllSensors = asyncHandler(async (req: AuthRequest, res: Response) => {
     const user = req.user!;
-    if (!user) {
-      return res
-        .status(401)
-        .json({ success: false, message: "Token inválido ou ausente" });
-    }
 
     const sensors = await SensorService.getAll(user);
     if (!sensors) {
@@ -23,14 +17,9 @@ class SensorController {
     return res.status(200).json({ success: true, sensors });
   });
 
-  // Cadastrar Sensor
+  // CRIAR SENSOR
   createSensor = asyncHandler(async (req: AuthRequest, res: Response) => {
     const user = req.user!;
-    if (!user) {
-      return res
-        .status(401)
-        .json({ success: false, message: "Token inválido ou ausente." });
-    }
 
     const sensorData: SensorInput = req.body;
     const newSensor = await SensorService.create(user, sensorData);
@@ -48,13 +37,9 @@ class SensorController {
     });
   });
 
-  // Atualizar Sensor
+  // ATUALIZAR SENSOR
   updateSensor = asyncHandler(async (req: AuthRequest, res: Response) => {
     const user = req.user!;
-    if (!user)
-      return res
-        .status(401)
-        .json({ success: false, message: "Token inválido ou ausente." });
 
     const { id } = req.params;
 
@@ -74,13 +59,9 @@ class SensorController {
     });
   });
 
-  // Excluir Sensor
+  // DELETAR SENSOR
   deleteSensor = asyncHandler(async (req: AuthRequest, res: Response) => {
     const user = req.user!;
-    if (!user)
-      return res
-        .status(401)
-        .json({ success: false, message: "Token inválido ou ausente." });
 
     const { id } = req.params;
 
@@ -90,13 +71,9 @@ class SensorController {
       .json({ success: true, message: "Sensor deletado com sucesso." });
   });
 
-  // Buscar um sensor específico
+  // BUSCAR SENSOR ESPECÍFICO
   getOneSensor = asyncHandler(async (req: AuthRequest, res: Response) => {
     const user = req.user!;
-    if (!user)
-      return res
-        .status(401)
-        .json({ success: false, message: "Token inválido ou ausente." });
 
     const { id } = req.params;
 

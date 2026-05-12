@@ -1,15 +1,14 @@
 import HarvestImage, { IHarvestImage } from "../models/HarvestImage";
 
-// Resultado do upload de imagem
+// INTERFACE PARA RESULTADO DE UPLOAD DE IMAGEM
 interface UploadImageResult {
   success: boolean;
   image?: IHarvestImage;
   message?: string;
 }
 
-// Serviço de Perfil
 class ProfileService {
-  // Buscar imagens do usuário
+  // BUSCAR IMAGENS DE COLHEITA DO USUÁRIO
   async getUserImages(userId: string) {
     try {
       const images = await HarvestImage.find({ user: userId })
@@ -22,10 +21,10 @@ class ProfileService {
     }
   }
 
-  // Upload de imagem
+  // ENVIAR IMAGEM DE PERFIL DO USUÁRIO
   async uploadImage(
     userId: string,
-    imageName: string
+    imageName: string,
   ): Promise<UploadImageResult> {
     try {
       const newImage = new HarvestImage({ user: userId, imageName });

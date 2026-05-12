@@ -1,11 +1,12 @@
 import { Router } from "express";
 import HarvestController from "../controllers/HarvestController";
-import { authMiddleware } from "../middlewares/authMiddleware";
+import { authMiddleware, ensureUser } from "../middlewares/authMiddleware";
 import { validateObjectId } from "../middlewares/validateObjectId";
 
 const router = Router();
 
 router.use(authMiddleware); // Todas as rotas abaixo precisam de token
+router.use(ensureUser); // Todas as rotas abaixo precisam de usuário autenticado
 
 router.get("/paginated", HarvestController.getPaginatedHarvests);
 router.get("/", HarvestController.getAllHarvests);

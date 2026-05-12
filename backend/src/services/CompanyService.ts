@@ -1,6 +1,6 @@
 import Company, { ICompany } from "../models/Company";
 
-// Interface para entrada de dados de empresa
+// TIPO DE DADOS PARA CRIAÇÃO/ATUALIZAÇÃO DE EMPRESA
 export interface CompanyInput {
   companyCNPJ: string;
   ownerName: string;
@@ -9,33 +9,37 @@ export interface CompanyInput {
   companyAddress?: ICompany["companyAddress"];
 }
 
-// Serviço para gerenciar empresas
 class CompanyService {
-  // Listar todas as empresas
+  // LISTAR TODAS AS EMPRESAS
   async getAll(): Promise<ICompany[]> {
     return await Company.find();
   }
 
-  // Criar uma empresa
+  // CRIAR NOVA EMPRESA
   async create(data: CompanyInput): Promise<ICompany> {
     const newCompany = new Company(data);
     await newCompany.save();
     return newCompany;
   }
 
-  // Atualizar empresa
+  // ATUALIZAR EMPRESA
   async update(id: string, data: CompanyInput): Promise<ICompany | null> {
     return await Company.findByIdAndUpdate(id, data, { new: true });
   }
 
-  // Deletar empresa
+  // DELETAR EMPRESA
   async delete(id: string): Promise<void> {
     await Company.findByIdAndDelete(id);
   }
 
-  // Buscar uma empresa específica
+  // BUSCAR UMA EMPRESA ESPECÍFICA
   async getOne(id: string): Promise<ICompany | null> {
     return await Company.findById(id);
+  }
+
+  // BUSCAR EMPRESA POR CNPJ
+  async getByCNPJ(cnpj: string): Promise<ICompany | null> {
+    return await Company.findOne({ companyCNPJ: cnpj });
   }
 }
 

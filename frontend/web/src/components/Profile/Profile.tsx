@@ -7,7 +7,6 @@ import styles from "./Profile.module.css";
 
 const Profile = () => {
   const router = useRouter();
-  const baseURL = api.defaults.baseURL?.replace("/api", "");
 
   const [user, setUser] = useState<IUser>();
   const [loading, setLoading] = useState(true);
@@ -66,6 +65,17 @@ const Profile = () => {
     return () => window.removeEventListener("resize", checkOverflow);
   }, []);
 
+  const getProfileImage = (userImage?: string) => {
+    if (userImage) {
+      // Se for URL completaa, retorna diretamente (ex: Cloudinary)
+      if (userImage.startsWith("http")) {
+        return userImage;
+      }
+    }
+    // Imagem padrão caso não haja imagem do usuário
+    return "/images/icons/profile.png";
+  };
+
   if (loading) return null;
   if (!user) return null;
 
@@ -75,14 +85,24 @@ const Profile = () => {
         className={`${styles.profileImg} ${styles.profileClick}`}
         onClick={toggleMenu}
       >
-        <Image src={user.userImage ? `${baseURL}/uploads/users/${user.userImage}` : "/images/icons/profile.png"} alt="Profile" fill />
+        <Image
+          src={getProfileImage(user.userImage)}
+          alt="Profile"
+          fill
+          style={{ objectFit: "cover" }}
+        />
       </div>
 
       {isOpen && (
         <div className={styles.dropdownMenu}>
           <div ref={containerRef} className={styles.profileInformation}>
             <div className={styles.profileImg}>
-              <Image src={user.userImage ? `${baseURL}/uploads/users/${user.userImage}` : "/images/icons/profile.png"} alt="Profile" fill />
+              <Image
+                src={getProfileImage(user.userImage)}
+                alt="Profile"
+                fill
+                style={{ objectFit: "cover" }}
+              />
             </div>
 
             <div className={styles.display}>

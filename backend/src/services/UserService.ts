@@ -1,14 +1,15 @@
 import bcrypt from "bcrypt";
+import { cloudinary } from "../config/cloudinary";
 import User from "../models/User";
 import { generateToken, IUserPayload } from "../utils/jwt";
 
-// Tipo para detalhes específicos de agricultores familiares
+// TIPO PARA DETALHES ESPECÍFICOS DE AGRICULTORES FAMILIARES
 interface FarmerDetails {
   cpf: string;
   dap: string;
 }
 
-// Interface para entrada de dados de usuário
+// TIPO DE DADOS PARA CRIAÇÃO/ATUALIZAÇÃO DE USUÁRIO
 export interface UserInput {
   userName: string;
   userEmail: string;
@@ -20,8 +21,8 @@ export interface UserInput {
   userImage?: string;
 }
 
-// Tipo para o resultado da criação do usuário
-interface CreateUserResult {
+// TIPO PARA O RESULTADO DA CRIAÇÃO DO USUÁRIO
+interface UserResult {
   success: boolean;
   message: string;
   token?: string;
@@ -37,16 +38,31 @@ interface CreateUserResult {
   };
 }
 
-// Serviço de Usuário
 class UserService {
-  // Listar todos os usuários de uma Empresa
+  // DELETAR IMAGEM DO CLOUDINARY
+  private async deleteUserImage(id: string) {
+    try {
+      const publicId = `mobo/users/${id}`;
+      const result = await cloudinary.uploader.destroy(publicId);
+
+      if (result.result === "ok") {
+        console.log(`Imagem do usuário ${id} deletada do Cloudinary`);
+      } else if (result.result === "not found") {
+        console.error(`Nenhuma imagem encontrada para o usuário ${id}`);
+      }
+    } catch (error) {
+      console.error("Erro ao deletar imagem do Cloudinary:", error);
+    }
+  }
+
+  // LISTAR TODOS OS USUÁRIOS DE UMA EMPRESA
   async getAll(companyId?: string) {
     const query = companyId ? { company: companyId } : {};
     return await User.find(query);
   }
 
-  // Criar um novo usuário
-  async create(data: UserInput): Promise<CreateUserResult> {
+  // CRIAR UM NOVO USUÁRIO
+  async create(data: UserInput): Promise<UserResult> {
     try {
       const {
         userName,
@@ -58,6 +74,7 @@ class UserService {
         userPhone,
         userImage,
       } = data;
+
       // Verificação de campos obrigatórios
       if (!userName || !userEmail || !userPassword || !userRole) {
         return {
@@ -65,6 +82,7 @@ class UserService {
           message: "Campos obrigatórios não preenchidos.",
         };
       }
+
       // Preenchendo o campo farmerDetails se userRole = "family_farmer"
       let parsedFarmerDetails: FarmerDetails | undefined;
       if (userRole === "family_farmer") {
@@ -80,11 +98,16 @@ class UserService {
           dap: farmerDetails.dap,
         };
       }
+
       // Verificando se o email cadastrado já existe
       const existing = await User.findOne({ userEmail });
       if (existing) {
         return { success: false, message: "Usuário já cadastrado." };
       }
+
+      // Sanitizando campo company para evitar string vazia sendo salva no banco
+      const sanitizedCompany = company && company !== "" ? company : undefined;
+
       // Cadastrando usuário
       const hashedPassword = await bcrypt.hash(userPassword, 10);
       const newUser = new User({
@@ -94,7 +117,7 @@ class UserService {
         userRole,
         userPhone,
         userImage,
-        company,
+        company: sanitizedCompany,
         farmerDetails: parsedFarmerDetails,
       });
       await newUser.save();
@@ -131,14 +154,17 @@ class UserService {
     }
   }
 
-  // Atualizar usuário
+  // ATUALIZAR USUÁRIO
   async update(id: string, data: Partial<UserInput>) {
     try {
       const updateData: any = { ...data };
+
+      if (updateData.company && updateData.company === "") {
+        updateData.company = undefined;
+      }
       if (data.userPassword) {
         updateData.userPassword = await bcrypt.hash(data.userPassword, 10);
       }
-
       return await User.findByIdAndUpdate(id, updateData, { new: true });
     } catch (error) {
       console.error("Erro em update UserService:", error);
@@ -146,21 +172,23 @@ class UserService {
     }
   }
 
-  // Deletar usuário
+  // DELETAR USUÁRIO
   async delete(id: string) {
+    await this.deleteUserImage(id);
     await User.findByIdAndDelete(id);
+    return { success: true, message: "Usuário deletado com sucesso" };
   }
 
-  // Buscar um usuário específico
+  // BUSCAR UM USUÁRIO ESPECÍFICO
   async getOne(id: string) {
     return await User.findById(id).select("-userPassword");
   }
 
-  // Autenticar usuário
+  // AUTENTICAR USUÁRIO
   async authenticate(data: {
     userEmail: string;
     userPassword: string;
-  }): Promise<CreateUserResult> {
+  }): Promise<UserResult> {
     try {
       const { userEmail, userPassword } = data;
 

@@ -5,16 +5,10 @@ import SensorDataService, {
 import asyncHandler from "../utils/asyncHandler";
 import { AuthRequest } from "../middlewares/authMiddleware";
 
-// Controlador para operações de dados de sensores
 class SensorDataController {
-  // Listar todos os dados de Sensores
+  // LISTAR TODOS OS DADOS DE SENSOR (SEM PAGINAÇÃO)
   getAllSensorDatas = asyncHandler(async (req: AuthRequest, res: Response) => {
     const user = req.user!;
-    if (!user) {
-      return res
-        .status(401)
-        .json({ success: false, message: "Token inválido ou ausente" });
-    }
 
     const sensorDatas = await SensorDataService.getAll(user);
     if (!sensorDatas) {
@@ -25,14 +19,9 @@ class SensorDataController {
     return res.status(200).json({ success: true, sensorDatas });
   });
 
-  // Cadastar Dado de Sensor
+  // CRIAR DADO DE SENSOR
   createSensorData = asyncHandler(async (req: AuthRequest, res: Response) => {
     const user = req.user!;
-    if (!user) {
-      return res
-        .status(401)
-        .json({ success: false, message: "Token inválido ou ausente." });
-    }
 
     const sensorDataD: SensorDataInput = req.body;
     const newSensorData = await SensorDataService.create(user, sensorDataD);
@@ -50,12 +39,9 @@ class SensorDataController {
     });
   });
 
+  // ATUALIZAR DADO DE SENSOR
   updateSensorData = asyncHandler(async (req: AuthRequest, res: Response) => {
     const user = req.user!;
-    if (!user)
-      return res
-        .status(401)
-        .json({ success: false, message: "Token inválido ou ausente." });
 
     const { id } = req.params;
 
@@ -63,7 +49,7 @@ class SensorDataController {
     const updatedSensorData = await SensorDataService.update(
       id,
       user,
-      sensorDataD
+      sensorDataD,
     );
 
     if (!updatedSensorData) {
@@ -79,13 +65,9 @@ class SensorDataController {
     });
   });
 
-  // Excluir Dado de Sensor
+  // DELETAR DADO DE SENSOR
   deleteSensorData = asyncHandler(async (req: AuthRequest, res: Response) => {
     const user = req.user!;
-    if (!user)
-      return res
-        .status(401)
-        .json({ success: false, message: "Token inválido ou ausente." });
 
     const { id } = req.params;
 
@@ -95,12 +77,9 @@ class SensorDataController {
       .json({ success: true, message: "Dado de Sensor deletado com sucesso." });
   });
 
+  // BUSCAR UM DADO DE SENSOR ESPECÍFICO
   getOneSensorData = asyncHandler(async (req: AuthRequest, res: Response) => {
     const user = req.user!;
-    if (!user)
-      return res
-        .status(401)
-        .json({ success: false, message: "Token inválido ou ausente." });
 
     const { id } = req.params;
 

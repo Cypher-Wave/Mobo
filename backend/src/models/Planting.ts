@@ -2,13 +2,13 @@ import mongoose, { Schema, Document, Model } from "mongoose";
 import { IUser } from "./User";
 import { ICompany } from "./Company";
 
-// Interface para localização geográfica
+// INTERFACE PARA O DOCUMENTO DE PLANTAÇÃO
 interface ILocation {
   longitude: number;
   latitude: number;
 }
 
-// Interface principal da plantação
+// INTERFACE PARA O DOCUMENTO DE PLANTAÇÃO
 export interface IPlanting extends Document {
   plantingName: string;
   plantingDate?: Date;
@@ -20,13 +20,13 @@ export interface IPlanting extends Document {
   updatedAt: Date;
 }
 
-// Schema para localização geográfica
+// SCHEMA PARA A LOCALIZAÇÃO
 const LocationSchema: Schema<ILocation> = new Schema({
   longitude: { type: Number },
   latitude: { type: Number },
 });
 
-// Schema principal da plantação
+// SCHEMA PARA A PLANTAÇÃO
 const PlantingSchema: Schema<IPlanting> = new Schema(
   {
     plantingName: { type: String },
@@ -36,10 +36,13 @@ const PlantingSchema: Schema<IPlanting> = new Schema(
     user: { type: mongoose.Schema.Types.ObjectId, ref: "User" },
     company: { type: mongoose.Schema.Types.ObjectId, ref: "Company" },
   },
-  { timestamps: true }
+  { timestamps: true },
 );
 
-// Criando o modelo da plantação
-const Planting: Model<IPlanting> = mongoose.model<IPlanting>("Planting", PlantingSchema);
+// CRIAÇÃO DO MODELO DE PLANTAÇÃO
+const Planting: Model<IPlanting> = mongoose.model<IPlanting>(
+  "Planting",
+  PlantingSchema,
+);
 
 export default Planting;

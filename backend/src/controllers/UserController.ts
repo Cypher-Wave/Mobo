@@ -4,7 +4,7 @@ import asyncHandler from "../utils/asyncHandler";
 import { AuthRequest } from "../middlewares/authMiddleware";
 
 class UserController {
-  // Listar todos os usuários - Empresa
+  // LISTAR TODOS OS USUÁRIOS DE UMA EMPRESA - ADMIN
   getAllUsers = asyncHandler(async (req: AuthRequest, res: Response) => {
     const companyId = req.user?.company;
     const users = await UserService.getAll(companyId);
@@ -15,21 +15,19 @@ class UserController {
         message: "Nenhum usuário encontrado para esta empresa.",
       });
     }
+
     return res.status(200).json({
       success: true,
       users,
     });
   });
 
-  // Atualizar usuário - Pessoal
+  // ATUALIZAR USUÁRIO - PESSOAL
   updateUser = asyncHandler(async (req: AuthRequest, res: Response) => {
     const id = req.user!.id;
-
     const userData: UserInput = {
       ...req.body,
-      userImage: req.file
-        ? (req.file as Express.Multer.File).filename
-        : undefined,
+      userImage: req.file ? (req.file as Express.Multer.File).path : undefined,
     };
 
     const updatedUser = await UserService.update(id, userData);
@@ -48,7 +46,7 @@ class UserController {
     });
   });
 
-  // Deletar usuário - Pessoal
+  // DELETAR USUÁRIO - PESSOAL
   deleteUser = asyncHandler(async (req: AuthRequest, res: Response) => {
     const id = req.user!.id;
     await UserService.delete(id);
@@ -57,7 +55,7 @@ class UserController {
       .json({ success: true, message: "Conta deletada com sucesso." });
   });
 
-  // Buscar um usuário - Pessoal
+  // BUSCAR USUÁRIO LOGADO
   getUser = asyncHandler(async (req: AuthRequest, res: Response) => {
     const id = req.user!.id;
 

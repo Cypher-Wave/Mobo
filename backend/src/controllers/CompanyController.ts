@@ -2,9 +2,8 @@ import { Request, Response } from "express";
 import CompanyService, { CompanyInput } from "../services/CompanyService";
 import asyncHandler from "../utils/asyncHandler";
 
-// Controller de empresas com asyncHandler
 class CompanyController {
-  // Listar todas as empresas
+  // LISTAR TODAS AS EMPRESAS
   getAllCompanies = asyncHandler(async (req: Request, res: Response) => {
     const companies = await CompanyService.getAll();
     if (!companies || companies.length === 0) {
@@ -19,15 +18,27 @@ class CompanyController {
     });
   });
 
-  // Criar empresa
+  // CRIAR NOVA EMPRESA
   createCompany = asyncHandler(async (req: Request, res: Response) => {
     const companyData: CompanyInput = req.body;
 
-    if (!companyData.companyCNPJ || !companyData.ownerName || !companyData.companyName) {
+    if (
+      !companyData.companyCNPJ ||
+      !companyData.ownerName ||
+      !companyData.companyName
+    ) {
       return res.status(400).json({
         success: false,
         message:
           "Campos obrigatórios ausentes: CNPJ, nome da empresa ou responsável.",
+      });
+    }
+
+    const existing = await CompanyService.getByCNPJ(companyData.companyCNPJ);
+    if (existing) {
+      return res.status(400).json({
+        success: false,
+        message: "CNPJ já cadastrado.",
       });
     }
 
@@ -47,7 +58,7 @@ class CompanyController {
     });
   });
 
-  // Atualizar empresa
+  // ATUALIZAR EMPRESA
   updateCompany = asyncHandler(async (req: Request, res: Response) => {
     const id = req.params.id;
     const companyData: CompanyInput = req.body;
@@ -68,16 +79,25 @@ class CompanyController {
     });
   });
 
-  // Deletar empresa
+  // DELETAR EMPRESA
   deleteCompany = asyncHandler(async (req: Request, res: Response) => {
     const id = req.params.id;
+
+    const company = await CompanyService.getOne(id);
+    if (!company) {
+      return res.status(404).json({
+        success: false,
+        message: "Empresa não encontrada.",
+      });
+    }
+
     await CompanyService.delete(id);
     return res
       .status(200)
       .json({ success: true, message: "Empresa deletada com sucesso." });
   });
 
-  // Buscar uma empresa
+  // BUSCAR UMA EMPRESA ESPECÍFICA
   getOneCompany = asyncHandler(async (req: Request, res: Response) => {
     const id = req.params.id;
     const company = await CompanyService.getOne(id);

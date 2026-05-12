@@ -4,17 +4,10 @@ import HarvestService, { HarvestInput } from "../services/HarvestService";
 import asyncHandler from "../utils/asyncHandler";
 import { AuthRequest } from "../middlewares/authMiddleware";
 
-// Controller de colheitas
 class HarvestController {
-  // Listar todas as colheitas
+  // LISTAR TODAS AS COLHEITAS (SEM PAGINAÇÃO)
   getAllHarvests = asyncHandler(async (req: AuthRequest, res: Response) => {
-    // Pega página e limite da query string (default: page 1, limit 10)
     const user = req.user!;
-    if (!user) {
-      return res
-        .status(401)
-        .json({ success: false, message: "Token inválido ou ausente." });
-    }
 
     const harvests = await HarvestService.getAll(user);
 
@@ -31,7 +24,7 @@ class HarvestController {
     });
   });
 
-  // Listar as colheitas Paginadas
+  // LISTAR COLHEITAS COM PAGINAÇÃO
   getPaginatedHarvests = asyncHandler(
     async (req: AuthRequest, res: Response) => {
       // Pega página e limite da query string (default: page 1, limit 10)
@@ -40,17 +33,12 @@ class HarvestController {
 
       // user vem do middleware JWT
       const user = req.user!;
-      if (!user) {
-        return res
-          .status(401)
-          .json({ success: false, message: "Token inválido ou ausente." });
-      }
 
       // Chama o service paginado
       const paginatedResult = await HarvestService.getPaginated(
         user,
         page,
-        limit
+        limit,
       );
 
       if (!paginatedResult || paginatedResult.results.length === 0) {
@@ -71,17 +59,12 @@ class HarvestController {
         totalCount: paginatedResult.total,
         currentPage: paginatedResult.currentPage,
       });
-    }
+    },
   );
 
-  // Criar colheita
+  // CRIAR COLHEITA
   createHarvest = asyncHandler(async (req: AuthRequest, res: Response) => {
     const user = req.user!;
-    if (!user) {
-      return res
-        .status(401)
-        .json({ success: false, message: "Token inválido ou ausente." });
-    }
 
     const harvestData: HarvestInput = req.body;
 
@@ -105,13 +88,9 @@ class HarvestController {
     });
   });
 
-  // Atualizar colheita
+  // ATUALIZAR COLHEITA
   updateHarvest = asyncHandler(async (req: AuthRequest, res: Response) => {
     const user = req.user!;
-    if (!user)
-      return res
-        .status(401)
-        .json({ success: false, message: "Token inválido ou ausente." });
 
     const { id } = req.params;
 
@@ -133,15 +112,9 @@ class HarvestController {
     });
   });
 
-  // Deletar colheita
+  // DELETAR VÁRIAS COLHEITAS
   deleteManyHarvests = asyncHandler(async (req: AuthRequest, res: Response) => {
     const user = req.user!;
-    if (!user) {
-      return res.status(401).json({
-        success: false,
-        message: "Token inválido ou ausente.",
-      });
-    }
 
     const { ids } = req.body;
 
@@ -160,13 +133,9 @@ class HarvestController {
     });
   });
 
-  // Buscar uma colheita específica
+  // BUSCAR COLHEITA ESPECÍFICA
   getOneHarvest = asyncHandler(async (req: AuthRequest, res: Response) => {
     const user = req.user!;
-    if (!user)
-      return res
-        .status(401)
-        .json({ success: false, message: "Token inválido ou ausente." });
 
     const { id } = req.params;
 

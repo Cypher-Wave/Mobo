@@ -6,7 +6,7 @@ import {
   assignOwnership,
 } from "../utils/checkOwnership";
 
-// Interface para entrada de dados de plantação
+// INTERFACE DE ENTRADA PARA CRIAÇÃO/ATUALIZAÇÃO DE PLANTAÇÃO
 export interface PlantingInput {
   plantingName: string;
   plantingDate: Date;
@@ -14,9 +14,15 @@ export interface PlantingInput {
   location: string;
 }
 
-// Serviço de Plantio
+// INTERFACE PARA RESULTADOS DE PLANTAÇÃO
+interface PlantingResult {
+  success?: boolean;
+  message?: string;
+  planting?: IPlanting;
+}
+
 class PlantingService {
-  // Listar todas as plantações
+  // LISTAR PLANTAÇÕES
   async getAll(userSession: IUserPayload): Promise<IPlanting[]> {
     const filter =
       userSession.userRole === "family_farmer"
@@ -25,10 +31,10 @@ class PlantingService {
     return Planting.find(filter);
   }
 
-  // Criar plantação
+  // CRIAR PLANTAÇÃO
   async create(
     userSession: IUserPayload,
-    data: PlantingInput
+    data: PlantingInput,
   ): Promise<IPlanting> {
     const newPlanting = new Planting(data);
     assignOwnership(userSession, newPlanting);
@@ -36,38 +42,47 @@ class PlantingService {
     return newPlanting;
   }
 
-  // Atualizar plantação
+  // ATUALIZAR PLANTAÇÃO
   async update(
     id: string,
     userSession: IUserPayload,
-    data: PlantingInput
-  ): Promise<IPlanting | null> {
+    data: PlantingInput,
+  ): Promise<PlantingResult> {
     const planting = await Planting.findById(id);
-    if (!planting) throw new Error("Pomar não encontrado");
+    if (!planting)
+      return { success: false, message: "Plantação não encontrada." };
 
     checkOwnership(userSession, ownedFields(planting));
-    return await Planting.findByIdAndUpdate(id, data, { new: true });
+    const updatePlanting = await Planting.findByIdAndUpdate(id, data, {
+      new: true,
+    });
+
+    return {
+      success: true,
+      message: "Plantação atualizada com sucesso.",
+      planting: updatePlanting!,
+    };
   }
 
-  // Deletar uma plantação
-  async delete(id: string, userSession: IUserPayload): Promise<void> {
+  // DELETAR PLANTAÇÃO
+  async delete(id: string, userSession: IUserPayload): Promise<PlantingResult> {
     const planting = await Planting.findById(id);
-    if (!planting) throw new Error("Pomar não encontrado");
+    if (!planting)
+      return { success: false, message: "Plantação não encontrada" };
 
     checkOwnership(userSession, ownedFields(planting));
     await Planting.findByIdAndDelete(id);
+    return { success: true, message: "Plantação deletada com sucesso." };
   }
 
-  // Buscar uma plantação específica
-  async getOne(
-    id: string,
-    userSession: IUserPayload
-  ): Promise<IPlanting | null> {
+  // BUSCAR PLANTAÇÃO ESPECÍFICA
+  async getOne(id: string, userSession: IUserPayload): Promise<PlantingResult> {
     const planting = await Planting.findById(id);
-    if (!planting) throw new Error("Pomar não encontrado");
+    if (!planting)
+      return { success: false, message: "Plantação não encontrada." };
 
     checkOwnership(userSession, ownedFields(planting));
-    return planting;
+    return { success: true, planting };
   }
 }
 
