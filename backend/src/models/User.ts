@@ -1,4 +1,4 @@
-import mongoose, { Schema, Document, Model } from "mongoose";
+import mongoose, { Schema, Model, Types } from "mongoose";
 import { ICompany } from "./Company";
 
 // INTERFACE PARA DETALHES DE AGRICULTORES FAMILIARES
@@ -8,7 +8,8 @@ interface IFarmerDetails {
 }
 
 // INTERFACE PRINCIPAL PARA USUÁRIOS
-export interface IUser extends Document {
+export interface IUser {
+  _id?: Types.ObjectId;  // ← adicione isso
   userImage?: string;
   userName: string;
   userEmail: string;

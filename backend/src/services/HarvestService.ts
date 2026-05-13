@@ -148,6 +148,18 @@ class HarvestService {
       message: "Colheitas deletadas com sucesso.",
     };
   }
+
+  // BUSCAR COLHEITA ESPECÍFICA
+  async getOne(
+    id: string,
+    userSession: IUserPayload,
+  ): Promise<IHarvest | null> {
+    const harvest = await Harvest.findById(id).populate("planting");
+    if (!harvest) return null;
+
+    checkOwnership(userSession, ownedFields(harvest));
+    return harvest;
+  }
 }
 
 export default new HarvestService();
