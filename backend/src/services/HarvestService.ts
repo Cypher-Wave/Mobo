@@ -1,3 +1,4 @@
+import mongoose from "mongoose";
 import Harvest, { IHarvest } from "../models/Harvest";
 import { IUserPayload } from "../utils/jwt";
 import { paginate, PaginateResult } from "../utils/paginate";
@@ -106,24 +107,46 @@ class HarvestService {
     ids: string[],
   ): Promise<HarvestResult> {
     const idsArray = Array.isArray(ids) ? ids : [ids];
-    const harvests = await Harvest.find({ _id: { $in: idsArray } });
-    if (harvests.length === 0)
-      return { success: false, message: "Nenhuma colheita encontrada." };
+
+    // Sanitizar e validar IDs
+    const sanitizedIds = idsArray.filter((id) =>
+      mongoose.Types.ObjectId.isValid(String(id)),
+    );
+
+    if (sanitizedIds.length === 0) {
+      return {
+        success: false,
+        message: "IDs inválidos.",
+      };
+    }
+
+    const harvests = await Harvest.find({
+      _id: {
+        $in: sanitizedIds,
+      },
+    });
+
+    if (harvests.length === 0) {
+      return {
+        success: false,
+        message: "Nenhuma colheita encontrada.",
+      };
+    }
 
     for (const harvest of harvests) {
       checkOwnership(userSession, ownedFields(harvest));
     }
-    await Harvest.deleteMany({ _id: { $in: idsArray } });
-    return { success: true, message: "Colheitas deletadas com sucesso." };
-  }
 
-  // BUSCAR COLHEITA ESPECÍFICA
-  async getOne(id: string, userSession: IUserPayload): Promise<HarvestResult> {
-    const harvest = await Harvest.findById(id).populate("planting");
-    if (!harvest) return { success: false, message: "Colheita não encontrada" };
+    await Harvest.deleteMany({
+      _id: {
+        $in: sanitizedIds,
+      },
+    });
 
-    checkOwnership(userSession, ownedFields(harvest));
-    return { success: true, harvest };
+    return {
+      success: true,
+      message: "Colheitas deletadas com sucesso.",
+    };
   }
 }
 
