@@ -83,6 +83,16 @@ class UserService {
         };
       }
 
+      // Sanitização do email
+      const sanitizedEmail = userEmail.toString().toLowerCase().trim();
+
+      if (!sanitizedEmail) {
+        return {
+          success: false,
+          message: "E-mail inválido.",
+        };
+      }
+
       // Preenchendo o campo farmerDetails se userRole = "family_farmer"
       let parsedFarmerDetails: FarmerDetails | undefined;
       if (userRole === "family_farmer") {
@@ -100,7 +110,7 @@ class UserService {
       }
 
       // Verificando se o email cadastrado já existe
-      const existing = await User.findOne({ userEmail });
+      const existing = await User.findOne({ userEmail: sanitizedEmail });
       if (existing) {
         return { success: false, message: "Usuário já cadastrado." };
       }
@@ -112,7 +122,7 @@ class UserService {
       const hashedPassword = await bcrypt.hash(userPassword, 10);
       const newUser = new User({
         userName,
-        userEmail: userEmail.toLowerCase().trim(),
+        userEmail: sanitizedEmail,
         userPassword: hashedPassword,
         userRole,
         userPhone,
