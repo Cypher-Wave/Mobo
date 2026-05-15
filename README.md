@@ -11,7 +11,9 @@
 ![Expo](https://img.shields.io/badge/Expo-mobile-000020?logo=expo)
 ![Arduino](https://img.shields.io/badge/Arduino-hardware-00979D?logo=arduino)
 ![MongoDB](https://img.shields.io/badge/MongoDB-Atlas-47A248?logo=mongodb)
-![AWS](https://img.shields.io/badge/AWS-hospedagem-FF9900?logo=amazonaws)
+![Render](https://img.shields.io/badge/Render-Deploy-46E3B7?logo=render&logoColor=white)
+![Vercel](https://img.shields.io/badge/Vercel-Deploy-000000?logo=vercel&logoColor=white)
+![Cloudinary](https://img.shields.io/badge/Cloudinary-Storage-3448C5?logo=cloudinary&logoColor=white)
 
 ---
 
@@ -55,10 +57,12 @@ O projeto se alinha aos seguintes **Objetivos de Desenvolvimento Sustentável (O
 - [Mongoose](https://mongoosejs.com/) — ODM para MongoDB
 - [MongoDB Atlas](https://www.mongodb.com/atlas) — banco de dados NoSQL na nuvem
 - [JWT](https://jwt.io/) — autenticação via tokens
-- [AWS](https://aws.amazon.com/) — hospedagem e infraestrutura
+- [Render](https://render.com/) — hospedagem do backend
+- [Cloudinary](https://cloudinary.com/) — armazenamento e gerenciamento de imagens
 
 ### Frontend Web
 - [Next.js](https://nextjs.org/) + [TypeScript](https://www.typescriptlang.org/) — framework React com SSR/SSG
+- [Vercel](https://vercel.com/) — hospedagem do frontend
 
 ### Frontend Mobile
 - [React Native](https://reactnative.dev/) + [Expo](https://expo.dev/) + [TypeScript](https://www.typescriptlang.org/) — app multiplataforma (iOS e Android)
@@ -97,13 +101,13 @@ O projeto se alinha aos seguintes **Objetivos de Desenvolvimento Sustentável (O
 ├──────────────────┬──────────────────┬────────────────────────┤
 │    Frontend      │     Backend      │    Hardware / IoT      │
 │                  │                  │                        │
-│  React (Web)     │  Node.js +       │  Sensores IoT          │
-│                  │  TypeScript      │  (temp, umidade)       │
-│  React Native    │  APIs RESTful    │                        │
-│  (Mobile / TS)   │                  │  Braço Mecânico 3D     │
-│                  │  MongoDB Atlas   │  (Arduino + Servos)    │
-│  Figma (UX)      │  (nuvem / AWS)   │                        │
-│                  │                  │  CNN / Visão Comp.     │
+│  React (Web) +   │  Node.js +       │  Sensores IoT          │
+│     Vercel       │  TypeScript      │  (temp, umidade)       │
+│                  │  APIs RESTful    │                        │
+│  React Native    │                  │  Braço Mecânico 3D     │
+│  (Mobile / TS)   │  MongoDB Atlas   │  (Arduino + Servos)    │
+│                  │ (nuvem / Render) │                        │
+│  Figma (UX)      │  + Cloudinary    │  CNN / Visão Comp.     │
 │                  │                  │  (maturação da lichia) │
 └──────────────────┴──────────────────┴────────────────────────┘
 ```
@@ -146,6 +150,7 @@ Mobo/
 │       ├── next.config.ts
 │       ├── package.json
 │       └── tsconfig.json
+├── database/              # Dados de teste para banco local (seeds, fixtures, backups)
 ├── .gitignore
 └── README.md
 ```
@@ -229,7 +234,7 @@ npm run dev
 
 Acesse [http://localhost:3000](http://localhost:3000) no navegador.
 
-> 💡 O frontend web está configurado para consumir a API em `http://localhost:5000/api`. Caso altere a porta do backend, ajuste também a URL da API no frontend web.
+> 💡 O frontend web está configurado para consumir a API em `http://localhost:5000`. Caso altere a porta do backend, ajuste também a URL da API no frontend web.
 
 ---
 
@@ -338,7 +343,7 @@ O backend está configurado para aceitar requisições do frontend rodando em `h
 | Recurso | Link |
 |---------|------|
 | 📖 Documentação da API (Swagger) | `Em breve` |
-| 🌐 Deploy — Frontend Web | `Em breve` |
+| 🌐 Deploy — Frontend Web | [mobocw.vercel.app](https://mobocw.vercel.app/) |
 | 📱 Deploy — Mobile (Expo) | `Em breve` |
 | 🎨 Protótipo Figma | `Em breve` |
 
