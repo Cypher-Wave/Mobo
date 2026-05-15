@@ -118,7 +118,6 @@ Mobo/
 │   └── workflows/            # CI/CD e auto-assign de issues
 ├── backend/
 │   ├── src/                  # Código-fonte da API
-│   ├── uploads/              # Arquivos de upload
 │   ├── .env.example          # Exemplo de variáveis de ambiente
 │   ├── package.json
 │   └── tsconfig.json
