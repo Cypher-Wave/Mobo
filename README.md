@@ -70,7 +70,7 @@ O projeto se alinha aos seguintes **Objetivos de Desenvolvimento Sustentável (O
 ### Design
 - [Figma](https://figma.com/) — prototipação e design de interfaces
 
-### Inteligência Artificial *(não implementado)*
+### Inteligência Artificial 
 - **Redes Neurais Convolucionais (CNN)** — classificação do estágio de maturação da lichia
 - **Transfer Learning** — arquitetura pré-treinada com ajuste fino para a tarefa específica
 - **Data Augmentation** — técnica para aumentar a robustez do modelo em variações de iluminação e ângulo
@@ -356,9 +356,9 @@ O backend está configurado para aceitar requisições do frontend rodando em `h
 | Nome | Função | GitHub |
 |------|--------|--------|
 | Bárbara Vitória Ferreira dos Santos | Frontend & UI/UX e Mobile | [@babi-s4ntos](https://github.com/babi-s4ntos) |
-| Jaquelaine Aparecida de Ramos | Documentação / IA | [@jk-ramos](https://github.com/jk-ramos) |
-| Lucas de Lima Santana | IoT / IA | [@LucasLiSan](https://github.com/LucasLiSan) |
-| Pedro Henrique Venâncio | Backend & DevOps / Mobile | [@phvenancio](https://github.com/phvenancio) |
+| Jaquelaine Aparecida de Ramos | Documentação / IA /Mobile| [@jk-ramos](https://github.com/jk-ramos) |
+| Lucas de Lima Santana | IoT / IA / Mobile | [@LucasLiSan](https://github.com/LucasLiSan) |
+| Pedro Henrique Venâncio | Backend & DevOps / Front | [@phvenancio](https://github.com/phvenancio) |
 
 ---
 
