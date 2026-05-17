@@ -68,7 +68,7 @@ O projeto se alinha aos seguintes **Objetivos de Desenvolvimento Sustentável (O
 - [React Native](https://reactnative.dev/) + [Expo](https://expo.dev/) + [TypeScript](https://www.typescriptlang.org/) — app multiplataforma (iOS e Android)
 
 ### Design
-- [Figma](https://figma.com/) — prototipação e design de interfaces
+- [Figma](https://www.figma.com/design/xTZIWXjrK5TRtYm3Csh8h8/Mobo---UI?node-id=1-6998&t=Y23Z0Rf7ffm81J15-1) — prototipação e design de interfaces
 
 ### Inteligência Artificial 
 - **Redes Neurais Convolucionais (CNN)** — classificação do estágio de maturação da lichia
@@ -345,7 +345,7 @@ O backend está configurado para aceitar requisições do frontend rodando em `h
 | 📖 Documentação da API (Swagger) | `Em breve` |
 | 🌐 Deploy — Frontend Web | [mobocw.vercel.app](https://mobocw.vercel.app/) |
 | 📱 Deploy — Mobile (Expo) | `Em breve` |
-| 🎨 Protótipo Figma | `Em breve` |
+| 🎨 Protótipo Figma | `https://www.figma.com/design/xTZIWXjrK5TRtYm3Csh8h8/Mobo---UI?node-id=1-6998&t=Y23Z0Rf7ffm81J15-1` |
 
 > 🔔 Acompanhe as [issues](https://github.com/Cypher-Wave/Mobo/issues) do projeto para atualizações.
 
@@ -373,7 +373,7 @@ O backend está configurado para aceitar requisições do frontend rodando em `h
 - [x] Diagramas UML (Classe, Objeto, Caso de Uso, Fluxograma)
 - [x] Protótipo físico do braço mecânico (impresso em 3D + Arduino)
 - [x] Testes iniciais de movimentação em ambiente controlado
-- [ ] Modelo de IA (CNN) para reconhecimento do estágio de maturação *(próximo semestre)*
+- [x] Modelo de IA (CNN) para reconhecimento do estágio de maturação *(próximo semestre)*
 - [ ] Coleta do dataset de imagens de lichia em campo
 - [ ] Integração completa IoT + visão computacional + braço mecânico
 - [ ] Visualização em tempo real dos sensores IoT
