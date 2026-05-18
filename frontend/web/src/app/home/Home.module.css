@@ -1,76 +1,115 @@
 .homeMain {
   width: 100%;
   min-height: 100vh;
-  background: rgb(var(--mobo-beige));
+  background: rgb(var(--mobo-red-banner));
+  position: relative;
+  overflow-x: hidden;
 }
 
-/* ===== Banner e Logo ===== */
+/* ===== Banner ===== */
 .banner {
   position: relative;
   width: 100%;
-  height: 480px;
+  height: 100vh;
+  min-height: 600px;
   overflow: hidden;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  background-color: rgb(var(--mobo-red-banner));
 }
 
 .imgBanner {
-  object-fit: cover; 
-  object-position: center;
-}
-
-.logoContainer {
-  position: absolute;
-  top: 140px;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 280px;
-  height: 150px;
-}
-
-.logo {
   object-fit: contain;
-  filter: drop-shadow(0 0 20px rgba(var(--mobo-white), 0.9));
-} 
+  object-position: center right;
+}
 
-/* ===== Mascote ===== */
-.mascotFooter {
-  width: 350px;
-  height: 350px;
+/* ===== Conteúdo textual do Hero ===== */
+.heroContent {
   position: absolute;
-  bottom: -50vh;
-  right: -152px;
-  z-index: 100;
+  top: 50%;
+  left: 80px;
   transform: translateY(-50%);
-  animation: hide-appears 10s infinite;
+  z-index: 2;
+  max-width: 700px;
+}
+
+.heroTitle {
+  font-family: var(--font-primary);
+  font-size: clamp(1.8rem, 3.5vw, 2.85rem);
+  font-weight: 500;
+  color: rgb(var(--mobo-beige));
+  line-height: 1.25;
+  margin: 0 0 24px;
+}
+
+.bold {
+  font-weight: 800;
+}
+
+.underlined {
+  text-decoration: underline;
+  text-decoration-color: rgba(var(--mobo-dark-red), 0.75);
+  text-underline-offset: 6px;
+  text-decoration-thickness: 2px;
+}
+
+.heroSubtitle {
+  font-family: var(--font-primary);
+  font-size: clamp(0.875rem, 1.3vw, 1rem);
+  font-weight: 400;
+  color: rgba(var(--mobo-beige), 0.9);
+  line-height: 1.7;
+  margin: 0;
+  max-width: 500px;
 }
 
 @keyframes hide-appears {
   0% {
-    transform: translateY(-50%) translateX(60%);
+    transform: translateY(0) translateX(60%);
+    opacity: 0;
   }
   50% {
-    transform: translateY(20%) translateX(0);
+    transform: translateY(-20%) translateX(0);
     opacity: 1;
   }
   100% {
-    transform: translateY(-50%) translateX(90%);
+    transform: translateY(0) translateX(90%);
     opacity: 0;
   }
 }
 
 /* ===== Responsividade ===== */
-@media (max-width: 768px) {
-  .mascotFooter {
-    display: none;
+@media (max-width: 1024px) {
+  .heroContent {
+    left: 48px;
   }
 }
 
-@media (max-width: 600px) {
-  .logoContainer {
-    width: 180px;
+@media (max-width: 768px) {
+  .banner {
     height: auto;
-    top: 100px;
+    min-height: 520px;
+    padding: 120px 0 60px;
+  }
+
+  .heroContent {
+    position: relative;
+    top: unset;
+    left: unset;
+    transform: none;
+    padding: 0 28px;
+    max-width: 100%;
+  }
+
+  .imgBanner {
+    object-position: 70% center;
+  }
+}
+
+@media (max-width: 480px) {
+  .heroTitle {
+    font-size: 1.5rem;
+  }
+
+  .heroSubtitle {
+    font-size: 0.875rem;
   }
 }

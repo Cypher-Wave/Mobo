@@ -1,47 +1,81 @@
-.navbarHome {
+.navbar {
   position: absolute;
-  top: 20px;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 92%;
-  height: 45px;
-  background: rgba(var(--mobo-white), 0.08);
-  border: 2px solid rgba(var(--mobo-white), 0.6);
-  border-radius: 50px;
-  backdrop-filter: blur(10px);
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 100;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 0 2.5rem;
-  z-index: 50;
-  box-shadow: 0 4px 20px rgba(var(--mobo-black), 0.15);
+  padding: 0 3rem;
+  height: 72px;
 }
 
-/* Logo dentro da navbar */
-.logoNavbar {
-  position: relative;
-  width: 40px;
-  height: 40px;
-  cursor: pointer;
-  transition: transform 0.25s ease;
-}
-
-.logoNavbar:hover {
-  transform: scale(1.08);
-}
-
-/* Container dos ícones e perfil */
-.iconNav {
+/* ── Logo ── */
+.logoLink {
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  width: 100%;
+  flex-shrink: 0;
 }
 
-@media (max-width: 600px) {
-  .navbarHome {
-    height: 40px;
-    padding: 0 1rem;
-    width: 95%;
+.logoImg {
+  object-fit: contain;
+  filter: brightness(0) invert(1); /* deixa branco sobre o fundo vermelho */
+}
+
+/* ── Links ── */
+.navLinks {
+  display: flex;
+  align-items: center;
+  gap: 2.5rem;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.navLink {
+  color: rgb(var(--mobo-beige));
+  text-decoration: none;
+  font-size: 0.95rem;
+  font-weight: 400;
+  opacity: 0.85;
+  transition: opacity 0.2s ease, font-size 0.2s ease;
+}
+
+.navLink:hover {
+  opacity: 1;
+  font-size: 1.05rem;
+}
+
+.navLinkActive {
+  font-weight: 700;
+  opacity: 1;
+  text-decoration: underline;
+  text-underline-offset: 5px;
+  text-decoration-thickness: 2px;
+}
+
+/* active com hover: sem efeito de crescimento */
+.navLinkActive:hover {
+  font-size: 0.95rem;
+  cursor: default;
+}
+
+/* ── Ações ── */
+.navActions {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  flex-shrink: 0;
+}
+
+/* ── Responsividade ── */
+@media (max-width: 768px) {
+  .navbar {
+    padding: 0 1.25rem;
+  }
+
+  .navLinks {
+    display: none; /* menu mobile pode ser adicionado futuramente */
   }
 }
