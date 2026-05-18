@@ -46,6 +46,7 @@ O projeto se alinha aos seguintes **Objetivos de Desenvolvimento Sustentável (O
 - 🗺️ **Mapa de Sensores** — localização geográfica dos sensores e braços mecânicos
 - 👤 **Gestão de Usuários** — perfis de Administrador e Agricultor com permissões distintas
 - 📱 **Aplicativo Mobile** — versão mobile com todas as funcionalidades principais e controle da garra mecânica
+- Link do repositório da IA (https://github.com/Cypher-Wave/Mobo-IA)
 
 ---
 
