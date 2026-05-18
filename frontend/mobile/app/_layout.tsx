@@ -19,15 +19,22 @@ export default function RootLayout() {
         <Drawer.Screen name="terrenoCadastrado" options={{ title: 'Cadastro de Terreno' }} />
         <Drawer.Screen name="home" options={{ title: 'Home' }} />
         <Drawer.Screen name="alertas" options={{ title: 'Alertas' }} />
-        <Drawer.Screen name="curiosidades"options={{ title: 'Curiosidades' }}/>
+        <Drawer.Screen name="curiosidades" options={{ title: 'Curiosidades' }} />
         <Drawer.Screen name="dashboard" options={{ title: 'Dashboard' }} />
-        <Drawer.Screen name="sensores" options={{ title: 'Sensores' }} />       
+        <Drawer.Screen name="sensores" options={{ title: 'Sensores' }} />
         <Drawer.Screen name="relatorios" options={{ title: 'Relatórios' }} />
-        <Drawer.Screen name="previsao-de-colheita"options={{ title: 'Previsão de Colheita' }}/>
+        <Drawer.Screen name="previsao-de-colheita" options={{ title: 'Previsão de Colheita' }} />
         <Drawer.Screen name="perfil" options={{ title: 'Perfil' }} />
         <Drawer.Screen name="garra" options={{ title: 'Garra' }} />
+        <Drawer.Screen
+          name="controle"
+          options={{
+            title: 'Controle',
+            headerShown: false,
+          }}
+        />
 
-        {}
+        { }
       </Drawer>
     </GestureHandlerRootView>
   );
