@@ -1,185 +1,176 @@
-import React from 'react';
-import {
-  View,
-  Text,
-  Image,
-  ImageBackground,
-  TouchableOpacity,
-  ScrollView,
-  StyleSheet,
-} from 'react-native';
-import { Feather } from '@expo/vector-icons';
+import { Ionicons } from '@expo/vector-icons';
+import { useState } from 'react';
+import { Image, ScrollView, Text, TouchableOpacity, View } from 'react-native';
 
-export default function PerfilScreen() {
+import { NoteList, PrimaryButton, RecordCard, colors } from '../components/mobo-ui';
+
+export default function Perfil() {
+  const [activeTab, setActiveTab] = useState<'notes' | 'records'>('notes');
+
   return (
-    <ScrollView style={styles.container}>
-      
-      {/* Fundo com lichias */}
-      <ImageBackground
-        source={require('../assets/images/fundoPerfil.png')}
-        style={styles.imageHeader}
+    <View style={{ flex: 1, backgroundColor: colors.cream }}>
+      <ScrollView
+        showsVerticalScrollIndicator={false}
+        contentContainerStyle={{ paddingBottom: 18 }}
       >
-        <TouchableOpacity style={styles.cameraIcon}>
-          <Feather name="camera" size={22} color="#fff" />
-          <Feather name="plus" size={10} color="#fff" style={styles.plusIcon} />
-        </TouchableOpacity>
-      </ImageBackground>
+        <View
+          style={{
+            height: 220,
+            backgroundColor: colors.red,
+            borderBottomLeftRadius: 112,
+            borderBottomRightRadius: 112,
+            paddingTop: 38,
+            paddingHorizontal: 24,
+          }}
+        >
+          <Image
+            source={require('../assets/images/mb-bege.png')}
+            style={{ width: 40, height: 40 }}
+            resizeMode="contain"
+          />
+        </View>
 
-      {/* Conteúdo principal */}
-      <View style={styles.content}>
-        {/* Foto e nome */}
-        <Image
-          source={require('../assets/images/perfilFoto.png')}
-          style={styles.profileImage}
-        />
-        <Text style={styles.name}>Geovanna Silva</Text>
-        <Text style={styles.username}>@Silovageovanna</Text>
+        <View style={{ alignItems: 'center', marginTop: -78 }}>
+          <TouchableOpacity
+            activeOpacity={0.85}
+            style={{
+              width: 120,
+              height: 120,
+              borderRadius: 60,
+              borderWidth: 4,
+              borderColor: colors.red,
+              backgroundColor: '#E8E8E8',
+              overflow: 'hidden',
+            }}
+          >
+            <Image
+              source={require('../assets/images/funcionaria.jpg')}
+              style={{ width: '100%', height: '100%' }}
+              resizeMode="cover"
+            />
+            <View
+              style={{
+                position: 'absolute',
+                right: 8,
+                top: 8,
+                width: 36,
+                height: 36,
+                borderRadius: 18,
+                backgroundColor: colors.red,
+                alignItems: 'center',
+                justifyContent: 'center',
+              }}
+            >
+              <Ionicons name="add" size={26} color={colors.white} />
+            </View>
+          </TouchableOpacity>
 
-        {/* Botão */}
-        <TouchableOpacity style={styles.button}>
-          <Text style={styles.buttonText}>Gerar Relatórios</Text>
-        </TouchableOpacity>
+          <View
+            style={{
+              width: '100%',
+              paddingHorizontal: 36,
+              alignItems: 'center',
+              marginTop: 18,
+            }}
+          >
+            <Text style={{ fontFamily: 'Livvic_700Bold', fontSize: 22, color: colors.red }}>
+              Fernanda Mendes
+            </Text>
+            <Text
+              style={{
+                fontFamily: 'Livvic_400Regular',
+                fontSize: 17,
+                color: '#77777D',
+                marginTop: 12,
+              }}
+            >
+              Funcionário - Empresa Tal
+            </Text>
+            <View style={{ flexDirection: 'row', alignItems: 'center', marginTop: 8 }}>
+              <Ionicons name="location" size={18} color="#BDBDBD" />
+              <Text style={{ fontFamily: 'Livvic_400Regular', fontSize: 16, color: '#77777D' }}>
+                Localização
+              </Text>
+            </View>
+            <Text
+              style={{
+                fontFamily: 'Livvic_400Regular',
+                fontSize: 16,
+                color: '#858585',
+                marginTop: 8,
+              }}
+            >
+              20 anotações • 10 Registros
+            </Text>
 
-        {/* Galeria */}
-        <Text style={styles.galleryTitle}>Galeria de Fotos-</Text>
-        <ScrollView horizontal showsHorizontalScrollIndicator={false}>
-          <View style={styles.photoCard}>
-            <Image
-              source={require('../assets/images/imgGaleria1.png')}
-              style={styles.photo}
-            />
+            <TouchableOpacity
+              activeOpacity={0.8}
+              style={{ position: 'absolute', right: 28, top: 26 }}
+            >
+              <Ionicons name="pencil" size={30} color="#000000" />
+            </TouchableOpacity>
           </View>
-            <View style={styles.photoCard}>
-            <Image
-              source={require('../assets/images/imgGaleria2.png')}
-              style={styles.photo}
-            />
+        </View>
+
+        <View style={{ paddingHorizontal: 28, paddingTop: 26 }}>
+          <View
+            style={{
+              flexDirection: 'row',
+              justifyContent: 'center',
+              gap: 28,
+              marginBottom: 22,
+            }}
+          >
+            {[
+              { key: 'notes', label: 'Anotações' },
+              { key: 'records', label: 'Registros' },
+            ].map((tab) => {
+              const selected = activeTab === tab.key;
+              return (
+                <TouchableOpacity
+                  key={tab.key}
+                  activeOpacity={0.8}
+                  onPress={() => setActiveTab(tab.key as 'notes' | 'records')}
+                >
+                  <Text
+                    style={{
+                      fontFamily: 'Livvic_700Bold',
+                      fontSize: 20,
+                      color: selected ? colors.red : colors.oliveLight,
+                    }}
+                  >
+                    {tab.label}
+                  </Text>
+                  {selected && (
+                    <View
+                      style={{
+                        height: 3,
+                        borderRadius: 3,
+                        backgroundColor: colors.red,
+                        marginTop: 4,
+                      }}
+                    />
+                  )}
+                </TouchableOpacity>
+              );
+            })}
           </View>
-          <View style={styles.photoCard}>
-            <Image
-              source={require('../assets/images/imgGaleria4.png')}
-              style={styles.photo}
-            />
-          </View>
-          <View style={styles.photoCard}>
-            <Image
-              source={require('../assets/images/imgGaleria3.png')}
-              style={styles.photo}
-            />
-          </View>
-        </ScrollView>
-      </View>
-    </ScrollView>
+
+          {activeTab === 'notes' ? (
+            <>
+              <NoteList compact />
+              <View style={{ marginTop: 10 }}>
+                <PrimaryButton title="Ver Tudo" width="76%" />
+              </View>
+            </>
+          ) : (
+            <View>
+              <RecordCard index={0} />
+              <RecordCard index={1} />
+            </View>
+          )}
+        </View>
+      </ScrollView>
+    </View>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    backgroundColor: '#E7D9CA',
-    flex: 1,
-  },
-  header: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    paddingHorizontal: 15,
-    paddingTop: 10,
-  },
-  hora: {
-    color: '#b70a49',
-    fontWeight: 'bold',
-    fontSize: 16,
-  },
-  iconsRight: {
-    flexDirection: 'row',
-  },
-  iconHeader: {
-    marginLeft: 8,
-  },
-  imageHeader: {
-    width: '100%',
-    height: 360,
-    justifyContent: 'flex-end',
-  },
-  cameraIcon: {
-    position: 'absolute',
-    top: 10,
-    left: 20,
-    backgroundColor: '#b70a49',
-    padding: 8,
-    borderRadius: 50,
-  },
-  plusIcon: {
-    position: 'absolute',
-    right: 4,
-    bottom: 2,
-  },
-  content: {
-    alignItems: 'center',
-    backgroundColor: '#E7D9CA',
-    marginTop: 40,
-    paddingBottom: 40,
-  },
-  profileImage: {
-    width: 240,
-    height: 240,
-    borderRadius: 125,
-    borderWidth: 3,
-    borderColor: '#fff',
-    marginTop: -160,
-    marginBottom: 30,
-
-  },
-  name: {
-    fontWeight: 'bold',
-    fontSize: 18,
-    marginTop: 10,
-    color: '#000',
-  },
-  username: {
-    color: '#555',
-    marginBottom: 15,
-  },
-  button: {
-    backgroundColor: '#b70a49',
-    borderRadius: 8,
-    paddingVertical: 10,
-    paddingHorizontal: 25,
-    marginBottom: 25,
-  },
-  buttonText: {
-    color: '#fff',
-    fontWeight: 'bold',
-  },
-  galleryTitle: {
-    fontWeight: 'bold',
-    fontSize: 16,
-    alignSelf: 'flex-start',
-    marginLeft: 20,
-    marginBottom: 50,
-    marginTop: 40,
-    color: '#000',
-  },
-  photoCard: {
-    backgroundColor: '#fff',
-    borderRadius: 12,
-    marginHorizontal: 10,
-    shadowColor: '#000',
-    shadowOpacity: 0.2,
-    shadowRadius: 3,
-    elevation: 5,
-  },
-  photo: {
-    width: 200,
-    height: 180,
-    borderRadius: 12,
-  },
-  addPhoto: {
-    position: 'absolute',
-    bottom: -20,
-    right: 70,
-    backgroundColor: '#b70a49',
-    padding: 15,
-    borderRadius: 50,
-    elevation: 5,
-  },
-});
