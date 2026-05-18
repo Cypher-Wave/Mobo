@@ -119,38 +119,45 @@ O projeto se alinha aos seguintes **Objetivos de Desenvolvimento Sustentável (O
 ```
 Mobo/
 ├── .github/
-│   └── workflows/            # CI/CD e auto-assign de issues
+│ └── workflows/ # CI/CD e auto-assign de issues
 ├── backend/
-│   ├── src/                  # Código-fonte da API
-│   ├── .env.example          # Exemplo de variáveis de ambiente
-│   ├── package.json
-│   └── tsconfig.json
+│ ├── src/ # Código-fonte da API
+│ ├── .env.example # Exemplo de variáveis de ambiente
+│ ├── package.json
+│ └── tsconfig.json
 ├── frontend/
-│   ├── mobile/               # Aplicativo React Native + Expo
-│   │   ├── app/              # Telas do aplicativo (.tsx)
-│   │   │   ├── _layout.tsx
-│   │   │   ├── alertas.tsx
-│   │   │   ├── cadastro.tsx
-│   │   │   ├── cadastroTerreno.tsx
-│   │   │   ├── curiosidades.tsx
-│   │   │   ├── dashboard.tsx
-│   │   │   ├── garra.tsx
-│   │   │   ├── home.tsx
-│   │   │   ├── login.tsx
-│   │   │   ├── perfil.tsx
-│   │   │   ├── previsao-de-colheita.tsx
-│   │   │   └── sensores.tsx
-│   │   ├── assets/images/
-│   │   ├── app.json
-│   │   ├── package.json
-│   │   └── tsconfig.json
-│   └── web/                  # Aplicação Next.js
-│       ├── public/
-│       ├── src/
-│       ├── next.config.ts
-│       ├── package.json
-│       └── tsconfig.json
-├── database/              # Dados de teste para banco local (seeds, fixtures, backups)
+│ ├── mobile/ # Aplicativo React Native + Expo
+│ │ ├── app/ # Telas do aplicativo (.tsx)
+│ │ │ ├── layout.tsx
+│ │ │ ├── alertas.tsx
+│ │ │ ├── cadastro.tsx
+│ │ │ ├── cadastroTerreno.tsx
+│ │ │ ├── curiosidades.tsx
+│ │ │ ├── dashboard.tsx
+│ │ │ ├── garra.tsx
+│ │ │ ├── home.tsx
+│ │ │ ├── login.tsx
+│ │ │ ├── perfil.tsx
+│ │ │ ├── previsao-de-colheita.tsx
+│ │ │ └── sensores.tsx
+│ │ ├── assets/images/
+│ │ ├── app.json
+│ │ ├── package.json
+│ │ └── tsconfig.json
+│ └── web/ # Aplicação Next.js
+│ ├── public/
+│ ├── src/
+│ ├── next.config.ts
+│ ├── package.json
+│ └── tsconfig.json
+├── database/ # Dados de teste para banco local (seeds, fixtures, backups)
+├── IoT/ # Integração com hardware e IA para colheita
+│ ├── BracoEsteira.ino # Código Arduino para controle do braço mecânico
+│ └── script_gera_dataset/ # Scripts Python para geração de dataset de treinamento
+│ ├── gerar_dataset.py
+│ ├── requirements.txt
+│ ├── dataset_lichia*/ # Datasets organizados (train/val/test)
+│ └── yolo11x.pt # Modelo YOLOv11 pré-treinado (Git LFS) ⚠️
 ├── .gitignore
 └── README.md
 ```
@@ -391,7 +398,50 @@ O backend está configurado para aceitar requisições do frontend rodando em `h
 - Desenvolver versão acessível via parcerias com cooperativas agrícolas
 - Adaptar a tecnologia para outras frutas tropicais
 
+  ---
+
+## 📡 Integração IoT & IA
+
+Esta seção contém os componentes de hardware e inteligência artificial para automação da colheita.
+
+### 📂 Conteúdo da Pasta `IoT/`
+
+| Arquivo/Pasta | Descrição |
+|--------------|-----------|
+| `BracoEsteira.ino` | Código Arduino para controle dos servomotores do braço mecânico e esteira |
+| `script_gera_dataset/` | Scripts Python para organização e augmentação de imagens de lichia |
+| `yolo11x.pt` | Modelo YOLOv11 pré-treinado para detecção de frutas em tempo real |
+
+### ⚙️ Como Utilizar
+
+#### Arduino (BracoEsteira.ino)
+1. Abra o arquivo `.ino` na [Arduino IDE](https://www.arduino.cc/en/software)
+2. Selecione a placa e a porta correta
+3. Faça o upload para o microcontrolador
+
+#### Dataset e IA (script_gera_dataset/)
+```bash
+cd IoT/script_gera_dataset
+
+# Instalar dependências Python
+pip install -r requirements.txt
+
+# Executar script de geração de dataset
+python gerar_dataset.py
+
+⚠️ Git LFS: O arquivo yolo11x.pt (109 MB) é gerenciado pelo Git Large File Storage.
+Para clonar este repositório em outra máquina:
+
+# 1. Instale o Git LFS (apenas uma vez por máquina)
+git lfs install
+
+# 2. Clone o repositório normalmente
+git clone https://github.com/Cypher-Wave/Mobo.git
+
+
 ---
+
+
 
 ## 📄 Licença
 
