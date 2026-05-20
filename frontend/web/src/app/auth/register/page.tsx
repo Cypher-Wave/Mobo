@@ -136,7 +136,7 @@ const Register = () => {
         <div className={styles.topBar}>
           <div className={styles.logoContainer}>
             <Image
-              src="/images/Logo.png"
+              src="/images/logo.png"
               alt="Logo Mobo"
               fill
               className={styles.logo}
