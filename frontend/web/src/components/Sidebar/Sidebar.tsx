@@ -7,7 +7,7 @@ const Sidebar = () => {
     <aside className={styles.sidebarContainer}>
       <div className={styles.toggle}>
         <div className={styles.logo}>
-          <Image src="/images/mbBege.png" alt="Mobo logo" fill />
+          <Image src="/images/mobo.png" alt="Mobo logo" fill />
         </div>
       </div>
 

@@ -2,92 +2,45 @@
 
 import Image from "next/image";
 import NavbarHome from "@/components/NavbarHome/NavbarHome";
-import CardSection from "@/components/CardSection/CardSection";
-import Footer from "@/components/Footer/Footer";
-
 import styles from "./Home.module.css";
 
 const Home = () => {
-  const tools = [
-    {
-      title: "Configurações do Braço Mecânico",
-      description:
-        "A garra mecânica possui sensores, câmera que identifica frutos prontos para serem colhidos e controle de direção para precisão na colheita.",
-      icon: "/images/icons/garraIcon.png",
-      link: "/harvester",
-    },
-    {
-      title: "Sensores",
-      description:
-        "Os sensores monitoram a temperatura, a umidade do ar e a umidade do solo, garantindo um ambiente de cultivo nas condições ideais.",
-      icon: "/images/icons/sensoresIcon.png",
-      link: "/sensor",
-    },
-    {
-      title: "Previsão de Colheita",
-      description:
-        "A previsão de colheita utiliza dados de sensores e condições climáticas para estimar o momento ideal da colheita.",
-      icon: "/images/icons/lembrete-vermelho.png",
-      link: "/forecast",
-    },
-    {
-      title: "Relatórios",
-      description:
-        "Os relatórios fornecem dados detalhados sobre o processo de colheita, permitindo o monitoramento contínuo para otimizar a qualidade e eficiência.",
-      icon: "/images/icons/relatorioIcon.png",
-      link: "/report",
-    },
-    {
-      title: "Dashboard",
-      description:
-        "A dashboard exibe gráficos, proporcionando uma visão clara e em tempo real dos dados do cultivo e da colheita.",
-      icon: "/images/icons/dashboard.png",
-      link: "/dashboard",
-    },
-    {
-      title: "Alertas",
-      description:
-        "Os alertas notificam sobre mudanças nas condições ideais de temperatura e umidade, permitindo ajustes rápidos.",
-      icon: "/images/icons/aviso.png",
-      link: "/alert",
-    },
-  ];
-
   return (
     <>
       <NavbarHome />
 
       <main className={styles.homeMain}>
+
+        {/* ===== Banner Hero ===== */}
         <div className={styles.banner}>
           <Image
             className={styles.imgBanner}
-            src="/images/BannerOfc.png"
+            src="/images/banner.png"
             alt="Banner"
             fill
+            priority
           />
 
-          <div className={styles.logoContainer}>
-            <Image
-              className={styles.logo}
-              src="/images/Logo.png"
-              alt="Logo"
-              fill
-            />
+          <div className={styles.heroContent}>
+            <h1 className={styles.heroTitle}>
+              <span className={styles.bold}>Revolucione</span> sua{" "}
+              <span className={styles.bold}>Produção</span>
+              <br />
+              de Lichia com{" "}
+              <span className={`${styles.bold} ${styles.underlined}`}>
+                Automação
+                <br />
+                Inteligente
+              </span>
+            </h1>
+
+            <p className={styles.heroSubtitle}>
+              Sistema inteligente e tecnologia avançada que automatizam
+              todo o processo de colheita, reduzindo perdas e garantindo
+              eficiência, escala e resultados superiores.
+            </p>
           </div>
         </div>
-
-        <CardSection title="Ferramentas" cards={tools} />
-
-        <div className={styles.mascotFooter}>
-          <Image
-            className={styles.mascot}
-            src="/images/mobotst3.png"
-            alt="Mascote"
-            fill
-          />
-        </div>
-
-        <Footer />
       </main>
     </>
   );

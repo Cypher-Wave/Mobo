@@ -4,7 +4,6 @@ import { useState, useRef } from "react";
 import axios from "axios";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
-import FirstColumn from "@/components/FirstColumn/FirstColumn";
 import api from "@/services/api";
 import styles from "../Auth.module.css";
 
@@ -18,11 +17,12 @@ const Register = () => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [passwordConfirm, setPasswordConfirm] = useState("");
   const [phone, setPhone] = useState("");
   const [role, setRole] = useState<
     "family_farmer" | "company_admin" | "company_worker"
   >();
-  const [company, ] = useState("");
+  const [company] = useState("");
   const [farmerDetails, setFarmerDetails] = useState<{
     cpf: string;
     dap: string;
@@ -30,9 +30,50 @@ const Register = () => {
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
 
+  // Máscara de telefone
+  const handlePhoneChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    let value = e.target.value.replace(/\D/g, ""); // remove tudo que não é dígito
+    if (value.length > 11) value = value.slice(0, 11);
+
+    if (value.length <= 2) {
+      value = value.replace(/^(\d{0,2})/, "($1");
+    } else if (value.length <= 7) {
+      value = value.replace(/^(\d{2})(\d{0,5})/, "($1)$2");
+    } else {
+      value = value.replace(/^(\d{2})(\d{5})(\d{0,4})/, "($1)$2-$3");
+    }
+
+    setPhone(value);
+  };
+
+  // Máscara de CPF
+  const handleCpfChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    let value = e.target.value.replace(/\D/g, ""); // remove tudo que não é dígito
+    if (value.length > 11) value = value.slice(0, 11);
+
+    if (value.length <= 3) {
+      value = value.replace(/^(\d{0,3})/, "$1");
+    } else if (value.length <= 6) {
+      value = value.replace(/^(\d{3})(\d{0,3})/, "$1.$2");
+    } else if (value.length <= 9) {
+      value = value.replace(/^(\d{3})(\d{3})(\d{0,3})/, "$1.$2.$3");
+    } else {
+      value = value.replace(/^(\d{3})(\d{3})(\d{3})(\d{0,2})/, "$1.$2.$3-$4");
+    }
+
+    setFarmerDetails((prev) => ({ ...prev!, cpf: value }));
+  };
+
   const handleRegister = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     setError("");
+
+    // ===== Validação de senhas =====
+    if (password !== passwordConfirm) {
+      setError("As senhas não coincidem.");
+      return;
+    }
+
     setLoading(true);
 
     try {
@@ -87,188 +128,216 @@ const Register = () => {
     }
   };
 
-  const infos = {
-    title: "Bem-vindo ao Mobo!",
-    description1: "Se você já possui uma conta",
-    description2: "clique no botão abaixo e faça seu login",
-    link: "/auth/login",
-    button: "Entrar",
-  };
-
   return (
-    <div className={styles.content}>
-      {/* Primeira coluna */}
-      <FirstColumn info={infos} />
-
-      {/* Formulário de cadastro */}
-      <div className={`${styles.secondColumn} ${styles.backgroundRegister}`}>
-        <div className={styles.logoContainer}>
-          <Image
-            className={styles.authLogo}
-            src="/images/Logo.png"
-            alt="Logo Mobo"
-            fill
-          />
+    <div className={styles.page}>
+      {/* ===== Coluna Esquerda — Formulário ===== */}
+      <div className={styles.leftColumn}>
+        {/* Topo: Logo + Título */}
+        <div className={styles.topBar}>
+          <div className={styles.logoContainer}>
+            <Image
+              src="/images/Logo.png"
+              alt="Logo Mobo"
+              fill
+              className={styles.logo}
+            />
+          </div>
+          <h1 className={styles.title}>Faça seu cadastro!</h1>
         </div>
 
-        <h2 className={`${styles.title} ${styles.titleSecond}`}>
-          Deseja criar uma conta?
-        </h2>
-
-        <form className={styles.form} onSubmit={handleRegister} method="POST">
-          {/* Preview da imagem (opcional) */}
-          {imagePreview && (
-            <div className={styles.imagePreview}>
+        {/* Área central com avatar + form */}
+        <div className={styles.formArea}>
+          {/* Avatar clicável */}
+          <button
+            type="button"
+            className={styles.avatarButton}
+            onClick={() => fileInputRef.current?.click()}
+            aria-label="Escolher foto de perfil"
+          >
+            {imagePreview ? (
               <Image
                 src={imagePreview}
                 alt="Preview"
-                width={100}
-                height={100}
-                style={{ objectFit: "cover", borderRadius: "50%" }}
-                unoptimized // necessário para blob URLs
+                fill
+                className={styles.avatarPreview}
+                unoptimized
               />
-            </div>
-          )}
+            ) : (
+              /* Silhueta padrão */
+              <svg
+                className={styles.avatarIcon}
+                viewBox="0 0 80 80"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <circle cx="40" cy="28" r="16" fill="rgba(255,255,255,0.25)" />
+                <ellipse
+                  cx="40"
+                  cy="62"
+                  rx="26"
+                  ry="16"
+                  fill="rgba(255,255,255,0.25)"
+                />
+              </svg>
+            )}
+            {/* Botão "+" */}
+            <span className={styles.avatarPlus}>+</span>
+          </button>
 
-          {/* Imagem */}
-          <label className={styles.labelInput} htmlFor="userProfileImage">
-            <i className={`far fa-image ${styles.iconModify}`}></i>
-            <span className={styles.txtImg}>Escolher imagem</span>
-            <input
-              id="userProfileImage"
-              type="file"
-              accept="image/*"
-              style={{ display: "none" }}
-              onChange={handleImageChange}
-              ref={fileInputRef}
-            />
-          </label>
+          {/* Input de arquivo oculto */}
+          <input
+            id="userProfileImage"
+            type="file"
+            accept="image/*"
+            style={{ display: "none" }}
+            onChange={handleImageChange}
+            ref={fileInputRef}
+          />
 
-          {/* Nome */}
-          <label className={styles.labelInput} htmlFor="userName">
-            <i className={`far fa-user ${styles.iconModify}`}></i>
+          {/* Formulário */}
+          <form className={styles.formRegister} onSubmit={handleRegister}>
+            {/* Nome */}
             <input
+              className={`input ${styles.fullWidth}`}
               type="text"
-              placeholder="Nome"
+              name="userName"
               value={name}
-              onChange={(event) => setName(event.target.value)}
+              onChange={(e) => setName(e.target.value)}
+              placeholder="Nome"
               required
             />
-          </label>
 
-          {/* Telefone */}
-          <label className={styles.labelInput} htmlFor="userPhone">
-            <i className={`fas fa-phone ${styles.iconModify}`}></i>
+            {/* Email */}
             <input
-              type="text"
-              placeholder="Telefone"
-              value={phone}
-              onChange={(event) => setPhone(event.target.value)}
-            />
-          </label>
-
-          {/* Email */}
-          <label className={styles.labelInput} htmlFor="userEmail">
-            <i className={`far fa-envelope ${styles.iconModify}`}></i>
-            <input
+              className={`input ${styles.fullWidth}`}
               type="email"
-              placeholder="Email"
+              name="userEmail"
               value={email}
-              onChange={(event) => setEmail(event.target.value)}
+              onChange={(e) => setEmail(e.target.value)}
+              placeholder="E-mail"
               required
             />
-          </label>
 
-          {/* Senha */}
-          <label className={styles.labelInput} htmlFor="userPassword">
-            <i className={`fas fa-lock ${styles.iconModify}`}></i>
+            {/* Senha */}
             <input
+              className="input"
               type="password"
-              placeholder="Senha"
+              name="userPassword"
               value={password}
-              onChange={(event) => setPassword(event.target.value)}
+              onChange={(e) => setPassword(e.target.value)}
+              placeholder="Senha"
               required
             />
-          </label>
 
-          {/* Tipo de usuário */}
-          <label className={styles.labelInput} htmlFor="userRole">
-            <i className={`fas fa-seedling ${styles.iconModify}`}></i>
-
-            <select
-              className={styles.selectInput}
-              id="userRole"
-              value={role}
-              onChange={(event) => {
-                const newRole = event.target.value as
-                  | "family_farmer"
-                  | "company_admin"
-                  | "company_worker";
-
-                setRole(newRole);
-
-                if (newRole === "family_farmer") {
-                  setFarmerDetails({ cpf: "", dap: "" });
-                } else {
-                  setFarmerDetails(null);
-                }
-              }}
+            {/* Confirmação de Senha */}
+            <input
+              className={`input ${passwordConfirm && password !== passwordConfirm ? "inputError" : ""}`}
+              type="password"
+              name="userPasswordConfirm"
+              value={passwordConfirm}
+              onChange={(e) => setPasswordConfirm(e.target.value)}
+              placeholder="Confirmar Senha"
               required
-            >
-              <option value="" disabled>
-                Tipo de Usuário:
-              </option>
-              <option value="company_admin">CEO de Empresa</option>
-              <option value="company_worker">Funcionário de Empresa</option>
-              <option value="family_farmer">Agricultor Familiar</option>
-            </select>
+            />
 
-            <i className={`bx bx-chevron-down ${styles.selectIcon}`}></i>
-          </label>
+            {/* Feedback inline de senhas */}
+            {passwordConfirm && password !== passwordConfirm && (
+              <p className={styles.error}>As senhas não coincidem.</p>
+            )}
 
-          {/* Campos extras para agricultor familiar */}
-          {role === "family_farmer" && farmerDetails && (
-            <>
-              <label className={styles.labelInput}>
-                <i className={`fas fa-id-card ${styles.iconModify}`}></i>
+            {/* Tipo de Conta */}
+            <div className={`selectWrapper ${styles.fullWidth}`}>
+              <select
+                className="input"
+                value={role ?? ""}
+                onChange={(e) => {
+                  const newRole = e.target.value as
+                    | "family_farmer"
+                    | "company_admin"
+                    | "company_worker";
+                  setRole(newRole);
+                  setFarmerDetails(
+                    newRole === "family_farmer" ? { cpf: "", dap: "" } : null,
+                  );
+                }}
+                required
+              >
+                <option value="" disabled>
+                  Tipo de Conta
+                </option>
+                <option value="company_admin">CEO de Empresa</option>
+                <option value="company_worker">Funcionário de Empresa</option>
+                <option value="family_farmer">Agricultor Familiar</option>
+              </select>
+            </div>
+
+            {/* Telefone (opcional) */}
+            <input
+              className={`input ${styles.fullWidth}`}
+              type="text"
+              name="userPhone"
+              value={phone}
+              onChange={handlePhoneChange}
+              placeholder="Telefone (opcional)"
+              maxLength={14}
+            />
+
+            {/* Campo extra para agricultor familiar */}
+            {role === "family_farmer" && farmerDetails && (
+              <>
                 <input
+                  className="input"
                   type="text"
                   placeholder="CPF"
                   value={farmerDetails.cpf}
-                  onChange={(event) =>
-                    setFarmerDetails((prev) => ({
-                      ...prev!,
-                      cpf: event.target.value,
-                    }))
-                  }
+                  onChange={handleCpfChange}
+                  maxLength={14}
                   required
                 />
-              </label>
-
-              <label className={styles.labelInput}>
-                <i className={`fas fa-file-alt ${styles.iconModify}`}></i>
                 <input
+                  className="input"
                   type="text"
                   placeholder="DAP"
                   value={farmerDetails.dap}
-                  onChange={(event) =>
+                  onChange={(e) =>
                     setFarmerDetails((prev) => ({
                       ...prev!,
-                      dap: event.target.value,
+                      dap: e.target.value,
                     }))
                   }
                   required
                 />
-              </label>
-            </>
-          )}
+              </>
+            )}
 
-          <button className="btn btn-primary" type="submit" disabled={loading}>
-            {loading ? "Cadastrando..." : "Cadastrar-se"}
-          </button>
+            {/* Erro */}
+            {error && <p className={styles.error}>{error}</p>}
 
-          {error && <p className={styles.error}>{error}</p>}
-        </form>
+            {/* Botão Entrar */}
+            <button className="submitButton" type="submit" disabled={loading}>
+              {loading ? "Cadastrando..." : "Cadastrar-se"}
+            </button>
+          </form>
+
+          {/* Cadastro */}
+          <p className={styles.registerText}>
+            Já possui conta?{" "}
+            <a href="/auth/login" className={styles.registerLink}>
+              Faça login
+            </a>
+          </p>
+        </div>
+      </div>
+
+      {/* ===== Coluna Direita — Imagem ===== */}
+      <div className={styles.rightColumn}>
+        <Image
+          src="/images/banner.png"
+          alt="Robô colhendo lichia"
+          fill
+          priority
+          className={styles.bgImage}
+        />
       </div>
     </div>
   );

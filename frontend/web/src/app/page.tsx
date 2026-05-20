@@ -37,7 +37,7 @@ const SplashScreen = () => {
       <h1 className={`${styles.logoHeader} ${fadeIn ? "fade-in" : ""}`}>
         <Image
           className={styles.introLogo}
-          src="/images/mbRosa.png"
+          src="/images/mobo.png"
           alt="MOBO Logo"
           fill
         />
