@@ -1,205 +1,251 @@
-.container {
+/* Layout split-screen */
+.page {
   display: flex;
-  justify-content: center;
-  align-items: center;
+  width: 100%;
   height: 100vh;
-  background-color: rgb(var(--mobo-green));
-  font-family: var(--font-primary);
-}
-
-/* Caixa de conteúdo central */
-.content {
-  width: 80%;
-  max-width: 1300px;
-  height: 600px;
-  background-color: rgb(var(--mobo-white));
-  border-radius: 15px;
-  filter: drop-shadow(0 0 20px rgba(var(--mobo-black), 0.8));
-  display: flex;
   overflow: hidden;
+  position: relative;
 }
 
-/* Coluna esquerda (mensagem + botão) */
-.firstColumn {
-  width: 40%;
-  background-color: rgb(var(--mobo-red)); /* vermelho mobo */
-  color: rgb(var(--mobo-white));
+/* ===== Coluna Esquerda ===== */
+.leftColumn {
+  width: 32%;
+  min-width: 300px;
+  background-color: rgba(var(--mobo-dark-red-banner), 0.75);
   display: flex;
   flex-direction: column;
-  justify-content: center;
   align-items: center;
-  padding: 3rem;
   text-align: center;
-}
-
-.title {
-  font-size: 2rem;
-  font-weight: 700;
-  margin-bottom: 1rem;
-}
-
-.titlePrimary {
-  color: rgb(var(--mobo-white));
-}
-
-.description {
-  font-size: 0.95rem;
-  margin-bottom: 0.3rem;
-}
-
-.secondColumn {
-  width: 60%;
-  display: flex;
-  flex-direction: column;
   justify-content: center;
+  padding: 60px 50px;
+  gap: 0;
+  position: relative;
+  z-index: 1;
+}
+
+/* ===== Topo: Logo + Título ===== */
+.topBar {
+  display: flex;
   align-items: center;
-  position: relative;
-  color: rgb(var(--mobo-white));
-  padding: 2rem 3rem;
-}
-
-.backgroundLogin {
-  background: url("/images/agro_Login.jpeg") center/cover no-repeat;
-}
-
-.backgroundRegister {
-  background: url("/images/agro_Register.jpeg") center/cover no-repeat;
-}
-
-/* Fundo translúcido atrás do formulário */
-.secondContent {
-  position: relative;
-  background-color: rgba(var(--mobo-black), 0.4);
-  backdrop-filter: blur(3px);
+  gap: 16px;
+  padding: 28px 36px;
+  flex-shrink: 0;
 }
 
 /* Logo */
 .logoContainer {
-  display: flex;
-  justify-content: center;
-  align-items: center;
   position: relative;
-  margin-bottom: 1rem;
-  width: 11rem;
-  height: 6rem;
+  width: 140px;
+  height: 72px;
+  margin-bottom: 28px;
 }
 
-.authLogo {
+.logo {
   object-fit: contain;
-  filter: drop-shadow(0 0 20px rgba(var(--mobo-white), 0.9));
-} 
-
-/* Título do formulário */
-.titleSecond {
-  font-size: 1.6rem;
-  font-weight: 700;
-  margin-bottom: 1rem;
-  color: rgb(var(--mobo-white));
+  filter: brightness(0) invert(1);
 }
 
-/* Formulário */
-.form {
+/* Título "Bem Vindo!" */
+.title {
+  font-family: var(--font-primary);
+  font-size: 2rem;
+  font-weight: 600;
+  color: #ffffff;
+  margin: 0 0 32px;
+}
+
+/* ===== Área central (avatar + form) ===== */
+.formArea {
+  flex: 1;
   display: flex;
   flex-direction: column;
-  width: 100%;
-  max-width: 350px;
+  align-items: center;
+  justify-content: center;
+  padding: 0 40px 40px;
+  gap: 0;
 }
 
-.labelInput {
+/* ===== Avatar clicável ===== */
+.avatarButton {
   position: relative;
+  width: 96px;
+  height: 96px;
+  border-radius: 50%;
+  border: 2.5px solid rgba(255, 255, 255, 0.55);
+  background: rgba(255, 255, 255, 0.08);
+  cursor: pointer;
+  margin-bottom: 28px;
+  overflow: visible;
+  flex-shrink: 0;
+  transition: border-color 0.2s;
+}
+
+.avatarButton:hover {
+  border-color: rgba(255, 255, 255, 0.9);
+}
+
+.avatarIcon {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+}
+
+.avatarPreview {
+  object-fit: cover;
+  border-radius: 50%;
+}
+
+/* Botão "+" no canto inferior direito do avatar */
+.avatarPlus {
+  position: absolute;
+  bottom: 0px;
+  right: 0px;
+  width: 24px;
+  height: 24px;
+  background: #e0184a;
+  border-radius: 50%;
+  color: #ffffff;
+  font-size: 1.1rem;
+  font-weight: 700;
   display: flex;
   align-items: center;
-  background-color: rgba(var(--mobo-white), 0.20);
-  box-shadow: 1px 5px 5px rgba(var(--mobo-red), 0.85);
-  border: 1px solid rgb(var(--mobo-red));
-  border-radius: 30px;
-  padding: 0.6rem 1rem;
-  margin-bottom: 1rem;
-  transition: all 0.3s ease;
-}
-
-.labelInput:hover {
-  background-color: rgba(var(--mobo-white), 0.20);
-}
-
-.labelInput input,
-.selectInput {
-  flex: 1;
-  background: transparent;
-  border: none;
-  outline: none;
-  color: rgb(var(--mobo-white));
-  font-size: 0.95rem;
-  margin-left: 0.6rem;
-  appearance: none;
-  -webkit-appearance: none;
-  -moz-appearance: none;
-}
-
-.labelInput input::placeholder {
-  color: rgb(var(--mobo-white));
-}
-
-.selectInput {
-  padding-right: 2rem;
-  cursor: pointer;
-}
-
-.selectInput::-ms-expand {
-  display: none;
-}
-
-.selectInput option {
-  color: rgb(var(--mobo-black));
-  background: rgb(var(--mobo-beige));
-}
-.selectInput option:checked {
-  background: rgb(var(--mobo-red));
-  color: rgb(var(--mobo-white));
-}
-
-.selectIcon {
-  position: absolute;
-  right: 0.5rem;
-  color: rgb(var(--mobo-white));
-  font-size: 1.2rem;
+  justify-content: center;
+  line-height: 1;
   pointer-events: none;
 }
 
-/* Ícones */
-.iconModify {
-  color: rgb(var(--mobo-white));
+/* ===== Formulário ===== */
+.fullWidth {
+  grid-column: 1 / -1; /* ocupa as duas colunas */
 }
 
-/* Link de senha */
-.password {
-  display: block;
-  margin-top: 1rem;
-  text-align: center;
-  color: rgb(var(--mobo-white));
-  font-size: 0.9rem;
+.formLogin { /* Login */
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.formRegister { /* Register */
+  width: 100%;
+  display: grid;
+  grid-template-columns: 1fr 1fr; /* duas colunas iguais */
+  gap: 12px;
+}
+
+/* Wrapper do campo de senha (para posicionar o ícone) */
+.passwordWrapper {
+  position: relative;
+  width: 100%;
+}
+
+.eyeButton {
+  position: absolute;
+  right: 16px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: rgba(255, 255, 255, 0.7);
+  display: flex;
+  align-items: center;
+  padding: 0;
+  transition: color 0.2s;
+}
+
+.eyeButton:hover {
+  color: #ffffff;
+}
+
+/* Row: Lembre-se + Esqueceu senha */
+.row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  margin-top: 2px;
+}
+
+.checkboxLabel {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: rgba(255, 255, 255, 0.85);
+  font-size: 0.875rem;
+  cursor: pointer;
+}
+
+.checkbox {
+  width: 16px;
+  height: 16px;
+  accent-color: #e0184a;
+  cursor: pointer;
+}
+
+.forgotLink {
+  font-size: 0.875rem;
+  color: rgba(255, 255, 255, 0.75);
   text-decoration: none;
-  transition: color 0.3s;
+  transition: color 0.2s;
 }
 
-.password:hover {
-  color: rgb(var(--mobo-light-red));
+.forgotLink:hover {
+  color: #ffffff;
 }
 
-/* Responsividade */
-@media (max-width: 900px) {
-  .content {
+/* Mensagem de erro */
+.error {
+  color: #ffb3b3;
+  font-size: 0.85rem;
+  margin: 0;
+}
+
+/* Texto de cadastro */
+.registerText {
+  margin-top: 24px;
+  font-size: 0.9rem;
+  color: rgba(255, 255, 255, 0.75);
+}
+
+.registerLink {
+  color: #ffffff;
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.registerLink:hover {
+  text-decoration: underline;
+}
+
+/* ===== Coluna Direita — Imagem ===== */
+.rightColumn {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  background-color: #c0133e;
+}
+
+.bgImage {
+  object-fit: contain;
+  object-position: center right;
+}
+
+/* ===== Responsividade ===== */
+@media (max-width: 768px) {
+  .page {
     flex-direction: column;
     height: auto;
+    min-height: 100vh;
   }
 
-  .firstColumn,
-  .secondColumn {
+  .leftColumn {
     width: 100%;
-    border-radius: 0;
+    min-width: unset;
+    padding: 48px 28px;
   }
 
-  .secondColumn {
-    padding: 2rem;
+  .rightColumn {
+    display: none; /* esconde a imagem em mobile */
   }
 }

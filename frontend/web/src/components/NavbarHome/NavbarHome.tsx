@@ -21,7 +21,7 @@ const NavbarHome = () => {
       {/* Logo */}
       <Link href="/home" className={styles.logoLink}>
         <Image
-          src="/images/Logo.png"
+          src="/images/logo.png"
           alt="Mobo Logo"
           width={80}
           height={40}

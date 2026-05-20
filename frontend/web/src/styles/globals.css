@@ -52,3 +52,80 @@ body {
   cursor: pointer;
   transition: all 0.3s ease;
 }
+
+/* Inputs */
+.input {
+  width: 100%;
+  padding: 14px 18px;
+  background: transparent;
+  border: 1.5px solid rgb(var(--mobo-white));
+  border-radius: 15px;
+  color: rgb(var(--mobo-white));
+  font-size: 0.95rem;
+  outline: none;
+  transition: border-color 0.2s;
+  box-sizing: border-box;
+  box-shadow: 0 4px 0 rgba(var(--mobo-white), 0.7);
+}
+
+.input::placeholder {
+  color: rgba(var(--mobo-white), 0.6);
+}
+
+.input:focus {
+  border-color: rgb(var(--mobo-white));
+}
+
+/* Select — mesmo visual dos inputs */
+.selectWrapper {
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.selectWrapper .input {
+  appearance: none;
+  -webkit-appearance: none;
+  cursor: pointer;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='rgba(255,255,255,0.7)' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 18px center;
+  padding-right: 44px;
+}
+
+/* Select options */
+.input option {
+  background: rgb(var(--mobo-dark-red-banner));
+  color: rgb(var(--mobo-white));
+}
+
+/* Botão Vermelho de Login e Cadastro */
+.submitButton {
+  width: 100%;
+  padding: 15px;
+  margin-top: 8px;
+  grid-column: 1 / -1; /* ocupa as duas colunas */
+  background: rgb(var(--mobo-red-button));
+  border: none;
+  border-radius: 15px;
+  color: rgb(var(--mobo-white));
+  font-size: 1rem;
+  font-weight: 700;
+  box-shadow: 0 4px 0px rgb(var(--mobo-dark-red), 0.7);
+  cursor: pointer;
+  transition:
+    background 0.2s,
+    transform 0.1s;
+}
+
+.submitButton:hover:not(:disabled) {
+  background: rgb(var(--mobo-red-banner));
+}
+
+.submitButton:active:not(:disabled) {
+  transform: scale(0.98);
+}
+
+.submitButton:disabled {
+  opacity: 0.65;
+  cursor: not-allowed;
+}

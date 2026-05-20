@@ -27,6 +27,7 @@
   width: 4rem;
   height: 4rem;
   position: relative;
+  filter: brightness(0) invert(1);
 }
 
 .sidebar {
