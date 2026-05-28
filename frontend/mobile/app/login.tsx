@@ -118,7 +118,7 @@ export default function Login() {
                 <TextInput
                   value={email}
                   onChangeText={setEmail}
-                  placeholder="Digite seu email"
+                  placeholder="E-mail"
                   placeholderTextColor="#D38BA2"
                   keyboardType="email-address"
                   autoCapitalize="none"
@@ -149,7 +149,7 @@ export default function Login() {
                 <TextInput
                   value={password}
                   onChangeText={setPassword}
-                  placeholder="Digite sua senha"
+                  placeholder="Senha"
                   placeholderTextColor="#D38BA2"
                   secureTextEntry={!showPassword}
                   style={styles.input}
@@ -278,7 +278,7 @@ const styles = StyleSheet.create({
   labelText: {
     color: colors.cream,
     fontFamily: 'Livvic_400Regular',
-    fontSize: 22,
+    fontSize: 21,
     lineHeight: 28,
   },
   field: {
@@ -352,7 +352,7 @@ const styles = StyleSheet.create({
   loginButtonText: {
     color: colors.white,
     fontFamily: 'Livvic_700Bold',
-    fontSize: 22,
+    fontSize: 21,
   },
   signupButton: {
     marginTop: 31,

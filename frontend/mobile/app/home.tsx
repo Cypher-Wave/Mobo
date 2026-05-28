@@ -13,14 +13,6 @@ export default function Home() {
     return (
         <View style={{ flex: 1, backgroundColor: '#F8F2EB' }}>
             <ScrollView showsVerticalScrollIndicator={false}>
-                {/* FAIXA BEGE */}
-                <View
-                    style={{
-                        height: 35,
-                        backgroundColor: '#F8F2EB',
-                    }}
-                />
-
                 {/* FAIXA VERMELHA */}
                 <View
                     style={{
