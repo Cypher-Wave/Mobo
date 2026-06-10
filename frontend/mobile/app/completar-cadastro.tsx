@@ -178,7 +178,7 @@ export default function CompletarCadastro() {
               label="CAP"
               value={cap}
               onChangeText={setCap}
-              placeholder="Digite seu CAP"
+              placeholder="Digite seu DAP"
               fieldMarginBottom={36}
             />
 

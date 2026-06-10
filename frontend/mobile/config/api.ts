@@ -1,5 +1,6 @@
 import axios from "axios";
 import { router } from "expo-router";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 const api = axios.create({
   baseURL: "https://mobo-m9ug.onrender.com/api",
@@ -9,8 +10,13 @@ const api = axios.create({
 
 // 🔵 REQUEST
 api.interceptors.request.use(
-  (config) => {
+  async (config) => {
     console.log("➡️ Request:", config.method?.toUpperCase(), config.url);
+
+    const token = await AsyncStorage.getItem("token");
+    if (token) {
+      config.headers.Authorization = `Bearer ${token}`;
+    }
 
     if (config.data instanceof FormData) {
       delete config.headers["Content-Type"];
@@ -20,7 +26,7 @@ api.interceptors.request.use(
   (error) => {
     console.error("❌ Erro antes da requisição:", error);
     return Promise.reject(error);
-  }
+  },
 );
 
 // 🔴 RESPONSE
@@ -39,7 +45,9 @@ api.interceptors.response.use(
         console.log("🔁 Tentando novamente...");
         return api(originalRequest);
       }
-      return Promise.reject({ message: "Servidor indisponível. Tente novamente." });
+      return Promise.reject({
+        message: "Servidor indisponível. Tente novamente.",
+      });
     }
 
     const status = error.response.status;
@@ -47,15 +55,18 @@ api.interceptors.response.use(
     if (status === 401 && !originalRequest._retry) {
       originalRequest._retry = true;
       console.warn("🔒 Não autenticado, redirecionando...");
-      router.replace("/login"); // ← substitui o window.location
+      await AsyncStorage.removeItem("token");
+      router.replace("/login");
     }
 
     if (status === 403) console.warn("⛔ Acesso negado");
-    if (status === 404) console.warn("❓ Endpoint não encontrado:", originalRequest.url);
-    if (status >= 500) console.error("🔥 Erro no servidor:", error.response.data);
+    if (status === 404)
+      console.warn("❓ Endpoint não encontrado:", originalRequest.url);
+    if (status >= 500)
+      console.error("🔥 Erro no servidor:", error.response.data);
 
     return Promise.reject(error);
-  }
+  },
 );
 
 export default api;

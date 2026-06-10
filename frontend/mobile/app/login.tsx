@@ -16,6 +16,7 @@ import {
 } from "react-native";
 import { StatusBar } from "expo-status-bar";
 import api from "../config/api";
+import { saveToken } from "../config/auth";
 import { colors } from "../components/mobo-ui";
 
 export default function Login() {
@@ -49,8 +50,10 @@ export default function Login() {
         userPassword: password,
       });
 
-      console.log("✅ Login ok:", response.data);
-      router.replace("/home");
+      if (response.data.success) {
+        await saveToken(response.data.token);
+        router.replace("/home");
+      }
     } catch (error: any) {
       const mensagem = error.response?.data?.message || "Erro ao fazer login.";
       alert(mensagem);

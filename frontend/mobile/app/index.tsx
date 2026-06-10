@@ -1,39 +1,41 @@
-import { router } from 'expo-router';
-import { useEffect, useRef } from 'react';
-import { Animated, View } from 'react-native';
+import { Redirect } from "expo-router";
+import { useEffect, useState } from "react";
+import { View, ActivityIndicator } from "react-native";
+import api from "../config/api";
+import { getToken } from "../config/auth";
 
 export default function Index() {
-  const opacity = useRef(new Animated.Value(1)).current;
+  const [loading, setLoading] = useState(true);
+  const [authenticated, setAuthenticated] = useState(false);
+
   useEffect(() => {
-    const timer = setTimeout(() => {
-      Animated.timing(opacity, {
-        toValue: 0,
-        duration: 900,
-        useNativeDriver: true,
-      }).start(() => {
-        router.replace('/login');
-      });
-    }, 2200);
+    async function checkAuth() {
+      try {
+        const token = await getToken();
+        setAuthenticated(!!token);
+      } catch {
+        setAuthenticated(false);
+      } finally {
+        setLoading(false);
+      }
+    }
+    checkAuth();
+  }, []);
 
-    return () => clearTimeout(timer);
-  }, [opacity]);
-
-  return (
-    <View
-      style={{
-        flex: 1,
-        backgroundColor: '#B9B88A',
-      }}
-    >
-      <Animated.Image
-        source={require('../assets/images/splash.png')}
+  if (loading) {
+    return (
+      <View
         style={{
-          width: '100%',
-          height: '100%',
-          opacity,
+          flex: 1,
+          justifyContent: "center",
+          alignItems: "center",
+          backgroundColor: "#6e0026",
         }}
-        resizeMode="cover"
-      />
-    </View>
-  );
+      >
+        <ActivityIndicator size="large" color="#ECE2D6" />
+      </View>
+    );
+  }
+
+  return <Redirect href={authenticated ? "/home" : "/login"} />;
 }
